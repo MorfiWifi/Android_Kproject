@@ -149,13 +149,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <android.support.v7.widget.SwitchCompat
+                android:text="به خاطر بسپار"
+                android:layout_weight="0.1"
                 android:textColor="#0288D1"
                 android:gravity="center"
-                android:text="تنظیمات بیشتر"
-                android:layout_weight="0.1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
 
             <Button
                 android:layout_marginLeft="15dp"

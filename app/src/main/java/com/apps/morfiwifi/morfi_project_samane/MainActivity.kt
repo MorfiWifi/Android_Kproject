@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.apps.morfiwifi.morfi_project_samane.ui.MessageActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -38,8 +39,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         startActivity(inte)
     }
 
-    fun sheet(viwe : View){
-        val inte = Intent (this ,Bottom_sheetActivity::class.java )
+
+
+    fun message(viwe : View){
+        val inte = Intent (this ,MessageActivity::class.java )
         startActivity(inte)
     }
 

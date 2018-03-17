@@ -21,8 +21,9 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoTitle"></activity>
-        <activity android:name=".Bottom_sheetActivity"></activity>
+            android:theme="@style/AppTheme.NoTitle" />
+        <activity android:name=".Bottom_sheetActivity" />
+        <activity android:name=".ui.MessageActivity"></activity>
     </application>
 
 </manifest>
