@@ -4,7 +4,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.AuthenticationResponseMode
 import com.apps.morfiwifi.morfi_project_samane.models.CallModel;
 import com.apps.morfiwifi.morfi_project_samane.models.ContractModel;
 import com.apps.morfiwifi.morfi_project_samane.models.CustomerModel;
-import com.apps.morfiwifi.morfi_project_samane.models.LogInViewModel;
+import com.apps.morfiwifi.morfi_project_samane.models.LoginModel;
 import com.apps.morfiwifi.morfi_project_samane.models.OrderModel;
 import com.apps.morfiwifi.morfi_project_samane.models.Order_DetailsModel;
 import com.apps.morfiwifi.morfi_project_samane.models.ProductModel;
@@ -158,7 +158,7 @@ public interface FakeDataService {
 //////////////////////////////////////////////
 
     @POST("token")
-    Call<LogInViewModel> LogIn(@Body LogInViewModel logInViewModel);
+    Call<LoginModel> LogIn(@Body LoginModel logInViewModel);
 
 
 

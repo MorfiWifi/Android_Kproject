@@ -2,6 +2,9 @@ package com.apps.morfiwifi.morfi_project_samane
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import com.apps.morfiwifi.morfi_project_samane.models.TokenModel
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -15,5 +18,11 @@ class LoginActivity : AppCompatActivity() {
 
 */
         setContentView(R.layout.activity_login)
+    }
+
+    fun login (view : View){
+        val username = txin_user_name.text.toString()
+        val pass = txin_pass.text.toString();
+        TokenModel.getToken(username,pass, this)
     }
 }
