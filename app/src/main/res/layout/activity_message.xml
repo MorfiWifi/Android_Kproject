@@ -7,7 +7,8 @@
     tools:context="com.apps.morfiwifi.morfi_project_samane.ui.MessageActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_send"
+        android:onClick="send_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -156,8 +157,9 @@
         app:layout_constraintVertical_bias="0.973" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_recived_messages"
         android:layout_width="wrap_content"
+        android:onClick="recive_messages"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="32dp"

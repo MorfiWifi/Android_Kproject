@@ -13,6 +13,8 @@ import retrofit2.Response;
 
 public class ErrorUtils {
     public static final String OperationFaild = "OPE_FAILD_Check_THINGS";
+    public static final String Yes = "YES";
+    public static final String No = "NO";
 
     public static ErrorModel parseError(Response<?> response) {
         FakeDataProvider fakeDataProvider = new FakeDataProvider();
