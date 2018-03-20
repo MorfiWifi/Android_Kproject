@@ -144,17 +144,18 @@
     <TextView
         android:id="@+id/tv_recived_messages"
         android:layout_width="347dp"
-        android:layout_height="105dp"
+        android:layout_height="107dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Recived Messages"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.973" />
+        app:layout_constraintVertical_bias="0.762" />
 
     <Button
         android:id="@+id/btn_recived_messages"

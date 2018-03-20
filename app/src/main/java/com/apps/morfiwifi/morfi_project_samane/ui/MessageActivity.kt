@@ -6,7 +6,6 @@ import android.view.View
 import com.apps.morfiwifi.morfi_project_samane.R
 import com.apps.morfiwifi.morfi_project_samane.models.Message
 import com.apps.morfiwifi.morfi_project_samane.models.User
-import com.apps.morfiwifi.morfi_project_samane.models.kind
 import com.apps.morfiwifi.morfi_project_samane.utility.ErrorUtils
 import kotlinx.android.synthetic.main.activity_message.*
 
@@ -19,7 +18,7 @@ class MessageActivity : AppCompatActivity() {
 
 
     fun recive_messages(view:View){
-        Message().GetMessages(applicationContext ,this )
+        Message.GetMessages(applicationContext ,this )
     }
 
     fun send_message (view:View){
@@ -29,10 +28,10 @@ class MessageActivity : AppCompatActivity() {
         mes.Readed = ErrorUtils.No
         mes.Reciver_ID = et_revicer.text.toString()
         mes.Sender_ID = et_sender.text.toString()
-        mes.Reciver_Type = kind.Student
+        mes.Reciver_Type = User.kind.Student
         mes.Recive_Date = ""
         mes.Tags = ""
-        Message().InsertMessages(applicationContext ,this , mes)
+        Message.InsertMessages(applicationContext ,this , mes)
 
     }
     fun update_recived (messages : List<Message>){
@@ -45,7 +44,7 @@ class MessageActivity : AppCompatActivity() {
 
     }
 
-    fun update_user (messages : String){
+    fun update_messages (messages : String){
         tv_recived_messages.setText(messages)
     }
 

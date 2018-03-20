@@ -1,5 +1,8 @@
 package com.apps.morfiwifi.morfi_project_samane.utility;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -46,5 +49,10 @@ public class Init {
         }
         return false;
     }
-
+    public static void Println (String passin){
+        System.out.println(passin);
+    }
+    public static void Toas (Context context , String Text){
+        Toast.makeText(context ,Text , Toast.LENGTH_SHORT).show();
+    }
 }

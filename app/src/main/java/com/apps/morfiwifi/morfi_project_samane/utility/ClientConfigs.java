@@ -12,5 +12,6 @@ public class ClientConfigs {
     public static final String Controller = "http://192.168.1.105:46810/";
     public static final String Online_Just = "http://kasrazhino.company/";
     public static final String Online_Gear = "http://kasra.gearhostpreview.com/";
-    public static final String REST_API_BASE_URL = Local3;
+    public static final String Local4 = "http://192.168.42.249:60270/api/";
+    public static final String REST_API_BASE_URL = Local4;
 }
