@@ -10,6 +10,5 @@ class Bottom_sheetActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bottom_sheet)
 
 
-
     }
 }

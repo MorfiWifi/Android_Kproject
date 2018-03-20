@@ -15,6 +15,7 @@ import retrofit2.Response;
  * Token Model used in sign in, sign up and refresh token response
  */
 public class TokenModel {
+
     private static RetrofitDataService mTService;
     public String access_token;
   //  public Long expire_in_sec;

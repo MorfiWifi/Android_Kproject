@@ -6,12 +6,14 @@ import com.apps.morfiwifi.morfi_project_samane.models.CallModel;
 import com.apps.morfiwifi.morfi_project_samane.models.ContractModel;
 import com.apps.morfiwifi.morfi_project_samane.models.CustomerModel;
 import com.apps.morfiwifi.morfi_project_samane.models.LoginModel;
+import com.apps.morfiwifi.morfi_project_samane.models.Message;
 import com.apps.morfiwifi.morfi_project_samane.models.OrderModel;
 import com.apps.morfiwifi.morfi_project_samane.models.Order_DetailsModel;
 import com.apps.morfiwifi.morfi_project_samane.models.ProductModel;
 import com.apps.morfiwifi.morfi_project_samane.models.SignInRequestModel;
 import com.apps.morfiwifi.morfi_project_samane.models.SignUpRequestModel;
 import com.apps.morfiwifi.morfi_project_samane.models.SupplierModel;
+import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.UserModel;
 
 import java.util.List;
@@ -42,6 +44,70 @@ public interface RetrofitDataService {
 
     @GET("Token")
     Call<String> Tokem();
+
+    ///  Mainly our NEW PROJECT Zero_Down!
+    ///  Mainly our NEW PROJECT Zero_Down!
+
+    @GET("Message")
+    Call<List<Message>> GetMessages(@Header("Authorization") String Tokenscr );
+
+    @POST("Message")
+    Call<Message> InsertMessages (@Header("Authorization") String Tokenscr, @Body Message message);
+
+    @GET("User")
+    Call<User> GetUser(@Header("Authorization") String Tokenscr );
+
+
+
+
+
+
+
+
+    /// END OF Mainly our NEW PROJECT Zero_Down!
+    /// END OF Mainly our NEW PROJECT Zero_Down!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @POST("IncomingCalls2")
     Call<CallModel> createNewCall(@Header("Authorization") String Tokenscr, @Body CallModel callModel);
