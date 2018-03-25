@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.apps.morfiwifi.morfi_project_samane.network.RetrofitDataProvider;
 import com.apps.morfiwifi.morfi_project_samane.network.RetrofitDataService;
 import com.apps.morfiwifi.morfi_project_samane.ui.MessageActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.apps.morfiwifi.morfi_project_samane.view.message_RecyclerAdapter;
 
 import java.util.List;
 
@@ -58,6 +60,10 @@ public class Message {
                 else if (response.isSuccessful()){
                     if (activity instanceof MessageActivity){
                         ((MessageActivity) activity).update_messages(STR(response.body()));
+                    }
+                    if (activity instanceof ReciverActivity){
+                        message_RecyclerAdapter.Init(response.body() , activity);
+                        //((MessageActivity) activity).update_messages(STR(response.body()));
                     }
                 }
                 else {

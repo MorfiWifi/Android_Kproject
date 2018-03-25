@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/message_item_back"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+
+    android:layout_height="100dp">
+
+    <ImageView
+        android:src="@drawable/shape_ring"
+        android:background="@drawable/ic_account_temp"
+        android:layout_weight="0.16"
+        android:id="@+id/im_message_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_weight="0.1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_message_t1"
+            android:gravity="center"
+            android:layout_weight="0.1"
+            android:hint="text1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_message_t2"
+            android:gravity="center"
+            android:layout_weight="0.1"
+            android:hint="text2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_message_t3"
+            android:gravity="center"
+            android:layout_weight="0.1"
+            android:hint="text3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="0.19"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/im_message_more"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_3dot"
+            />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

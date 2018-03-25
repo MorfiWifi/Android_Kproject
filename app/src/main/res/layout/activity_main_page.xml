@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.apps.morfiwifi.morfi_project_samane.ui.MainPageActivity">
+
+    <ViewFlipper
+        android:id="@+id/vf_viewfliper"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <include android:id="@+id/inc_first" layout="@layout/activity_message"/>
+        <include android:id="@+id/inc_second" layout="@layout/activity_login"/>
+
+
+    </ViewFlipper>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_ring"
+        android:src="@drawable/ic_account_temp"
+        android:layout_weight="0.1"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+
+
+
+</LinearLayout>
