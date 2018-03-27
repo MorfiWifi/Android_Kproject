@@ -11,7 +11,7 @@ class MainPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_page)
         //Todo set apro priate Vhild for Displaying (add multplr First);
-        
+
         vf_viewfliper.displayedChild = 1;
         //inc_layout_main.set
     }

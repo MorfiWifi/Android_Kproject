@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         startActivity(inte)
     }
 
+    fun sheet (view:View){
+        val inte = Intent (this ,Bottom_sheetActivity::class.java )
+        startActivity(inte)
+    }
 
 
     fun message(viwe : View){

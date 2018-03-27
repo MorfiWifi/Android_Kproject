@@ -27,7 +27,5 @@ public class ViewHolder_message extends RecyclerView.ViewHolder {
         t1 = (TextView) itemView.findViewById(R.id.tv_message_t1);
         t2 = (TextView) itemView.findViewById(R.id.tv_message_t2);
         t3 = (TextView) itemView.findViewById(R.id.tv_message_t3);
-
-
     }
 }
