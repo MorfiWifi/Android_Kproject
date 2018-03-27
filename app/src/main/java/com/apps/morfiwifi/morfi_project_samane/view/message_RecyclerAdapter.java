@@ -53,7 +53,7 @@ public class message_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_mes
                     LinearLayout bottom_sheet = (LinearLayout)
                         activity.findViewById(R.id.bottom_sheet);
                     BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
             }
         });

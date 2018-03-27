@@ -22,8 +22,8 @@ class Bottom_sheetActivity : AppCompatActivity() {
     fun showsheet (view:View){
         //bottomsheet.showWithSheetView(LayoutInflater.from(applicationContext).inflate(R.layout.activity_login, bottomsheet, false));
         val bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet)
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
