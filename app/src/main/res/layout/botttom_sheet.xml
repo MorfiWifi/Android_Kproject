@@ -6,7 +6,7 @@
     android:paddingBottom="8dp"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
-    android:layout_height="348dp"
+    android:layout_height="500dp"
 
     android:orientation="vertical"
     app:behavior_hideable="true"
@@ -18,27 +18,95 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:background="@drawable/buttom_big_white"
-        android:layout_height="340dp">
+        android:layout_height="match_parent">
 
-        <TextView
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-
             android:gravity="center"
-            android:text="bottom_sheet_peek"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/black" >
 
-        <TextView
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_account_temp"
+                android:src="@drawable/shape_ring"
+                android:layout_weight="0.2"
+                />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="0.1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:id="@+id/tv_message_sender"
+                android:text="فرستنده"
+                android:gravity="center"
+                />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:id="@+id/tv_message_header"
+                    android:text="تیتر"
+                    android:gravity="center"
+
+                    />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/im_close_message"
+                android:src="@drawable/ic_close"
+                android:layout_weight="0.24"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="260dp"
-            android:gravity="center"
-            android:text="bottom_sheet_content"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
 
-            android:textColor="@android:color/white" />
+            <TextView
+                android:id="@+id/tv_message_matn"
+                android:background="@drawable/background_rect_stork"
+                android:layout_weight="0.1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="متن پیام"
+                android:textColor="@android:color/black" />
 
+            <TextView
+                android:gravity="center"
+                android:layout_weight="0.6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="تاریخ"/>
 
+            <Button
+                android:visibility="gone"
+                android:id="@+id/bu_replat_message"
+                android:layout_margin="10dp"
+                android:background="@drawable/buttom_big_white"
+                android:text="replay"
+                android:layout_weight="0.56"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-
+        </LinearLayout>
 
     </LinearLayout>
 
