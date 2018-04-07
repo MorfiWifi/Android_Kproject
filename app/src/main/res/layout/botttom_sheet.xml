@@ -90,6 +90,7 @@
                 android:textColor="@android:color/black" />
 
             <TextView
+                android:id="@+id/tv_message_date"
                 android:gravity="center"
                 android:layout_weight="0.6"
                 android:layout_width="match_parent"
@@ -101,7 +102,7 @@
                 android:id="@+id/bu_replat_message"
                 android:layout_margin="10dp"
                 android:background="@drawable/buttom_big_white"
-                android:text="replay"
+                android:text="پاسخ"
                 android:layout_weight="0.56"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

@@ -10,6 +10,7 @@ import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.view.message_RecyclerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -21,6 +22,8 @@ import retrofit2.Response;
  */
 
 public class Message {
+    public  static ArrayList<Message> arrayList = new ArrayList<>();
+
     private static RetrofitDataService mTService;
     public String Id;
     public String Send_Date;

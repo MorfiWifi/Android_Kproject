@@ -10,9 +10,17 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.apps.morfiwifi.morfi_project_samane.models.Message
+import com.apps.morfiwifi.morfi_project_samane.models.User
 import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity
+import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import java.text.SimpleDateFormat
+import java.util.*
+
+
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,7 +48,70 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun sheet (view:View){
-        val inte = Intent (this ,Bottom_sheetActivity::class.java )
+        //todo chainge to Pre Designed List of Messages!
+        val l  = ArrayList<com.apps.morfiwifi.morfi_project_samane.models.Message>()
+        val mes1 = com.apps.morfiwifi.morfi_project_samane.models.Message()
+        val mes2 = com.apps.morfiwifi.morfi_project_samane.models.Message()
+
+        val currentTime = Calendar.getInstance().time
+
+
+        mes1.Recive_Date = currentTime.toString()
+        mes2.Recive_Date = currentTime.setTime(currentTime.time - 1000 ).toString()
+
+        val c = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("yyyy:MM:dd:hh:mm:ss")
+        val s = dateFormat.format(c.time)
+        c.add(Calendar.DAY_OF_MONTH, -1)
+        val ss = dateFormat.format(c.time)
+
+        val times1 = IntArray(3)
+        times1[0] = Integer.parseInt(s.split(":")[0])
+        times1[1] = Integer.parseInt(s.split(":")[1])
+        times1[2] = Integer.parseInt(s.split(":")[2])
+
+        val times2 = IntArray(3)
+        times2[0] = Integer.parseInt(ss.split(":")[0])
+        times2[1] = Integer.parseInt(ss.split(":")[1])
+        times2[2] = Integer.parseInt(ss.split(":")[2])
+
+
+        val scal  = shamsiDate( )
+        mes1.Recive_Date = scal.shamsiDate(times1[0] , times1[1] , times1[2])
+        mes2.Recive_Date = scal.shamsiDate(times2[0] , times2[1] , times2[2])
+
+        mes1.Matn = "   اجراي موفقيت آميز اين برجام ايران را قادر خواهد ساخت تا به طور کامل حق خود بر انرژي هسته اي جهت مقاصد صلح آميز را طبق مواد ذيربط معاهده عدم اشاعه هسته اي و همسو با تعهداتش در آن سند استيفاء نمايد و در نتيجه با برنامه هسته اي ايران همچون برنامه هر دولت ديگر غير دارنده سلاح هاي هسته اي عضو معاهده عدم اشاعه رفتار خواهد شد."
+        mes2.Matn = "   اجراي موفقيت آميز اين برجام ايران را قادر خواهد ساخت تا به طور کامل حق خود بر انرژي هسته اي جهت مقاصد صلح آميز را طبق مواد ذيربط معاهده عدم اشاعه هسته اي و همسو با تعهداتش در آن سند استيفاء نمايد و در نتيجه با برنامه هسته اي ايران همچون برنامه هر دولت ديگر غير دارنده سلاح هاي هسته اي عضو معاهده عدم اشاعه رفتار خواهد شد."
+
+        mes1.Send_Date = mes1.Recive_Date
+        mes2.Send_Date = mes2.Recive_Date
+
+        mes1.Id = "00"
+        mes2.Id = "01"
+
+        mes1.Readed = "YES"
+        mes2.Readed = "YES"
+
+        mes1.Reciver_Type = User.kind.Student
+        mes2.Reciver_Type = User.kind.Student
+
+        mes1.Tags = "اضطراری"
+        mes2.Tags = "اضطراری"
+
+        mes1.Sender_ID = "11"
+        mes2.Sender_ID = "11"
+
+        l.add(mes1)
+        l.add(mes2)
+
+
+    //todo go To Self Craated Message List !
+
+        Message.arrayList = l;
+
+        //(activity as MessageActivity).update_messages(STR(response.body()))
+
+        val inte = Intent (this ,ReciverActivity::class.java )
         startActivity(inte)
     }
 
