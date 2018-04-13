@@ -44,7 +44,15 @@
         <activity android:name=".ui.SentActivity" />
         <activity android:name=".ui.MainPageActivity" />
         <activity android:name=".ui.SettingActivity" />
-        <activity android:name=".ui.SenderActivity"></activity>
+        <activity android:name=".ui.SenderActivity" />
+        <activity
+            android:name=".ui.student.StudentMainActivity"
+            android:label="@string/title_activity_student_main"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.admin.AdminMainActivity"
+            android:label="@string/title_activity_admin_main"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
