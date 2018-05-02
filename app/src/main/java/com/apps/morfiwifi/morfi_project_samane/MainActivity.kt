@@ -13,6 +13,7 @@ import android.view.View
 import com.apps.morfiwifi.morfi_project_samane.models.Message
 import com.apps.morfiwifi.morfi_project_samane.models.User
 import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity
+import com.apps.morfiwifi.morfi_project_samane.ui.TestDaoActivity
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -117,7 +118,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     fun message(viwe : View){
-        val inte = Intent (this ,ReciverActivity::class.java )
+        //val inte = Intent (this ,ReciverActivity::class.java )
+        val inte = Intent (this ,TestDaoActivity::class.java )
         startActivity(inte)
     }
 

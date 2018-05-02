@@ -7,6 +7,7 @@ import com.apps.morfiwifi.morfi_project_samane.network.RetrofitDataProvider;
 import com.apps.morfiwifi.morfi_project_samane.network.RetrofitDataService;
 import com.apps.morfiwifi.morfi_project_samane.ui.MessageActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.orm.SugarRecord;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,7 +17,8 @@ import retrofit2.Response;
  * Created by WifiMorfi on 3/20/2018.
  */
 
-public class User {
+
+public class User  extends SugarRecord {
     public  User(){
         Id = "";
         FName = "";

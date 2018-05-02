@@ -14,5 +14,6 @@ public class TApplication extends Application {
     public void onCreate() {
         super.onCreate();
         applicationContext = getApplicationContext();
+
     }
 }

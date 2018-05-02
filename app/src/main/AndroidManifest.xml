@@ -25,6 +25,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="DATABASE"
+            android:value="my_database.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.apps.morfiwifi.morfi_project_samane" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -52,7 +65,8 @@
         <activity
             android:name=".ui.admin.AdminMainActivity"
             android:label="@string/title_activity_admin_main"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.TestDaoActivity"></activity>
     </application>
 
 </manifest>

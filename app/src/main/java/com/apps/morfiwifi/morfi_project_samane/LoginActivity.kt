@@ -8,11 +8,17 @@ import com.apps.morfiwifi.morfi_project_samane.models.DataPref
 import com.apps.morfiwifi.morfi_project_samane.models.User
 import com.apps.morfiwifi.morfi_project_samane.ui.admin.AdminMainActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentMainActivity
+import com.apps.morfiwifi.morfi_project_samane.utility.Init
 import kotlinx.android.synthetic.main.activity_login.*
+
 
 class LoginActivity : AppCompatActivity() {
 
+    //private val noteDao: NoteDao? = null
+    //private val notesQuery: Query<com.apps.morfiwifi.morfi_project_samane.models.Note>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        //com.orm.SugarContext.init(applicationContext)
         super.onCreate(savedInstanceState)
        /* //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -22,6 +28,14 @@ class LoginActivity : AppCompatActivity() {
 
 */
         setContentView(R.layout.activity_login)
+        /*val noteDao: NoteDao;
+        val daoSession = DaoMaster.newDevSession(applicationContext, "DB_DB")
+        noteDao = daoSession.noteDao
+        val note = com.apps.morfiwifi.morfi_project_samane.models.Note()
+        note.id = 1L
+        note.text = "Max"
+        noteDao.insert(note)*/
+
     }
 
     fun login (view : View){
@@ -43,5 +57,23 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+
+        val maxi = User.find(User::class.java , "wher user.FName = ?" , "max" ).first()
+
+        val s : String
+        s = maxi.FName + maxi.LName;
+
+        Init.Toas(applicationContext , s )
+
+    }
+
+    fun save_ins_user (){
+        val m = User();
+        m.FName = "max"
+        m.Kaet_meli = "0000"
+        m.LName = "ad"
+
+        m.save()
     }
 }
