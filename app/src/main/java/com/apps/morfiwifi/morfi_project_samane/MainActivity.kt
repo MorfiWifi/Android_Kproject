@@ -87,8 +87,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mes1.Send_Date = mes1.Recive_Date
         mes2.Send_Date = mes2.Recive_Date
 
-        mes1.Id = "00"
-        mes2.Id = "01"
+        mes1.Id = 0L
+        mes2.Id = 1L
 
         mes1.Readed = "YES"
         mes2.Readed = "YES"

@@ -23,7 +23,7 @@ class MessageActivity : AppCompatActivity() {
 
     fun send_message (view:View){
         val mes = Message()
-        mes.Id = "0" // Dosent Matter (Server Fills!)
+        mes.Id = 0L // Dosent Matter (Server Fills!)
         mes.Matn = et_matn.text.toString()
         mes.Readed = ErrorUtils.No
         mes.Reciver_ID = et_revicer.text.toString()

@@ -10,6 +10,11 @@ import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.view.message_RecyclerAdapter;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.query.QueryBuilder;
+import org.w3c.dom.UserDataHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +26,16 @@ import retrofit2.Response;
  * Created by WifiMorfi on 3/20/2018.
  */
 
+@Entity
 public class Message {
     public  static ArrayList<Message> arrayList = new ArrayList<>();
 
     private static RetrofitDataService mTService;
-    public String Id;
+
+
+    // Chaingigng in ID
+    @org.greenrobot.greendao.annotation.Id (autoincrement = true)
+    public Long Id;
     public String Send_Date;
     public String Recive_Date;
     public String Tags;
@@ -36,7 +46,7 @@ public class Message {
     public User.kind Reciver_Type;
 
     public Message(){
-        Id = "";
+        Id = 0l;
         Send_Date = "";
         Recive_Date = "";
         Tags = "";
@@ -130,6 +140,9 @@ public class Message {
         for (int i = 0; i < messages.size(); i++) {
             res = res + messages.get(i).Matn;
         }
+
+
+
         return res;
     }
 
