@@ -9,61 +9,59 @@ import com.apps.morfiwifi.morfi_project_samane.ui.MessageActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.orm.SugarRecord;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by WifiMorfi on 3/20/2018.
  */
 
 
-public class User  extends SugarRecord {
-    public  User(){
-        Id = "";
-        FName = "";
-        LName = "";
-        Pass = "";
-        Pass_hash = "";
-        Kaet_meli = "";
-        Type = kind.Student;
-    }
+@Entity
+public class User   {
+
     private static RetrofitDataService mTService;
-    public String Id;
+    @org.greenrobot.greendao.annotation.Id
+    public Long Id;
     public String FName;
     public String LName;
     public String Pass;
     public String Pass_hash;
     public String Kaet_meli;
-    public kind Type;
+    public int Type;
 
 
-    public enum kind {
-        Student, Master, Technical, Site_Master, Self_Service, Admin;
 
 
-        @Override
-        public String toString() {
-            int dis = this.compareTo(kind.Student);
-            switch (dis){
-                case 0 :
-                    return "دانشجو";
-                case 1 :
-                    return "استاد";
-                case 2 :
-                    return "فنی";
-                case  3 :
-                    return "مسئول سایت";
-                case 4 :
-                    return "سلف";
-                case 5:
-                    return "ادمین کل";
-                default:
-                    return "نامشخص";
-            }
 
-        }
+    @Generated(hash = 1830581726)
+    public User(Long Id, String FName, String LName, String Pass, String Pass_hash,
+            String Kaet_meli, int Type) {
+        this.Id = Id;
+        this.FName = FName;
+        this.LName = LName;
+        this.Pass = Pass;
+        this.Pass_hash = Pass_hash;
+        this.Kaet_meli = Kaet_meli;
+        this.Type = Type;
     }
+
+
+
+
+
+    @Generated(hash = 586692638)
+    public User() {
+    }
+
+
+
+
 
     public static User GetUser (final Context context , final AppCompatActivity activity){
 
@@ -100,5 +98,117 @@ public class User  extends SugarRecord {
         });
 
         return new User();
+    }
+
+
+
+
+
+    public Long getId() {
+        return this.Id;
+    }
+
+
+
+
+
+    public void setId(Long Id) {
+        this.Id = Id;
+    }
+
+
+
+
+
+    public String getFName() {
+        return this.FName;
+    }
+
+
+
+
+
+    public void setFName(String FName) {
+        this.FName = FName;
+    }
+
+
+
+
+
+    public String getLName() {
+        return this.LName;
+    }
+
+
+
+
+
+    public void setLName(String LName) {
+        this.LName = LName;
+    }
+
+
+
+
+
+    public String getPass() {
+        return this.Pass;
+    }
+
+
+
+
+
+    public void setPass(String Pass) {
+        this.Pass = Pass;
+    }
+
+
+
+
+
+    public String getPass_hash() {
+        return this.Pass_hash;
+    }
+
+
+
+
+
+    public void setPass_hash(String Pass_hash) {
+        this.Pass_hash = Pass_hash;
+    }
+
+
+
+
+
+    public String getKaet_meli() {
+        return this.Kaet_meli;
+    }
+
+
+
+
+
+    public void setKaet_meli(String Kaet_meli) {
+        this.Kaet_meli = Kaet_meli;
+    }
+
+
+
+
+
+    public int getType() {
+        return this.Type;
+    }
+
+
+
+
+
+    public void setType(int Type) {
+        this.Type = Type;
     }
 }

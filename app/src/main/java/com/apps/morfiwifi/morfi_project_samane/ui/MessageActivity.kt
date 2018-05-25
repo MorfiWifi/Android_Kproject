@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.apps.morfiwifi.morfi_project_samane.R
+import com.apps.morfiwifi.morfi_project_samane.R.id.tv_recived_messages
 import com.apps.morfiwifi.morfi_project_samane.models.Message
 import com.apps.morfiwifi.morfi_project_samane.models.User
 import com.apps.morfiwifi.morfi_project_samane.utility.ErrorUtils
@@ -22,7 +23,7 @@ class MessageActivity : AppCompatActivity() {
     }
 
     fun send_message (view:View){
-        val mes = Message()
+        /*val mes = Message()
         mes.Id = 0L // Dosent Matter (Server Fills!)
         mes.Matn = et_matn.text.toString()
         mes.Readed = ErrorUtils.No
@@ -31,7 +32,7 @@ class MessageActivity : AppCompatActivity() {
         mes.Reciver_Type = User.kind.Student
         mes.Recive_Date = ""
         mes.Tags = ""
-        Message.InsertMessages(applicationContext ,this , mes)
+        Message.InsertMessages(applicationContext ,this , mes)*/
 
     }
     fun update_recived (messages : List<Message>){

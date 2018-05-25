@@ -17,4 +17,31 @@ public class UserModel {
         return this.UserName;
     }
 
+    public enum kind {
+        Student, Master, Technical, Site_Master, Self_Service, Admin;
+
+
+        @Override
+        public String toString() {
+            int dis = this.compareTo(kind.Student);
+            switch (dis){
+                case 0 :
+                    return "دانشجو";
+                case 1 :
+                    return "استاد";
+                case 2 :
+                    return "فنی";
+                case  3 :
+                    return "مسئول سایت";
+                case 4 :
+                    return "سلف";
+                case 5:
+                    return "ادمین کل";
+                default:
+                    return "نامشخص";
+            }
+
+        }
+    }
+
 }
