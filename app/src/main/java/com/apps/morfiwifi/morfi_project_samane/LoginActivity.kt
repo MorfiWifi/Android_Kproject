@@ -36,9 +36,13 @@ class LoginActivity : AppCompatActivity() {
         note.text = "Max"
         noteDao.insert(note)*/
 
+        Init.Insert_init_Users(this)
+
     }
 
     fun login (view : View){
+
+
         val username = txin_user_name.text.toString()
         val pass = txin_pass.text.toString();
 
@@ -48,23 +52,32 @@ class LoginActivity : AppCompatActivity() {
 
         val result = DataPref.check_user(username , pass , this)
 
-        if (result.res){
-            if (result.user.Type.equals(User.kind.Student)){
+        val log_user = Init.log_in(username , pass , this)
+
+        if (log_user != null){
+            if (log_user.Type.equals(0) ){
                 val intent = Intent(this, StudentMainActivity::class.java)
                 startActivity(intent)
-            }else{
+            }else if (log_user.Type.equals(5)){
                 val intent = Intent(this, AdminMainActivity::class.java)
                 startActivity(intent)
+            }else{
+                Init.Toas(this , "خطا در ورودی")
             }
         }
 
 
-        val maxi = User.find(User::class.java , "wher user.FName = ?" , "max" ).first()
 
-        val s : String
-        s = maxi.FName + maxi.LName;
 
-        Init.Toas(applicationContext , s )
+
+
+
+        //val maxi = User.find(User::class.java , "wher user.FName = ?" , "max" ).first()
+
+        //val s : String
+        //s = maxi.FName + maxi.LName;
+
+       // Init.Toas(applicationContext , s )
 
     }
 
@@ -74,6 +87,6 @@ class LoginActivity : AppCompatActivity() {
         m.Kaet_meli = "0000"
         m.LName = "ad"
 
-        m.save()
+       // m.save()
     }
 }

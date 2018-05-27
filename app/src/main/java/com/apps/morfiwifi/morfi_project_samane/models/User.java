@@ -24,6 +24,10 @@ import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class User   {
+    public enum kind {
+        Student(), Master(), Technical(), Site_Master(), Self_Service(), Admin()
+    }
+
 
     private static RetrofitDataService mTService;
     @org.greenrobot.greendao.annotation.Id
@@ -210,5 +214,20 @@ public class User   {
 
     public void setType(int Type) {
         this.Type = Type;
+    }
+
+    public kind getKind (){
+        return kind.values()[getType()% kind.values().length];
+    }
+
+    public void setkind(kind kinde){
+        kind[] vals = kind.values();
+        setType(0);
+        for (int i = 0; i <vals.length ; i++) {
+            if (vals[i].equals(kinde)){
+                setType(i);
+                break;
+            }
+        }
     }
 }

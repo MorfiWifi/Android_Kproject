@@ -7,19 +7,39 @@
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="پروفایل" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="درخواست" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="گزارش" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="فهرست" />
+        <item
+            android:id="@+id/nav_manage2"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="جابجایی" />
+        <item
+            android:id="@+id/nav_manage3"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="انصراف" />
+        <item
+            android:id="@+id/nav_manage4"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="صندوق پیام" />
+        <item
+            android:id="@+id/nav_manage5"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="پیشنهاد" />
+        <item
+            android:id="@+id/nav_manage6"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="خروج" />
     </group>
 
     <item android:title="Communicate">
