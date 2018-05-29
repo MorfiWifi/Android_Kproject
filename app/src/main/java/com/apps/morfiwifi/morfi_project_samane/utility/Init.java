@@ -7,11 +7,16 @@ import android.widget.ActionMenuView;
 import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
+import com.apps.morfiwifi.morfi_project_samane.models.Message;
+import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,6 +69,12 @@ public class Init {
         Toast.makeText(context ,Text , Toast.LENGTH_SHORT).show();
     }
 
+    public static List<Message> get_messages_dao (AppCompatActivity activity){
+        List<Message> messages = new ArrayList<>();
+        DaoSession session = Repository.GetInstant(activity);
+        messages = session.getMessageDao().loadAll();
+        return messages;
+    }
     public static void Insert_init_Users(AppCompatActivity activity){
         DaoSession session = Repository.GetInstant(activity);
         List<User> users = session.getUserDao().loadAll();
@@ -84,7 +95,78 @@ public class Init {
 
             session.getUserDao().insert(u1);
             session.getUserDao().insert(u2);
+
+            List<Message> messages = session.getMessageDao().loadAll();
+            users = session.getUserDao().loadAll();
+
+
+            if (messages.size() < 2 ){
+                Message m1 = new Message();
+                m1.Matn = "بازگشت اضطراری" ;
+                m1.Readed = "YES"; //=> Make it boolean oR TIME !
+                m1.setSender(users.get(users.size()-1)); // admin
+                m1.Tags = "NON"; // yet
+                m1.Reciver_Type = 0;
+                m1.Recive_Date = Calendar.getInstance().getTime().toString();
+
+
+
+
+
+
+                Message m2 = new Message();
+                m2.Matn = "پام اضطراری" ;
+                m2.Readed = "NO"; //=> Make it boolean oR TIME !
+                m2.setSender(users.get(users.size()-1)); // admin
+                m2.Tags = "NON"; // yet
+                m2.Reciver_Type = 0;
+                m2.Recive_Date = Calendar.getInstance().getTime().toString();
+
+
+
+                session.getMessageDao().insert(m1);
+
+                session.getMessageDao().insert(m2);
+
+
+
+                List<Samane> samanes = session.getSamaneDao().loadAll();
+                //users = session.getUserDao().loadAll();
+
+                if (samanes.size() < 2){
+                    Samane s1 = new Samane();
+                    s1.Name = "خوابگاه ها";
+                    s1.Code = "06";
+                    s1.prop = "NON_YET_INSERTED";
+
+
+                    Samane s2 = new Samane();
+                    s2.Name = "تغذیه";
+                    s2.Code = "07";
+                    s2.prop = "NON_YET_INSERTED";
+
+                    session.getSamaneDao().insert(s1);
+                    session.getSamaneDao().insert(s2);
+
+
+                    users = session.getUserDao().loadAll();
+                    samanes = session.getSamaneDao().loadAll();
+
+                    User un =  users.get(0);
+                    un.getSamanes().add(samanes.get(0));
+                    session.getUserDao().save(un);
+
+                    un =  users.get(0);
+                    un.getSamanes().add(samanes.get(1));
+                    session.getUserDao().save(un);
+
+                }
+            }
         }
+
+
+
+
     }
 
 

@@ -1,5 +1,6 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.student
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
@@ -9,6 +10,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.apps.morfiwifi.morfi_project_samane.R
+import com.apps.morfiwifi.morfi_project_samane.ui.MessageActivity
+import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity
+import com.apps.morfiwifi.morfi_project_samane.ui.TestDaoActivity
 import kotlinx.android.synthetic.main.activity_student_main.*
 import kotlinx.android.synthetic.main.app_bar_student_main.*
 
@@ -59,6 +63,7 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
+
             R.id.nav_camera -> {
                 // Handle the camera action
             }
@@ -76,6 +81,10 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             }
             R.id.nav_send -> {
 
+            }
+            R.id.nav_manage_box->{
+                val intent = Intent(this , ReciverActivity::class.java)
+                startActivity(intent )
             }
         }
 
