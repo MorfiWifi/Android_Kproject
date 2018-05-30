@@ -183,4 +183,8 @@ public class Init {
         }
         return null;
     }
+
+    public static void Terminal (String s){
+        System.out.println(s);
+    }
 }

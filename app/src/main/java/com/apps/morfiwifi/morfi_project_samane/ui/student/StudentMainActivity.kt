@@ -86,6 +86,10 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 val intent = Intent(this , ReciverActivity::class.java)
                 startActivity(intent )
             }
+            R.id.nav_enseraf ->{
+                val intent = Intent(this , EnserafActivity::class.java)
+                startActivity(intent )
+            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
