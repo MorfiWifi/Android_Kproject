@@ -3,9 +3,15 @@ package com.apps.morfiwifi.morfi_project_samane.models;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Transient;
 
 @Entity
 public class Samane {
+
+    @Transient
+    public static String khab = "06"; //yet just Samane KHAB!
+
+
     @Id
     public Long id;
     public String Code;

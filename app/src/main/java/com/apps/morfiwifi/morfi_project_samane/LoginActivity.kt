@@ -7,6 +7,7 @@ import android.view.View
 import com.apps.morfiwifi.morfi_project_samane.models.DataPref
 import com.apps.morfiwifi.morfi_project_samane.models.User
 import com.apps.morfiwifi.morfi_project_samane.ui.admin.AdminMainActivity
+import com.apps.morfiwifi.morfi_project_samane.ui.student.SamanehaActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentMainActivity
 import com.apps.morfiwifi.morfi_project_samane.utility.Init
 import kotlinx.android.synthetic.main.activity_login.*
@@ -56,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
 
         if (log_user != null){
             if (log_user.Type.equals(0) ){
-                val intent = Intent(this, StudentMainActivity::class.java)
+                val intent = Intent(this, SamanehaActivity::class.java)
                 startActivity(intent)
             }else if (log_user.Type.equals(5)){
                 val intent = Intent(this, AdminMainActivity::class.java)

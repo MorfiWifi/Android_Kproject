@@ -126,7 +126,7 @@ public class Init {
 
                 session.getMessageDao().insert(m1);
 
-                session.getMessageDao().insert(m2);
+               // session.getMessageDao().insert(m2);// todo Unknown Exception HERE!!
 
 
 
@@ -161,6 +161,7 @@ public class Init {
                     session.getUserDao().save(un);
 
                 }
+
             }
         }
 

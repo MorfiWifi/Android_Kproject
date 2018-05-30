@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_marginLeft="10dp"
+    android:id="@+id/lin_samane_view"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/background_light_blue"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+
+    android:layout_height="100dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_samane_name"
+            android:gravity="center"
+            android:layout_weight="0.1"
+            android:textColor="@color/white"
+            android:text="TEST"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+</LinearLayout>
