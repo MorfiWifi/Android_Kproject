@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.student.JabejaiActivity">
+
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/sp_start_khab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:id="@+id/sp_start_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="100dp"
+        android:id="@+id/sp_start_otagh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/sp_end_khab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/sp_end_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="200dp"
+        android:id="@+id/sp_end_otagh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:onClick="jabeja_pick_date"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_date_range"
+        android:id="@+id/im_choose_date"
+        android:layout_width="48dp"
+        android:layout_height="48dp" />
+
+    <TextView
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_choosen_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="یک تاریخ انتخواب کنید"
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="20sp"
+        android:text="تایید"
+        android:textColor="@color/white"
+        android:background="@drawable/buttom_blue_stack"
+        android:onClick="taeed_jabeja"
+
+        />
+
+
+
+
+</RelativeLayout>

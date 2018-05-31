@@ -1,5 +1,6 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.student;
 
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,6 +60,8 @@ public class EnserafActivity extends AppCompatActivity implements
         is_date_selected = true;
         //tv_hint.setTypeface();
     }
+
+    
 
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {

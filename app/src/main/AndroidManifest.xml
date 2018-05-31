@@ -68,7 +68,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.TestDaoActivity" />
         <activity android:name=".ui.student.SamanehaActivity" />
-        <activity android:name=".ui.student.EnserafActivity"></activity>
+        <activity android:name=".ui.student.EnserafActivity" />
+        <activity android:name=".ui.student.JabejaiActivity"></activity>
     </application>
 
 </manifest>
