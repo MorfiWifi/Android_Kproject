@@ -90,6 +90,10 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 val intent = Intent(this , EnserafActivity::class.java)
                 startActivity(intent )
             }
+            R.id.nav_jabeja ->{
+                val intent = Intent(this , JabejaiActivity::class.java)
+                startActivity(intent )
+            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)

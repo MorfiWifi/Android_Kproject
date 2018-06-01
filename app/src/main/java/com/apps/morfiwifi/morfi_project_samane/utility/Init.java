@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ActionMenuView;
 import android.widget.Toast;
 
+import com.apps.morfiwifi.morfi_project_samane.models.Block;
 import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
+import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
 import com.apps.morfiwifi.morfi_project_samane.models.Message;
+import com.apps.morfiwifi.morfi_project_samane.models.Othagh;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
@@ -110,10 +113,6 @@ public class Init {
                 m1.Recive_Date = Calendar.getInstance().getTime().toString();
 
 
-
-
-
-
                 Message m2 = new Message();
                 m2.Matn = "پام اضطراری" ;
                 m2.Readed = "NO"; //=> Make it boolean oR TIME !
@@ -122,14 +121,9 @@ public class Init {
                 m2.Reciver_Type = 0;
                 m2.Recive_Date = Calendar.getInstance().getTime().toString();
 
-
-
                 session.getMessageDao().insert(m1);
 
                // session.getMessageDao().insert(m2);// todo Unknown Exception HERE!!
-
-
-
                 List<Samane> samanes = session.getSamaneDao().loadAll();
                 //users = session.getUserDao().loadAll();
 
@@ -161,6 +155,68 @@ public class Init {
                     session.getUserDao().save(un);
 
                 }
+
+
+                Khabgah kh1 = new Khabgah();
+                Khabgah kh2 = new Khabgah();
+
+                Block bl1 = new Block();
+                Block bl2 = new Block();
+
+                Othagh ot1 = new Othagh();
+                Othagh ot2 = new Othagh();
+
+                ot1.setNaem("شماره 5");
+                ot1.setCode("007");
+
+                ot2.setNaem("شماره 6");
+                ot2.setCode("008");
+
+                bl1.name = "بلوک 1";
+                bl2.name = "بلوک 2";
+                bl2.code = "2";
+                bl1.code = "3";
+
+                kh1.name = "شهید مطهری";
+                kh2.name = "مرکزی";
+                kh2.code = "0";
+                kh1.code = "13";
+
+                kh1.id = session.getKhabgahDao().insert(kh1); // retriving ID
+                kh2.id = session.getKhabgahDao().insert(kh2); // retriving ID
+
+                bl1.id = session.getBlockDao().insert(bl1);
+                bl2.id = session.getBlockDao().insert(bl2);
+
+                ot1.id = session.getOthaghDao().insert(ot1);
+                ot2.id = session.getOthaghDao().insert(ot2);
+
+
+                List<Othagh> othaghs_1 = new ArrayList<>();
+                List<Othagh> othaghs_2 = new ArrayList<>();
+                othaghs_1.add(ot1);
+                othaghs_1.add(ot2);
+                othaghs_2.add(ot1);
+                othaghs_2.add(ot2);
+
+                bl1.othaghs = othaghs_1;
+                bl2.othaghs = othaghs_2;
+
+                session.getBlockDao().update(bl1);
+                session.getBlockDao().update(bl2);
+
+                List<Block> blocks_1 = new ArrayList<>();
+                blocks_1.add(bl1);
+                blocks_1.add(bl2);
+
+                List<Block> blocks_2 = new ArrayList<>();
+                blocks_2.add(bl2);
+
+                kh1.blocks = blocks_1;
+                kh2.blocks = blocks_2;
+
+                session.getKhabgahDao().update(kh1);
+                session.getKhabgahDao().update(kh2);
 
             }
         }

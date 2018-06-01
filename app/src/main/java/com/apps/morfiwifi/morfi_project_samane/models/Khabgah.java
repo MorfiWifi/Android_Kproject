@@ -11,11 +11,11 @@ import org.greenrobot.greendao.DaoException;
 @Entity
 public class Khabgah {
     @Id
-    Long id;
-    String name = "";
-    String code;
+    public Long id;
+    public String name = "";
+    public String code;
     @ToMany(referencedJoinProperty = "id")
-    List<Block> blocks;
+    public List<Block> blocks;
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;

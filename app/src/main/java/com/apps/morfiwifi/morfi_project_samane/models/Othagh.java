@@ -7,9 +7,9 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Othagh {
     @Id
-    Long id;
-    String code;
-    String naem = "";
+    public Long id;
+    public String code;
+    public String naem = "";
 
     @Generated(hash = 487051572)
     public Othagh(Long id, String code, String naem) {
