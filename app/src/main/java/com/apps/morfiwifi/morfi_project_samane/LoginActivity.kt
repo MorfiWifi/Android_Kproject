@@ -15,12 +15,18 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
+
     //private val noteDao: NoteDao? = null
     //private val notesQuery: Query<com.apps.morfiwifi.morfi_project_samane.models.Note>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //com.orm.SugarContext.init(applicationContext)
         super.onCreate(savedInstanceState)
+
+        val exit_code = intent.getBooleanExtra("EXIT" , false)
+        if (exit_code){
+            finish()
+        }
        /* //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 

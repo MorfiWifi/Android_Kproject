@@ -35,6 +35,8 @@ public class EnserafActivity extends DarkhastActivity implements
         tv_hint = findViewById(R.id.tv_enseraf_date);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("انصراف");
+        toolbar.setTitle("انصراف");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

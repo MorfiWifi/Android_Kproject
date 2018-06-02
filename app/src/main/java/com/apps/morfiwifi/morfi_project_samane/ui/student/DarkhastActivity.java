@@ -1,5 +1,6 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.student;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,8 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity;
 
 public class DarkhastActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -23,6 +26,8 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
         setContentView(R.layout.activity_darkhast);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("درخواست");
+        toolbar.setTitle("درخواست");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -44,7 +49,9 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Dialogue dialog = new Dialogue();
+            dialog.Exit_app(this).show();
+            //super.onBackPressed(); // YET ON REAL EXITING
         }
     }
 
@@ -81,34 +88,63 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
 
 
             case R.id.nav_fehrest :
-                intent = new Intent(this , FehrestActivity.class);
-                startActivity(intent );
+                if (this instanceof FehrestActivity){
+
+                }else {
+                    intent = new Intent(this , FehrestActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent );
+                }
                 break;
             case R.id.nav_profile :
                 break;
             case R.id.nav_exit :
                 break;
             case R.id.nav_enteghad :
-                 intent = new Intent(this , EnteghadActivity.class);
-                startActivity(intent );
+                if (!(this instanceof EnteghadActivity)){
+                    intent = new Intent(this , EnteghadActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent );
+                }
                 break;
             case R.id.nav_darkhast :
-                 intent = new Intent(this , DarkhastActivity.class);
-                startActivity(intent );
+                if (!(this instanceof DarkhastActivity)){
+                    intent = new Intent(this , DarkhastActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent );
+                }
                 break;
             case R.id.nav_gozaresh :
-                 intent = new Intent(this , GozareshActivity.class);
-                startActivity(intent );
+                if (!(this instanceof GozareshActivity)){
+                    intent = new Intent(this , GozareshActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent );
+                }
+
                 break;
             case R.id.nav_manage_box :
-                 intent = new Intent(this , ReciverActivity.class);
-                startActivity(intent );
+               // if (!(this instanceof ReciverActivity)){ // HSould Chainge ...todo chainge this activity ASAP!
+                    intent = new Intent(this , ReciverActivity.class);
+                    startActivity(intent );
+                //}
+
                 break;
             case R.id.nav_enseraf :
-                 intent = new Intent(this , EnteghadActivity.class);
-                startActivity(intent );
-                break;
+                if (!(this instanceof EnserafActivity)){
+                    intent = new Intent(this , EnserafActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent );
+                }
 
+                break;
+            case R.id.nav_jabeja :
+                if (!(this instanceof JabejaiActivity)){
+                    intent = new Intent(this , JabejaiActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent );
+                }
+
+                break;
                 default:
                     break;
 

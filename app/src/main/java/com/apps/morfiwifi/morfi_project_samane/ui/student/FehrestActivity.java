@@ -17,6 +17,8 @@ public class FehrestActivity extends DarkhastActivity {
         setContentView(R.layout.activity_fehrest);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("فهرست");
+        toolbar.setTitle("فهرست");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

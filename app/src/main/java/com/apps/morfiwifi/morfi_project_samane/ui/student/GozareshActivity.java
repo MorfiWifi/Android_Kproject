@@ -18,6 +18,8 @@ public class GozareshActivity extends DarkhastActivity {
         setContentView(R.layout.activity_gozaresh);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("گزارش");
+        toolbar.setTitle("گزارش");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

@@ -18,6 +18,8 @@ public class EnteghadActivity extends DarkhastActivity {
         setContentView(R.layout.activity_enteghad);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("پیشنهاد");
+        toolbar.setTitle("پیشنهاد");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
