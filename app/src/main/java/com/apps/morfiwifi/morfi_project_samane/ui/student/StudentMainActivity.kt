@@ -64,23 +64,26 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         // Handle navigation view item clicks here.
         when (item.itemId) {
 
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
+            R.id.nav_fehrest -> {
 
             }
-            R.id.nav_slideshow -> {
+            R.id.nav_profile -> {
 
             }
-            R.id.nav_manage -> {
-
+            R.id.nav_exit -> {
+                onBackPressed() // YET JUST BACK PRESSED
             }
-            R.id.nav_share -> {
-
+            R.id.nav_enteghad -> {
+                val intent = Intent(this , EnteghadActivity::class.java)
+                startActivity(intent )
             }
-            R.id.nav_send -> {
-
+            R.id.nav_darkhast -> {
+                val intent = Intent(this , DarkhastActivity::class.java)
+                startActivity(intent )
+            }
+            R.id.nav_gozaresh -> {
+                val intent = Intent(this , GozareshActivity::class.java)
+                startActivity(intent )
             }
             R.id.nav_manage_box->{
                 val intent = Intent(this , ReciverActivity::class.java)

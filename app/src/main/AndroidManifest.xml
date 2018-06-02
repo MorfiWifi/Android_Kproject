@@ -69,7 +69,15 @@
         <activity android:name=".ui.TestDaoActivity" />
         <activity android:name=".ui.student.SamanehaActivity" />
         <activity android:name=".ui.student.EnserafActivity" />
-        <activity android:name=".ui.student.JabejaiActivity"></activity>
+        <activity android:name=".ui.student.JabejaiActivity" />
+        <activity android:name=".ui.student.DarkhastActivity" />
+        <activity android:name=".ui.student.GozareshActivity" />
+        <activity android:name=".ui.student.EnteghadActivity" />
+        <activity android:name=".ui.student.FehrestActivity" />
+        <activity
+            android:name=".ui.master.MasterActivity"
+            android:label="@string/title_activity_master"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

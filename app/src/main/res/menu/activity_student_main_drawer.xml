@@ -5,19 +5,19 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_camera"
             android:title="پروفایل" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_darkhast"
             android:icon="@drawable/ic_menu_gallery"
             android:title="درخواست" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_gozaresh"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="گزارش" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_fehrest"
             android:icon="@drawable/ic_menu_manage"
             android:title="فهرست" />
         <item
@@ -33,11 +33,11 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="صندوق پیام" />
         <item
-            android:id="@+id/nav_manage5"
+            android:id="@+id/nav_enteghad"
             android:icon="@drawable/ic_menu_manage"
             android:title="پیشنهاد" />
         <item
-            android:id="@+id/nav_manage6"
+            android:id="@+id/nav_exit"
             android:icon="@drawable/ic_menu_manage"
             android:title="خروج" />
     </group>
