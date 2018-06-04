@@ -29,7 +29,7 @@ class MessageActivity : AppCompatActivity() {
         mes.Readed = ErrorUtils.No
         mes.Reciver_ID = et_revicer.text.toString()
         mes.Sender_ID = et_sender.text.toString()
-        mes.Reciver_Type = User.kind.Student
+        mes.Reciver_Type = User.Kind.Student
         mes.Recive_Date = ""
         mes.Tags = ""
         Message.InsertMessages(applicationContext ,this , mes)*/

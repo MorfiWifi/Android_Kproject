@@ -248,8 +248,8 @@ public class JabejaiActivity extends DarkhastActivity implements
         }
         else{
             // TODO: 5/30/2018 Add TO DB & Go BACK
-
-            onBackPressed();
+            Init.Toas(this , "تایید شد");
+            //onBackPressed();
         }
     }
 

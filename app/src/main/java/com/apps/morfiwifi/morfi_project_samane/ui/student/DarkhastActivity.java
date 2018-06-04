@@ -108,7 +108,7 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
                 }
                 break;
             case R.id.nav_darkhast :
-                if (!(this instanceof DarkhastActivity)){
+                if (! (this.getClass().getName().equals(DarkhastActivity.class.getName())) ){
                     intent = new Intent(this , DarkhastActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent );

@@ -80,7 +80,7 @@ public class DataPref {
             User user1 = new User();
             user1.Pass = P1;
             user1.FName = N1;
-            //user1.Type = User.kind.Student;
+            //user1.Type = User.Kind.Student;
             users.add(user1);
 
         }
@@ -88,7 +88,7 @@ public class DataPref {
             User user2 = new User();
             user2.Pass = P2;
             user2.FName = N2;
-           // user2.Type = User.kind.Admin;
+           // user2.Type = User.Kind.Admin;
             users.add(user2);
         }
     }

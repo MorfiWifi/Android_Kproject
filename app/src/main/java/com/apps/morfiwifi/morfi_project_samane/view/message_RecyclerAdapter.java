@@ -63,7 +63,7 @@ public class message_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_mes
 
                     TextView tv_sender = (TextView) activity.findViewById(R.id.tv_message_sender);
                     // TODO: 4/7/2018 fix sender Type (Needs A query OR Fix !?)
-                    tv_sender.setText(User.kind.Admin.toString());
+                    tv_sender.setText(User.Kind.Admin.toString());
 
                     TextView tv_header = (TextView) activity.findViewById(R.id.tv_message_header);
                     // TODO: 4/7/2018 Fix Token (seperated and Moded!! power View)

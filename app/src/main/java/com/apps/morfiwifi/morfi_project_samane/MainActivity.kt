@@ -93,8 +93,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mes1.Readed = "YES"
         mes2.Readed = "YES"
 
-       // mes1.Reciver_Type = User.kind.Student
-        //mes2.Reciver_Type = User.kind.Student
+       // mes1.Reciver_Type = User.Kind.Student
+        //mes2.Reciver_Type = User.Kind.Student
 
         mes1.Tags = "اضطراری"
         mes2.Tags = "اضطراری"

@@ -35,7 +35,47 @@ public class Message {
 
     private static RetrofitDataService mTService;
 
+    public enum  State{
+        notSeen , seen , answered , finished , workingon , don;
 
+        public static State fromInteger(int x) {
+            int count = values().length;
+            return values()[x % count];
+        }
+
+        @Override
+        public String toString() {
+            switch (this){
+                case don:
+                    return "خاتمه یافته";
+                case seen:
+                    return "دیده شده";
+                case notSeen:
+                    return "دیده نشده";
+                case answered:
+                    return "جواب داده شده";
+                case finished:
+                    return "تمام شده";
+                case workingon:
+                    return "درحال پیگیری";
+                    default:
+                        return "مشخص نیست";
+            }
+
+            //return super.toString();
+        }
+    }
+
+    public State get_State (){
+        return State.fromInteger(this.State_message);
+    }
+
+    public void set_State (State state){
+        this.State_message = state.ordinal();
+    }
+
+
+    // Use Sendre ID as Outer Value ( Auto mated in server -Complexity here rises!)
     // Chaingigng in ID
     @org.greenrobot.greendao.annotation.Id (autoincrement = true)
     public Long Id;
@@ -47,11 +87,13 @@ public class Message {
     public String Reciver_ID;
     public String Readed;
     public int Reciver_Type;
-
+    public int State_message;
+    public boolean CanAnsewr;
+    public Long answer_id;
 
 
     @ToOne
-    private User sender;
+    private User sender; // Also Reciver !!
 
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
@@ -65,7 +107,7 @@ public class Message {
     private transient boolean sender__refreshed;
 
 
-    //public User.kind Reciver_Type;
+    //public User.Kind Reciver_Type;
 
     public Message(){
         Id = 0l;
@@ -79,9 +121,9 @@ public class Message {
         Reciver_Type = 0;
     }
 
-    @Generated(hash = 961024010)
+    @Generated(hash = 628032992)
     public Message(Long Id, String Send_Date, String Recive_Date, String Tags, String Matn, String Sender_ID,
-            String Reciver_ID, String Readed, int Reciver_Type) {
+            String Reciver_ID, String Readed, int Reciver_Type, int State_message, boolean CanAnsewr, Long answer_id) {
         this.Id = Id;
         this.Send_Date = Send_Date;
         this.Recive_Date = Recive_Date;
@@ -91,6 +133,9 @@ public class Message {
         this.Reciver_ID = Reciver_ID;
         this.Readed = Readed;
         this.Reciver_Type = Reciver_Type;
+        this.State_message = State_message;
+        this.CanAnsewr = CanAnsewr;
+        this.answer_id = answer_id;
     }
 
     public static String GetMessages (final Context context , final AppCompatActivity activity){
@@ -317,6 +362,30 @@ public class Message {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+    public int getState_message() {
+        return this.State_message;
+    }
+
+    public void setState_message(int State_message) {
+        this.State_message = State_message;
+    }
+
+    public boolean getCanAnsewr() {
+        return this.CanAnsewr;
+    }
+
+    public void setCanAnsewr(boolean CanAnsewr) {
+        this.CanAnsewr = CanAnsewr;
+    }
+
+    public Long getAnswer_id() {
+        return this.answer_id;
+    }
+
+    public void setAnswer_id(Long answer_id) {
+        this.answer_id = answer_id;
     }
 
     /** called by internal mechanisms, do not call yourself. */

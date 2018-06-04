@@ -7,10 +7,8 @@ import com.apps.morfiwifi.morfi_project_samane.network.RetrofitDataProvider;
 import com.apps.morfiwifi.morfi_project_samane.network.RetrofitDataService;
 import com.apps.morfiwifi.morfi_project_samane.ui.MessageActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
-import com.orm.SugarRecord;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,8 +26,44 @@ import org.greenrobot.greendao.DaoException;
 
 @Entity
 public class User   {
-    public enum kind {
-        Student(), Master(), Technical(), Site_Master(), Self_Service(), Admin()
+    public enum Kind {
+        Student, Master, Technical, Site_Master, Self_Service, Admin ;
+
+
+        public static Kind fromInteger(int x) {
+            int count = values().length;
+            return values()[x % count];
+        }
+
+        @Override
+        public String toString() {
+            switch (this){
+                case Student:
+                    return "دانشجو";
+                case Master:
+                    return "استاد";
+                case Technical:
+                    return "مسئول فنی";
+                case Site_Master:
+                    return "مسئول سایت";
+                case Self_Service:
+                    return "مسئول سلف";
+                case Admin:
+                    return "ادمین سیستم";
+                default:
+                    return "مشخص نیست";
+            }
+
+            //return super.toString();
+        }
+    }
+
+    public Kind get_Type (){
+        return Kind.fromInteger(this.Type);
+    }
+
+    public void set_Type (Kind kind){
+        this.Type = kind.ordinal();
     }
 
 
@@ -229,12 +263,12 @@ public class User   {
         this.Type = Type;
     }
 
-    public kind getKind (){
-        return kind.values()[getType()% kind.values().length];
+    public Kind getKind (){
+        return Kind.values()[getType()% Kind.values().length];
     }
 
-    public void setkind(kind kinde){
-        kind[] vals = kind.values();
+    public void setkind(Kind kinde){
+        Kind[] vals = Kind.values();
         setType(0);
         for (int i = 0; i <vals.length ; i++) {
             if (vals[i].equals(kinde)){
