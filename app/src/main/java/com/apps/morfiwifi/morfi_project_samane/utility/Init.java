@@ -94,10 +94,16 @@ public class Init {
             u2.setLName("ad_block");
             u2.setType(5);
 
+            User u3 = new User();
+            u3.setFName("site");
+            u3.setPass("1234");
+            u3.setLName("ad_block");
+            u3.set_Type(User.Kind.Site_Master);
 
 
             session.getUserDao().insert(u1);
             session.getUserDao().insert(u2);
+            session.getUserDao().insert(u3);
 
             List<Message> messages = session.getMessageDao().loadAll();
             users = session.getUserDao().loadAll();

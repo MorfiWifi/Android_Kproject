@@ -77,7 +77,17 @@
         <activity
             android:name=".ui.master.MasterActivity"
             android:label="@string/title_activity_master"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.site_master.SiteMasterActivity"
+            android:label="@string/title_activity_site_master"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.site_master.SignupQeueActivity" />
+        <activity android:name=".ui.site_master.EnserafQeueActivity" />
+        <activity android:name=".ui.site_master.AddUserActivity" />
+        <activity android:name=".ui.site_master.StatesticActivity" />
+        <activity android:name=".ui.site_master.SearchActivity" />
+        <activity android:name=".ui.site_master.ProfileActivity"></activity>
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ import org.greenrobot.greendao.annotation.ToMany;
 
 import java.util.List;
 import org.greenrobot.greendao.DaoException;
+import org.greenrobot.greendao.annotation.Transient;
 
 /**
  * Created by WifiMorfi on 3/20/2018.
@@ -26,6 +27,9 @@ import org.greenrobot.greendao.DaoException;
 
 @Entity
 public class User   {
+    @Transient
+    public static  User current_user; // for different tasks
+
     public enum Kind {
         Student, Master, Technical, Site_Master, Self_Service, Admin ;
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="پروفایل" />
+        <item
+            android:id="@+id/nav_sighup"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="صف ثبت نام" />
+        <item
+            android:id="@+id/nav_enseraf"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="صف انصراف" />
+        <item
+            android:id="@+id/nav_adduser"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="اضافه کردن کاربر" />
+
+        <item
+            android:id="@+id/nav_statesic"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="آمارگیری" />
+
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="جستجو" />
+    </group>
+
+    <item android:title="بیشتر">
+        <menu>
+            <item
+                android:id="@+id/nav_exit"
+                android:icon="@drawable/ic_close"
+                android:title="خروج" />
+        </menu>
+    </item>
+
+</menu>

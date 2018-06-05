@@ -7,6 +7,7 @@ import android.view.View
 import com.apps.morfiwifi.morfi_project_samane.models.DataPref
 import com.apps.morfiwifi.morfi_project_samane.models.User
 import com.apps.morfiwifi.morfi_project_samane.ui.admin.AdminMainActivity
+import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SiteMasterActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.student.SamanehaActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentMainActivity
 import com.apps.morfiwifi.morfi_project_samane.utility.Init
@@ -51,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         val username = txin_user_name.text.toString()
-        val pass = txin_pass.text.toString();
+        val pass = txin_pass.text.toString()
 
        // TokenModel.getToken(username,pass, this)
 
@@ -68,7 +69,10 @@ class LoginActivity : AppCompatActivity() {
             }else if (log_user.Type.equals(5)){
                 val intent = Intent(this, AdminMainActivity::class.java)
                 startActivity(intent)
-            }else{
+            }else if (log_user._Type == User.Kind.Site_Master){
+                val intent = Intent(this, SiteMasterActivity::class.java)
+                startActivity(intent)
+            } else{
                 Init.Toas(this , "خطا در ورودی")
             }
         }
