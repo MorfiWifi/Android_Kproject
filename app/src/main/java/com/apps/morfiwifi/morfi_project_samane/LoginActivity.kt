@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.TextView
 import com.apps.morfiwifi.morfi_project_samane.models.DataPref
 import com.apps.morfiwifi.morfi_project_samane.models.User
 import com.apps.morfiwifi.morfi_project_samane.ui.admin.AdminMainActivity
@@ -28,6 +29,17 @@ class LoginActivity : AppCompatActivity() {
         if (exit_code){
             finish()
         }
+
+
+
+/*
+        tv_go_signup.setOnClickListener({
+            val intent = Intent(this, SiteMasterActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+        })*/
+
+
        /* //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -45,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
         noteDao.insert(note)*/
 
         Init.Insert_init_Users(this)
+        Init.Login_Signup(this)
 
     }
 
@@ -76,9 +89,6 @@ class LoginActivity : AppCompatActivity() {
                 Init.Toas(this , "خطا در ورودی")
             }
         }
-
-
-
 
 
 

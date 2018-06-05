@@ -151,6 +151,7 @@
             android:layout_height="match_parent">
 
             <android.support.v7.widget.SwitchCompat
+                android:id="@+id/sw_remember_me"
                 android:text="به خاطر بسپار"
                 android:layout_weight="0.1"
                 android:textColor="#0288D1"
@@ -190,11 +191,13 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/tv_go_signup"
             android:textColor="#0288D1"
             android:gravity="center"
             android:text="ثبت نام"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:ignore="OnClick" />
 
 
     </LinearLayout>

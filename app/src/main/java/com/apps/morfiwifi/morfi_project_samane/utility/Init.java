@@ -1,11 +1,16 @@
 package com.apps.morfiwifi.morfi_project_samane.utility;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ActionMenuView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.SignupStudentsActivity;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
 import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
@@ -249,4 +254,17 @@ public class Init {
     public static void Terminal (String s){
         System.out.println(s);
     }
+
+    public static void Login_Signup ( final AppCompatActivity activity){
+        TextView textView = (TextView) activity.findViewById(R.id.tv_go_signup);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity , SignupStudentsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                activity.startActivity(intent);
+            }
+        });
+    }
+
 }

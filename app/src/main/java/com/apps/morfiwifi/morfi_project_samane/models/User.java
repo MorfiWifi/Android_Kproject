@@ -74,11 +74,14 @@ public class User   {
     private static RetrofitDataService mTService;
     @org.greenrobot.greendao.annotation.Id
     public Long Id;
+    public String UserName;
     public String FName;
     public String LName;
     public String Pass;
     public String Pass_hash;
     public String Kaet_meli;
+    public boolean Active = false;
+    public boolean Deleted = false;
     public int Type;
 
     @ToMany(referencedJoinProperty = "id")
@@ -94,21 +97,20 @@ public class User   {
 
 
 
-    @Generated(hash = 1830581726)
-    public User(Long Id, String FName, String LName, String Pass, String Pass_hash,
-            String Kaet_meli, int Type) {
+    @Generated(hash = 2093235286)
+    public User(Long Id, String UserName, String FName, String LName, String Pass, String Pass_hash,
+            String Kaet_meli, boolean Active, boolean Deleted, int Type) {
         this.Id = Id;
+        this.UserName = UserName;
         this.FName = FName;
         this.LName = LName;
         this.Pass = Pass;
         this.Pass_hash = Pass_hash;
         this.Kaet_meli = Kaet_meli;
+        this.Active = Active;
+        this.Deleted = Deleted;
         this.Type = Type;
     }
-
-
-
-
 
     @Generated(hash = 586692638)
     public User() {
@@ -369,6 +371,30 @@ public class User   {
 
 
 
+
+    public String getUserName() {
+        return this.UserName;
+    }
+
+    public void setUserName(String UserName) {
+        this.UserName = UserName;
+    }
+
+    public boolean getActive() {
+        return this.Active;
+    }
+
+    public void setActive(boolean Active) {
+        this.Active = Active;
+    }
+
+    public boolean getDeleted() {
+        return this.Deleted;
+    }
+
+    public void setDeleted(boolean Deleted) {
+        this.Deleted = Deleted;
+    }
 
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 2059241980)
