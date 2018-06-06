@@ -57,7 +57,7 @@ public class Gozaresh {
 
 
 
-    @Id
+    @Id(autoincrement = true)
     public Long id;
     public String sharh;
     public Long type_id;

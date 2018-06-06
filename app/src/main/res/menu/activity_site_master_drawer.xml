@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="صف ثبت نام" />
         <item
+            android:id="@+id/nav_active_user"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="صف فعال سازی" />
+        <item
             android:id="@+id/nav_enseraf"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="صف انصراف" />

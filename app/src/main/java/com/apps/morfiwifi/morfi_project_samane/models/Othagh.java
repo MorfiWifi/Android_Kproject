@@ -6,7 +6,7 @@ import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class Othagh {
-    @Id
+    @Id(autoincrement = true)
     public Long id;
     public String code;
     public String naem = "";

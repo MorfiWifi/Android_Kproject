@@ -71,11 +71,6 @@ public class SignupStudentsActivity extends AppCompatActivity {
         // ******************************************************** checking all property...
 
 
-
-
-
-
-
         if (err == 0){
             // if there is no eror do the thing ...
             User m = new User();
@@ -85,15 +80,17 @@ public class SignupStudentsActivity extends AppCompatActivity {
             m.setFName(name.getText().toString());
             m.setLName(last_name.getText().toString());
             m.setUserName(user_name.getText().toString());
-
-            Repository.GetInstant(this).getUserDao().insert(m);
-
+            m.setActive(false);
+            m.setShould_fill_init_forms(true);
+            
             if (op_finished){
                 Init.Toas(this ,"لطفا خارج شوید !");
             }else {
                 if (switc.isChecked()){ //todo : check what you would do ....for remeber
+                    Repository.GetInstant(this).getUserDao().insert(m);
                     Init.Toas(this ,"پس از فعال شدن مطلع خواهید شد");
                 }else {
+                    Repository.GetInstant(this).getUserDao().insert(m);
                     Init.Toas(this ,"پس از فعال شدن می توانید وارد شوید");
                 }
             }

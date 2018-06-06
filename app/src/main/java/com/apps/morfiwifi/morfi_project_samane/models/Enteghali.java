@@ -9,7 +9,7 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Enteghali {
 
-    @Id
+    @Id(autoincrement = true)
     Long id;
     Long block_id;
     Long khabghah_id;

@@ -88,7 +88,8 @@
         <activity android:name=".ui.site_master.StatesticActivity" />
         <activity android:name=".ui.site_master.SearchActivity" />
         <activity android:name=".ui.site_master.ProfileActivity" />
-        <activity android:name=".SignupStudentsActivity"></activity>
+        <activity android:name=".SignupStudentsActivity" />
+        <activity android:name=".ui.site_master.ActiveStudentActivity"></activity>
     </application>
 
 </manifest>

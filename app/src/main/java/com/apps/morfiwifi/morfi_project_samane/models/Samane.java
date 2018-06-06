@@ -12,7 +12,7 @@ public class Samane {
     public static String khab = "06"; //yet just Samane KHAB!
 
 
-    @Id
+    @Id(autoincrement = true)
     public Long id;
     public String Code;
     public String Name;

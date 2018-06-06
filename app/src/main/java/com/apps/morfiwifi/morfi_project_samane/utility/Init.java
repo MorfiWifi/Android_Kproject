@@ -92,18 +92,24 @@ public class Init {
             u1.setFName("morteza");
             u1.setPass("1990");
             u1.setLName("ad");
+            u1.setActive(true);
+            u1.setShould_fill_init_forms(false);
 
             User u2 = new User();
             u2.setFName("max");
             u2.setPass("1996");
             u2.setLName("ad_block");
             u2.setType(5);
+            u2.setActive(true);
+            u2.setShould_fill_init_forms(false);
 
             User u3 = new User();
             u3.setFName("site");
             u3.setPass("1234");
             u3.setLName("ad_block");
             u3.set_Type(User.Kind.Site_Master);
+            u3.setActive(true);
+            u3.setShould_fill_init_forms(false);
 
 
             session.getUserDao().insert(u1);

@@ -63,7 +63,7 @@ public class Request {
 
 
 
-    @Id
+    @Id(autoincrement = true)
     public Long id;
     public int count;
     public Long user_id;

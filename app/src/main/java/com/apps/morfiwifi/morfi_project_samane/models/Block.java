@@ -10,7 +10,7 @@ import org.greenrobot.greendao.DaoException;
 
 @Entity
 public class Block {
-    @Id
+    @Id(autoincrement = true)
     public Long id;
     public String name = "";
     public String code;

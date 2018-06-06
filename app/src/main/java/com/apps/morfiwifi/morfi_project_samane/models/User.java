@@ -72,7 +72,7 @@ public class User   {
 
 
     private static RetrofitDataService mTService;
-    @org.greenrobot.greendao.annotation.Id
+    @org.greenrobot.greendao.annotation.Id(autoincrement = true)
     public Long Id;
     public String UserName;
     public String FName;
@@ -80,6 +80,8 @@ public class User   {
     public String Pass;
     public String Pass_hash;
     public String Kaet_meli;
+    public String Student_id = "0" ; // from Uni
+    public boolean should_fill_init_forms = true;
     public boolean Active = false;
     public boolean Deleted = false;
     public int Type;
@@ -97,9 +99,10 @@ public class User   {
 
 
 
-    @Generated(hash = 2093235286)
+    @Generated(hash = 489795572)
     public User(Long Id, String UserName, String FName, String LName, String Pass, String Pass_hash,
-            String Kaet_meli, boolean Active, boolean Deleted, int Type) {
+            String Kaet_meli, String Student_id, boolean should_fill_init_forms, boolean Active,
+            boolean Deleted, int Type) {
         this.Id = Id;
         this.UserName = UserName;
         this.FName = FName;
@@ -107,6 +110,8 @@ public class User   {
         this.Pass = Pass;
         this.Pass_hash = Pass_hash;
         this.Kaet_meli = Kaet_meli;
+        this.Student_id = Student_id;
+        this.should_fill_init_forms = should_fill_init_forms;
         this.Active = Active;
         this.Deleted = Deleted;
         this.Type = Type;
@@ -394,6 +399,22 @@ public class User   {
 
     public void setDeleted(boolean Deleted) {
         this.Deleted = Deleted;
+    }
+
+    public boolean getShould_fill_init_forms() {
+        return this.should_fill_init_forms;
+    }
+
+    public void setShould_fill_init_forms(boolean should_fill_init_forms) {
+        this.should_fill_init_forms = should_fill_init_forms;
+    }
+
+    public String getStudent_id() {
+        return this.Student_id;
+    }
+
+    public void setStudent_id(String Student_id) {
+        this.Student_id = Student_id;
     }
 
     /** called by internal mechanisms, do not call yourself. */

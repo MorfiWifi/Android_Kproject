@@ -7,7 +7,7 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Gozaresh_type {
     // Thise Are just ITEMS FOR CHOOSING !
-    @Id
+    @Id(autoincrement = true)
     public Long id ;
     public String Name;
     public String pr_name;

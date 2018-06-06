@@ -6,7 +6,7 @@ import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class User_type {
-    @Id
+    @Id(autoincrement = true)
     Long id;
     String name;
     String pr_name;

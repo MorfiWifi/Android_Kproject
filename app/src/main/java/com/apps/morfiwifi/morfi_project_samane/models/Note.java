@@ -16,7 +16,7 @@ import org.greenrobot.greendao.annotation.Generated;
 })
 public class Note {
 
-    @Id
+    @Id(autoincrement = true)
     private Long id;
 
     @NotNull
