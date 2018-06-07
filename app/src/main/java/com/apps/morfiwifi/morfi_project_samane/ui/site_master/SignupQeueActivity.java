@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
@@ -43,11 +44,16 @@ public class SignupQeueActivity extends SiteMasterActivity {
                 .where(Properties.Should_fill_init_forms.eq(true))
                 .where(UserDao.Properties.Active.eq(false)).list();
 
-        Init.Toas( this, sh_users.size() +"");
+//        Init.Toas( this, sh_users.size() +"");
         signup_stu_RecyclerAdapter.Init(sh_users , this);
 
 
     }
 
 
+    public void accept_signup_std(View view) {
+    }
+
+    public void delet_signup_std(View view) {
+    }
 }

@@ -14,6 +14,8 @@ import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 
+import java.util.Calendar;
+
 public class SignupStudentsActivity extends AppCompatActivity {
     boolean op_finished = false;
 
@@ -82,7 +84,8 @@ public class SignupStudentsActivity extends AppCompatActivity {
             m.setUserName(user_name.getText().toString());
             m.setActive(false);
             m.setShould_fill_init_forms(true);
-            
+            m.setInset_date(Calendar.getInstance().getTime());
+
             if (op_finished){
                 Init.Toas(this ,"لطفا خارج شوید !");
             }else {

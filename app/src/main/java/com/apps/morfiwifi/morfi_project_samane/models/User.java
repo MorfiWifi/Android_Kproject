@@ -16,6 +16,7 @@ import retrofit2.Response;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.ToMany;
 
+import java.util.Date;
 import java.util.List;
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Transient;
@@ -85,6 +86,7 @@ public class User   {
     public boolean Active = false;
     public boolean Deleted = false;
     public int Type;
+    public Date inset_date;
 
     @ToMany(referencedJoinProperty = "id")
     public List<Samane> samanes;
@@ -99,10 +101,10 @@ public class User   {
 
 
 
-    @Generated(hash = 489795572)
+    @Generated(hash = 649569981)
     public User(Long Id, String UserName, String FName, String LName, String Pass, String Pass_hash,
             String Kaet_meli, String Student_id, boolean should_fill_init_forms, boolean Active,
-            boolean Deleted, int Type) {
+            boolean Deleted, int Type, Date inset_date) {
         this.Id = Id;
         this.UserName = UserName;
         this.FName = FName;
@@ -115,6 +117,7 @@ public class User   {
         this.Active = Active;
         this.Deleted = Deleted;
         this.Type = Type;
+        this.inset_date = inset_date;
     }
 
     @Generated(hash = 586692638)
@@ -415,6 +418,14 @@ public class User   {
 
     public void setStudent_id(String Student_id) {
         this.Student_id = Student_id;
+    }
+
+    public Date getInset_date() {
+        return this.inset_date;
+    }
+
+    public void setInset_date(Date inset_date) {
+        this.inset_date = inset_date;
     }
 
     /** called by internal mechanisms, do not call yourself. */
