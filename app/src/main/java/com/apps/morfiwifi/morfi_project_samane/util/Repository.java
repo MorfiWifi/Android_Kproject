@@ -21,6 +21,7 @@ public class Repository {
     public static DaoSession GetInstant (Context context){
         if (daoSession == null){
             helper = new DaoMaster.DevOpenHelper(context,"azsoftwaredb" , null);
+            // TODO: 6/8/2018 can use On upgrade here .....
             SQLiteDatabase db = helper.getWritableDatabase();
             DaoMaster daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();

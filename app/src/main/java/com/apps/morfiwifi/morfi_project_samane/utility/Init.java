@@ -111,10 +111,19 @@ public class Init {
             u3.setActive(true);
             u3.setShould_fill_init_forms(false);
 
+            User u4 = new User();
+            u4.setFName("masool");
+            u4.setPass("1234");
+            u4.setLName("ad_block");
+            u4.set_Type(User.Kind.Technical);
+            u4.setActive(true);
+            u4.setShould_fill_init_forms(false);
+
 
             session.getUserDao().insert(u1);
             session.getUserDao().insert(u2);
             session.getUserDao().insert(u3);
+            session.getUserDao().insert(u4);
 
             List<Message> messages = session.getMessageDao().loadAll();
             users = session.getUserDao().loadAll();

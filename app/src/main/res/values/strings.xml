@@ -13,4 +13,5 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="ok">بله</string>
     <string name="title_activity_site_master">SiteMasterActivity</string>
+    <string name="title_activity_technical">TechnicalActivity</string>
 </resources>

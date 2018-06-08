@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_std_report"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="گزارش دانشجوها" />
+        <item
+            android:id="@+id/nav_post_archive"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="صندوق پست" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="پروفایل" />
+        <item
+            android:id="@+id/nav_manage_items"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="اموال" />
+    </group>
+
+    <item android:title="دیگر">
+        <menu>
+            <item
+                android:id="@+id/nav_exit"
+                android:icon="@drawable/ic_menu_send"
+                android:title="خروج" />
+        </menu>
+    </item>
+
+</menu>

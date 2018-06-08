@@ -89,7 +89,15 @@
         <activity android:name=".ui.site_master.SearchActivity" />
         <activity android:name=".ui.site_master.ProfileActivity" />
         <activity android:name=".SignupStudentsActivity" />
-        <activity android:name=".ui.site_master.ActiveStudentActivity"></activity>
+        <activity android:name=".ui.site_master.ActiveStudentActivity" />
+        <activity
+            android:name=".ui.technical.TechnicalActivity"
+            android:label="@string/title_activity_technical"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.technical.StdReportActivity" />
+        <activity android:name=".ui.technical.PostArchiveActivity" />
+        <activity android:name=".ui.technical.ProfileTechActivity" />
+        <activity android:name=".ui.technical.ManageItemsActivity"></activity>
     </application>
 
 </manifest>
