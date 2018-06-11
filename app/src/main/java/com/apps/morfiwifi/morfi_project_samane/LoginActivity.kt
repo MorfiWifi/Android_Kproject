@@ -77,20 +77,25 @@ class LoginActivity : AppCompatActivity() {
         val log_user = Init.log_in(username , pass , this)
 
         if (log_user != null){
-            if (log_user.Type.equals(0) ){
-                val intent = Intent(this, SamanehaActivity::class.java)
-                startActivity(intent)
-            }else if (log_user.Type.equals(5)){
-                val intent = Intent(this, AdminMainActivity::class.java)
-                startActivity(intent)
-            }else if (log_user._Type == User.Kind.Site_Master){
-                val intent = Intent(this, SiteMasterActivity::class.java)
-                startActivity(intent)
-            }else if (log_user._Type == User.Kind.Technical){
-                val intent = Intent(this, TechnicalActivity::class.java)
-                startActivity(intent)
-            } else{
-                Init.Toas(this , "خطا در ورودی")
+            Init.current_login = log_user
+            when {
+                log_user.Type.equals(0) -> {
+                    val intent = Intent(this, SamanehaActivity::class.java)
+                    startActivity(intent)
+                }
+                log_user.Type.equals(5) -> {
+                    val intent = Intent(this, AdminMainActivity::class.java)
+                    startActivity(intent)
+                }
+                log_user._Type == User.Kind.Site_Master -> {
+                    val intent = Intent(this, SiteMasterActivity::class.java)
+                    startActivity(intent)
+                }
+                log_user._Type == User.Kind.Technical -> {
+                    val intent = Intent(this, TechnicalActivity::class.java)
+                    startActivity(intent)
+                }
+                else -> Init.Toas(this , "خطا در ورودی")
             }
         }
 

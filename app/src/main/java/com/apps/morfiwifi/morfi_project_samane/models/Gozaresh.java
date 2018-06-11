@@ -4,16 +4,45 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
+import java.util.Date;
+
 @Entity
 public class Gozaresh {
+    public enum  State{
+        open , working_on  , finished  ;
 
-    public Message.State get_State (){
-        return Message.State.fromInteger(this.State_gozaresh);
+        public static Gozaresh.State fromInteger(int x) {
+            int count = values().length;
+            return values()[x % count];
+        }
+
+        @Override
+        public String toString() {
+            switch (this){
+                case open:
+                    return "باز";
+                case finished:
+                    return "تمام شده";
+                case working_on:
+                    return "درحال پیگیری";
+                default:
+                    return "مشخص نیست";
+            }
+
+            //return super.toString();
+
+        }
     }
 
-    public void set_State (Message.State state){
+
+    public void set_State (Gozaresh.State state){
         this.State_gozaresh = state.ordinal();
     }
+
+    public Gozaresh.State get_State (){
+        return Gozaresh.State.fromInteger(this.State_gozaresh);
+    }
+
 
     public Long getId() {
         return this.id;
@@ -55,6 +84,14 @@ public class Gozaresh {
         this.State_gozaresh = State_gozaresh;
     }
 
+    public Date getDate() {
+        return this.date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
 
 
     @Id(autoincrement = true)
@@ -63,14 +100,16 @@ public class Gozaresh {
     public Long type_id;
     public Long user_id; // sender of this!
     public int State_gozaresh;
-    @Generated(hash = 1645069386)
+    public Date date; // date of set !
+    @Generated(hash = 455888435)
     public Gozaresh(Long id, String sharh, Long type_id, Long user_id,
-            int State_gozaresh) {
+            int State_gozaresh, Date date) {
         this.id = id;
         this.sharh = sharh;
         this.type_id = type_id;
         this.user_id = user_id;
         this.State_gozaresh = State_gozaresh;
+        this.date = date;
     }
 
     @Generated(hash = 637639576)

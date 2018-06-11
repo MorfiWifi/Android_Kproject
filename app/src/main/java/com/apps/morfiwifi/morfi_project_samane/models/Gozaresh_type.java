@@ -39,4 +39,15 @@ public class Gozaresh_type {
         this.pr_name = pr_name;
     }
 
+    @Override
+    public String toString() {
+        if (pr_name == null){
+            pr_name = "";
+        }
+        if (pr_name.isEmpty()){
+            return "بی نام!";
+        }else {
+            return pr_name;
+        }
+    }
 }

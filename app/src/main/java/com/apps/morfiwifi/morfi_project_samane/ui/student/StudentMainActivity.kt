@@ -34,6 +34,7 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        title = "دانشجو"
     }
 
     override fun onBackPressed() {
