@@ -101,6 +101,7 @@ public class Gozaresh {
     public Long user_id; // sender of this!
     public int State_gozaresh;
     public Date date; // date of set !
+    public Date seen_date; // it's shown
     @Generated(hash = 455888435)
     public Gozaresh(Long id, String sharh, Long type_id, Long user_id,
             int State_gozaresh, Date date) {
