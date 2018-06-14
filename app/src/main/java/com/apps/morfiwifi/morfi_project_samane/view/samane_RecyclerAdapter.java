@@ -46,7 +46,7 @@ public class samane_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_sama
 
 //        holder.t3.setText(sample_message.Recive_Date);
         holder.t1.setText(sample_message.Name); // Use Message Header Insetead!
-//        holder.t2.setText(sample_message.Tags); // Minimall Tags! (Not All OF Them !)
+//        holder.sender_lname.setText(sample_message.Tags); // Minimall Tags! (Not All OF Them !)
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override

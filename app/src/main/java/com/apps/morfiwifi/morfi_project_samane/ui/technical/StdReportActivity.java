@@ -8,6 +8,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.Gozaresh;
+import com.apps.morfiwifi.morfi_project_samane.util.Repository;
+import com.apps.morfiwifi.morfi_project_samane.view.gozaresh_RecyclerAdapter;
+
+import java.util.List;
 
 public class StdReportActivity extends TechnicalActivity {
 
@@ -29,5 +34,11 @@ public class StdReportActivity extends TechnicalActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
         setTitle("گزارشات");
+
+
+        List<Gozaresh> gozareshList = Repository.GetInstant(this).getGozareshDao().loadAll();
+        gozaresh_RecyclerAdapter.Init(gozareshList , this);
+
     }
+
 }

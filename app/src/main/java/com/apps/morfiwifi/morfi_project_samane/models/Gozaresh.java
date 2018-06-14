@@ -3,6 +3,7 @@ package com.apps.morfiwifi.morfi_project_samane.models;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Transient;
 
 import java.util.Date;
 
@@ -92,6 +93,14 @@ public class Gozaresh {
         this.date = date;
     }
 
+    public Date getSeen_date() {
+        return this.seen_date;
+    }
+
+    public void setSeen_date(Date seen_date) {
+        this.seen_date = seen_date;
+    }
+
 
 
     @Id(autoincrement = true)
@@ -102,15 +111,20 @@ public class Gozaresh {
     public int State_gozaresh;
     public Date date; // date of set !
     public Date seen_date; // it's shown
-    @Generated(hash = 455888435)
+
+    @Transient
+    public Gozaresh_type gozaresh_type;
+
+    @Generated(hash = 1759818905)
     public Gozaresh(Long id, String sharh, Long type_id, Long user_id,
-            int State_gozaresh, Date date) {
+            int State_gozaresh, Date date, Date seen_date) {
         this.id = id;
         this.sharh = sharh;
         this.type_id = type_id;
         this.user_id = user_id;
         this.State_gozaresh = State_gozaresh;
         this.date = date;
+        this.seen_date = seen_date;
     }
 
     @Generated(hash = 637639576)

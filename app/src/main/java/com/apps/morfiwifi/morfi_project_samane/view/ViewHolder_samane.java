@@ -13,7 +13,7 @@ public class ViewHolder_samane extends RecyclerView.ViewHolder {
 //    public ImageView image ;
     public TextView t1;
     public LinearLayout layout;
-//    public  TextView t2;
+//    public  TextView sender_lname;
 //    public  TextView t3;
 //    public  ImageView im3dot;
 
@@ -24,7 +24,7 @@ public class ViewHolder_samane extends RecyclerView.ViewHolder {
 //        im3dot = (ImageView) itemView.findViewById(R.id.im_message_more);
         t1 = (TextView) itemView.findViewById(R.id.tv_samane_name);
         layout = (LinearLayout) itemView.findViewById(R.id.lin_samane_view);
-//        t2 = (TextView) itemView.findViewById(R.id.tv_message_t2);
+//        sender_lname = (TextView) itemView.findViewById(R.id.tv_message_t2);
 //        t3 = (TextView) itemView.findViewById(R.id.tv_message_t3);
     }
 

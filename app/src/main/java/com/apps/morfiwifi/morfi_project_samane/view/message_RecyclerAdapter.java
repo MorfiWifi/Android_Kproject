@@ -47,7 +47,7 @@ public class message_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_mes
         // TODO: 3/25/2018  ocnverting Date To persian One!!
         // {holder.image = case {type of User} }
         holder.t3.setText(sample_message.Recive_Date);
-        //holder.t1.setText(sample_message.Reciver_Type.toString()); // Use Message Header Insetead!
+        //holder.sender_name.setText(sample_message.Reciver_Type.toString()); // Use Message Header Insetead!
         holder.t2.setText(sample_message.Tags); // Minimall Tags! (Not All OF Them !)
 
         holder.im3dot.setOnClickListener(new View.OnClickListener() {
