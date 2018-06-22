@@ -3,6 +3,8 @@ package com.apps.morfiwifi.morfi_project_samane;
 import android.app.Application;
 import android.content.Context;
 
+import com.parse.Parse;
+
 /**
  * extend application class
  */
