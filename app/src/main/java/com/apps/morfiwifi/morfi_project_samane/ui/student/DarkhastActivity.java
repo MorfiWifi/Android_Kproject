@@ -18,6 +18,8 @@ import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity;
 
+import java.io.File;
+
 public class DarkhastActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     @Override
@@ -37,6 +39,8 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     public void send_darkhast(View view) {

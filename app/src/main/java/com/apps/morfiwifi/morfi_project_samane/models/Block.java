@@ -133,4 +133,5 @@ public class Block {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getBlockDao() : null;
     }
+    
 }
