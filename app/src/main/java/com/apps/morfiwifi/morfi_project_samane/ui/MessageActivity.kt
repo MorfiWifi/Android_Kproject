@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.apps.morfiwifi.morfi_project_samane.R
-import com.apps.morfiwifi.morfi_project_samane.R.id.tv_recived_messages
 import com.apps.morfiwifi.morfi_project_samane.models.Message
 import com.apps.morfiwifi.morfi_project_samane.models.User
-import com.apps.morfiwifi.morfi_project_samane.utility.ErrorUtils
 import kotlinx.android.synthetic.main.activity_message.*
 
 class MessageActivity : AppCompatActivity() {
@@ -19,7 +17,7 @@ class MessageActivity : AppCompatActivity() {
 
 
     fun recive_messages(view:View){
-        Message.GetMessages(applicationContext ,this )
+        //Message.GetMessages(applicationContext ,this )
     }
 
     fun send_message (view:View){

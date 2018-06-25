@@ -1,3 +1,4 @@
+/*
 package com.apps.morfiwifi.morfi_project_samane.network;
 
 
@@ -11,18 +12,22 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+*/
 /**
  * this class make Retrofit API Service
- */
+ *//*
+
 public class RetrofitDataProvider {
 
     private RetrofitDataService mTService;
     private Retrofit mRetrofitClient;
     //private AppPreferenceTools mAppPreferenceTools;
 
-    /**
+    */
+/**
      * config Retrofit in initialization
-     */
+     *//*
+
     public RetrofitDataProvider() {
         //this.mAppPreferenceTools = new AppPreferenceTools(TApplication.applicationContext);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -46,22 +51,27 @@ public class RetrofitDataProvider {
 
     }
 
-    /**
+    */
+/**
      * can get Retrofit Service
      *
      * @return
-     */
+     *//*
+
     public RetrofitDataService getTService() {
         return mTService;
     }
 
-    /**
+    */
+/**
      * get Retrofit client
      * used in ErrorUtil class
      *
      * @return
-     */
+     *//*
+
     public Retrofit getRetrofitClient() {
         return mRetrofitClient;
     }
 }
+*/

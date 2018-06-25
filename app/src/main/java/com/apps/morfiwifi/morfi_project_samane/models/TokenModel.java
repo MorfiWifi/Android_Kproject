@@ -1,3 +1,4 @@
+/*
 package com.apps.morfiwifi.morfi_project_samane.models;
 
 import android.content.Context;
@@ -11,9 +12,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+*/
 /**
  * Token Model used in sign in, sign up and refresh token response
- */
+ *//*
+
 public class TokenModel {
 
     private static RetrofitDataService mTService;
@@ -206,3 +209,4 @@ public class TokenModel {
     }
 
 }
+*/

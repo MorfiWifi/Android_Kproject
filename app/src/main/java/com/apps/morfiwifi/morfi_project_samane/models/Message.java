@@ -1,29 +1,12 @@
 package com.apps.morfiwifi.morfi_project_samane.models;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-
-import com.apps.morfiwifi.morfi_project_samane.network.RetrofitDataProvider;
-import com.apps.morfiwifi.morfi_project_samane.network.RetrofitDataService;
-import com.apps.morfiwifi.morfi_project_samane.ui.MessageActivity;
-import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity;
-import com.apps.morfiwifi.morfi_project_samane.utility.Init;
-import com.apps.morfiwifi.morfi_project_samane.view.message_RecyclerAdapter;
-
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.ToOne;
-import org.greenrobot.greendao.query.QueryBuilder;
-import org.w3c.dom.UserDataHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.DaoException;
 
 /**
  * Created by WifiMorfi on 3/20/2018.
@@ -33,7 +16,7 @@ import org.greenrobot.greendao.DaoException;
 public class Message {
     public  static ArrayList<Message> arrayList = new ArrayList<>();
 
-    private static RetrofitDataService mTService;
+   // private static RetrofitDataService mTService;
 
     public enum  State{
         notSeen , seen , answered , finished , workingon , don;
@@ -138,7 +121,7 @@ public class Message {
         this.answer_id = answer_id;
     }
 
-    public static String GetMessages (final Context context , final AppCompatActivity activity){
+    /*public static String GetMessages (final Context context , final AppCompatActivity activity){
         RetrofitDataProvider provider = new RetrofitDataProvider();
         mTService = provider.getTService();
 
@@ -175,9 +158,9 @@ public class Message {
 
 
         return "no its Async";
-    }
+    }*/
 
-    public static String InsertMessages (final Context context , final AppCompatActivity activity , Message message){
+   /* public static String InsertMessages (final Context context , final AppCompatActivity activity , Message message){
         RetrofitDataProvider provider = new RetrofitDataProvider();
         mTService = provider.getTService();
 
@@ -213,7 +196,7 @@ public class Message {
 
 
         return "no its Async";
-    }
+    }*/
 
 
     private static String STR (List<Message> messages){

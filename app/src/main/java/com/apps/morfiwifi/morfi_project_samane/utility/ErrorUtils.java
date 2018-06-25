@@ -1,7 +1,7 @@
+/*
 package com.apps.morfiwifi.morfi_project_samane.utility;
 
 import com.apps.morfiwifi.morfi_project_samane.models.ErrorModel;
-import com.apps.morfiwifi.morfi_project_samane.network.FakeDataProvider;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -34,3 +34,4 @@ public class ErrorUtils {
         return errorModel;
     }
 }
+*/

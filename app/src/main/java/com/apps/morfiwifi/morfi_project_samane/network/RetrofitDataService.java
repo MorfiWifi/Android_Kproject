@@ -1,3 +1,4 @@
+/*
 package com.apps.morfiwifi.morfi_project_samane.network;
 
 //import adapter.OperationResultModel;
@@ -7,9 +8,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.ContractModel;
 import com.apps.morfiwifi.morfi_project_samane.models.CustomerModel;
 import com.apps.morfiwifi.morfi_project_samane.models.LoginModel;
 import com.apps.morfiwifi.morfi_project_samane.models.Message;
-import com.apps.morfiwifi.morfi_project_samane.models.OrderModel;
 import com.apps.morfiwifi.morfi_project_samane.models.Order_DetailsModel;
-import com.apps.morfiwifi.morfi_project_samane.models.ProductModel;
 import com.apps.morfiwifi.morfi_project_samane.models.SignInRequestModel;
 import com.apps.morfiwifi.morfi_project_samane.models.SignUpRequestModel;
 import com.apps.morfiwifi.morfi_project_samane.models.SupplierModel;
@@ -28,9 +27,11 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
+*/
 /**
  * the interface implements REST API routes
- */
+ *//*
+
 public interface RetrofitDataService {
 ////////////////////////////call api service
 
@@ -257,3 +258,4 @@ public interface RetrofitDataService {
 
 }
 
+*/

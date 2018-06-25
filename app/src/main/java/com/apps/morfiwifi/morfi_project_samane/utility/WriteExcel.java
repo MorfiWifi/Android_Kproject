@@ -1,7 +1,12 @@
 package com.apps.morfiwifi.morfi_project_samane.utility; /**
  * Created by Wifimorfi on 6/23/2018.
  */
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Property;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -28,15 +33,18 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
+import static android.support.v4.content.ContextCompat.checkSelfPermission;
+
 
 public class WriteExcel {
 
     private static WritableCellFormat timesBoldUnderline;
     private static WritableCellFormat times;
+    private static int REQUEST_CODE = 103; // for Storage permission
     private String inputFile;
-    private static String[] property = {"نام" , "نام خانوادگی" , "نام کاربری" , "رمز" , "تاربخ تولد" , "کد ملی" , "نام پدر"};
+    private static String[] property = {"نام" , "نام خانوادگی" , "نام کاربری" , "رمز" , "تاریخ تولد" , "کد ملی" , "نام پدر"};
 
-    public static String[] Users_prop (List<User> userList){
+    public static  ArrayList<String> Users_prop (List<User> userList){
         ArrayList<String> props = new ArrayList<String>();
         for (User user: userList) {
             for (int i = 0; i < property.length; i++) {
@@ -68,70 +76,96 @@ public class WriteExcel {
             }
         }
 
-        return(String[]) props.toArray();
+        return  props;
     }
 
-    public static void  Export_User_Queue (List<User> userList , Context context ){
+    public static void  Export_User_Queue (List<User> userList , AppCompatActivity context ){
         try {
-
-            File file = new File(context.getExternalFilesDir(null) , "Excel_export.xls"); // Auto Gen
-            WorkbookSettings wbSettings = new WorkbookSettings();
-
-            wbSettings.setLocale(new Locale("en", "EN"));
-
-            WritableWorkbook workbook = Workbook.createWorkbook(file, wbSettings);
-            workbook.createSheet("Report", 0);
-            WritableSheet excelSheet = workbook.getSheet(0);
-            // ************************************************
-
-            // Lets create a times font
-            WritableFont times10pt = new WritableFont(WritableFont.TIMES, 10);
-            // Define the cell format
-            times = new WritableCellFormat(times10pt);
-            // Lets automatically wrap the cells
-            times.setWrap(true);
-
-            // create create a bold font with unterlines
-            WritableFont times10ptBoldUnderline = new WritableFont(
-                    WritableFont.TIMES, 10, WritableFont.BOLD, false,
-                    UnderlineStyle.SINGLE);
-            timesBoldUnderline = new WritableCellFormat(times10ptBoldUnderline);
-            // Lets automatically wrap the cells
-            timesBoldUnderline.setWrap(true);
-
-            CellView cv = new CellView();
-            cv.setFormat(times);
-            cv.setFormat(timesBoldUnderline);
-//        cv.setAutosize(true);
-
-            // Write a few headers
-            addCaption(excelSheet, 0, 0, "Property");
-            addCaption(excelSheet, 1, 0, "Value");
-            // ************************************************
+            boolean have_permission = false;
 
 
-            int index = 1; // start index
-            String[] data = Users_prop(userList);
-
-            for (User user :userList) {
-                for (int i = 0; i < property.length; i++) {
-                    // First column
-                    addLabel(excelSheet, 0, index, property[i]);
-                    // Second column
-                    addLabel(excelSheet, 1, index, data[index-1]);
-                    index ++;
-                }
+            if (userList == null){
+                Toast.makeText(context, "خالی", Toast.LENGTH_SHORT).show();
             }
 
+            if (checkSelfPermission( context , android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Log.v("Storage Write","Permission is granted");
+                //File write logic here
+                have_permission = true;
+                //return true;
+            }
+
+            if (have_permission){
+
+                File file = new File("//sdcard//Download//" , "Excel_export.xls"); // Auto Gen
+                WorkbookSettings wbSettings = new WorkbookSettings();
+
+                wbSettings.setLocale(new Locale("en", "EN"));
+
+                WritableWorkbook workbook = Workbook.createWorkbook(file, wbSettings);
+                workbook.createSheet("Report", 0);
+                WritableSheet excelSheet = workbook.getSheet(0);
+                // ************************************************
+
+                // Lets create a times font
+                WritableFont times10pt = new WritableFont(WritableFont.TIMES, 10);
+                // Define the cell format
+                times = new WritableCellFormat(times10pt);
+                // Lets automatically wrap the cells
+                times.setWrap(true);
+
+                // create create a bold font with unterlines
+                WritableFont times10ptBoldUnderline = new WritableFont(
+                        WritableFont.TIMES, 10, WritableFont.BOLD, false,
+                        UnderlineStyle.SINGLE);
+                timesBoldUnderline = new WritableCellFormat(times10ptBoldUnderline);
+                // Lets automatically wrap the cells
+                timesBoldUnderline.setWrap(true);
+
+                CellView cv = new CellView();
+                cv.setFormat(times);
+                cv.setFormat(timesBoldUnderline);
+//        cv.setAutosize(true);
+
+                // Write a few headers
+                addCaption(excelSheet, 0, 0, "Property");
+                addCaption(excelSheet, 1, 0, "Value");
+                // ************************************************
 
 
-            workbook.write();
-            workbook.close();
+                int index = 1; // start index
+                ArrayList<String> data = Users_prop(userList);
 
-            Toast.makeText(context, file.getPath() + file.getName(), Toast.LENGTH_SHORT).show();
+                for (User user :userList) {
+                    for (int i = 0; i < property.length; i++) {
+                        // First column
+                        addLabel(excelSheet, 0, index, property[i]);
+                        // Second column
+                        addLabel(excelSheet, 1, index, data.get(index-1));
+                        index ++;
+                    }
+                }
+
+
+
+                workbook.write();
+                workbook.close();
+
+                Toast.makeText(context, file.getPath() + file.getName(), Toast.LENGTH_SHORT).show();
+
+            }else {
+                // Requesting Permission
+
+                Toast.makeText(context, "پس از دادن دسترسی دوباره تلاش کنید", Toast.LENGTH_SHORT).show();
+                ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
+                
+
+
+            }
 
         }catch (Exception e){
             Toast.makeText(context, "خطا در خروجی گرفتن", Toast.LENGTH_SHORT).show();
+            Init.Terminal(e.getMessage());
         }
 
 

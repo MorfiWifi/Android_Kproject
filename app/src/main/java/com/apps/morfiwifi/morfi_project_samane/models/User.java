@@ -1,25 +1,13 @@
 package com.apps.morfiwifi.morfi_project_samane.models;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-
-import com.apps.morfiwifi.morfi_project_samane.network.RetrofitDataProvider;
-import com.apps.morfiwifi.morfi_project_samane.network.RetrofitDataService;
-import com.apps.morfiwifi.morfi_project_samane.ui.MessageActivity;
-import com.apps.morfiwifi.morfi_project_samane.utility.Init;
-
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.ToMany;
+import org.greenrobot.greendao.annotation.Transient;
 
 import java.util.Date;
 import java.util.List;
-import org.greenrobot.greendao.DaoException;
-import org.greenrobot.greendao.annotation.Transient;
 
 /**
  * Created by WifiMorfi on 3/20/2018.
@@ -72,7 +60,7 @@ public class User   {
     }
 
 
-    private static RetrofitDataService mTService;
+    //private static RetrofitDataService mTService;
     @org.greenrobot.greendao.annotation.Id(autoincrement = true)
     public Long Id;
     public String UserName;
@@ -128,7 +116,7 @@ public class User   {
 
 
 
-    public static User GetUser (final Context context , final AppCompatActivity activity){
+    /*public static User GetUser (final Context context , final AppCompatActivity activity){
 
         RetrofitDataProvider provider = new RetrofitDataProvider();
         mTService = provider.getTService();
@@ -163,7 +151,7 @@ public class User   {
         });
 
         return new User();
-    }
+    }*/
 
 
 
