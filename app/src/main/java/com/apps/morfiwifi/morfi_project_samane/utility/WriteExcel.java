@@ -79,6 +79,99 @@ public class WriteExcel {
         return  props;
     }
 
+    public static void  Export_Active_Queue (List<User> userList , AppCompatActivity context ){
+        try {
+            boolean have_permission = false;
+
+
+            if (userList == null){
+                Toast.makeText(context, "خالی", Toast.LENGTH_SHORT).show();
+            }
+
+            if (checkSelfPermission( context , android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Log.v("Storage Write","Permission is granted");
+                //File write logic here
+                have_permission = true;
+                //return true;
+            }
+
+            if (have_permission){
+
+                File file = new File("//sdcard//Download//" , "Excel_export.xls"); // Auto Gen
+                WorkbookSettings wbSettings = new WorkbookSettings();
+
+                wbSettings.setLocale(new Locale("en", "EN"));
+
+                WritableWorkbook workbook = Workbook.createWorkbook(file, wbSettings);
+                workbook.createSheet("Report", 0);
+                WritableSheet excelSheet = workbook.getSheet(0);
+                // ************************************************
+
+                // Lets create a times font
+                WritableFont times10pt = new WritableFont(WritableFont.TIMES, 10);
+                // Define the cell format
+                times = new WritableCellFormat(times10pt);
+                // Lets automatically wrap the cells
+                times.setWrap(true);
+
+                // create create a bold font with unterlines
+                WritableFont times10ptBoldUnderline = new WritableFont(
+                        WritableFont.TIMES, 10, WritableFont.BOLD, false,
+                        UnderlineStyle.SINGLE);
+                timesBoldUnderline = new WritableCellFormat(times10ptBoldUnderline);
+                // Lets automatically wrap the cells
+                timesBoldUnderline.setWrap(true);
+
+                CellView cv = new CellView();
+                cv.setFormat(times);
+                cv.setFormat(timesBoldUnderline);
+//        cv.setAutosize(true);
+
+                // Write a few headers
+                addCaption(excelSheet, 0, 0, "Property");
+                addCaption(excelSheet, 1, 0, "Value");
+                // ************************************************
+
+
+                int index = 1; // start index
+                ArrayList<String> data = Users_prop(userList);
+
+                for (User user :userList) {
+                    for (int i = 0; i < property.length; i++) {
+                        // First column
+                        addLabel(excelSheet, 0, index, property[i]);
+                        // Second column
+                        addLabel(excelSheet, 1, index, data.get(index-1));
+                        index ++;
+                    }
+                }
+
+
+
+                workbook.write();
+                workbook.close();
+
+                Toast.makeText(context, file.getPath() + file.getName(), Toast.LENGTH_SHORT).show();
+
+            }else {
+                // Requesting Permission
+
+                Toast.makeText(context, "پس از دادن دسترسی دوباره تلاش کنید", Toast.LENGTH_SHORT).show();
+                ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
+
+
+
+            }
+
+        }catch (Exception e){
+            Toast.makeText(context, "خطا در خروجی گرفتن", Toast.LENGTH_SHORT).show();
+            Init.Terminal(e.getMessage());
+        }
+
+
+
+
+    }
     public static void  Export_User_Queue (List<User> userList , AppCompatActivity context ){
         try {
             boolean have_permission = false;

@@ -46,7 +46,9 @@ public class SignupQeueActivity extends SiteMasterActivity {
         sh_users =
         Repository.GetInstant(this).getUserDao().queryBuilder()
                 .where(Properties.Should_fill_init_forms.eq(true))
-                .where(UserDao.Properties.Active.eq(false)).list();
+                .where(UserDao.Properties.Active.eq(false))
+                .where(Properties.PreActive.eq(false))
+                .list();
 
 //        Init.Toas( this, sh_users.size() +"");
         signup_stu_RecyclerAdapter.Init(sh_users , this);
@@ -91,5 +93,16 @@ public class SignupQeueActivity extends SiteMasterActivity {
     }
 
     public void delet_signup_std(View view) {
+    }
+
+    public void refresh_view(){
+        sh_users =
+                Repository.GetInstant(this).getUserDao().queryBuilder()
+                        .where(Properties.Should_fill_init_forms.eq(true))
+                        .where(UserDao.Properties.Active.eq(false))
+                        .where(Properties.PreActive.eq(false))
+                        .list();
+
+        signup_stu_RecyclerAdapter.Init(sh_users , this);
     }
 }

@@ -73,6 +73,7 @@ public class User   {
     public boolean should_fill_init_forms = true;
     public boolean Active = false;
     public boolean Deleted = false;
+    public boolean PreActive = false;
     public int Type;
     public Date inset_date;
 
@@ -89,10 +90,10 @@ public class User   {
 
 
 
-    @Generated(hash = 649569981)
+    @Generated(hash = 316889759)
     public User(Long Id, String UserName, String FName, String LName, String Pass, String Pass_hash,
             String Kaet_meli, String Student_id, boolean should_fill_init_forms, boolean Active,
-            boolean Deleted, int Type, Date inset_date) {
+            boolean Deleted, boolean PreActive, int Type, Date inset_date) {
         this.Id = Id;
         this.UserName = UserName;
         this.FName = FName;
@@ -104,6 +105,7 @@ public class User   {
         this.should_fill_init_forms = should_fill_init_forms;
         this.Active = Active;
         this.Deleted = Deleted;
+        this.PreActive = PreActive;
         this.Type = Type;
         this.inset_date = inset_date;
     }
@@ -414,6 +416,14 @@ public class User   {
 
     public void setInset_date(Date inset_date) {
         this.inset_date = inset_date;
+    }
+
+    public boolean getPreActive() {
+        return this.PreActive;
+    }
+
+    public void setPreActive(boolean PreActive) {
+        this.PreActive = PreActive;
     }
 
     /** called by internal mechanisms, do not call yourself. */

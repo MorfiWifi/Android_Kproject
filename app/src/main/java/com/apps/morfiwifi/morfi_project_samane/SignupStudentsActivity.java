@@ -85,6 +85,7 @@ public class SignupStudentsActivity extends AppCompatActivity {
             m.setActive(false);
             m.setShould_fill_init_forms(true);
             m.setInset_date(Calendar.getInstance().getTime());
+            m.setPreActive(false);
 
             if (op_finished){
                 Init.Toas(this ,"لطفا خارج شوید !");
