@@ -1,5 +1,6 @@
 package com.apps.morfiwifi.morfi_project_samane.utility;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.widget.ActionMenuView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.SignupStudentsActivity;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
@@ -21,17 +23,26 @@ import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
+///////////////////////////////////////////////////////////////////////////
+// BLOOCK ZERO >> !
+///////////////////////////////////////////////////////////////////////////
 /**
  * Created by WifiMorfi on 12/20/2017.
  */
 public class Init {
+    public static String Parse_serevr = "pars";
+    public static String ASP_server = "ASP";
+    public static String Offline = "offline";
+    public static String MOD = "pars" ;
+
     public static User current_login;
     public static  void Pront_mark(){
         System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
@@ -310,4 +321,11 @@ public class Init {
         });
     }
 
+
+    public static void test_loading(@NotNull LoginActivity loginActivity) {
+        ProgressDialog dialog = new ProgressDialog(loginActivity);
+        dialog.setMessage("در حال پردازش");
+        dialog.setCancelable(false);
+        dialog.show();
+    }
 }

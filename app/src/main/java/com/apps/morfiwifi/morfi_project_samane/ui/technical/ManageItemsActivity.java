@@ -29,5 +29,7 @@ public class ManageItemsActivity extends TechnicalActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
         setTitle("اموال");
+
+
     }
 }

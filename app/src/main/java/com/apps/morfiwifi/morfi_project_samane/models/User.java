@@ -1,5 +1,11 @@
 package com.apps.morfiwifi.morfi_project_samane.models;
 
+import android.widget.Toast;
+
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -432,4 +438,45 @@ public class User   {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getUserDao() : null;
     }
+
+    //  PART FOT USING PARSE SERVER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    public static  void login(String userName , String pass){
+        ParseUser.logInInBackground("username", "password", new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                if (parseUser != null) {
+                   // Toast.makeText(LoginActivity.this, "Succsss Log in", Toast.LENGTH_SHORT).show();
+
+                    //startWithCurrentUser();
+                    //Login Successful
+                    //You may choose what to do or display here
+                    //For example: Welcome + ParseUser.getUsername()
+
+                    // TODO: 7/9/2018 Do what ever tekes its log in !
+
+
+                } else {
+                   // Toast.makeText(LoginActivity.this, "Error in Log in" + e.getMessage() , Toast.LENGTH_SHORT).show();
+                    //Login Fail
+                    //get error by calling e.getMessage()
+                    // TODO: 7/9/2018  Log in Faild due to message (EX)
+                }
+            }
+        });
+
+
+    }
+
+
+
+
+
+
+
+
+    //  PART FOT USING PARSE SERVER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
 }

@@ -26,10 +26,13 @@ class LoginActivity : AppCompatActivity() {
         //com.orm.SugarContext.init(applicationContext)
         super.onCreate(savedInstanceState)
 
+        Init.test_loading(this)
+
         val exit_code = intent.getBooleanExtra("EXIT" , false)
         if (exit_code){
             finish()
         }
+
 
 
 

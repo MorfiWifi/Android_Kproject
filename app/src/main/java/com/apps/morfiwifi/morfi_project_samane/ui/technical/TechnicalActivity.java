@@ -1,5 +1,6 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.technical;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +21,8 @@ import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SiteMasterActivity
 
 public class TechnicalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,5 +137,24 @@ public class TechnicalActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void start_loading(){
+        loading = new ProgressDialog(this);
+        loading.setMessage("در حال پردازش");
+        loading.setCancelable(false);
+        loading.show();
+    }
+
+    public void stop_loading(){
+        if (loading != null){
+            loading.dismiss();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        stop_loading();
+        super.onStop();
     }
 }
