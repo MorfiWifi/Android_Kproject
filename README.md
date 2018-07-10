@@ -1,7 +1,12 @@
 ﻿# Android_Kproject
 
+[x] online Log in 
+[ ] online DB Work
+[ ] online Messaging
+[ ] online Exchaingign
 
-[] دسته بندی کلاس ها 
+
+دسته بندی کلاس ها 
 کلاس ها شامل چند پکیج کلی هستند که مشخص می کند از چه نوعی هستند.
 
 
