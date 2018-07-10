@@ -44,6 +44,9 @@ public class Init {
     public static String MOD = "pars" ;
 
     public static User current_login;
+    private static ProgressDialog loading;
+
+
     public static  void Pront_mark(){
         System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
         System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
@@ -321,11 +324,28 @@ public class Init {
         });
     }
 
+    public static void start_loading( AppCompatActivity activity){
+        if (loading != null){
+            stop_loading(activity);
+        }
 
-    public static void test_loading(@NotNull LoginActivity loginActivity) {
+        loading = new ProgressDialog(activity);
+        loading.setMessage("در حال پردازش");
+        loading.setCancelable(false);
+        loading.show();
+    }
+
+    public static void stop_loading( AppCompatActivity activity){
+        if (loading != null){
+            loading.dismiss();
+        }
+    }
+
+
+    /*public static void test_loading(@NotNull LoginActivity loginActivity) {
         ProgressDialog dialog = new ProgressDialog(loginActivity);
         dialog.setMessage("در حال پردازش");
         dialog.setCancelable(false);
         dialog.show();
-    }
+    }*/
 }

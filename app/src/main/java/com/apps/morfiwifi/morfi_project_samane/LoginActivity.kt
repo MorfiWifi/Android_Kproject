@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
         //com.orm.SugarContext.init(applicationContext)
         super.onCreate(savedInstanceState)
 
-        Init.test_loading(this)
+//        Init.test_loading(this)
 
         val exit_code = intent.getBooleanExtra("EXIT" , false)
         if (exit_code){
@@ -65,6 +65,35 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    fun login_server (user : User){
+
+        if (user != null){
+            //Init.current_login = User
+            when {
+                user.Role.equals(User.Kind.Student.toString()) -> {
+                    val intent = Intent(this, SamanehaActivity::class.java)
+                    startActivity(intent)
+                }
+                user.Role.equals(User.Kind.Admin.toString()) -> {
+                    val intent = Intent(this, AdminMainActivity::class.java)
+                    startActivity(intent)
+                }
+                user.Role.equals(User.Kind.Site_Master.toString()) -> {
+                    val intent = Intent(this, SiteMasterActivity::class.java)
+                    startActivity(intent)
+                }
+                user.Role.equals(User.Kind.Technical.toString()) -> {
+                    val intent = Intent(this, TechnicalActivity::class.java)
+                    startActivity(intent)
+                }
+                else -> Init.Toas(this , "خطا در ورودی")
+            }
+        }
+
+
+
+    }
+
     fun login (view : View){
 
 
@@ -77,7 +106,9 @@ class LoginActivity : AppCompatActivity() {
 
         val result = DataPref.check_user(username , pass , this)
 
-        val log_user = Init.log_in(username , pass , this)
+        var log_user = Init.log_in(username , pass , this)
+        User.login(username , pass , this)
+        log_user = null
 
         if (log_user != null){
             Init.current_login = log_user

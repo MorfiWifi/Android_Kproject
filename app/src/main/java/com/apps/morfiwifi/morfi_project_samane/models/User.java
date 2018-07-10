@@ -1,9 +1,18 @@
 package com.apps.morfiwifi.morfi_project_samane.models;
 
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
+import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 import org.greenrobot.greendao.DaoException;
@@ -24,6 +33,8 @@ import java.util.List;
 public class User   {
     @Transient
     public static  User current_user; // for different tasks
+    @Transient
+    public String Role;
 
     public enum Kind {
         Student, Master, Technical, Site_Master, Self_Service, Admin ;
@@ -432,40 +443,101 @@ public class User   {
         this.PreActive = PreActive;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 2059241980)
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getUserDao() : null;
-    }
+    
 
     //  PART FOT USING PARSE SERVER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    public static  void login(String userName , String pass){
-        ParseUser.logInInBackground("username", "password", new LogInCallback() {
+    public static  void login(String userName , final String pass , final AppCompatActivity activity){
+        Init.start_loading(activity);
+
+
+
+
+
+
+        ParseUser.logInInBackground(userName, pass, new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
                 if (parseUser != null) {
-                   // Toast.makeText(LoginActivity.this, "Succsss Log in", Toast.LENGTH_SHORT).show();
+                    current_user  = new User();
+                    current_user.Role = null;
+                    current_user.setUserName(parseUser.getUsername()); // TODO: 7/10/2018  Fild,s You need in User
 
-                    //startWithCurrentUser();
-                    //Login Successful
-                    //You may choose what to do or display here
-                    //For example: Welcome + ParseUser.getUsername()
 
                     // TODO: 7/9/2018 Do what ever tekes its log in !
+                    parseUser.getUsername();
+//                    Object object =  parseUser.get("role_id");
+                    String role_id = parseUser.get("role_id").toString();
+
+                    Toast.makeText(activity, role_id, Toast.LENGTH_SHORT).show();
+
+                    // GET ROLE
+                    try {
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("role");
+                    ParseObject Role_obj ;
+                    String Role_name;
 
 
+                        query.getInBackground(role_id, new GetCallback<ParseObject>() {
+                            @Override
+                            public void done(ParseObject object, ParseException e) {
+                                if (e == null){
+                                    String Role_name  = object.get("name").toString();
+                                    current_user.Role = Role_name;
+                                    Toast.makeText(activity, Role_name, Toast.LENGTH_SHORT).show();
+                                    if(activity instanceof LoginActivity){
+                                        ((LoginActivity) activity).login_server(current_user);
+                                    }
+
+                                }else {
+                                    Toast.makeText(activity, "EX " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+
+                        //Role_obj = query.get(role_id ).fetch();
+
+                        //String role_name = Role_obj.get("name").toString();
+                        //current_user.Role = role_name;
+
+
+                    } catch (Exception e1) {
+                        Init.Terminal(e1.getMessage());
+                    }
+
+
+
+                    // GET ROLE
+
+
+                    if (current_user.Role != null){
+                        Toast.makeText(activity, "OK YOU ARE IN !", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Init.Terminal(current_user.Role + " Role KEY !");
+                    }
+
+
+                    Init.stop_loading(activity);
                 } else {
                    // Toast.makeText(LoginActivity.this, "Error in Log in" + e.getMessage() , Toast.LENGTH_SHORT).show();
                     //Login Fail
                     //get error by calling e.getMessage()
                     // TODO: 7/9/2018  Log in Faild due to message (EX)
+                    Toast.makeText(activity, "خطا در ورود", Toast.LENGTH_SHORT).show();
+                    Init.stop_loading(activity);
                 }
             }
         });
 
 
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 2059241980)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getUserDao() : null;
     }
 
 
