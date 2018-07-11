@@ -35,6 +35,7 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
         nav_view.setNavigationItemSelectedListener(this)
         title = "دانشجو"
+        //fixme THis Could be std Profile instead of Main
     }
 
     override fun onBackPressed() {

@@ -69,6 +69,7 @@
             android:layout_height="wrap_content"/>
 
         <android.support.v7.widget.AppCompatSpinner
+            android:background="@color/mdtp_background_color"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="140dp"
             android:id="@+id/sp_start_block"

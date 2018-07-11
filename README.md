@@ -4,7 +4,10 @@
 - [ ] online DB Work
 - [ ] online Messaging
 - [ ] online Exchaingign
-
+- [ ] online User based setting save
+- [ ] Offline settings
+- [ ] Pre catch data for speed
+- [X] Using parse services
 
 دسته بندی کلاس ها 
 کلاس ها شامل چند پکیج کلی هستند که مشخص می کند از چه نوعی هستند.

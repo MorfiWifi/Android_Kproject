@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -37,20 +38,26 @@
             android:layout_height="wrap_content"/>
 
         <android.support.design.widget.TextInputLayout
-            android:layout_alignTop="@id/sp_gozaresh_header"
+
             android:id="@+id/ti_gozaresh_matn"
-            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginRight="15dp"
+            android:layout_alignTop="@id/sp_gozaresh_header"
             android:layout_marginLeft="15dp"
-            >
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/buttom_big_white"
+            android:paddingTop="15dp">
 
             <android.support.design.widget.TextInputEditText
-                android:gravity="center"
+                android:background="@null"
+                android:id="@+id/te_gozaresh_matn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="متن گزارش" />
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:hint="متن گزارش"
+                 />
         </android.support.design.widget.TextInputLayout>
 
         <Button

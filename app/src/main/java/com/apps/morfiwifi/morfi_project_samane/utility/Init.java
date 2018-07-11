@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ActionMenuView;
 import android.widget.TextView;
@@ -22,10 +23,18 @@ import com.apps.morfiwifi.morfi_project_samane.models.Othagh;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
+import org.apache.commons.net.ntp.NTPUDPClient;
+import org.apache.commons.net.ntp.TimeInfo;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -62,6 +71,7 @@ public class Init {
         System.out.println("MMNNNNMMMMNNNNMMMNNNNMMNNNNNNMMMMMMMNNNNNNMMNNNNNNNNNNNMMMMM");
         System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
         System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+        // THis is a Memory From the PAST..................................................
     }
     public  static  String Token = "";
     public static boolean CheckInternet (){
@@ -341,11 +351,34 @@ public class Init {
         }
     }
 
+    public static void test (){
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("role");
+        ParseObject Role_obj ;
+        String Role_name;
+        query.whereMatches("role_id" , "Tvdsj24");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
 
-    /*public static void test_loading(@NotNull LoginActivity loginActivity) {
-        ProgressDialog dialog = new ProgressDialog(loginActivity);
-        dialog.setMessage("در حال پردازش");
-        dialog.setCancelable(false);
-        dialog.show();
-    }*/
+            }
+        });
+    }
+
+    public static void test_time(){
+
+        String TAG = "YOUR_APP_TAG";
+        String TIME_SERVER = "0.europe.pool.ntp.org";
+
+        try {
+            NTPUDPClient timeClient = new NTPUDPClient();
+            InetAddress inetAddress = InetAddress.getByName(TIME_SERVER);
+            TimeInfo timeInfo = timeClient.getTime(inetAddress);
+            long setverTime = timeInfo.getMessage().getTransmitTimeStamp().getTime();
+
+            // store this somewhere and use to correct system time
+            long timeCorrection = System.currentTimeMillis()-setverTime;
+        } catch (Exception e) {
+            Log.v(TAG,"Time server error - "+e.getLocalizedMessage());
+        }
+    }
 }

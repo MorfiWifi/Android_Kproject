@@ -1,6 +1,8 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.student;
 
+import android.graphics.Paint;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -48,6 +50,11 @@ public class GozareshActivity extends DarkhastActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         text = findViewById(R.id.ti_gozaresh_matn);
+//        TextInputEditText matn = findViewById(R.id.te_gozaresh_matn);
+//        matn.getBackground().clearColorFilter();
+//        text.getBackground().clearColorFilter();
+//        editText.getBackground().clearColorFilter();
+
 
         Spinner gozaresh_header = findViewById(R.id.sp_gozaresh_header);
 

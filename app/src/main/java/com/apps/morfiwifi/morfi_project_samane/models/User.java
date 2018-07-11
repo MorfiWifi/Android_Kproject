@@ -32,6 +32,8 @@ import java.util.List;
 @Entity
 public class User   {
     @Transient
+    public static String Tuser = "User"; // name of Table in parse
+    @Transient
     public static  User current_user; // for different tasks
     @Transient
     public String Role;
@@ -451,10 +453,6 @@ public class User   {
         Init.start_loading(activity);
 
 
-
-
-
-
         ParseUser.logInInBackground(userName, pass, new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
@@ -469,7 +467,7 @@ public class User   {
 //                    Object object =  parseUser.get("role_id");
                     String role_id = parseUser.get("role_id").toString();
 
-                    Toast.makeText(activity, role_id, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity, role_id, Toast.LENGTH_SHORT).show();
 
                     // GET ROLE
                     try {
@@ -484,7 +482,7 @@ public class User   {
                                 if (e == null){
                                     String Role_name  = object.get("name").toString();
                                     current_user.Role = Role_name;
-                                    Toast.makeText(activity, Role_name, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(activity, Role_name, Toast.LENGTH_SHORT).show();
                                     if(activity instanceof LoginActivity){
                                         ((LoginActivity) activity).login_server(current_user);
                                     }
@@ -529,6 +527,33 @@ public class User   {
                 }
             }
         });
+
+
+    }
+
+    public static void getall_active_users (){
+        try {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery(Tuser);
+            query.whereEqualTo("activate" , true);
+
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> objects, ParseException e) {
+                    if (e == null){
+
+                    }else {
+                     Init.Terminal(e.getMessage() + " exception in get all users list");
+                    }
+                }
+            });
+
+            // TODO: 7/11/2018 Do what ever it takes from users
+
+
+        } catch (Exception e1) {
+            Init.Terminal(e1.getMessage());
+        }
+
 
 
     }
