@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.technical.PostArchiveActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/toolbar_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -18,6 +21,22 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <Button
+        android:id="@+id/btn_send_broudcast"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:background="@drawable/background_light_blue"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="ارسال پیام"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
 
 
-</android.support.constraint.ConstraintLayout>
+
+
+
+</RelativeLayout>
