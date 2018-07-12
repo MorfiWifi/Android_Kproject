@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.apps.morfiwifi.morfi_project_samane.R
+import com.apps.morfiwifi.morfi_project_samane.models.Setting
 import com.apps.morfiwifi.morfi_project_samane.ui.MessageActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.TestDaoActivity
@@ -88,7 +89,7 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 startActivity(intent )
             }
             R.id.nav_manage_box->{
-                val intent = Intent(this , ReciverActivity::class.java)
+                val intent = Intent(this , BroadcastActivity::class.java)
                 startActivity(intent )
             }
             R.id.nav_enseraf ->{
@@ -103,5 +104,16 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun load_data (){
+        // preload data or normal load !
+        if (Setting.isPreload(this)){
+            //todo  load all data - broudcastes ,
+
+        }else{
+
+
+        }
     }
 }

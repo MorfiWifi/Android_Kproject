@@ -47,6 +47,7 @@
             />
 
         <ImageView
+            android:background="@drawable/buttom_big_white"
             android:id="@+id/img_time_pic"
             android:layout_marginTop="10dp"
             android:layout_width="40dp"
@@ -60,6 +61,7 @@
             />
 
         <TextView
+
             android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:layout_marginTop="10dp"
@@ -71,6 +73,10 @@
             android:layout_height="wrap_content" />
 
         <android.support.design.widget.TextInputLayout
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:paddingTop="15dp"
+            android:background="@drawable/buttom_big_white"
             android:layout_marginTop="5dp"
             android:layout_below="@id/img_time_pic"
             android:id="@+id/txin_enseraf_reason"
@@ -82,6 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:gravity="center|top"
+                android:background="@null"
 
                 android:hint="دلیل انصراف" />
         </android.support.design.widget.TextInputLayout>

@@ -130,10 +130,11 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
 
                 break;
             case R.id.nav_manage_box :
-               // if (!(this instanceof ReciverActivity)){ // HSould Chainge ...todo chainge this activity ASAP!
-                    intent = new Intent(this , ReciverActivity.class);
+                if (!(this instanceof BroadcastActivity)){ // HSould Chainge ...todo chainge this activity ASAP!
+                    intent = new Intent(this , BroadcastActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent );
-                //}
+                }
 
                 break;
             case R.id.nav_enseraf :

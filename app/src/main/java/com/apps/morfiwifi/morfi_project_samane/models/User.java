@@ -476,7 +476,24 @@ public class User   {
                     String Role_name;
 
 
-                        query.getInBackground(role_id, new GetCallback<ParseObject>() {
+                        ParseObject object = query.get(role_id);
+
+                        { // FIXME: 7/12/2018 Do we have section in JAVA??
+                            if (object != null){
+                                Role_name  = object.get("name").toString();
+                                current_user.Role = Role_name;
+//                                    Toast.makeText(activity, Role_name, Toast.LENGTH_SHORT).show();
+                                if(activity instanceof LoginActivity){
+                                    ((LoginActivity) activity).login_server(current_user);
+                                }
+                            }else {
+                                Toast.makeText(activity, "EX " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }// section for recived role
+
+                        /*query.getInBackground(role_id, new GetCallback<ParseObject>() {
                             @Override
                             public void done(ParseObject object, ParseException e) {
                                 if (e == null){
@@ -491,7 +508,7 @@ public class User   {
                                     Toast.makeText(activity, "EX " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
-                        });
+                        });*/
 
 
                         //Role_obj = query.get(role_id ).fetch();

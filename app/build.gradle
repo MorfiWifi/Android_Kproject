@@ -30,7 +30,7 @@ dependencies {
     // Add for push notification support -- add FCM or GCM but not both.
     implementation "com.parse:parse-fcm-android:$parseVersion" // migrate to FCM
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation  'commons-net:commons-net:3.3'
+    implementation 'commons-net:commons-net:3.3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.50"
     implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
     //noinspection GradleCompatible

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity">
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity">
 
 
 
-    <include layout="@layout/reciver_content" />
+<include layout="@layout/reciver_content" />
 
 
-    <include layout="@layout/botttom_sheet" />
+<include layout="@layout/botttom_sheet" />
 
 
 </android.support.design.widget.CoordinatorLayout>
