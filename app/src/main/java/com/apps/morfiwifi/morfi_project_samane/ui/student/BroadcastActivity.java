@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.Broudcast;
+import com.apps.morfiwifi.morfi_project_samane.view.broudcast_RecyclerAdapter;
 
 public class BroadcastActivity extends DarkhastActivity {
 
@@ -35,6 +37,9 @@ public class BroadcastActivity extends DarkhastActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        Broudcast broudcast = new Broudcast();
+        broudcast_RecyclerAdapter.Init(broudcast.getBroudcastList(getApplicationContext()) , this);
 
 
     }

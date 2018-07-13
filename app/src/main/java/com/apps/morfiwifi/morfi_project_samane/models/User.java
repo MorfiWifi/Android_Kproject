@@ -37,6 +37,8 @@ public class User   {
     public static  User current_user; // for different tasks
     @Transient
     public String Role;
+    @Transient
+    public String Role_id;
 
     public enum Kind {
         Student, Master, Technical, Site_Master, Self_Service, Admin ;
@@ -482,6 +484,7 @@ public class User   {
                             if (object != null){
                                 Role_name  = object.get("name").toString();
                                 current_user.Role = Role_name;
+                                current_user.Role_id = object.getObjectId();
 //                                    Toast.makeText(activity, Role_name, Toast.LENGTH_SHORT).show();
                                 if(activity instanceof LoginActivity){
                                     ((LoginActivity) activity).login_server(current_user);
