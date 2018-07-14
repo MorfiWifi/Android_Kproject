@@ -168,7 +168,7 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
     public void start_loading(){
         loading = new ProgressDialog(this);
         loading.setMessage("در حال پردازش");
-        loading.setCancelable(false);
+        loading.setCancelable(true);
         loading.show();
     }
 

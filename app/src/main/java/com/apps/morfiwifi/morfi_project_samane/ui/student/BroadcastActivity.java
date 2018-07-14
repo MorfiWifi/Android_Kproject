@@ -38,10 +38,14 @@ public class BroadcastActivity extends DarkhastActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
 
+
+        Broudcast.getBroudcastList(this , true);
+
+    }
+
+    public void loadlist (){
         Broudcast broudcast = new Broudcast();
         broudcast_RecyclerAdapter.Init(broudcast.getBroudcastList(getApplicationContext()) , this);
-
-
     }
 
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import com.apps.morfiwifi.morfi_project_samane.models.DataPref
 import com.apps.morfiwifi.morfi_project_samane.models.User
+import com.apps.morfiwifi.morfi_project_samane.models.role
 import com.apps.morfiwifi.morfi_project_samane.ui.admin.AdminMainActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SiteMasterActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.student.SamanehaActivity
@@ -71,18 +72,22 @@ class LoginActivity : AppCompatActivity() {
             //Init.current_login = User
             when {
                 user.Role.equals(User.Kind.Student.toString()) -> {
+                    role.load_roles(this , false);
                     val intent = Intent(this, SamanehaActivity::class.java)
                     startActivity(intent)
                 }
                 user.Role.equals(User.Kind.Admin.toString()) -> {
+                    role.load_roles(this , false);
                     val intent = Intent(this, AdminMainActivity::class.java)
                     startActivity(intent)
                 }
                 user.Role.equals(User.Kind.Site_Master.toString()) -> {
+                    role.load_roles(this , false);
                     val intent = Intent(this, SiteMasterActivity::class.java)
                     startActivity(intent)
                 }
                 user.Role.equals(User.Kind.Technical.toString()) -> {
+                    role.load_roles(this , false);
                     val intent = Intent(this, TechnicalActivity::class.java)
                     startActivity(intent)
                 }

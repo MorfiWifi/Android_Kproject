@@ -39,6 +39,8 @@ public class User   {
     public String Role;
     @Transient
     public String Role_id;
+    @Transient
+    public  String id;
 
     public enum Kind {
         Student, Master, Technical, Site_Master, Self_Service, Admin ;
@@ -462,6 +464,7 @@ public class User   {
                     current_user  = new User();
                     current_user.Role = null;
                     current_user.setUserName(parseUser.getUsername()); // TODO: 7/10/2018  Fild,s You need in User
+                    current_user.id = parseUser.getObjectId();
 
 
                     // TODO: 7/9/2018 Do what ever tekes its log in !

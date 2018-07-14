@@ -55,19 +55,19 @@ public class broudcast_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder_
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
 
-                TextView name = bottom_sheet.findViewById(R.id.tv_std_queue_name);
-                TextView lastname = bottom_sheet.findViewById(R.id.tv_std_queue_lastname);
-                TextView kartmelli = bottom_sheet.findViewById(R.id.tv_std_queue_kodmelli);
-                TextView username = bottom_sheet.findViewById(R.id.tv_std_queue_username);
-                TextView date = bottom_sheet.findViewById(R.id.tv_std_queue_date);
+                TextView name = bottom_sheet.findViewById(R.id.tv_message_sender);
+                TextView header = bottom_sheet.findViewById(R.id.tv_message_header);
+                TextView matn = bottom_sheet.findViewById(R.id.tv_message_matn);
+//                TextView username = bottom_sheet.findViewById(R.id.tv_std_queue_username);
+                TextView date = bottom_sheet.findViewById(R.id.tv_message_date);
 
                 name.setText("NON YET");
                 //sample_user.role_name
-                lastname.setText(sample_user.id);
-                kartmelli.setText(sample_user.role_name);
-                //sample_user.created_date.toString()
-                username.setText(sample_user.header);
-                date.setText(sample_user.matn);
+                header.setText(sample_user.header);
+                matn.setText(sample_user.matn);
+                sample_user.created_date.toString();
+//                username.setText(sample_user.header);
+                date.setText(sample_user.created_date.toString());
 /*
 
                 bottom_sheet.findViewById(R.id.btn_std_queue_accept).setOnClickListener(new View.OnClickListener() {
