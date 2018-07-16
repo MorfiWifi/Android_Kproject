@@ -88,7 +88,8 @@ public class JabejaiActivity extends DarkhastActivity implements
                 if (i >= 0){
                     sp_st_block.setEnabled(true);
                     //sp_end_block.setEnabled(false);
-                    st_blocks = khabgahs.get(i).getBlocks();
+                    st_blocks = khabgahs.get(i).blocks;
+//                            getBlocks();
 
                     ArrayAdapter<Block> spinnerArrayAdapter = new ArrayAdapter<Block>(activity ,   android.R.layout.simple_spinner_item, khabgahs.get(i).blocks);
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
@@ -121,7 +122,8 @@ public class JabejaiActivity extends DarkhastActivity implements
                     sp_end_block.setEnabled(true);
                     //sp_end_block.setEnabled(false);
 
-                    end_blocks = khabgahs.get(i).getBlocks();
+                    end_blocks = khabgahs.get(i).blocks;
+//                            getBlocks();
                     ArrayAdapter<Block> spinnerArrayAdapter = new ArrayAdapter<Block>(activity ,   android.R.layout.simple_spinner_item, khabgahs.get(i).blocks);
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                     sp_end_block.setAdapter(spinnerArrayAdapter);
@@ -150,8 +152,9 @@ public class JabejaiActivity extends DarkhastActivity implements
                     sp_st_othagh.setEnabled(true);
                     //sp_end_block.setEnabled(false);
 
-                    st_otaghs = st_blocks.get(i).getOthaghs();
-                    ArrayAdapter<Otagh> spinnerArrayAdapter = new ArrayAdapter<Otagh>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).getOthaghs());
+                    st_otaghs = st_blocks.get(i).otaghs;
+//                            getOthaghs();
+                    ArrayAdapter<Otagh> spinnerArrayAdapter = new ArrayAdapter<Otagh>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).otaghs);
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                     sp_st_othagh.setAdapter(spinnerArrayAdapter);
 
@@ -175,8 +178,9 @@ public class JabejaiActivity extends DarkhastActivity implements
                     sp_end_othagh.setEnabled(true);
                     //sp_end_block.setEnabled(false);
 
-                    end_otaghs = st_blocks.get(i).getOthaghs();
-                    ArrayAdapter<Otagh> spinnerArrayAdapter = new ArrayAdapter<Otagh>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).getOthaghs());
+                    end_otaghs = st_blocks.get(i).otaghs;
+//                            getOthaghs();
+                    ArrayAdapter<Otagh> spinnerArrayAdapter = new ArrayAdapter<Otagh>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).otaghs);
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                     sp_end_othagh.setAdapter(spinnerArrayAdapter);
 
