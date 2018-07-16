@@ -195,4 +195,9 @@ public class Broudcast {
             }
         }
     }
+    public static void Clear(){
+        broudcastList = null;
+        tempList = null;
+        isloaded = false;
+    }
 }

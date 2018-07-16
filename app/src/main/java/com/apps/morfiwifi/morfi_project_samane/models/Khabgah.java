@@ -1,137 +1,159 @@
 package com.apps.morfiwifi.morfi_project_samane.models;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.ToMany;
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 
+import com.apps.morfiwifi.morfi_project_samane.ui.student.BroadcastActivity;
+import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.DaoException;
 
-@Entity
+
+
 public class Khabgah {
-    @Id(autoincrement = true)
+
+    public static String class_name = "khabgah";
+    public static String obj_name = "name";
+    public static String obj_code = "code";
+
+    public static boolean isloaded = false;
+    public static List<ParseObject> temp;
+    public static  List<Khabgah> things ;
+
+//    @Transient
+    public String Id;
+//    @Transient
+    public Date createAt;
+
+//    @Id(autoincrement = true)
     public Long id;
     public String name = "";
     public String code;
-    @ToMany(referencedJoinProperty = "id")
+//    @ToMany(referencedJoinProperty = "id")
     public List<Block> blocks;
-    /** Used to resolve relations */
-    @Generated(hash = 2040040024)
-    private transient DaoSession daoSession;
-    /** Used for active entity operations. */
-    @Generated(hash = 2071694555)
-    private transient KhabgahDao myDao;
 
-    @Generated(hash = 911184618)
-    public Khabgah(Long id, String name, String code) {
-        this.id = id;
-        this.name = name;
-        this.code = code;
-    }
-
-    @Generated(hash = 1927461767)
-    public Khabgah() {
-    }
-
-    @Override
-    public String toString() {
-        return name;
-        //return super.toString();
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return this.code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    /**
-     * To-many relationship, resolved on first access (and after reset).
-     * Changes to to-many relations are not persisted, make changes to the target entity.
-     */
-    @Generated(hash = 444008352)
-    public List<Block> getBlocks() {
-        if (blocks == null) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
+    public static List<Khabgah> load_Khabgahs (Context context){
+        if ( !isloaded){
+            try {
+                ParseQuery query = new ParseQuery(class_name);
+                temp =  query.find();
+                convert_parse();
+                isloaded = true;
+            }catch (Exception e){
+                things = new ArrayList<>();
             }
-            BlockDao targetDao = daoSession.getBlockDao();
-            List<Block> blocksNew = targetDao._queryKhabgah_Blocks(id);
-            synchronized (this) {
-                if (blocks == null) {
-                    blocks = blocksNew;
+        }else {
+            if (Setting.isPreload(context)){
+                return things;
+            }else {
+                try {
+                    ParseQuery query = new ParseQuery(class_name);
+                    temp =  query.find();
+                    convert_parse();
+                }catch (Exception e){
+                    things = new ArrayList<>();
                 }
             }
         }
-        return blocks;
+        return things;
     }
-
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    @Generated(hash = 1731085026)
-    public synchronized void resetBlocks() {
-        blocks = null;
-    }
-
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 128553479)
-    public void delete() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
+    public static void load_Khabgahs  (final AppCompatActivity activity , final boolean draw_loading){
+        if ( !isloaded){
+            try {
+                ParseQuery query = new ParseQuery(class_name);
+                if (activity instanceof BroadcastActivity && draw_loading){
+                    ((BroadcastActivity) activity).start_loading();
+                }
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> objects, ParseException e) {
+                        if (e == null){
+                            temp = objects;
+                            convert_parse();
+                            isloaded = true;
+                            if (activity instanceof BroadcastActivity && draw_loading){
+//                                broudcast_RecyclerAdapter.Init(roles , activity);
+                                ((BroadcastActivity) activity).stop_loading();
+                            }
+                        }else {
+                            Init.Terminal("Some ERROR IN RETRIVING BROUDCASTS");
+                            if (activity instanceof BroadcastActivity && draw_loading ){
+//                                broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                                ((BroadcastActivity) activity).stop_loading();
+                            }
+                        }
+                    }
+                });
+            }catch (Exception e){
+                things = new ArrayList<>();
+            }
+        }else {
+            if (Setting.isPreload(activity)){
+                return ;
+            }else {
+                try {
+                    ParseQuery query = new ParseQuery(class_name);
+                    if (activity instanceof  BroadcastActivity && draw_loading){
+                        ((BroadcastActivity) activity).start_loading();
+                    }
+                    query.findInBackground(new FindCallback<ParseObject>() {
+                        @Override
+                        public void done(List objects, ParseException e) {
+                            if (e == null){
+                                temp = objects;
+                                convert_parse();
+                                isloaded = true;
+                                if (activity instanceof BroadcastActivity && draw_loading){
+//                                    broudcast_RecyclerAdapter.Init(roles , activity);
+                                    ((BroadcastActivity) activity).stop_loading();
+                                }
+                            }else {
+                                Init.Terminal("Some ERROR IN RETRIVING BROUDCASTS");
+                            }
+                        }
+                    });
+                }catch (Exception e){
+                    things = new ArrayList<>();
+                    if (activity instanceof BroadcastActivity && draw_loading){
+//                        broudcast_RecyclerAdapter.Init(roles , activity);
+                        ((BroadcastActivity) activity).stop_loading();
+                    }
+                }
+            }
         }
-        myDao.delete(this);
-    }
+        return ;
 
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 1942392019)
-    public void refresh() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
+    }
+    private static void convert_parse(){
+        if (temp != null){
+            things = new ArrayList<>();
+            for (ParseObject parseObject : temp) {
+                Khabgah khabgah = new Khabgah();
+                khabgah.Id = parseObject.getObjectId();
+                khabgah.createAt = parseObject.getCreatedAt();
+                khabgah.name = parseObject.get(obj_name).toString();
+                things.add(khabgah);
+            }
+        }else {
+            things = new ArrayList<>();
         }
-        myDao.refresh(this);
+
     }
 
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 713229351)
-    public void update() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.update(this);
+    public static void Clear(){
+        things = null;
+        temp   = null;
+        isloaded = false;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 230203222)
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getKhabgahDao() : null;
-    }
+
+
+
+
 }

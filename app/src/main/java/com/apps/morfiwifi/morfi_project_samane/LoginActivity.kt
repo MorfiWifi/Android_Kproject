@@ -70,6 +70,7 @@ class LoginActivity : AppCompatActivity() {
 
         if (user != null){
             //Init.current_login = User
+            Init.start_fresh() // for fixing other user catching problem
             when {
                 user.Role.equals(User.Kind.Student.toString()) -> {
                     role.load_roles(this , false);

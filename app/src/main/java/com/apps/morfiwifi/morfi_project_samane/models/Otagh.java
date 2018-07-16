@@ -15,42 +15,31 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+//@Entity
+public class Otagh {
 
-
-
-public class Block {
-
-    public static String class_name = "blook";
+    public static String class_name = "otagh";
     public static String obj_name = "name";
     public static String obj_code = "code";
 
+    public static boolean isloaded = false;
+    public static List<ParseObject> temp;
+    public static  List<Otagh> otaghs;
 
+
+//    @Transient
     public String Id;
-
+//    @Transient
     public Date createAt;
 
+//    @Id(autoincrement = true)
     public Long id;
-    public String name = "";
     public String code;
-    public List<Otagh> otaghs;
-
-
-    @Override
-    public String toString() {
-        return name;
-    }
+    public String name = "";
 
 
 
-    public static boolean isloaded = false;
-
-    public static List<ParseObject> temp;
-
-    public static  List<Block> blocks;
-
-
-
-    public static List<Block> load_blocks (Context context){
+    public static List<Otagh> load_otaghs (Context context){
         if ( !isloaded){
             try {
                 ParseQuery query = new ParseQuery(class_name);
@@ -58,24 +47,24 @@ public class Block {
                 convert_parse();
                 isloaded = true;
             }catch (Exception e){
-                blocks = new ArrayList<>();
+                otaghs = new ArrayList<>();
             }
         }else {
             if (Setting.isPreload(context)){
-                return blocks;
+                return otaghs;
             }else {
                 try {
                     ParseQuery query = new ParseQuery(class_name);
                     temp =  query.find();
                     convert_parse();
                 }catch (Exception e){
-                    blocks = new ArrayList<>();
+                    otaghs = new ArrayList<>();
                 }
             }
         }
-        return blocks;
+        return otaghs;
     }
-    public static void load_blocks  (final AppCompatActivity activity , final boolean draw_loading){
+    public static void load_otaghs  (final AppCompatActivity activity , final boolean draw_loading){
         if ( !isloaded){
             try {
                 ParseQuery query = new ParseQuery(class_name);
@@ -103,7 +92,7 @@ public class Block {
                     }
                 });
             }catch (Exception e){
-                blocks = new ArrayList<>();
+                otaghs = new ArrayList<>();
             }
         }else {
             if (Setting.isPreload(activity)){
@@ -131,7 +120,7 @@ public class Block {
                         }
                     });
                 }catch (Exception e){
-                    blocks = new ArrayList<>();
+                    otaghs = new ArrayList<>();
                     if (activity instanceof BroadcastActivity && draw_loading){
 //                        broudcast_RecyclerAdapter.Init(roles , activity);
                         ((BroadcastActivity) activity).stop_loading();
@@ -144,25 +133,23 @@ public class Block {
     }
     private static void convert_parse(){
         if (temp != null){
-            blocks = new ArrayList<>();
+            otaghs = new ArrayList<>();
             for (ParseObject parseObject : temp) {
-                Block block = new Block();
-                block.Id = parseObject.getObjectId();
-                block.createAt = parseObject.getCreatedAt();
-                block.name = parseObject.get(obj_name).toString();
-                blocks.add(block);
+                Otagh otagh = new Otagh();
+                otagh.Id = parseObject.getObjectId();
+                otagh.createAt = parseObject.getCreatedAt();
+                otagh.name = parseObject.get(obj_name).toString();
+                otaghs.add(otagh);
             }
         }else {
-            blocks = new ArrayList<>();
+            otaghs = new ArrayList<>();
         }
 
     }
 
     public static void Clear(){
-        blocks = null;
+        otaghs = null;
         temp   = null;
         isloaded = false;
     }
-    //Pares server THINGS ......
-    
 }

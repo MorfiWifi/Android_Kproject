@@ -7,38 +7,36 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ActionMenuView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.SignupStudentsActivity;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
+import com.apps.morfiwifi.morfi_project_samane.models.Broudcast;
 import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
 import com.apps.morfiwifi.morfi_project_samane.models.Gozaresh_type;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
 import com.apps.morfiwifi.morfi_project_samane.models.Message;
-import com.apps.morfiwifi.morfi_project_samane.models.Othagh;
+import com.apps.morfiwifi.morfi_project_samane.models.Otagh;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
+import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
+import com.apps.morfiwifi.morfi_project_samane.models.role;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import org.apache.commons.net.ntp.NTPUDPClient;
 import org.apache.commons.net.ntp.TimeInfo;
-import org.jetbrains.annotations.NotNull;
 
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 ///////////////////////////////////////////////////////////////////////////
 // BLOOCK ZERO >> !
@@ -215,14 +213,14 @@ public class Init {
                 Block bl1 = new Block();
                 Block bl2 = new Block();
 
-                Othagh ot1 = new Othagh();
-                Othagh ot2 = new Othagh();
+                Otagh ot1 = new Otagh();
+                Otagh ot2 = new Otagh();
 
-                ot1.setNaem("شماره 5");
+                /*ot1.setNaem("شماره 5");
                 ot1.setCode("007");
 
                 ot2.setNaem("شماره 6");
-                ot2.setCode("008");
+                ot2.setCode("008");*/
 
                 bl1.name = "بلوک 1";
                 bl2.name = "بلوک 2";
@@ -234,28 +232,28 @@ public class Init {
                 kh2.code = "0";
                 kh1.code = "13";
 
-                kh1.id = session.getKhabgahDao().insert(kh1); // retriving ID
+                /*kh1.id = session.getKhabgahDao().insert(kh1); // retriving ID
                 kh2.id = session.getKhabgahDao().insert(kh2); // retriving ID
 
                 bl1.id = session.getBlockDao().insert(bl1);
                 bl2.id = session.getBlockDao().insert(bl2);
 
                 ot1.id = session.getOthaghDao().insert(ot1);
-                ot2.id = session.getOthaghDao().insert(ot2);
+                ot2.id = session.getOthaghDao().insert(ot2);*/
 
 
-                List<Othagh> othaghs_1 = new ArrayList<>();
-                List<Othagh> othaghs_2 = new ArrayList<>();
+                List<Otagh> othaghs_1 = new ArrayList<>();
+                List<Otagh> othaghs_2 = new ArrayList<>();
                 othaghs_1.add(ot1);
                 othaghs_1.add(ot2);
                 othaghs_2.add(ot1);
                 othaghs_2.add(ot2);
 
-                bl1.othaghs = othaghs_1;
-                bl2.othaghs = othaghs_2;
+                bl1.otaghs = othaghs_1;
+                bl2.otaghs = othaghs_2;
 
-                session.getBlockDao().update(bl1);
-                session.getBlockDao().update(bl2);
+//                session.getBlockDao().update(bl1);
+//                session.getBlockDao().update(bl2);
 
                 List<Block> blocks_1 = new ArrayList<>();
                 blocks_1.add(bl1);
@@ -267,8 +265,8 @@ public class Init {
                 kh1.blocks = blocks_1;
                 kh2.blocks = blocks_2;
 
-                session.getKhabgahDao().update(kh1);
-                session.getKhabgahDao().update(kh2);
+//                session.getKhabgahDao().update(kh1);
+//                session.getKhabgahDao().update(kh2);
 
 
                 Gozaresh_type type1 = new Gozaresh_type();
@@ -380,5 +378,19 @@ public class Init {
         } catch (Exception e) {
             Log.v(TAG,"Time server error - "+e.getLocalizedMessage());
         }
+    }
+
+    public static void start_fresh (){
+        // TODO: 7/16/2018 Clear all Classes Brfore full Loging in
+        role.Clear();
+        Broudcast.Clear();
+        Thing.Clear();
+        Otagh.Clear();
+        Khabgah.Clear();
+        Block.Clear();
+
+
+
+
     }
 }

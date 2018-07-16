@@ -4,7 +4,6 @@ import android.graphics.Typeface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,7 +16,7 @@ import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
 import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
-import com.apps.morfiwifi.morfi_project_samane.models.Othagh;
+import com.apps.morfiwifi.morfi_project_samane.models.Otagh;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
@@ -26,6 +25,7 @@ import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JabejaiActivity extends DarkhastActivity implements
@@ -35,8 +35,8 @@ public class JabejaiActivity extends DarkhastActivity implements
     private JabejaiActivity activity;
     private List<Block> st_blocks;
     private List<Block> end_blocks;
-    private List<Othagh> st_othaghs;
-    private List<Othagh> end_othaghs;
+    private List<Otagh> st_otaghs;
+    private List<Otagh> end_otaghs;
     private static String[] monthrs = {"فروردین" , "اردیبهشت" , "خرداد" , "تیر" ,"مرداد" ,"شهریور" ,"مهر" ,"آبان" , "آذر" , "دی" , "بهمن" , "اسفند"};
     private boolean is_date_selected = false;
     private TextView tv_hint;
@@ -63,7 +63,8 @@ public class JabejaiActivity extends DarkhastActivity implements
         activity = this;
         tv_hint = findViewById(R.id.tv_choosen_date);
         DaoSession session = Repository.GetInstant(this);
-        final List<Khabgah> khabgahs = session.getKhabgahDao().loadAll();
+        final List<Khabgah> khabgahs = new ArrayList<>();
+//                session.getKhabgahDao().loadAll();
 
         Spinner sp_st_kh = (Spinner) findViewById(R.id.sp_start_khab);
         Spinner sp_end_kh = (Spinner) findViewById(R.id.sp_end_khab);
@@ -149,8 +150,8 @@ public class JabejaiActivity extends DarkhastActivity implements
                     sp_st_othagh.setEnabled(true);
                     //sp_end_block.setEnabled(false);
 
-                    st_othaghs = st_blocks.get(i).getOthaghs();
-                    ArrayAdapter<Othagh> spinnerArrayAdapter = new ArrayAdapter<Othagh>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).getOthaghs());
+                    st_otaghs = st_blocks.get(i).getOthaghs();
+                    ArrayAdapter<Otagh> spinnerArrayAdapter = new ArrayAdapter<Otagh>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).getOthaghs());
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                     sp_st_othagh.setAdapter(spinnerArrayAdapter);
 
@@ -174,8 +175,8 @@ public class JabejaiActivity extends DarkhastActivity implements
                     sp_end_othagh.setEnabled(true);
                     //sp_end_block.setEnabled(false);
 
-                    end_othaghs = st_blocks.get(i).getOthaghs();
-                    ArrayAdapter<Othagh> spinnerArrayAdapter = new ArrayAdapter<Othagh>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).getOthaghs());
+                    end_otaghs = st_blocks.get(i).getOthaghs();
+                    ArrayAdapter<Otagh> spinnerArrayAdapter = new ArrayAdapter<Otagh>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).getOthaghs());
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                     sp_end_othagh.setAdapter(spinnerArrayAdapter);
 

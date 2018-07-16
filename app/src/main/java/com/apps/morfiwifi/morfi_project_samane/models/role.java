@@ -67,7 +67,7 @@ public class role {
         if ( !isloaded){
             try {
                 ParseQuery query = new ParseQuery(class_name);
-                if (activity instanceof BroadcastActivity){
+                if (activity instanceof BroadcastActivity && draw_loading){
                     ((BroadcastActivity) activity).start_loading();
                 }
                 query.findInBackground(new FindCallback<ParseObject>() {
@@ -144,5 +144,11 @@ public class role {
             roles = new ArrayList<>();
         }
 
+    }
+
+    public static void Clear(){
+        roles = null;
+        temp   = null;
+        isloaded = false;
     }
 }
