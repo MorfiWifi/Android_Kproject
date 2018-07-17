@@ -1,18 +1,15 @@
 package com.apps.morfiwifi.morfi_project_samane.models;
 
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 import org.greenrobot.greendao.DaoException;
@@ -32,7 +29,7 @@ import java.util.List;
 @Entity
 public class User   {
     @Transient
-    public static String Tuser = "User"; // name of Table in parse
+    public static String class_name = "User"; // name of Table in parse
     @Transient
     public static  User current_user; // for different tasks
     @Transient
@@ -556,7 +553,7 @@ public class User   {
 
     public static void getall_active_users (){
         try {
-            ParseQuery<ParseObject> query = ParseQuery.getQuery(Tuser);
+            ParseQuery<ParseObject> query = ParseQuery.getQuery(class_name);
             query.whereEqualTo("activate" , true);
 
             query.findInBackground(new FindCallback<ParseObject>() {

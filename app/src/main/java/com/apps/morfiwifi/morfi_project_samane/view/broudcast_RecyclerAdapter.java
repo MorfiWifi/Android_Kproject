@@ -18,7 +18,9 @@ import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ActiveStudentActivity;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class broudcast_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder_broudcast_std>{
@@ -45,6 +47,13 @@ public class broudcast_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder_
         //sample_user.created_date.toString()
         holder.t3.setText(sample_user.id);
 
+        if (sample_user.sender_id.equals(User.current_user.id)){
+            holder.image.setBackground(activity.getDrawable(R.drawable.ic_sent));
+
+        }else {
+            holder.image.setBackground(activity.getDrawable(R.drawable.ic_received));
+        }
+
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,36 +76,15 @@ public class broudcast_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder_
                 matn.setText(sample_user.matn);
                 sample_user.created_date.toString();
 //                username.setText(sample_user.header);
-                date.setText(sample_user.created_date.toString());
-/*
 
-                bottom_sheet.findViewById(R.id.btn_std_queue_accept).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // accepted
-                        sample_user.setActive(true);
-                        sample_user.setPreActive(true);
-                        sample_user.setShould_fill_init_forms(false);
-                        Repository.GetInstant(activity).getUserDao().update(sample_user);
+                shamsiDate shamsiDate = new shamsiDate();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(sample_user.created_date);
 
-                        if (activity instanceof ActiveStudentActivity){
-                            ((ActiveStudentActivity) activity).refresh_view();
-                        }
+                String date_STR = shamsiDate.shamsiDate(calendar.get(Calendar.YEAR)  , (calendar.get(Calendar.MONTH)+1) ,  calendar.get(Calendar.DAY_OF_MONTH));
 
-                        Init.Toas(activity , " فعال شد");
-                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    }
-                });
+                date.setText(date_STR);
 
-                bottom_sheet.findViewById(R.id.btn_std_queue_del).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // deleted
-                        Init.Toas(activity , "مثلا حذف شد");
-                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    }
-                });
-*/
 
 
 

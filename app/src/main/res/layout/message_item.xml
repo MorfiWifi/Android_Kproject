@@ -13,6 +13,7 @@
     android:layout_height="100dp">
 
     <ImageView
+        android:layout_margin="10dp"
         android:src="@drawable/shape_ring"
         android:background="@drawable/ic_account_temp"
         android:layout_weight="0.16"

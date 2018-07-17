@@ -1,42 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.technical.PostArchiveActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/toolbar_parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/toolbar_parent"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-    </android.support.design.widget.AppBarLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <Button
-        android:id="@+id/btn_send_broudcast"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:background="@drawable/background_light_blue"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="15dp"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:text="ارسال پیام"
-        android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_marginTop="?attr/actionBarSize"
+            android:gravity="center"
+            android:background="@drawable/buttom_big_white"
+            android:layout_marginBottom="60dp"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@id/toolbar_pa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textColor="@color/black"
+                android:visibility="visible"
+                android:id="@+id/tv_signup_empty"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:text="خالی !"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <android.support.v7.widget.RecyclerView
+                android:visibility="gone"
+                android:id="@+id/rec_broudcast_std"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
 
 
 
 
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/btn_send_broudcast"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:background="@drawable/background_light_blue"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="ارسال پیام"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+
+    </RelativeLayout>
+
+
+
+    <include
+        layout="@layout/bottom_sheet_std_broudcast"
+         />
+
+</android.support.design.widget.CoordinatorLayout>

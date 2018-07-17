@@ -2,11 +2,11 @@
 
 - [x] online Log in 
 - [ ] online DB Work
-- [ ] online Messaging
+- [x] online Messaging
 - [ ] online Exchaingign
 - [ ] online User based setting save
 - [ ] Offline settings
-- [ ] Pre catch data for speed
+- [x] Pre catch data for speed
 - [X] Using parse services
 
 دسته بندی کلاس ها 

@@ -39,7 +39,7 @@ public class BroadcastActivity extends DarkhastActivity {
 
 
 
-        Broudcast.getBroudcastList(this , true);
+        Broudcast.getBroudcastList(this , true , false  );
 
     }
 

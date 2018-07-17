@@ -1,23 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/toolbar_pa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@null"
+        android:fitsSystemWindows="false"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@null"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:background="@color/red_700"
+           android:layout_height="250dp">
 
 
-</android.support.constraint.ConstraintLayout>
+
+           <de.hdodenhof.circleimageview.CircleImageView
+               android:layout_centerHorizontal="true"
+               xmlns:app="http://schemas.android.com/apk/res-auto"
+               android:layout_marginTop="70dp"
+               android:id="@+id/im_prof"
+               android:layout_width="96dp"
+               android:layout_height="96dp"
+               android:src="@drawable/ic_account_temp"
+               app:civ_border_width="2dp"
+               app:civ_border_color="#FF000000"/>
+
+           <TextView
+               android:id="@+id/ti_username"
+               android:layout_marginTop="10dp"
+               android:layout_below="@id/im_prof"
+               android:gravity="center"
+               android:text="USER NAME - LAST NAMEA"
+               android:textSize="20sp"
+               android:textColor="@color/white"
+               android:layout_width="match_parent"
+               android:layout_height="30dp" />
+           
+           <TextView
+               android:textColor="@color/white"
+               android:text="user_ranc_here"
+               android:id="@+id/tv_ranc"
+               android:layout_below="@id/ti_username"
+               android:textSize="14sp"
+               android:gravity="center"
+               android:layout_width="match_parent"
+               android:layout_height="20dp" />
+
+       </RelativeLayout>
+
+
+
+
+
+
+
+   </ScrollView>
+
+
+</RelativeLayout>

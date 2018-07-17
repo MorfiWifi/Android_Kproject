@@ -29,5 +29,7 @@ public class ProfileTechActivity extends TechnicalActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
         setTitle("پروفایل");
+        toolbar.setElevation(0);
+
     }
 }

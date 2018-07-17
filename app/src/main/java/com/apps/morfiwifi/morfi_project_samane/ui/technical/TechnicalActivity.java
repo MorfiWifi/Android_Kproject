@@ -16,8 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.Broudcast;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.EnserafQeueActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SiteMasterActivity;
+import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 
 public class TechnicalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -156,5 +158,36 @@ public class TechnicalActivity extends AppCompatActivity
     protected void onStop() {
         stop_loading();
         super.onStop();
+    }
+
+    public void refresh(MenuItem item) {
+        //        // TODO: 7/17/2018  refresh This activity posts complet Other ACS
+        Init.Terminal("Refresh Clicked .....");
+        String class_name =  this.getClass().getName();
+
+
+        if (class_name.equals(TechnicalActivity.class.getName())){
+
+
+        }else if (class_name.equals(ProfileTechActivity.class.getName())){
+
+
+        }else if (class_name.equals(StdReportActivity.class.getName())){
+
+
+        }else if (class_name.equals(ManageItemsActivity.class.getName())){
+
+
+        }else if (class_name.equals(PostArchiveActivity.class.getName())){
+            Broudcast.getBroudcastList(this , true , true);
+
+        }else {
+
+            // NO MAIN ACTIVITY !
+
+        }
+
+
+
     }
 }

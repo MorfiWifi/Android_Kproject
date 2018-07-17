@@ -109,30 +109,53 @@ public class Broudcast {
         return broudcastList;
     }
 
-    public static void getBroudcastList(final AppCompatActivity activity , final boolean display_loading) {
-        if ( !isloaded){
+    public static void getBroudcastList(final AppCompatActivity activity, final boolean display_loading , boolean force_new) {
+        if ( !isloaded || force_new){
             try {
-                ParseQuery query = new ParseQuery(Broudcast);
-                query.whereEqualTo(recive_role_id1 , User.current_user.Role_id);
-                if (activity instanceof  BroadcastActivity){
+                ParseQuery query1 = new ParseQuery(Broudcast);
+                query1.whereEqualTo(recive_role_id1 , User.current_user.Role_id);
+
+                ParseQuery query2 = new ParseQuery(Broudcast);
+                query2.whereEqualTo(sender_id1 , User.current_user.id);
+
+                // TODO: 7/17/2018 MERGE -OR QUERYES
+                List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
+                queries.add(query1);
+                queries.add(query2);
+
+                if (activity instanceof  BroadcastActivity && display_loading){
                     ((BroadcastActivity) activity).start_loading();
+                }else if (activity instanceof  TechnicalActivity && display_loading){
+                    ((TechnicalActivity) activity).start_loading();
                 }
-                 query.findInBackground(new FindCallback<ParseObject>() {
+
+                ParseQuery<ParseObject> query = ParseQuery.or(queries);
+
+
+
+            query.findInBackground(new FindCallback<ParseObject>() {
                     @Override
                     public void done(List<ParseObject> objects, ParseException e) {
                         if (e == null){
                             tempList = objects;
+                            Init.Terminal(tempList.size() +" SIZE OF LIST GRAINED!");
                             Conver_Parse();
                             isloaded = true;
                             if (activity instanceof BroadcastActivity && display_loading){
                                 broudcast_RecyclerAdapter.Init(broudcastList , activity);
                                 ((BroadcastActivity) activity).stop_loading();
+                            }else if (activity instanceof  TechnicalActivity && display_loading){
+                                broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                                ((TechnicalActivity) activity).stop_loading();
                             }
                         }else {
                             Init.Terminal("Some ERROR IN RETRIVING BROUDCASTS");
                             if (activity instanceof BroadcastActivity && display_loading){
                                 broudcast_RecyclerAdapter.Init(broudcastList , activity);
                                 ((BroadcastActivity) activity).stop_loading();
+                            }else if (activity instanceof  TechnicalActivity && display_loading){
+                                ((TechnicalActivity) activity).stop_loading();
+                                broudcast_RecyclerAdapter.Init(broudcastList , activity);
                             }
                         }
                     }
@@ -147,8 +170,11 @@ public class Broudcast {
                 try {
                     ParseQuery query = new ParseQuery(Broudcast);
                     query.whereEqualTo(recive_role_id1 , User.current_user.Role_id);
-                    if (activity instanceof  BroadcastActivity &&  display_loading){
+                    if (activity instanceof BroadcastActivity && display_loading){
+                        broudcast_RecyclerAdapter.Init(broudcastList , activity);
                         ((BroadcastActivity) activity).start_loading();
+                    }else if (activity instanceof  TechnicalActivity && display_loading){
+                        ((TechnicalActivity) activity).start_loading();
                     }
                     query.findInBackground(new FindCallback<ParseObject>() {
                         @Override
@@ -160,6 +186,9 @@ public class Broudcast {
                                 if (activity instanceof BroadcastActivity && display_loading){
                                     broudcast_RecyclerAdapter.Init(broudcastList , activity);
                                     ((BroadcastActivity) activity).stop_loading();
+                                }else if (activity instanceof  TechnicalActivity && display_loading){
+                                    ((TechnicalActivity) activity).stop_loading();
+                                    broudcast_RecyclerAdapter.Init(broudcastList , activity);
                                 }
                             }else {
                                 Init.Terminal("Some ERROR IN RETRIVING BROUDCASTS");
@@ -171,6 +200,9 @@ public class Broudcast {
                     if (activity instanceof BroadcastActivity && display_loading){
                         broudcast_RecyclerAdapter.Init(broudcastList , activity);
                         ((BroadcastActivity) activity).stop_loading();
+                    }else if (activity instanceof  TechnicalActivity && display_loading){
+                        broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                        ((TechnicalActivity) activity).stop_loading();
                     }
                 }
             }

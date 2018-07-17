@@ -26,7 +26,7 @@ ext {
 }
 dependencies {
     implementation "com.parse:parse-android:$parseVersion"
-
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
     // Add for push notification support -- add FCM or GCM but not both.
     implementation "com.parse:parse-fcm-android:$parseVersion" // migrate to FCM
     implementation fileTree(dir: 'libs', include: ['*.jar'])
