@@ -109,9 +109,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_refresh" />
-                            <entry key="sourceFile" value="C:\Users\Wifimorfi\Desktop\received.svg" />
+                            <entry key="outputName" value="ic_topography" />
+                            <entry key="sourceFile" value="C:\Users\Wifimorfi\Desktop\topography.svg" />
                           </map>
                         </option>
                       </PersistentState>

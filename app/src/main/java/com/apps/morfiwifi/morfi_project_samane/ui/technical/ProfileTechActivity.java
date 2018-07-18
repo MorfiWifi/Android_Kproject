@@ -6,8 +6,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.User;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileTechActivity extends TechnicalActivity {
 
@@ -31,5 +37,20 @@ public class ProfileTechActivity extends TechnicalActivity {
         setTitle("پروفایل");
         toolbar.setElevation(0);
 
+        load_profile();
+
+    }
+
+    public void load_profile (){
+        CircleImageView circleImageView = findViewById(R.id.im_prof);
+        TextView username = findViewById(R.id.ti_username);
+        TextView rank = findViewById(R.id.tv_ranc);
+
+        username.setText(User.current_user.getUserName());
+        rank.setText(User.current_user.Role);
+    }
+
+    public void chainge_profile_image(View view) {
+        Toast.makeText(this, "در آینده ای نزدیک", Toast.LENGTH_SHORT).show();
     }
 }
