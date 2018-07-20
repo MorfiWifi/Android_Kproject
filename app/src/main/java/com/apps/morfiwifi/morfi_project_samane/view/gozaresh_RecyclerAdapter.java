@@ -13,47 +13,44 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
-import com.apps.morfiwifi.morfi_project_samane.models.Gozaresh;
-import com.apps.morfiwifi.morfi_project_samane.models.Gozaresh_type;
+import com.apps.morfiwifi.morfi_project_samane.models.Report;
+import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
 import com.apps.morfiwifi.morfi_project_samane.models.Gozaresh_typeDao;
-import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
-
-import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.Calendar;
 import java.util.List;
 
 public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_gozaresh> {
 
-    private List<Gozaresh> gozareshList; // our items !
+    private List<Report> reportList; // our items !
     private static  RecyclerView recyclerView; //this
     private static AppCompatActivity activity; // super activit
     User sener_user ;
-    Gozaresh_type gozaresh_type;
-    List<Gozaresh_type> gozaresh_typeList;
+    Report_type report_type;
+    List<Report_type> report_typeList;
 
-    public gozaresh_RecyclerAdapter (List<Gozaresh> gozareshList) {
-        this.gozareshList = gozareshList;
+    public gozaresh_RecyclerAdapter (List<Report> reportList) {
+        this.reportList = reportList;
     }
 
     @Override
     public ViewHolder_gozaresh onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gozaresh_recive_item , parent , false); // Gozaresh Item
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gozaresh_recive_item , parent , false); // Report Item
         return new ViewHolder_gozaresh(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder_gozaresh holder, int position) {
-        final Gozaresh sample_gozaresh = gozareshList.get(position);
+        final Report sample_report = reportList.get(position);
 
 
 
         List<User> users = Repository.GetInstant(activity).getUserDao().queryBuilder()
-                .where(UserDao.Properties.Id.eq(sample_gozaresh.user_id))
+                .where(UserDao.Properties.Id.eq(sample_report.user_id))
                 .list();
 
         if (users.size() > 0){
@@ -64,23 +61,23 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
             sener_user.setLName( "Unknown");
         }
 
-        final List<Gozaresh_type> gozaresh_types = Repository.GetInstant(activity).getGozaresh_typeDao().queryBuilder()
-                .where(Gozaresh_typeDao.Properties.Id.eq(sample_gozaresh.type_id))
+        final List<Report_type> report_types = Repository.GetInstant(activity).getGozaresh_typeDao().queryBuilder()
+                .where(Gozaresh_typeDao.Properties.Id.eq(sample_report.type_id))
                 .list();
 
-        if (gozaresh_types.size() > 0){
-            gozaresh_type = gozaresh_types.get(0);
+        if (report_types.size() > 0){
+            report_type = report_types.get(0);
         }else {
-            gozaresh_type = new Gozaresh_type();
-            gozaresh_type.setName( "Unknown");
-            gozaresh_type.setPr_name( "Unknown");
+            report_type = new Report_type();
+            report_type.setName( "Unknown");
+            report_type.setPr_name( "Unknown");
         }
 
-        sample_gozaresh.gozaresh_type = gozaresh_type; // setting Directly!
+        sample_report.report_type = report_type; // setting Directly!
 
         holder.sender_name.setText(sener_user.getFName());
         holder.sender_lname.setText(sener_user.getLName());
-        holder.gozaresh_type.setText(gozaresh_type.getPr_name());
+        holder.gozaresh_type.setText(report_type.getPr_name());
 
         holder.lin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,15 +88,15 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                 final BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
-                if (sample_gozaresh.seen_date == null){
+                if (sample_report.seen_date == null){
                     // Juset First Update!
-                    sample_gozaresh.seen_date = Calendar.getInstance().getTime();
-                    Repository.GetInstant(activity).getGozareshDao().update(sample_gozaresh);
+                    sample_report.seen_date = Calendar.getInstance().getTime();
+                    Repository.GetInstant(activity).getGozareshDao().update(sample_report);
                 }
 
-                gozaresh_typeList = Repository.GetInstant(activity).getGozaresh_typeDao().loadAll();
+                report_typeList = Repository.GetInstant(activity).getGozaresh_typeDao().loadAll();
 
-                Gozaresh.State[] vals = Gozaresh.State.values();
+                Report.State[] vals = Report.State.values();
                 
                 
                 TextView matn = bottom_sheet.findViewById(R.id.tv_gozaresh_matn_rec);
@@ -107,11 +104,11 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                 final Spinner states = bottom_sheet.findViewById(R.id.sp_new_state);
                 TextView date = bottom_sheet.findViewById(R.id.tv_gozaresh_date);
 
-                matn.setText(sample_gozaresh.getSharh());
-                type.setText( "وضعیت : " + sample_gozaresh.get_State()  +" موضوع : "+ sample_gozaresh.gozaresh_type  );
-                date.setText(sample_gozaresh.getDate().toString());
+                matn.setText(sample_report.getSharh());
+                type.setText( "وضعیت : " + sample_report.get_State()  +" موضوع : "+ sample_report.report_type);
+                date.setText(sample_report.getDate().toString());
 
-                ArrayAdapter<Gozaresh.State> spinnerArrayAdapter = new ArrayAdapter<>(activity,   android.R.layout.simple_spinner_item, vals);
+                ArrayAdapter<Report.State> spinnerArrayAdapter = new ArrayAdapter<>(activity,   android.R.layout.simple_spinner_item, vals);
                 spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                 states.setAdapter(spinnerArrayAdapter);
 
@@ -119,12 +116,12 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                     @Override
                     public void onClick(View view) {
                         // accepted
-                        Gozaresh.State new_state = (Gozaresh.State) states.getSelectedItem();
-                        sample_gozaresh.set_State(new_state);
-                        Repository.GetInstant(activity).getGozareshDao().update(sample_gozaresh);
+                        Report.State new_state = (Report.State) states.getSelectedItem();
+                        sample_report.set_State(new_state);
+                        Repository.GetInstant(activity).getGozareshDao().update(sample_report);
                         Init.Toas(activity , "تفییرات اعمال شد");
                         // Juset checking ....
-                        Init(gozareshList , activity);
+                        Init(reportList, activity);
                     }
                 });
 
@@ -146,15 +143,15 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
 
     @Override
     public int getItemCount() {
-        return gozareshList.size();
+        return reportList.size();
     }
 
-    public static void view_fixer(List<Gozaresh> gozareshList , AppCompatActivity activity){
-        if (gozareshList == null){
+    public static void view_fixer(List<Report> reportList, AppCompatActivity activity){
+        if (reportList == null){
             activity.findViewById(R.id.tv_signup_empty).setVisibility(View.VISIBLE);
             activity.findViewById(R.id.rec_gozaresh_recive).setVisibility(View.GONE);
         }else{
-            if (gozareshList.size() == 0){
+            if (reportList.size() == 0){
                 activity.findViewById(R.id.tv_signup_empty).setVisibility(View.VISIBLE);
                 activity.findViewById(R.id.rec_gozaresh_recive).setVisibility(View.GONE);
             }
@@ -165,14 +162,14 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
         }
     }
 
-    public static void Init(List<Gozaresh> gozareshList , AppCompatActivity activity){
-        view_fixer(gozareshList , activity);
+    public static void Init(List<Report> reportList, AppCompatActivity activity){
+        view_fixer(reportList, activity);
         recyclerView = activity.findViewById(R.id.rec_gozaresh_recive);
         gozaresh_RecyclerAdapter.activity = activity;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
-        recyclerView.setAdapter(new gozaresh_RecyclerAdapter(gozareshList));
+        recyclerView.setAdapter(new gozaresh_RecyclerAdapter(reportList));
 
     }
 

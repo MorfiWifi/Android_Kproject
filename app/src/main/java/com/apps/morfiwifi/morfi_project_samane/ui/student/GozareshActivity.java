@@ -1,12 +1,9 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.student;
 
-import android.graphics.Paint;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,10 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
-import com.apps.morfiwifi.morfi_project_samane.models.Block;
-import com.apps.morfiwifi.morfi_project_samane.models.Gozaresh;
-import com.apps.morfiwifi.morfi_project_samane.models.Gozaresh_type;
-import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
+import com.apps.morfiwifi.morfi_project_samane.models.Report;
+import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 
@@ -28,8 +23,8 @@ import java.util.List;
 
 public class GozareshActivity extends DarkhastActivity {
     boolean isok = false;
-    List<Gozaresh_type> types = new ArrayList<>();
-    Gozaresh_type selected_type;
+    List<Report_type> types = new ArrayList<>();
+    Report_type selected_type;
     TextInputLayout text;
 
     @Override
@@ -62,7 +57,7 @@ public class GozareshActivity extends DarkhastActivity {
 
 
 
-        ArrayAdapter<Gozaresh_type> spinnerArrayAdapter = new ArrayAdapter<Gozaresh_type>(this,   android.R.layout.simple_spinner_item, types);
+        ArrayAdapter<Report_type> spinnerArrayAdapter = new ArrayAdapter<Report_type>(this,   android.R.layout.simple_spinner_item, types);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
         gozaresh_header.setAdapter(spinnerArrayAdapter);
 
@@ -111,12 +106,12 @@ public class GozareshActivity extends DarkhastActivity {
         }
 
         if (isok){
-            Gozaresh gozaresh = new Gozaresh();
-            gozaresh.setType_id(selected_type.id);
-            gozaresh.sharh = mes;
-            gozaresh.date = Calendar.getInstance().getTime();
-            gozaresh.setUser_id(Init.current_login.Id);
-            Repository.GetInstant(this).getGozareshDao().insert(gozaresh);
+            Report report = new Report();
+            report.setType_id(selected_type.id);
+            report.sharh = mes;
+            report.date = Calendar.getInstance().getTime();
+            report.setUser_id(Init.current_login.Id);
+            Repository.GetInstant(this).getGozareshDao().insert(report);
             Init.Toas(this , "گزارش ارسال شد");
         }
     }
