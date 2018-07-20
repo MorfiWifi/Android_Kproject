@@ -32,7 +32,7 @@ public class Block {
     public Long id;
     public String name = "";
     public String code;
-    public List<Otagh> otaghs;
+    public List<Room> rooms;
 
 
     @Override

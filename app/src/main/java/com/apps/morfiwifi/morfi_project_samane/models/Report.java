@@ -8,11 +8,11 @@ import org.greenrobot.greendao.annotation.Transient;
 import java.util.Date;
 
 @Entity
-public class Gozaresh {
+public class Report {
     public enum  State{
         open , working_on  , finished  ;
 
-        public static Gozaresh.State fromInteger(int x) {
+        public static Report.State fromInteger(int x) {
             int count = values().length;
             return values()[x % count];
         }
@@ -36,12 +36,12 @@ public class Gozaresh {
     }
 
 
-    public void set_State (Gozaresh.State state){
+    public void set_State (Report.State state){
         this.State_gozaresh = state.ordinal();
     }
 
-    public Gozaresh.State get_State (){
-        return Gozaresh.State.fromInteger(this.State_gozaresh);
+    public Report.State get_State (){
+        return Report.State.fromInteger(this.State_gozaresh);
     }
 
 
@@ -113,11 +113,11 @@ public class Gozaresh {
     public Date seen_date; // it's shown
 
     @Transient
-    public Gozaresh_type gozaresh_type;
+    public Report_type report_type;
 
     @Generated(hash = 1759818905)
-    public Gozaresh(Long id, String sharh, Long type_id, Long user_id,
-            int State_gozaresh, Date date, Date seen_date) {
+    public Report(Long id, String sharh, Long type_id, Long user_id,
+                  int State_gozaresh, Date date, Date seen_date) {
         this.id = id;
         this.sharh = sharh;
         this.type_id = type_id;
@@ -128,7 +128,7 @@ public class Gozaresh {
     }
 
     @Generated(hash = 637639576)
-    public Gozaresh() {
+    public Report() {
     }
 
 }

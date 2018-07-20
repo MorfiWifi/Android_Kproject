@@ -36,7 +36,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-
 /*
         tv_go_signup.setOnClickListener({
             val intent = Intent(this, SiteMasterActivity::class.java)

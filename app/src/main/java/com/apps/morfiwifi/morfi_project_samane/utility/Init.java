@@ -15,10 +15,10 @@ import com.apps.morfiwifi.morfi_project_samane.SignupStudentsActivity;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
 import com.apps.morfiwifi.morfi_project_samane.models.Broudcast;
 import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
-import com.apps.morfiwifi.morfi_project_samane.models.Gozaresh_type;
+import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
 import com.apps.morfiwifi.morfi_project_samane.models.Message;
-import com.apps.morfiwifi.morfi_project_samane.models.Otagh;
+import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
@@ -213,8 +213,8 @@ public class Init {
                 Block bl1 = new Block();
                 Block bl2 = new Block();
 
-                Otagh ot1 = new Otagh();
-                Otagh ot2 = new Otagh();
+                Room ot1 = new Room();
+                Room ot2 = new Room();
 
                 /*ot1.setNaem("شماره 5");
                 ot1.setCode("007");
@@ -242,15 +242,15 @@ public class Init {
                 ot2.id = session.getOthaghDao().insert(ot2);*/
 
 
-                List<Otagh> othaghs_1 = new ArrayList<>();
-                List<Otagh> othaghs_2 = new ArrayList<>();
+                List<Room> othaghs_1 = new ArrayList<>();
+                List<Room> othaghs_2 = new ArrayList<>();
                 othaghs_1.add(ot1);
                 othaghs_1.add(ot2);
                 othaghs_2.add(ot1);
                 othaghs_2.add(ot2);
 
-                bl1.otaghs = othaghs_1;
-                bl2.otaghs = othaghs_2;
+                bl1.rooms = othaghs_1;
+                bl2.rooms = othaghs_2;
 
 //                session.getBlockDao().update(bl1);
 //                session.getBlockDao().update(bl2);
@@ -269,23 +269,23 @@ public class Init {
 //                session.getKhabgahDao().update(kh2);
 
 
-                Gozaresh_type type1 = new Gozaresh_type();
+                Report_type type1 = new Report_type();
                 type1.Name = "bilding";
                 type1.pr_name = "خرابی ساختمان";
 
-                Gozaresh_type type2 = new Gozaresh_type();
+                Report_type type2 = new Report_type();
                 type2.Name = "robery";
                 type2.pr_name = "سرقت";
 
-                Gozaresh_type type3 = new Gozaresh_type();
+                Report_type type3 = new Report_type();
                 type3.Name = "network";
                 type3.pr_name = "شبکه";
 
-                Gozaresh_type type4 = new Gozaresh_type();
+                Report_type type4 = new Report_type();
                 type4.Name = "usual";
                 type4.pr_name = "عمومی";
 
-                Gozaresh_type type5 = new Gozaresh_type();
+                Report_type type5 = new Report_type();
                 type5.Name = "food";
                 type5.pr_name = "آشپزخانه";
 
@@ -385,7 +385,7 @@ public class Init {
         role.Clear();
         Broudcast.Clear();
         Thing.Clear();
-        Otagh.Clear();
+        Room.Clear();
         Khabgah.Clear();
         Block.Clear();
 

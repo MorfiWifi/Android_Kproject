@@ -5,20 +5,20 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
-public class Gozaresh_type {
+public class Report_type {
     // Thise Are just ITEMS FOR CHOOSING !
     @Id(autoincrement = true)
     public Long id ;
     public String Name;
     public String pr_name;
     @Generated(hash = 1909484017)
-    public Gozaresh_type(Long id, String Name, String pr_name) {
+    public Report_type(Long id, String Name, String pr_name) {
         this.id = id;
         this.Name = Name;
         this.pr_name = pr_name;
     }
     @Generated(hash = 1034794027)
-    public Gozaresh_type() {
+    public Report_type() {
     }
     public Long getId() {
         return this.id;

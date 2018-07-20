@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 //@Entity
-public class Otagh {
+public class Room {
 
     public static String class_name = "otagh";
     public static String obj_name = "name";
@@ -24,7 +24,7 @@ public class Otagh {
 
     public static boolean isloaded = false;
     public static List<ParseObject> temp;
-    public static  List<Otagh> otaghs;
+    public static  List<Room> rooms;
 
 
 //    @Transient
@@ -39,7 +39,7 @@ public class Otagh {
 
 
 
-    public static List<Otagh> load_otaghs (Context context){
+    public static List<Room> load_otaghs (Context context){
         if ( !isloaded){
             try {
                 ParseQuery query = new ParseQuery(class_name);
@@ -47,22 +47,22 @@ public class Otagh {
                 convert_parse();
                 isloaded = true;
             }catch (Exception e){
-                otaghs = new ArrayList<>();
+                rooms = new ArrayList<>();
             }
         }else {
             if (Setting.isPreload(context)){
-                return otaghs;
+                return rooms;
             }else {
                 try {
                     ParseQuery query = new ParseQuery(class_name);
                     temp =  query.find();
                     convert_parse();
                 }catch (Exception e){
-                    otaghs = new ArrayList<>();
+                    rooms = new ArrayList<>();
                 }
             }
         }
-        return otaghs;
+        return rooms;
     }
     public static void load_otaghs  (final AppCompatActivity activity , final boolean draw_loading){
         if ( !isloaded){
@@ -92,7 +92,7 @@ public class Otagh {
                     }
                 });
             }catch (Exception e){
-                otaghs = new ArrayList<>();
+                rooms = new ArrayList<>();
             }
         }else {
             if (Setting.isPreload(activity)){
@@ -120,7 +120,7 @@ public class Otagh {
                         }
                     });
                 }catch (Exception e){
-                    otaghs = new ArrayList<>();
+                    rooms = new ArrayList<>();
                     if (activity instanceof BroadcastActivity && draw_loading){
 //                        broudcast_RecyclerAdapter.Init(roles , activity);
                         ((BroadcastActivity) activity).stop_loading();
@@ -133,22 +133,22 @@ public class Otagh {
     }
     private static void convert_parse(){
         if (temp != null){
-            otaghs = new ArrayList<>();
+            rooms = new ArrayList<>();
             for (ParseObject parseObject : temp) {
-                Otagh otagh = new Otagh();
-                otagh.Id = parseObject.getObjectId();
-                otagh.createAt = parseObject.getCreatedAt();
-                otagh.name = parseObject.get(obj_name).toString();
-                otaghs.add(otagh);
+                Room room = new Room();
+                room.Id = parseObject.getObjectId();
+                room.createAt = parseObject.getCreatedAt();
+                room.name = parseObject.get(obj_name).toString();
+                rooms.add(room);
             }
         }else {
-            otaghs = new ArrayList<>();
+            rooms = new ArrayList<>();
         }
 
     }
 
     public static void Clear(){
-        otaghs = null;
+        rooms = null;
         temp   = null;
         isloaded = false;
     }

@@ -16,7 +16,7 @@ import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
 import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
-import com.apps.morfiwifi.morfi_project_samane.models.Otagh;
+import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
@@ -35,8 +35,8 @@ public class JabejaiActivity extends DarkhastActivity implements
     private JabejaiActivity activity;
     private List<Block> st_blocks;
     private List<Block> end_blocks;
-    private List<Otagh> st_otaghs;
-    private List<Otagh> end_otaghs;
+    private List<Room> st_rooms;
+    private List<Room> end_rooms;
     private static String[] monthrs = {"فروردین" , "اردیبهشت" , "خرداد" , "تیر" ,"مرداد" ,"شهریور" ,"مهر" ,"آبان" , "آذر" , "دی" , "بهمن" , "اسفند"};
     private boolean is_date_selected = false;
     private TextView tv_hint;
@@ -152,9 +152,9 @@ public class JabejaiActivity extends DarkhastActivity implements
                     sp_st_othagh.setEnabled(true);
                     //sp_end_block.setEnabled(false);
 
-                    st_otaghs = st_blocks.get(i).otaghs;
+                    st_rooms = st_blocks.get(i).rooms;
 //                            getOthaghs();
-                    ArrayAdapter<Otagh> spinnerArrayAdapter = new ArrayAdapter<Otagh>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).otaghs);
+                    ArrayAdapter<Room> spinnerArrayAdapter = new ArrayAdapter<Room>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).rooms);
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                     sp_st_othagh.setAdapter(spinnerArrayAdapter);
 
@@ -178,9 +178,9 @@ public class JabejaiActivity extends DarkhastActivity implements
                     sp_end_othagh.setEnabled(true);
                     //sp_end_block.setEnabled(false);
 
-                    end_otaghs = st_blocks.get(i).otaghs;
+                    end_rooms = st_blocks.get(i).rooms;
 //                            getOthaghs();
-                    ArrayAdapter<Otagh> spinnerArrayAdapter = new ArrayAdapter<Otagh>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).otaghs);
+                    ArrayAdapter<Room> spinnerArrayAdapter = new ArrayAdapter<Room>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).rooms);
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                     sp_end_othagh.setAdapter(spinnerArrayAdapter);
 

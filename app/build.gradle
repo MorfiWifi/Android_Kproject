@@ -16,10 +16,11 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            setMinifyEnabled(false)
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '27.0.3'
 }
 ext {
     parseVersion = "1.17.3"
@@ -28,10 +29,11 @@ dependencies {
     implementation "com.parse:parse-android:$parseVersion"
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     // Add for push notification support -- add FCM or GCM but not both.
-    implementation "com.parse:parse-fcm-android:$parseVersion" // migrate to FCM
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.parse:parse-fcm-android:$parseVersion"
+    // migrate to FCM
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'commons-net:commons-net:3.3'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.50"
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.50'
     implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -43,7 +45,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.0.2'
     implementation 'com.google.code.gson:gson:2.8.1'
     implementation 'com.flipboard:bottomsheet-core:1.5.3'
-    implementation 'com.flipboard:bottomsheet-commons:1.5.3' // optional
+    implementation 'com.flipboard:bottomsheet-commons:1.5.3'
+    // optional
     implementation 'org.greenrobot:greendao:3.2.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
