@@ -11,15 +11,17 @@ public class Report_type {
     public Long id ;
     public String Name;
     public String pr_name;
-    @Generated(hash = 1909484017)
+
+    @Generated(hash = 1109987613)
     public Report_type(Long id, String Name, String pr_name) {
         this.id = id;
         this.Name = Name;
         this.pr_name = pr_name;
     }
-    @Generated(hash = 1034794027)
+    @Generated(hash = 215531032)
     public Report_type() {
     }
+
     public Long getId() {
         return this.id;
     }

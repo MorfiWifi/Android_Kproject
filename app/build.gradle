@@ -26,6 +26,7 @@ ext {
     parseVersion = "1.17.3"
 }
 dependencies {
+    implementation 'com.github.florent37:expansionpanel:1.1.1'
     implementation "com.parse:parse-android:$parseVersion"
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     // Add for push notification support -- add FCM or GCM but not both.

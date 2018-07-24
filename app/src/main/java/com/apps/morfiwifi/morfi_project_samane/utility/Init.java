@@ -289,11 +289,11 @@ public class Init {
                 type5.Name = "food";
                 type5.pr_name = "آشپزخانه";
 
-                session.getGozaresh_typeDao().insert(type1);
-                session.getGozaresh_typeDao().insert(type2);
-                session.getGozaresh_typeDao().insert(type3);
-                session.getGozaresh_typeDao().insert(type4);
-                session.getGozaresh_typeDao().insert(type5);
+                session.getReport_typeDao().insert(type1);
+                session.getReport_typeDao().insert(type2);
+                session.getReport_typeDao().insert(type3);
+                session.getReport_typeDao().insert(type4);
+                session.getReport_typeDao().insert(type5);
             }
         }
 

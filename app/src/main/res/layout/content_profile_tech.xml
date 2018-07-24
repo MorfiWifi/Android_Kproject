@@ -32,10 +32,12 @@
            android:layout_height="250dp">
 
            <ImageView
+               android:background="@drawable/buttom_big_white"
                android:scaleType="centerCrop"
                android:layout_width="match_parent"
                android:layout_height="300dp"
                android:src="@drawable/background_fade1"
+               android:layout_margin="1dp"
                />
 
 
@@ -89,6 +91,8 @@
                android:layout_height="20dp" />
 
        </RelativeLayout>
+       
+
 
 
 

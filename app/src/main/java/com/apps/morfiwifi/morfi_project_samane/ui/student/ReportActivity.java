@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class GozareshActivity extends DarkhastActivity {
+public class ReportActivity extends DarkhastActivity {
     boolean isok = false;
     List<Report_type> types = new ArrayList<>();
     Report_type selected_type;
@@ -30,7 +30,7 @@ public class GozareshActivity extends DarkhastActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gozaresh);
+        setContentView(R.layout.activity_report);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("گزارش");
@@ -53,7 +53,7 @@ public class GozareshActivity extends DarkhastActivity {
 
         Spinner gozaresh_header = findViewById(R.id.sp_gozaresh_header);
 
-        types = Repository.GetInstant(this).getGozaresh_typeDao().loadAll();
+        types = Repository.GetInstant(this).getReport_typeDao().loadAll();
 
 
 
@@ -111,7 +111,7 @@ public class GozareshActivity extends DarkhastActivity {
             report.sharh = mes;
             report.date = Calendar.getInstance().getTime();
             report.setUser_id(Init.current_login.Id);
-            Repository.GetInstant(this).getGozareshDao().insert(report);
+            Repository.GetInstant(this).getReportDao().insert(report);
             Init.Toas(this , "گزارش ارسال شد");
         }
     }

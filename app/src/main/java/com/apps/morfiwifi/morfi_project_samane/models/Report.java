@@ -115,9 +115,9 @@ public class Report {
     @Transient
     public Report_type report_type;
 
-    @Generated(hash = 1759818905)
+    @Generated(hash = 1256556164)
     public Report(Long id, String sharh, Long type_id, Long user_id,
-                  int State_gozaresh, Date date, Date seen_date) {
+            int State_gozaresh, Date date, Date seen_date) {
         this.id = id;
         this.sharh = sharh;
         this.type_id = type_id;
@@ -127,8 +127,10 @@ public class Report {
         this.seen_date = seen_date;
     }
 
-    @Generated(hash = 637639576)
+    @Generated(hash = 1739299007)
     public Report() {
     }
+
+
 
 }

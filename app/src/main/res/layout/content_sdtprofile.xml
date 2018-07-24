@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.student.StudentProfileActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/toolbar_pa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:fitsSystemWindows="false"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@null"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rel_layout"
+
+            android:layout_width="match_parent"
+            android:layout_height="250dp">
+
+            <ImageView
+                android:id="@+id/image_background"
+                android:background="@drawable/background_fade1"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:src="@drawable/background_trans_mid_thick"
+                android:layout_margin="1dp"
+
+                />
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_centerHorizontal="true"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_marginTop="70dp"
+                android:id="@+id/im_prof"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/ic_account_temp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FF000000"/>
+
+            <android.support.design.widget.FloatingActionButton
+
+                android:scaleType="centerInside"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/im_prof"
+                android:layout_alignEnd="@id/im_prof"
+                android:src="@android:drawable/ic_menu_edit"
+                app:backgroundTint="@color/green_400" />
+
+            <TextView
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/ti_username"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/im_prof"
+                android:gravity="center"
+                android:text="USER NAME - LAST NAMEA"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:textColor="@color/black"
+                android:text="user_ranc_here"
+                android:id="@+id/tv_ranc"
+                android:layout_below="@id/ti_username"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+
+
+            <!--persnal information-->
+            <LinearLayout
+                android:id="@+id/lin_colapse1"
+                android:layout_margin="5dp"
+                android:background="@drawable/background_white_mid_thick"
+                android:layout_below="@id/image_background"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                >
+
+                <com.github.florent37.expansionpanel.ExpansionHeader
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    app:expansion_headerIndicator="@id/headerIndicator"
+                    app:expansion_layout="@id/expansionLayout"
+                    >
+
+                    <!-- app:expansion_toggleOnClick="true" -->
+
+                    ...
+                    <!-- HEADER INDICATOR -->
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="مشخصات فردی"
+                        />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:adjustViewBounds="true"
+                        android:id="@+id/headerIndicator"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_width="wrap_content"
+                        app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+
+                </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                <com.github.florent37.expansionpanel.ExpansionLayout
+                    android:id="@+id/expansionLayout"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+
+                    <!-- CONTENT -->
+
+                    <include layout="@layout/lay_std_prof_personal"/>
+
+
+
+
+
+
+
+                </com.github.florent37.expansionpanel.ExpansionLayout>
+
+
+            </LinearLayout>
+
+            <!--Std information-->
+            <LinearLayout
+
+                android:layout_margin="5dp"
+                android:background="@drawable/background_white_mid_thick"
+                android:layout_below="@id/lin_colapse1"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                >
+
+                <com.github.florent37.expansionpanel.ExpansionHeader
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    app:expansion_headerIndicator="@id/headerIndicator2"
+                    app:expansion_layout="@id/expansionLayout2"
+                    >
+
+                    <!-- app:expansion_toggleOnClick="true" -->
+
+                    ...
+                    <!-- HEADER INDICATOR -->
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="مشخصات دانشجویی"
+                        />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:adjustViewBounds="true"
+                        android:id="@+id/headerIndicator2"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_width="wrap_content"
+                        app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+
+                </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                <com.github.florent37.expansionpanel.ExpansionLayout
+                    android:id="@+id/expansionLayout2"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+
+                    <!-- CONTENT -->
+                    <include layout="@layout/lay_std_prof_uni"/>
+
+
+
+                </com.github.florent37.expansionpanel.ExpansionLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

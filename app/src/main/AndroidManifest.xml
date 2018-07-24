@@ -74,7 +74,7 @@
         <activity android:name=".ui.student.EnserafActivity" />
         <activity android:name=".ui.student.JabejaiActivity" />
         <activity android:name=".ui.student.DarkhastActivity" />
-        <activity android:name=".ui.student.GozareshActivity" />
+        <activity android:name=".ui.student.ReportActivity" />
         <activity android:name=".ui.student.EnteghadActivity" />
         <activity android:name=".ui.student.FehrestActivity" />
         <activity
@@ -101,7 +101,8 @@
         <activity android:name=".ui.technical.PostArchiveActivity" />
         <activity android:name=".ui.technical.ProfileTechActivity" />
         <activity android:name=".ui.technical.ManageItemsActivity" />
-        <activity android:name=".ui.student.BroadcastActivity"></activity>
+        <activity android:name=".ui.student.BroadcastActivity" />
+        <activity android:name=".ui.student.StudentProfileActivity"></activity>
     </application>
 
 </manifest>

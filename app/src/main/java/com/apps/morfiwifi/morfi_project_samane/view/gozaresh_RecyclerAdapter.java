@@ -15,7 +15,8 @@ import android.widget.TextView;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
-import com.apps.morfiwifi.morfi_project_samane.models.Gozaresh_typeDao;
+//import com.apps.morfiwifi.morfi_project_samane.models.Gozaresh_typeDao;
+import com.apps.morfiwifi.morfi_project_samane.models.Report_typeDao;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
@@ -61,8 +62,8 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
             sener_user.setLName( "Unknown");
         }
 
-        final List<Report_type> report_types = Repository.GetInstant(activity).getGozaresh_typeDao().queryBuilder()
-                .where(Gozaresh_typeDao.Properties.Id.eq(sample_report.type_id))
+        final List<Report_type> report_types = Repository.GetInstant(activity).getReport_typeDao().queryBuilder()
+                .where(Report_typeDao.Properties.Id.eq(sample_report.type_id))
                 .list();
 
         if (report_types.size() > 0){
@@ -91,10 +92,10 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                 if (sample_report.seen_date == null){
                     // Juset First Update!
                     sample_report.seen_date = Calendar.getInstance().getTime();
-                    Repository.GetInstant(activity).getGozareshDao().update(sample_report);
+                    Repository.GetInstant(activity).getReportDao().update(sample_report);
                 }
 
-                report_typeList = Repository.GetInstant(activity).getGozaresh_typeDao().loadAll();
+                report_typeList = Repository.GetInstant(activity).getReport_typeDao().loadAll();
 
                 Report.State[] vals = Report.State.values();
                 
@@ -118,7 +119,7 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                         // accepted
                         Report.State new_state = (Report.State) states.getSelectedItem();
                         sample_report.set_State(new_state);
-                        Repository.GetInstant(activity).getGozareshDao().update(sample_report);
+                        Repository.GetInstant(activity).getReportDao().update(sample_report);
                         Init.Toas(activity , "تفییرات اعمال شد");
                         // Juset checking ....
                         Init(reportList, activity);

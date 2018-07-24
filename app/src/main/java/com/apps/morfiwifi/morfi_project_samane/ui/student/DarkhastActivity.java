@@ -1,6 +1,5 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.student;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -13,13 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
-import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity;
-
-import java.io.File;
 
 public class DarkhastActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -94,16 +89,13 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
         switch (id){
 
 
-            case R.id.nav_fehrest :
-                if (this instanceof FehrestActivity){
 
-                }else {
-                    intent = new Intent(this , FehrestActivity.class);
+            case R.id.nav_profile :
+                if (!(this instanceof StudentProfileActivity)){
+                    intent = new Intent(this , StudentProfileActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent );
                 }
-                break;
-            case R.id.nav_profile :
                 break;
             case R.id.nav_exit :
                 break;
@@ -122,8 +114,8 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
                 }
                 break;
             case R.id.nav_gozaresh :
-                if (!(this instanceof GozareshActivity)){
-                    intent = new Intent(this , GozareshActivity.class);
+                if (!(this instanceof ReportActivity)){
+                    intent = new Intent(this , ReportActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent );
                 }

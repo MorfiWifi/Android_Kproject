@@ -11,9 +11,6 @@ import android.view.Menu
 import android.view.MenuItem
 import com.apps.morfiwifi.morfi_project_samane.R
 import com.apps.morfiwifi.morfi_project_samane.models.Setting
-import com.apps.morfiwifi.morfi_project_samane.ui.MessageActivity
-import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity
-import com.apps.morfiwifi.morfi_project_samane.ui.TestDaoActivity
 import kotlinx.android.synthetic.main.activity_student_main.*
 import kotlinx.android.synthetic.main.app_bar_student_main.*
 
@@ -67,37 +64,42 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         // Handle navigation view item clicks here.
         when (item.itemId) {
 
-            R.id.nav_fehrest -> {
-
-            }
             R.id.nav_profile -> {
-
+                val intent = Intent(this , StudentProfileActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent )
             }
             R.id.nav_exit -> {
                 onBackPressed() // YET JUST BACK PRESSED
             }
             R.id.nav_enteghad -> {
                 val intent = Intent(this , EnteghadActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent )
             }
             R.id.nav_darkhast -> {
                 val intent = Intent(this , DarkhastActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent )
             }
             R.id.nav_gozaresh -> {
-                val intent = Intent(this , GozareshActivity::class.java)
+                val intent = Intent(this , ReportActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent )
             }
             R.id.nav_manage_box->{
                 val intent = Intent(this , BroadcastActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent )
             }
             R.id.nav_enseraf ->{
                 val intent = Intent(this , EnserafActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent )
             }
             R.id.nav_jabeja ->{
                 val intent = Intent(this , JabejaiActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent )
             }
         }

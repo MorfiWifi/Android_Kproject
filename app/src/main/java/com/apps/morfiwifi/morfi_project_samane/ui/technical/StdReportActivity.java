@@ -35,7 +35,7 @@ public class StdReportActivity extends TechnicalActivity {
         setTitle("گزارشات");
 
 
-        List<Report> reportList = Repository.GetInstant(this).getGozareshDao().loadAll();
+        List<Report> reportList = Repository.GetInstant(this).getReportDao().loadAll();
         gozaresh_RecyclerAdapter.Init(reportList, this);
 
     }

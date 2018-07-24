@@ -28,9 +28,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.student.GozareshActivity">
+        tools:context=".ui.student.ReportActivity">
 
         <Spinner
+            android:background="@drawable/background_white_mid_thick"
             android:id="@+id/sp_gozaresh_header"
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
@@ -38,7 +39,7 @@
             android:layout_height="wrap_content"/>
 
         <android.support.design.widget.TextInputLayout
-
+            android:layout_below="@id/sp_gozaresh_header"
             android:id="@+id/ti_gozaresh_matn"
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -55,7 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
-                android:gravity="center"
+                android:gravity="right"
+                android:padding="10dp"
                 android:hint="متن گزارش"
                  />
         </android.support.design.widget.TextInputLayout>
