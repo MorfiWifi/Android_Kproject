@@ -5,34 +5,13 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/prof_name"
+        android:id="@+id/tv_isstudying"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:text="prof_name"
-        android:gravity="right"
+        android:gravity="center"
         />
 
-    <TextView
-        android:layout_below="@id/prof_name"
-        android:id="@+id/prof_lastname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:text="prof_lastname"
-        android:gravity="right"
-        />
-
-    <TextView
-        android:layout_below="@id/prof_lastname"
-        android:id="@+id/prof_nationalcode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:text="prof_nationalcode"
-        android:gravity="right"
-        />
 </RelativeLayout>

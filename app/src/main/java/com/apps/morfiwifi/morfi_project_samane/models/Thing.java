@@ -21,14 +21,14 @@ public class Thing {
     public Date createAt;
 
 
-    public static String class_name = "thing";
-    public static String obj_name = "name";
+    private static String class_name = "thing";
+    private static String obj_name = "name";
     public static String obj_code = "code";
 
 
-    public static boolean isloaded = false;
-    public static List<ParseObject> temp;
-    public static  List<Thing> things ;
+    private static boolean isloaded = false;
+    private static List<ParseObject> temp;
+    private static  List<Thing> things ;
 
 
 
@@ -124,6 +124,7 @@ public class Thing {
         return ;
 
     }
+
     private static void convert_parse(){
         if (temp != null){
             things = new ArrayList<>();

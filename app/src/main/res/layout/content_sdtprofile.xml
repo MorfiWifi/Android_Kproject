@@ -59,7 +59,7 @@
                 app:civ_border_color="#FF000000"/>
 
             <android.support.design.widget.FloatingActionButton
-
+                android:onClick="chainge_profile_image_std"
                 android:scaleType="centerInside"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -71,7 +71,7 @@
             <TextView
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
-                android:id="@+id/ti_username"
+                android:id="@+id/tv_username"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/im_prof"
                 android:gravity="center"
@@ -87,7 +87,7 @@
                 android:textColor="@color/black"
                 android:text="user_ranc_here"
                 android:id="@+id/tv_ranc"
-                android:layout_below="@id/ti_username"
+                android:layout_below="@id/tv_username"
                 android:textSize="14sp"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -162,7 +162,7 @@
 
             <!--Std information-->
             <LinearLayout
-
+                android:id="@+id/lin_colapse2"
                 android:layout_margin="5dp"
                 android:background="@drawable/background_white_mid_thick"
                 android:layout_below="@id/lin_colapse1"
@@ -217,6 +217,63 @@
 
             </LinearLayout>
 
+            <!--std khab gah -->
+            <LinearLayout
+                android:id="@+id/lin_expan_khabgah"
+                android:visibility="gone"
+                android:layout_margin="5dp"
+                android:background="@drawable/background_white_mid_thick"
+                android:layout_below="@id/lin_colapse2"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                >
+
+                <com.github.florent37.expansionpanel.ExpansionHeader
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    app:expansion_headerIndicator="@id/headerIndicator3"
+                    app:expansion_layout="@id/expansionLayout3"
+                    >
+
+                    <!-- app:expansion_toggleOnClick="true" -->
+
+                    ...
+                    <!-- HEADER INDICATOR -->
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="خوابگاه"
+                        />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:adjustViewBounds="true"
+                        android:id="@+id/headerIndicator3"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_width="wrap_content"
+                        app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+
+                </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                <com.github.florent37.expansionpanel.ExpansionLayout
+                    android:id="@+id/expansionLayout3"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+
+                    <!-- CONTENT -->
+                    <include layout="@layout/lay_std_prof_khabghah"/>
+
+
+
+                </com.github.florent37.expansionpanel.ExpansionLayout>
+
+
+            </LinearLayout>
         </RelativeLayout>
 
 

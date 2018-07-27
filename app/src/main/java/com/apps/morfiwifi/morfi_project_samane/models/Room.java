@@ -12,6 +12,7 @@ import com.parse.ParseQuery;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -28,14 +29,14 @@ public class Room {
 
 
 //    @Transient
-    public String Id;
+    public String Id = Init.Empty;
 //    @Transient
-    public Date createAt;
+    public Date createAt = Calendar.getInstance().getTime();
 
 //    @Id(autoincrement = true)
     public Long id;
-    public String code;
-    public String name = "";
+    public String code = Init.Empty;
+    public String name = Init.Empty;
 
 
 

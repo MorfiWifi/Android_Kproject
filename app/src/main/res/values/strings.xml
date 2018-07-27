@@ -14,4 +14,5 @@
     <string name="ok">بله</string>
     <string name="title_activity_site_master">SiteMasterActivity</string>
     <string name="title_activity_technical">TechnicalActivity</string>
+    <string name="khabga_name">نام خوابگاه :</string>
 </resources>

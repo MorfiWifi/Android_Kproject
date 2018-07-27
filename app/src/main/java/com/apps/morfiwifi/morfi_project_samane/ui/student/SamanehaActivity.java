@@ -6,8 +6,10 @@ import android.os.Bundle;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
 import com.apps.morfiwifi.morfi_project_samane.models.Message;
+import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
+import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.view.samane_RecyclerAdapter;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class SamanehaActivity extends AppCompatActivity {
         samanes = session.getSamaneDao().loadAll();
 
         samane_RecyclerAdapter.Init(samanes , this);
+        Properties.load_self_properties(null , false , true);
         // .Init(Init.get_messages_dao(this), this)
     }
 }

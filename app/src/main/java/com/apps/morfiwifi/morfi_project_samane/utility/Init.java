@@ -15,14 +15,17 @@ import com.apps.morfiwifi.morfi_project_samane.SignupStudentsActivity;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
 import com.apps.morfiwifi.morfi_project_samane.models.Broudcast;
 import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
+import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
 import com.apps.morfiwifi.morfi_project_samane.models.Message;
+import com.apps.morfiwifi.morfi_project_samane.models.Result;
 import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
+import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentProfileActivity;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -49,6 +52,9 @@ public class Init {
     public static String ASP_server = "ASP";
     public static String Offline = "offline";
     public static String MOD = "pars" ;
+    public final static String Empty = "خالی" ;
+    public final static String EXEPTION  = "SAMANE EXCEPTION : " ;
+
 
     public static User current_login;
     private static ProgressDialog loading;
@@ -332,22 +338,7 @@ public class Init {
         });
     }
 
-    public static void start_loading( AppCompatActivity activity){
-        if (loading != null){
-            stop_loading(activity);
-        }
 
-        loading = new ProgressDialog(activity);
-        loading.setMessage("در حال پردازش");
-        loading.setCancelable(false);
-        loading.show();
-    }
-
-    public static void stop_loading( AppCompatActivity activity){
-        if (loading != null){
-            loading.dismiss();
-        }
-    }
 
     public static void test (){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("role");
@@ -389,7 +380,58 @@ public class Init {
         Khabgah.Clear();
         Block.Clear();
 
+        Properties.Clear();
 
+
+
+
+
+    }
+
+    public static void start_loading( AppCompatActivity activity){
+        if (activity != null){
+            if (loading != null){
+                stop_loading(activity);
+            }
+
+            loading = new ProgressDialog(activity);
+            loading.setMessage("در حال پردازش");
+            loading.setCancelable(false);
+            loading.show();
+        }
+    }
+
+    public static void stop_loading( AppCompatActivity activity){
+        if (activity != null){
+            if (loading != null){
+                loading.dismiss();
+            }
+        }
+    }
+
+    public static void result_of_query (AppCompatActivity activity , Result result){
+        if (result.exception != null){
+            Log.e(EXEPTION , result.getCode() + " EX CODE"); // Exception Code
+            Log.e(EXEPTION , result.exception.getMessage()); // SOME THING WRONG IN THERE !
+        }else {
+            switch (result.getCode()){
+                case Properties.CODE :
+                    if (activity instanceof StudentProfileActivity){
+                        ((StudentProfileActivity) activity).loadproperties((Properties) result.getMessage());
+                    }
+
+
+                    break;
+                    case Properties.CODE_ALL:
+
+                        break;
+                    default:
+                        Log.i("result error : " , "Unknown CODE sent in ");
+
+            }
+
+
+        }
 
 
     }

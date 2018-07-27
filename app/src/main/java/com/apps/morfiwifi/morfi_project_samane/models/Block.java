@@ -12,6 +12,7 @@ import com.parse.ParseQuery;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -25,13 +26,13 @@ public class Block {
     public static String obj_code = "code";
 
 
-    public String Id;
+    public String Id = Init.Empty;
 
-    public Date createAt;
+    public Date createAt = Calendar.getInstance().getTime();
 
     public Long id;
-    public String name = "";
-    public String code;
+    public String name = Init.Empty;
+    public String code = Init.Empty;
     public List<Room> rooms;
 
 
