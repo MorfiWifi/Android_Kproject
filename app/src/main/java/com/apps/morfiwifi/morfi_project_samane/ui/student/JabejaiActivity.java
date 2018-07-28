@@ -6,16 +6,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
 import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
+import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
@@ -41,6 +44,21 @@ public class JabejaiActivity extends DarkhastActivity implements
     private boolean is_date_selected = false;
     private TextView tv_hint;
 
+    private ArrayList<Room> rooms;
+    private ArrayList<Khabgah> khabgahs;
+    private ArrayList<Block> blocks;
+    private Properties properties;
+
+    private  boolean isloaded = false;
+
+    public boolean isIsloaded(){
+        return isloaded;
+    }
+
+    private void force_refresh_view(){
+        // TODO: 7/28/2018 clear data - is loaded = NO!
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +78,95 @@ public class JabejaiActivity extends DarkhastActivity implements
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+
+
+        Properties.load_self_properties(this , true , false);
+        Khabgah.load_Khabgahs(this , true , false);
+        Block.load_blocks(this , true, false);
+        Room.load_rooms(this , true, false);
+
+    }
+
+    public void put_rooms (ArrayList<Room> rooms){
+        this.rooms = rooms;
+        if (blocks != null && khabgahs != null && properties != null){
+            isloaded  =true;
+            load_steppers();
+        }
+        Log.d(this.getClass().getName() , "rooms loaded");
+//        Toast.makeText(activity, "rooms loaded", Toast.LENGTH_SHORT).show();
+
+    }
+    public void put_blooks (ArrayList<Block> blocks){
+        this.blocks = blocks;
+        if (rooms != null && khabgahs != null && properties != null){
+            isloaded  =true;
+            load_steppers();
+        }
+        Log.d(this.getClass().getName() , "blocks loaded");
+//        Toast.makeText(activity, "block loaded", Toast.LENGTH_SHORT).show();
+    }
+    public void put_khabgahs (ArrayList<Khabgah> khabgahs){
+        this.khabgahs = khabgahs;
+        if (blocks != null && rooms != null && properties != null){
+            isloaded  =true;
+            load_steppers();
+        }
+        Log.d(this.getClass().getName() , "khabgah loaded");
+//        Toast.makeText(activity, "kha loaded", Toast.LENGTH_SHORT).show();
+    }
+
+    public void put_proprtties (Properties properties){
+        this.properties = properties;
+        if (blocks != null && rooms != null && khabgahs != null){
+            isloaded  =true;
+            load_steppers();
+        }
+        Log.d(this.getClass().getName() , "properties loaded");
+//        Toast.makeText(activity, "prop loaded", Toast.LENGTH_SHORT).show();
+    }
+    private void FIX_ARRAYS (){
+        if (rooms != null && blocks != null && khabgahs != null){
+            for (int i = 0; i < khabgahs.size(); i++) {
+                khabgahs.get(i).blocks = new ArrayList<Block>();
+            }
+            for (int i = 0; i < blocks.size(); i++) {
+                blocks.get(i).rooms = new ArrayList<Room>();
+            }
+
+            for (Room r : rooms) {
+
+                for (Block block :blocks ) {
+                    if (r.blook_id.equals(block.Id)){
+                        block.rooms.add(r);
+                    }
+                }
+
+            }
+
+            for (Block block : blocks) {
+                for (Khabgah khabgah : khabgahs){
+                    if (block.khabgah_id.equals(khabgah.Id)){
+                        khabgah.blocks.add(block);
+                    }
+                }
+            }
+
+
+
+        }
+    }
+
+    public void load_steppers (){
+        FIX_ARRAYS();
+
+//        Toast.makeText(activity, "ALL LOADED !", Toast.LENGTH_SHORT).show();
+
+
         activity = this;
         tv_hint = findViewById(R.id.tv_choosen_date);
         DaoSession session = Repository.GetInstant(this);
-        final List<Khabgah> khabgahs = new ArrayList<>();
-//                session.getKhabgahDao().loadAll();
 
         Spinner sp_st_kh = (Spinner) findViewById(R.id.sp_start_khab);
         Spinner sp_end_kh = (Spinner) findViewById(R.id.sp_end_khab);
@@ -218,8 +320,10 @@ public class JabejaiActivity extends DarkhastActivity implements
 
             }
         });
-
     }
+
+
+
 
     private void Load_View(List<Samane> samanes) {
         // Array of choices

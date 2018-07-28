@@ -78,7 +78,7 @@ public class Properties {
         if (force_new || !isloaded_all){ // don't have cache or forced
             if (draw_loading)
                 Init.start_loading(activity);
-
+            isloaded_all = false;
             ParseQuery query = new ParseQuery(class_name);
             query.whereExists(obj_user_id );
 
@@ -121,7 +121,7 @@ public class Properties {
         if (force_new || !isloaded){ // don't have cache or forced
             if (draw_loading)
                 Init.start_loading(activity);
-
+            isloaded = false;
             ParseQuery query = new ParseQuery(class_name);
             query.whereEqualTo(obj_user_id , User.current_user.id);
 
@@ -266,5 +266,13 @@ public class Properties {
             }
         }
 
+    }
+
+    public static boolean isloaded_self(){
+        return isloaded;
+    }
+
+    public static boolean isloaded_all(){
+        return isloaded_all;
     }
 }

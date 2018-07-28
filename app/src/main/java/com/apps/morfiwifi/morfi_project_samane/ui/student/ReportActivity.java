@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
+import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 
@@ -110,7 +111,7 @@ public class ReportActivity extends DarkhastActivity {
             report.setType_id(selected_type.id);
             report.sharh = mes;
             report.date = Calendar.getInstance().getTime();
-            report.setUser_id(Init.current_login.Id);
+            report.setUser_id(User.current_user.Id);
             Repository.GetInstant(this).getReportDao().insert(report);
             Init.Toas(this , "گزارش ارسال شد");
         }

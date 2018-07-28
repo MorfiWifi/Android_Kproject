@@ -3,7 +3,6 @@ package com.apps.morfiwifi.morfi_project_samane.ui.student;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -30,8 +29,8 @@ public class StudentProfileActivity extends DarkhastActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("پیام های دریافتی");
-        //toolbar.setTitle("فهرست");
+        setTitle("پروفایل");
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -102,8 +101,8 @@ public class StudentProfileActivity extends DarkhastActivity {
                 Room room = new Room();
                 Block block = new Block();
 
-                if (Khabgah.things != null){
-                    for (Khabgah ka: Khabgah.things) {
+                if (Khabgah.khabgahs != null){
+                    for (Khabgah ka: Khabgah.khabgahs) {
                         if (ka.Id.equals(properties.kh_id)){
                             khabgah = ka;
                             break;
@@ -150,9 +149,9 @@ public class StudentProfileActivity extends DarkhastActivity {
         }
 
         if (properties.is_studying){
-            tv_isstudying.setText("درحال نحصیل : بله");
+            tv_isstudying.setText("درحال تحصیل : بله");
         }else {
-            tv_isstudying.setText("درحال نحصیل : خبر");
+            tv_isstudying.setText("درحال تحصیل : خبر");
         }
 
         tv_prof_name.setText("نام کاربری : " + User.current_user.getUserName());

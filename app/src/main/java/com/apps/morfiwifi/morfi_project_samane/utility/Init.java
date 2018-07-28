@@ -25,6 +25,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
+import com.apps.morfiwifi.morfi_project_samane.ui.student.JabejaiActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentProfileActivity;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.parse.FindCallback;
@@ -403,6 +404,16 @@ public class Init {
 
     public static void stop_loading( AppCompatActivity activity){
         if (activity != null){
+            if (activity instanceof JabejaiActivity){
+                if (!((JabejaiActivity) activity).isIsloaded()){
+                    if (loading != null){
+                        loading.dismiss();
+                    }
+                    return;
+                }
+            }
+
+
             if (loading != null){
                 loading.dismiss();
             }
@@ -418,6 +429,20 @@ public class Init {
                 case Properties.CODE :
                     if (activity instanceof StudentProfileActivity){
                         ((StudentProfileActivity) activity).loadproperties((Properties) result.getMessage());
+                    }if (activity instanceof JabejaiActivity){
+                        ((JabejaiActivity) activity).put_proprtties((Properties) result.getMessage());
+                        // Wee Need 3 THING !
+                    if (!((JabejaiActivity) activity).isIsloaded()){
+
+//                        ((JabejaiActivity) activity).load_steppers();
+
+
+                        // OK DO THE THING manage data in activity !
+                    }
+
+
+
+
                     }
 
 
@@ -425,6 +450,44 @@ public class Init {
                     case Properties.CODE_ALL:
 
                         break;
+                case Khabgah.CODE:
+                    if (activity instanceof JabejaiActivity){
+                        ((JabejaiActivity) activity).put_khabgahs((ArrayList<Khabgah>) result.getMessage());
+
+                        if (!((JabejaiActivity) activity).isIsloaded()){
+
+//                            ((JabejaiActivity) activity).load_steppers();
+
+                            // OK DO THE THING manage data in activity !
+                        }
+                    }
+
+                    break;
+                case Room.CODE:
+                    if (activity instanceof JabejaiActivity){
+                        ((JabejaiActivity) activity).put_rooms((ArrayList<Room>) result.getMessage());
+
+                        if (!((JabejaiActivity) activity).isIsloaded()){
+
+
+//                            ((JabejaiActivity) activity).load_steppers();
+                            // OK DO THE THING manage data in activity !
+                        }
+
+                    }
+                    break;
+                case Block.CODE:
+                    if (activity instanceof JabejaiActivity){
+                        ((JabejaiActivity) activity).put_blooks((ArrayList<Block>) result.getMessage());
+
+                        if (!((JabejaiActivity) activity).isIsloaded()){
+
+
+//                            ((JabejaiActivity) activity).load_steppers();
+                            // OK DO THE THING manage data in activity !
+                        }
+                    }
+                    break;
                     default:
                         Log.i("result error : " , "Unknown CODE sent in ");
 
