@@ -274,6 +274,12 @@
 
 
             </LinearLayout>
+
+            <Space
+                android:layout_below="@id/lin_expan_khabgah"
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+
         </RelativeLayout>
 
 
@@ -283,6 +289,19 @@
 
 
     </ScrollView>
+
+    <Button
+        android:onClick="go_sama"
+        android:background="@drawable/buttom_blue_stack"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="ارتباط با سما"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 
 
 

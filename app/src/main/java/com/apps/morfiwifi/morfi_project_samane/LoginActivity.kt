@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
         note.text = "Max"
         noteDao.insert(note)*/
 
-        Init.Insert_init_Users(this)
+//        Init.Insert_init_Users(this)
         Init.Login_Signup(this)
 
     }

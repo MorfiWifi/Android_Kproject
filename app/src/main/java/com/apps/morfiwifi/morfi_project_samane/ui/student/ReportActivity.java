@@ -14,12 +14,9 @@ import android.widget.Spinner;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
-import com.apps.morfiwifi.morfi_project_samane.models.User;
-import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class ReportActivity extends DarkhastActivity {
@@ -52,18 +49,54 @@ public class ReportActivity extends DarkhastActivity {
 //        editText.getBackground().clearColorFilter();
 
 
+//        Spinner gozaresh_header = findViewById(R.id.sp_gozaresh_header);
+
+//        types = Repository.GetInstant(this).getReport_typeDao().loadAll();
+
+        Report_type.load_report_types(this , true , false);
+
+
+    }
+
+    public void send_gozaresh(View view) {
+        String mes = "";
+        if (text != null){
+            mes = text.getEditText().getText().toString().trim();
+        }
+
+        if (mes.length() < 5){
+            isok = false;
+            Init.Toas(this , "چی نوشتی ؟");
+            return;
+        }else {
+            if (selected_type != null){
+                isok = true;
+            }
+        }
+
+        if (isok){
+            if (selected_type   != null)
+                Report.send_self_report(this , true , mes , selected_type.id);
+
+
+
+
+            /*Report report = new Report();
+            report.setType_id(selected_type.id);
+            report.sharh = mes;
+            report.date = Calendar.getInstance().getTime();
+            report.setUser_id(User.current_user.Id);
+            Repository.GetInstant(this).getReportDao().insert(report);*/
+//            Init.Toas(this , "گزارش ارسال شد");
+        }
+    }
+
+    public void load_types(ArrayList<Report_type> report_types) {
+        types = report_types;
         Spinner gozaresh_header = findViewById(R.id.sp_gozaresh_header);
-
-        types = Repository.GetInstant(this).getReport_typeDao().loadAll();
-
-
-
         ArrayAdapter<Report_type> spinnerArrayAdapter = new ArrayAdapter<Report_type>(this,   android.R.layout.simple_spinner_item, types);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
         gozaresh_header.setAdapter(spinnerArrayAdapter);
-
-
-
 
         gozaresh_header.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -89,31 +122,6 @@ public class ReportActivity extends DarkhastActivity {
 
             }
         });
-    }
 
-    public void send_gozaresh(View view) {
-        String mes = "";
-        if (text != null){
-            mes = text.getEditText().getText().toString().trim();
-        }
-
-        if (mes.length() < 5){
-            isok = false;
-            Init.Toas(this , "چی نوشتی ؟");
-        }else {
-            if (selected_type != null){
-                isok = true;
-            }
-        }
-
-        if (isok){
-            Report report = new Report();
-            report.setType_id(selected_type.id);
-            report.sharh = mes;
-            report.date = Calendar.getInstance().getTime();
-            report.setUser_id(User.current_user.Id);
-            Repository.GetInstant(this).getReportDao().insert(report);
-            Init.Toas(this , "گزارش ارسال شد");
-        }
     }
 }

@@ -14,4 +14,16 @@
         android:gravity="center"
         />
 
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_night_mod"
+        android:layout_below="@id/tv_isstudying"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="night_mod"
+        android:gravity="center"
+        />
+
 </RelativeLayout>

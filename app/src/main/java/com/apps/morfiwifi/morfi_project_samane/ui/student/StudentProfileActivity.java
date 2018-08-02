@@ -1,5 +1,7 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.student;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -164,5 +166,12 @@ public class StudentProfileActivity extends DarkhastActivity {
 
     public void chainge_profile_image_std(View view) {
         Toast.makeText(this, "در آینده", Toast.LENGTH_SHORT).show();
+    }
+
+    public void go_sama(View view) {
+        String url = "http://reg.scu.ac.ir/SamaWeb/Login.aspx";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 }

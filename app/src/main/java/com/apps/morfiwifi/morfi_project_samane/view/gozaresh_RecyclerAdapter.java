@@ -15,12 +15,11 @@ import android.widget.TextView;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
-//import com.apps.morfiwifi.morfi_project_samane.models.Gozaresh_typeDao;
-import com.apps.morfiwifi.morfi_project_samane.models.Report_typeDao;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
 
 import java.util.Calendar;
 import java.util.List;
@@ -50,35 +49,47 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
 
 
 
-        List<User> users = Repository.GetInstant(activity).getUserDao().queryBuilder()
-                .where(UserDao.Properties.Id.eq(sample_report.user_id))
-                .list();
+       /* List<User> users = Repository.GetInstant(activity).getUserDao().queryBuilder()
+                .where(UserDao.Properties.Id.eq(sample_report.name))
+                .list();*/
 
-        if (users.size() > 0){
-            sener_user = users.get(0);
+        /*if (false){
+//            sener_user = users.get(0);
         }else {
             sener_user = new User();
             sener_user.setFName( "Unknown");
             sener_user.setLName( "Unknown");
-        }
+        }*/
 
-        final List<Report_type> report_types = Repository.GetInstant(activity).getReport_typeDao().queryBuilder()
+        /*final List<Report_type> report_types = Repository.GetInstant(activity).getReport_typeDao().queryBuilder()
                 .where(Report_typeDao.Properties.Id.eq(sample_report.type_id))
-                .list();
+                .list();*/
 
-        if (report_types.size() > 0){
-            report_type = report_types.get(0);
+        /*if (false){
+//            report_type = report_types.get(0);
         }else {
             report_type = new Report_type();
-            report_type.setName( "Unknown");
-            report_type.setPr_name( "Unknown");
-        }
+            report_type.name = ( "Unknown");
+            report_type.cod = ( "Unknown");
+        }*/
 
-        sample_report.report_type = report_type; // setting Directly!
+//        sample_report.report_type = report_type; // setting Directly!
 
-        holder.sender_name.setText(sener_user.getFName());
-        holder.sender_lname.setText(sener_user.getLName());
-        holder.gozaresh_type.setText(report_type.getPr_name());
+        holder.sender_name.setText(sample_report.report_type.name);
+        holder.sender_lname.setText(sample_report.state.toString());
+
+
+        shamsiDate shamsiDate = new shamsiDate();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(sample_report.createAt);
+        String dati = shamsiDate.shamsiDate(calendar.get(Calendar.YEAR) , calendar.get(Calendar.MONTH)+1 , calendar.get(Calendar.DATE));
+
+//        matn.setText(" موضوع : "+ sample_report.report_type.name);
+//        type.setText( "وضعیت : " + sample_report.state  );
+//        date.setText(dati);
+        holder.gozaresh_type.setText(dati);
+
+
 
         holder.lin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,13 +100,13 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                 final BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
-                if (sample_report.seen_date == null){
+                /*if (sample_report.seen_date == null){
                     // Juset First Update!
                     sample_report.seen_date = Calendar.getInstance().getTime();
                     Repository.GetInstant(activity).getReportDao().update(sample_report);
-                }
+                }*/
 
-                report_typeList = Repository.GetInstant(activity).getReport_typeDao().loadAll();
+//                report_typeList = Repository.GetInstant(activity).getReport_typeDao().loadAll();
 
                 Report.State[] vals = Report.State.values();
                 
@@ -104,10 +115,17 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                 TextView type = bottom_sheet.findViewById(R.id.tv_gozaresh_type);
                 final Spinner states = bottom_sheet.findViewById(R.id.sp_new_state);
                 TextView date = bottom_sheet.findViewById(R.id.tv_gozaresh_date);
+                TextView sende_id = bottom_sheet.findViewById(R.id.tv_gozaresh_sender_id);
 
-                matn.setText(sample_report.getSharh());
-                type.setText( "وضعیت : " + sample_report.get_State()  +" موضوع : "+ sample_report.report_type);
-                date.setText(sample_report.getDate().toString());
+                shamsiDate shamsiDate = new shamsiDate();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(sample_report.createAt);
+                String dati = shamsiDate.shamsiDate(calendar.get(Calendar.YEAR) , calendar.get(Calendar.MONTH)+1 , calendar.get(Calendar.DATE));
+
+                matn.setText(sample_report.matn);
+                type.setText(" موضوع : "+ sample_report.report_type.name+ "وضعیت : " + sample_report.state  );
+                date.setText(dati);
+                sende_id.setText("آیدی فرستنده : " + sample_report.sender_id);
 
                 ArrayAdapter<Report.State> spinnerArrayAdapter = new ArrayAdapter<>(activity,   android.R.layout.simple_spinner_item, vals);
                 spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
@@ -118,8 +136,8 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                     public void onClick(View view) {
                         // accepted
                         Report.State new_state = (Report.State) states.getSelectedItem();
-                        sample_report.set_State(new_state);
-                        Repository.GetInstant(activity).getReportDao().update(sample_report);
+//                        sample_report.set_State(new_state);
+//                        Repository.GetInstant(activity).getReportDao().update(sample_report);
                         Init.Toas(activity , "تفییرات اعمال شد");
                         // Juset checking ....
                         Init(reportList, activity);

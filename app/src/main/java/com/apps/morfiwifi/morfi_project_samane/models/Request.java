@@ -70,4 +70,11 @@ public class Request {
     @NotNull
     public int State_request;
 
+
+
+
+
+
+
+
 }
