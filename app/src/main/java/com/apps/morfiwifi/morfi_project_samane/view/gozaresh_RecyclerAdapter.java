@@ -17,6 +17,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
+import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
@@ -123,9 +124,18 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                 String dati = shamsiDate.shamsiDate(calendar.get(Calendar.YEAR) , calendar.get(Calendar.MONTH)+1 , calendar.get(Calendar.DATE));
 
                 matn.setText(sample_report.matn);
-                type.setText(" موضوع : "+ sample_report.report_type.name+ "وضعیت : " + sample_report.state  );
+                type.setText(" موضوع : "+ sample_report.report_type.name+ " وضعیت : " + sample_report.state  );
                 date.setText(dati);
-                sende_id.setText("آیدی فرستنده : " + sample_report.sender_id);
+                if (activity instanceof ReportActivity){
+                    sende_id.setText(" فرستنده : " + User.current_user.getUserName());
+                    bottom_sheet.findViewById(R.id.btn_gozaresh_new_state).setVisibility(View.GONE);
+                    states.setVisibility(View.GONE);
+                }else {
+                    sende_id.setText("آیدی فرستنده : " + sample_report.sender_id);
+                    bottom_sheet.findViewById(R.id.btn_gozaresh_new_state).setVisibility(View.VISIBLE);
+                    states.setVisibility(View.VISIBLE);
+                }
+
 
                 ArrayAdapter<Report.State> spinnerArrayAdapter = new ArrayAdapter<>(activity,   android.R.layout.simple_spinner_item, vals);
                 spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
@@ -182,6 +192,17 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
     }
 
     public static void Init(List<Report> reportList, AppCompatActivity activity){
+        view_fixer(reportList, activity);
+        recyclerView = activity.findViewById(R.id.rec_gozaresh_recive);
+        gozaresh_RecyclerAdapter.activity = activity;
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setAdapter(new gozaresh_RecyclerAdapter(reportList));
+
+    }
+
+    public static void Init(List<Report> reportList , List<Report_type> report_types, AppCompatActivity activity){
         view_fixer(reportList, activity);
         recyclerView = activity.findViewById(R.id.rec_gozaresh_recive);
         gozaresh_RecyclerAdapter.activity = activity;

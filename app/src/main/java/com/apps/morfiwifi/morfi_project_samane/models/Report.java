@@ -101,7 +101,7 @@ public class Report {
                     Result result;
                     if (e == null){
                         if (!Report_type.isloaded_all())
-                            Report_type.load_report_types_fog();
+                            Report_type.load_report_types_fog(false);
 
 
                         temp = objects;
@@ -188,13 +188,13 @@ public class Report {
             public void done(ParseException e) {
                 Result res;
                 if (e== null){
-                    res = new Result( "DON" , CODE , true);
+                    res = new Result( "DON" , CODE_SEND , true);
                     Init.result_of_query(activity , res);
 
                     if (draw_loading)
                         Init.stop_loading(activity);
                 }else {
-                    res = new Result(e , CODE);
+                    res = new Result(e , CODE_SEND);
                     if (draw_loading)
                         Init.stop_loading(activity);
                     Init.result_of_query(activity , res);
@@ -219,6 +219,7 @@ public class Report {
         // TODO: 7/25/2018 COMPLET OBJECT BUILDIGN SYS
         String t;
         int m = 0;
+        Object temp;
         for (String param: all_params) {
             switch (param){
                 case obj_id :
@@ -239,21 +240,21 @@ public class Report {
                     state = State.fromInteger(m);
                     break;
                 case obj_matn:
-                    t = parseObject.get(obj_matn).toString();
-                    if (t != null){
-                        matn = t;
+                    temp = parseObject.get(obj_matn);
+                    if (temp != null){
+                        matn  = temp.toString();
                     }
                     break;
                 case obj_sender_id:
-                    t = parseObject.get(obj_sender_id).toString();
-                    if (t != null){
-                        sender_id = t;
+                    temp = parseObject.get(obj_sender_id);
+                    if (temp   != null){
+                        sender_id = temp.toString();
                     }
                     break;
                 case obj_reporttype_id:
-                    t = parseObject.get(obj_reporttype_id).toString();
-                    if (t != null){
-                        report_type = Report_type.get(t);
+                    temp = parseObject.get(obj_reporttype_id);
+                    if (temp != null){
+                        report_type = Report_type.get(temp.toString());
                     }
                     report_type = Report_type.get(parseObject.get(obj_reporttype_id).toString());
                     break;

@@ -304,7 +304,13 @@ public class Init {
                     Log.d("Report : " , "SENDED");
                     if (result.isok())
                         Toast.makeText(activity, "ارسال شد", Toast.LENGTH_SHORT).show();
+                    if (activity != null ){
+                        if (activity  instanceof ReportActivity){
+                            ((ReportActivity) activity).report_sent();
+                        }
 
+                    }
+                    break;
                 case Report_type.CODE:
                     if (result.isok())
                         Log.d("Report_types :" , "Load succsess");
@@ -314,7 +320,15 @@ public class Init {
                         }
                     }
                     break;
-
+                case Report.CODE :
+                    if (result.isok())
+                        Log.d("Report_self :" , "Load succsess");
+                    if (activity != null){
+                        if (activity instanceof ReportActivity) {
+                            ((ReportActivity)activity).load_reports((ArrayList<Report>)result.getMessage() , Report_type.load_report_types_fog(false) );
+                        }
+                    }
+                    break;
                     case Report.CODE_ALL:
                         if (activity instanceof StdReportActivity){
                             ((StdReportActivity) activity).loadstd_reports((ArrayList<Report>) result.getMessage());

@@ -85,7 +85,11 @@ public class Report_type {
         }
     }
 
-    public static List<Report_type> load_report_types_fog (){ // laod all of them FORCED FORGE GROUND BLOCK >>>>
+    public static List<Report_type> load_report_types_fog (boolean force){ // laod all of them FORCED FORGE GROUND BLOCK >>>>
+        if (isloaded && !force){
+            return report_types;
+        }
+
             isloaded = false; // GETTING NEWER VERSION! NOT READY YET
         List <Report_type> report_types_in = new ArrayList<>();
             ParseQuery query = new ParseQuery(class_name);
@@ -135,9 +139,9 @@ public class Report_type {
                     break;
 
                 case obj_name:
-                    t = parseObject.get(obj_name).toString();
-                    if (t != null){
-                        name = t;
+                    object = parseObject.get(obj_name);
+                    if (object != null){
+                        name = object.toString();
                     }
                     break;
                 case obj_cod:

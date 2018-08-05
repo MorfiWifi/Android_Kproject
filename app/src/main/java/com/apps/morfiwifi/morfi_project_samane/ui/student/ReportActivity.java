@@ -10,11 +10,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.Broudcast;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
+import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.apps.morfiwifi.morfi_project_samane.view.broudcast_RecyclerAdapter;
+import com.apps.morfiwifi.morfi_project_samane.view.gozaresh_RecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +29,11 @@ public class ReportActivity extends DarkhastActivity {
     List<Report_type> types = new ArrayList<>();
     Report_type selected_type;
     TextInputLayout text;
+    boolean isloaded = false;
+
+    public List<Report_type> getTypes (){
+        return types;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,86 +52,29 @@ public class ReportActivity extends DarkhastActivity {
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        text = findViewById(R.id.ti_gozaresh_matn);
-//        TextInputEditText matn = findViewById(R.id.te_gozaresh_matn);
-//        matn.getBackground().clearColorFilter();
-//        text.getBackground().clearColorFilter();
-//        editText.getBackground().clearColorFilter();
 
-
-//        Spinner gozaresh_header = findViewById(R.id.sp_gozaresh_header);
-
-//        types = Repository.GetInstant(this).getReport_typeDao().loadAll();
-
-        Report_type.load_report_types(this , true , false);
-
+        Report.load_self_reports(this , true , false);
 
     }
 
-    public void send_gozaresh(View view) {
-        String mes = "";
-        if (text != null){
-            mes = text.getEditText().getText().toString().trim();
-        }
-
-        if (mes.length() < 5){
-            isok = false;
-            Init.Toas(this , "چی نوشتی ؟");
-            return;
-        }else {
-            if (selected_type != null){
-                isok = true;
-            }
-        }
-
-        if (isok){
-            if (selected_type   != null)
-                Report.send_self_report(this , true , mes , selected_type.id);
-
-
-
-
-            /*Report report = new Report();
-            report.setType_id(selected_type.id);
-            report.sharh = mes;
-            report.date = Calendar.getInstance().getTime();
-            report.setUser_id(User.current_user.Id);
-            Repository.GetInstant(this).getReportDao().insert(report);*/
-//            Init.Toas(this , "گزارش ارسال شد");
-        }
-    }
 
     public void load_types(ArrayList<Report_type> report_types) {
+        isloaded = true;
         types = report_types;
-        Spinner gozaresh_header = findViewById(R.id.sp_gozaresh_header);
-        ArrayAdapter<Report_type> spinnerArrayAdapter = new ArrayAdapter<Report_type>(this,   android.R.layout.simple_spinner_item, types);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
-        gozaresh_header.setAdapter(spinnerArrayAdapter);
+    }
 
-        gozaresh_header.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 0){
-                    selected_type = types.get((i % types.size()));
-                    if (selected_type != null){
-                        isok = true;
-                    }else {
-                        isok = false;
-                    }
+    public void new_report(View view) {
+        Dialogue.Send_Report(this);
+    }
 
+    public void load_reports (List<Report> reports , List<Report_type> types){
+        isloaded = true;
+        this.types = types;
+        Broudcast broudcast = new Broudcast();
+        gozaresh_RecyclerAdapter.Init(reports , types,this);
+    }
 
-                }else {
-                    isok = false;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // TODO: 6/1/2018 SET ON NOTHING ADAPTER AS AN ITEM!
-                isok = false;
-
-            }
-        });
-
+    public void report_sent (){
+        Report.load_self_reports(this , true , true);
     }
 }

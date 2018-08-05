@@ -16,8 +16,11 @@ import android.widget.Toast;
 import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Broudcast;
+import com.apps.morfiwifi.morfi_project_samane.models.Report;
+import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
+import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 
 public class Dialogue {
@@ -108,6 +111,70 @@ public class Dialogue {
         });
 
         dialog.show();
+
+
+    }
+
+    public static void Send_Report (final AppCompatActivity activity){
+
+        // custom dialog
+        final Dialog dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.dialogue_new_report);
+
+        // set the custom dialog components - text, image and button
+
+
+//        final TextInputEditText header = (TextInputEditText) dialog.findViewById(R.id.ti1);
+        final TextInputEditText matn = (TextInputEditText) dialog.findViewById(R.id.te_gozaresh_matn);
+        final Spinner types = (Spinner) dialog.findViewById(R.id.sp_gozaresh_header);
+
+        // FIXME: 7/14/2018 SHOULD BE PRe LOADED BUT BE AWARE!!
+        if (activity instanceof ReportActivity){
+            ArrayAdapter<Report_type> spinnerArrayAdapter = new ArrayAdapter<Report_type>(activity,   android.R.layout.simple_spinner_item, ((ReportActivity) activity).getTypes());
+            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+            types.setAdapter(spinnerArrayAdapter);
+
+            Button dialogButton = (Button) dialog.findViewById(R.id.btn_send_report);
+            // if button is clicked, close the custom dialog
+            dialogButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String matn_str = matn.getText().toString();
+//                    String heade_str = header.getText().toString();
+
+                    if (matn_str.trim().length() < 1 ){
+                        Toast.makeText(activity, "متن کوتاه است", Toast.LENGTH_SHORT).show();
+                        Init.Terminal("WHAT KIND OF MESSAGE IS THIS ????");
+                        return;
+                    }
+
+
+                    Report_type report_type = (Report_type) types.getSelectedItem();
+                    if (report_type != null){
+                        Report.send_self_report(activity ,true , matn_str , report_type.id);
+
+                    }else {
+                        Toast.makeText(activity, "نوع گزارش خالی است", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+
+                    dialog.dismiss();
+                }
+            });
+        }
+
+
+        dialog.show();
+
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                Toast.makeText(activity, "لغو شد", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
     }
