@@ -146,6 +146,9 @@ public class Report {
                 public void done(List<ParseObject> objects, ParseException e) {
                     Result result;
                     if (e == null){
+                        if (!Report_type.isloaded_all())
+                            Report_type.load_report_types_fog(false);
+
                         temp = objects;
                         if (objects.size() <= 0)
                             temp = new ArrayList<ParseObject>();

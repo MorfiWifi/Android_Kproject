@@ -14,11 +14,23 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.Request;
+import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
+import com.apps.morfiwifi.morfi_project_samane.view.request_RecyclerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DarkhastActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private ProgressDialog loading;
+    private List<Thing> things = new ArrayList<>();
+    private List<Request> requests = new ArrayList<>();
+
+    public List<Thing> getThings() {
+        return things;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +49,8 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Request.load_self_requests(this , true , false);
 
 
     }
@@ -175,6 +189,31 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
         stop_loading();
         super.onStop();
     }
+
+    public void new_request(View view) {
+        Dialogue.Send_Request(this , getThings());
+    }
+
+    public void setThings(List<Thing> things){
+        if (things != null)
+            this.things = things;
+    }
+
+    public void refresh_view() {
+        // Some new SENT....
+//       load_requests(requests);
+        Request.load_self_requests(this , true , true);
+
+    }
+
+    public void load_requests(List<Request> requests) {
+        things = Thing.load_things_fog(false); // should already be loaded
+        requests = requests;
+        request_RecyclerAdapter.Init(requests , things , this);
+        // load recycler with data...
+
+    }
+
 }
 
 

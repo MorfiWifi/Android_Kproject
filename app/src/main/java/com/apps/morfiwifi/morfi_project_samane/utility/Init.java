@@ -20,12 +20,14 @@ import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
 import com.apps.morfiwifi.morfi_project_samane.models.Message;
+import com.apps.morfiwifi.morfi_project_samane.models.Request;
 import com.apps.morfiwifi.morfi_project_samane.models.Result;
 import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
+import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.JabejaiActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentProfileActivity;
@@ -333,6 +335,39 @@ public class Init {
                         if (activity instanceof StdReportActivity){
                             ((StdReportActivity) activity).loadstd_reports((ArrayList<Report>) result.getMessage());
                         }
+                        break;
+                case Thing.CODE:
+                    //just things loaded
+                    if (activity instanceof DarkhastActivity){
+                        ((DarkhastActivity) activity).setThings((List<Thing>) result.getMessage());
+                    }
+
+
+                    break;
+                case Request.CODE:
+                    //just things loaded
+                    if (activity instanceof DarkhastActivity){
+                        ((DarkhastActivity) activity).load_requests((List<Request>) result.getMessage());
+                    }
+
+
+                    break;
+                case Request.CODE_SEND:
+                    //just things loaded
+                    if (activity instanceof DarkhastActivity){
+                        ((DarkhastActivity) activity).refresh_view();
+                    }
+
+
+                    break;
+                case Request.CODE_ALL:
+                    //just things loaded
+                    if (activity instanceof DarkhastActivity){
+                        // this dosent have !
+                    }
+
+
+                    break;
                     default:
                         Log.i("result error : " , "Unknown CODE sent in ");
 
