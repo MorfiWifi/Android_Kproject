@@ -11,8 +11,10 @@ import android.view.Menu
 import android.view.MenuItem
 import com.apps.morfiwifi.morfi_project_samane.R
 import com.apps.morfiwifi.morfi_project_samane.models.Setting
+import com.apps.morfiwifi.morfi_project_samane.models.User
 import kotlinx.android.synthetic.main.activity_student_main.*
 import kotlinx.android.synthetic.main.app_bar_student_main.*
+import kotlinx.android.synthetic.main.nav_header_main.view.*
 
 class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -32,6 +34,8 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+//        nav_view.tv_navbar_name.text = User.current_user.userName
+//        nav_view.tv_navbar_rolename.text = User.current_user.Role
         title = "دانشجو"
         //fixme THis Could be std Profile instead of Main
     }

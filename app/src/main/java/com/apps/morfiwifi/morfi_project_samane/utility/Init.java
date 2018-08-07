@@ -238,6 +238,12 @@ public class Init {
             Log.e(EXEPTION , result.exception.getMessage()); // SOME THING WRONG IN THERE !
             Toast.makeText(activity, "خطا", Toast.LENGTH_SHORT).show();
         }else {
+
+            if (activity == null){
+                return; // hell we dont need doing any thing...
+            }
+
+
             switch (result.getCode()){
                 case Properties.CODE :
                     if (activity instanceof StudentProfileActivity){
@@ -338,7 +344,7 @@ public class Init {
                         break;
                 case Thing.CODE:
                     //just things loaded
-                    if (activity instanceof DarkhastActivity){
+                    if (activity.getClass().getName().equals(DarkhastActivity.class.getName())){
                         ((DarkhastActivity) activity).setThings((List<Thing>) result.getMessage());
                     }
 
@@ -346,7 +352,7 @@ public class Init {
                     break;
                 case Request.CODE:
                     //just things loaded
-                    if (activity instanceof DarkhastActivity){
+                    if (activity.getClass().getName().equals(DarkhastActivity.class.getName())){
                         ((DarkhastActivity) activity).load_requests((List<Request>) result.getMessage());
                     }
 
@@ -354,7 +360,7 @@ public class Init {
                     break;
                 case Request.CODE_SEND:
                     //just things loaded
-                    if (activity instanceof DarkhastActivity){
+                    if (activity.getClass().getName().equals(DarkhastActivity.class.getName())){
                         ((DarkhastActivity) activity).refresh_view();
                     }
 
@@ -362,7 +368,7 @@ public class Init {
                     break;
                 case Request.CODE_ALL:
                     //just things loaded
-                    if (activity instanceof DarkhastActivity){
+                    if (activity.getClass().getName().equals(DarkhastActivity.class.getName())){
                         // this dosent have !
                     }
 

@@ -12,10 +12,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Request;
 import com.apps.morfiwifi.morfi_project_samane.models.Thing;
+import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.view.request_RecyclerAdapter;
 
@@ -53,6 +55,8 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
         Request.load_self_requests(this , true , false);
 
 
+//        ((TextView) navigationView.findViewById(R.id.tv_navbar_name)).setText(User.current_user.getUserName());
+//        ((TextView) navigationView.findViewById(R.id.tv_navbar_rolename)).setText(User.current_user.Role);
     }
 
     public void send_darkhast(View view) {
