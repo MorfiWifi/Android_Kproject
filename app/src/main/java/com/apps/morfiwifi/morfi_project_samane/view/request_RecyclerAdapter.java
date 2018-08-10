@@ -29,6 +29,7 @@ import java.util.List;
 public class request_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_request>  {
 
 
+
     private List<Request> reportList; // our items !
     private static RecyclerView recyclerView; //this
     private static AppCompatActivity activity; // super activit
@@ -47,35 +48,10 @@ public class request_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_req
 
     @Override
     public void onBindViewHolder(ViewHolder_request holder, int position) {
+
+
+
         final Request sample_report = reportList.get(position);
-
-
-
-       /* List<User> users = Repository.GetInstant(activity).getUserDao().queryBuilder()
-                .where(UserDao.Properties.Id.eq(sample_report.name))
-                .list();*/
-
-        /*if (false){
-//            sener_user = users.get(0);
-        }else {
-            sener_user = new User();
-            sener_user.setFName( "Unknown");
-            sener_user.setLName( "Unknown");
-        }*/
-
-        /*final List<Report_type> report_types = Repository.GetInstant(activity).getReport_typeDao().queryBuilder()
-                .where(Report_typeDao.Properties.Id.eq(sample_report.type_id))
-                .list();*/
-
-        /*if (false){
-//            report_type = report_types.get(0);
-        }else {
-            report_type = new Report_type();
-            report_type.name = ( "Unknown");
-            report_type.cod = ( "Unknown");
-        }*/
-
-//        sample_report.report_type = report_type; // setting Directly!
 
         holder.sender_name.setText(sample_report.thing.name);
         holder.sender_lname.setText(sample_report.state.toString());
@@ -86,9 +62,6 @@ public class request_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_req
         calendar.setTime(sample_report.createAt);
         String dati = shamsiDate.shamsiDate(calendar.get(Calendar.YEAR) , calendar.get(Calendar.MONTH)+1 , calendar.get(Calendar.DATE));
 
-//        matn.setText(" موضوع : "+ sample_report.report_type.name);
-//        type.setText( "وضعیت : " + sample_report.state  );
-//        date.setText(dati);
         holder.gozaresh_type.setText(dati);
 
 
@@ -101,14 +74,6 @@ public class request_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_req
                         activity.findViewById(R.id.bottom_sheet_std_gozaresh_rec);
                 final BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-
-                /*if (sample_report.seen_date == null){
-                    // Juset First Update!
-                    sample_report.seen_date = Calendar.getInstance().getTime();
-                    Repository.GetInstant(activity).getReportDao().update(sample_report);
-                }*/
-
-//                report_typeList = Repository.GetInstant(activity).getReport_typeDao().loadAll();
 
                 Report.State[] vals = Report.State.values();
 

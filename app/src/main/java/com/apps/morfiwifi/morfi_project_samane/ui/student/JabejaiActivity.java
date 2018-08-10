@@ -17,12 +17,16 @@ import android.widget.Toast;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
 import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
+import com.apps.morfiwifi.morfi_project_samane.models.Feedback;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
 import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
+import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
+import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.apps.morfiwifi.morfi_project_samane.view.general_RecyclerAdapter;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
@@ -85,6 +89,7 @@ public class JabejaiActivity extends DarkhastActivity implements
         Khabgah.load_Khabgahs(this , true , false);
         Block.load_blocks(this , true, false);
         Room.load_rooms(this , true, false);
+        Transfer.load_self_transfers(this , true , false);
 
     }
 
@@ -166,160 +171,7 @@ public class JabejaiActivity extends DarkhastActivity implements
 
         activity = this;
         tv_hint = findViewById(R.id.tv_choosen_date);
-        DaoSession session = Repository.GetInstant(this);
 
-        Spinner sp_st_kh = (Spinner) findViewById(R.id.sp_start_khab);
-        Spinner sp_end_kh = (Spinner) findViewById(R.id.sp_end_khab);
-
-        final Spinner sp_st_block = (Spinner) findViewById(R.id.sp_start_block);
-        final Spinner sp_end_block = (Spinner) findViewById(R.id.sp_end_block);
-
-        final Spinner sp_st_othagh = (Spinner) findViewById(R.id.sp_start_otagh);
-        final Spinner sp_end_othagh = (Spinner) findViewById(R.id.sp_end_otagh);
-
-        ArrayAdapter<Khabgah> spinnerArrayAdapter = new ArrayAdapter<Khabgah>(this,   android.R.layout.simple_spinner_item, khabgahs);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
-        sp_st_kh.setAdapter(spinnerArrayAdapter);
-        sp_end_kh.setAdapter(spinnerArrayAdapter);
-
-
-
-        sp_st_kh.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 0){
-                    sp_st_block.setEnabled(true);
-                    //sp_end_block.setEnabled(false);
-                    st_blocks = khabgahs.get(i).blocks;
-//                            getBlocks();
-
-                    ArrayAdapter<Block> spinnerArrayAdapter = new ArrayAdapter<Block>(activity ,   android.R.layout.simple_spinner_item, khabgahs.get(i).blocks);
-                    spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
-                    sp_st_block.setAdapter(spinnerArrayAdapter);
-
-
-
-                }else {
-                    sp_st_block.setEnabled(false);
-                    //sp_end_block.setEnabled(false);
-                    sp_st_othagh.setEnabled(false);
-                    //sp_end_othagh.setEnabled(false);
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // TODO: 6/1/2018 SET ON NOTHING ADAPTER AS AN ITEM!
-
-            }
-        });
-
-
-        sp_end_kh.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 0){
-                    // TODO: 6/1/2018 Check some out of bound Things
-                    sp_end_block.setEnabled(true);
-                    //sp_end_block.setEnabled(false);
-
-                    end_blocks = khabgahs.get(i).blocks;
-//                            getBlocks();
-                    ArrayAdapter<Block> spinnerArrayAdapter = new ArrayAdapter<Block>(activity ,   android.R.layout.simple_spinner_item, khabgahs.get(i).blocks);
-                    spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
-                    sp_end_block.setAdapter(spinnerArrayAdapter);
-
-                }else {
-                    //sp_st_block.setEnabled(false);
-                    sp_end_block.setEnabled(false);
-                    //sp_st_othagh.setEnabled(false);
-                    sp_end_othagh.setEnabled(false);
-
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-        sp_st_block.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 0){
-                    sp_st_othagh.setEnabled(true);
-                    //sp_end_block.setEnabled(false);
-
-                    st_rooms = st_blocks.get(i).rooms;
-//                            getOthaghs();
-                    ArrayAdapter<Room> spinnerArrayAdapter = new ArrayAdapter<Room>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).rooms);
-                    spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
-                    sp_st_othagh.setAdapter(spinnerArrayAdapter);
-
-                }else {
-                    sp_st_othagh.setEnabled(false);
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-        sp_end_block.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 0){
-                    sp_end_othagh.setEnabled(true);
-                    //sp_end_block.setEnabled(false);
-
-                    end_rooms = st_blocks.get(i).rooms;
-//                            getOthaghs();
-                    ArrayAdapter<Room> spinnerArrayAdapter = new ArrayAdapter<Room>(activity ,   android.R.layout.simple_spinner_item, st_blocks.get(i).rooms);
-                    spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
-                    sp_end_othagh.setAdapter(spinnerArrayAdapter);
-
-                }else {
-                    sp_end_othagh.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        sp_st_othagh.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        sp_end_othagh.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
     }
 
 
@@ -330,14 +182,14 @@ public class JabejaiActivity extends DarkhastActivity implements
         String colors[] = {"Red","Blue","White","Yellow","Black", "Green","Purple","Orange","Grey"};
 
         // Selection of the spinner
-        Spinner spinner = (Spinner) findViewById(R.id.sp_start_block);
+//        Spinner spinner = (Spinner) findViewById(R.id.sp_start_block);
 
 
 
         // Application of the Array to the Spinner
-        ArrayAdapter<Samane> spinnerArrayAdapter = new ArrayAdapter<>(this,   android.R.layout.simple_spinner_item, samanes);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
-        spinner.setAdapter(spinnerArrayAdapter);
+//        ArrayAdapter<Samane> spinnerArrayAdapter = new ArrayAdapter<>(this,   android.R.layout.simple_spinner_item, samanes);
+//        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+//        spinner.setAdapter(spinnerArrayAdapter);
     }
 
     public void jabeja_pick_date(View view) {
@@ -372,15 +224,26 @@ public class JabejaiActivity extends DarkhastActivity implements
         String date = "You picked the following date: "+dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
         Init.Terminal(date);
         String s =  dayOfMonth+ " "+ monthrs[monthOfYear] +" "+ year ;
-        tv_hint.setText(s);
-        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/BNAZANIN.TTF");
-        tv_hint.setTypeface(type);
         is_date_selected = true;
-        //tv_hint.setTypeface();
+        Dialogue.Send_Transfer(this , khabgahs , blocks , rooms ,properties , year , monthOfYear ,dayOfMonth , s);
     }
 
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
 
+    }
+
+    public void new_teansfer(View view) {
+        // TODO: 8/7/2018 dialogue Transfere
+        Dialogue.Send_Transfer(this , khabgahs , blocks , rooms , properties);
+    }
+
+    public void refresh_view() {
+        Transfer.load_self_transfers(this , true , true);
+    }
+
+    public void load_transfers(List<Transfer> transfers) {
+        general_RecyclerAdapter.Init(transfers
+                , this , Init.Mod.transfer , true ,true);
     }
 }

@@ -26,8 +26,8 @@ import static com.google.android.gms.tasks.Tasks.await;
 
 public class Properties {
 
-    public static final int CODE = 12; // just for indexing !
-    public static final int CODE_ALL = 13; // just for list of all
+    public static final int CODE = 9; // just for indexing !
+    public static final int CODE_ALL = 10; // just for list of all
 
     // PRE GIVE VALUE FOR NULL FIX FUTURE
     public Date createAt = Calendar.getInstance().getTime();

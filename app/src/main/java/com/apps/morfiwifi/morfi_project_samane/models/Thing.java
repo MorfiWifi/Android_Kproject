@@ -24,7 +24,7 @@ public class Thing {
     public Date createAt = Calendar.getInstance().getTime();
 
 
-    public static final int CODE = 11;
+    public static final int CODE = 19;
 
     private static String class_name = "thing";
     private final static String obj_name = "name";

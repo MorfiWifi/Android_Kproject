@@ -14,7 +14,9 @@ import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.SignupStudentsActivity;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
 import com.apps.morfiwifi.morfi_project_samane.models.Broudcast;
+import com.apps.morfiwifi.morfi_project_samane.models.Cancellation;
 import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
+import com.apps.morfiwifi.morfi_project_samane.models.Feedback;
 import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
@@ -25,9 +27,12 @@ import com.apps.morfiwifi.morfi_project_samane.models.Result;
 import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.Thing;
+import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.student.EnserafActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.student.EnteghadActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.JabejaiActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentProfileActivity;
@@ -61,6 +66,9 @@ public class Init {
     public final static String Empty = "خالی" ;
     public final static String EXEPTION  = "SAMANE EXCEPTION : " ;
 
+    public enum Mod {
+        cancelation , feedback , transfer
+    }
 
     public static User current_login;
     private static ProgressDialog loading;
@@ -343,7 +351,6 @@ public class Init {
                         }
                         break;
                 case Thing.CODE:
-                    //just things loaded
                     if (activity.getClass().getName().equals(DarkhastActivity.class.getName())){
                         ((DarkhastActivity) activity).setThings((List<Thing>) result.getMessage());
                     }
@@ -351,7 +358,6 @@ public class Init {
 
                     break;
                 case Request.CODE:
-                    //just things loaded
                     if (activity.getClass().getName().equals(DarkhastActivity.class.getName())){
                         ((DarkhastActivity) activity).load_requests((List<Request>) result.getMessage());
                     }
@@ -359,17 +365,50 @@ public class Init {
 
                     break;
                 case Request.CODE_SEND:
-                    //just things loaded
                     if (activity.getClass().getName().equals(DarkhastActivity.class.getName())){
                         ((DarkhastActivity) activity).refresh_view();
                     }
 
 
                     break;
-                case Request.CODE_ALL:
-                    //just things loaded
-                    if (activity.getClass().getName().equals(DarkhastActivity.class.getName())){
-                        // this dosent have !
+                case Transfer.CODE_SEND:
+                    if (activity.getClass().getName().equals(JabejaiActivity.class.getName())){
+                        ((JabejaiActivity)activity).refresh_view();
+                    }
+
+
+                    break;
+                case Transfer.CODE:
+                    if (activity.getClass().getName().equals(JabejaiActivity.class.getName())){
+                        ((JabejaiActivity)activity).load_transfers((List<Transfer>) result.getMessage());
+                    }
+
+
+                    break;
+                case Feedback.CODE_SEND:
+                    if (activity.getClass().getName().equals(EnteghadActivity.class.getName())){
+                        ((EnteghadActivity)activity).refresh_view();
+                    }
+
+
+                    break;
+                case Feedback.CODE:
+                    if (activity.getClass().getName().equals(EnteghadActivity.class.getName())){
+                        ((EnteghadActivity)activity).load_feedbsacks((List<Feedback>) result.getMessage());
+                    }
+
+
+                    break;
+                case Cancellation.CODE_SEND:
+                    if (activity.getClass().getName().equals(EnserafActivity.class.getName())){
+                        ((EnserafActivity)activity).refresh_view();
+                    }
+
+
+                    break;
+                case Cancellation.CODE:
+                    if (activity.getClass().getName().equals(EnserafActivity.class.getName())){
+                        ((EnserafActivity)activity).load_cancelations((List<Cancellation>) result.getMessage());
                     }
 
 

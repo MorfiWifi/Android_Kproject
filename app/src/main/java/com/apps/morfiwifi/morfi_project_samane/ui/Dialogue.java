@@ -10,29 +10,51 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.Block;
 import com.apps.morfiwifi.morfi_project_samane.models.Broudcast;
+import com.apps.morfiwifi.morfi_project_samane.models.Cancellation;
+import com.apps.morfiwifi.morfi_project_samane.models.Feedback;
+import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
+import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
 import com.apps.morfiwifi.morfi_project_samane.models.Request;
+import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.Thing;
+import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.apps.morfiwifi.morfi_project_samane.utility.JalaliCalendar;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Dialogue {
+    private static Dialog cancel_dialogue;
+    private static Dialog transfer_dialogue;
+    private static String content1 = "";
+    private static String content2 = "";
+    private static Khabgah khabgah;
+    private static Block block;
+    private static Room room;
+    static boolean first_time = true;
+
+
     public AlertDialog Exit_app (final AppCompatActivity activity ){
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         // Get the layout inflater
@@ -71,10 +93,49 @@ public class Dialogue {
                 });
         return builder.create();
     }
+    public AlertDialog Log_out_account (final AppCompatActivity activity ){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        // Get the layout inflater
+        final LayoutInflater inflater = activity.getLayoutInflater();
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView( null)
+                .setTitle("خروج از حساب کاربری ؟")
+                // Add action buttons
+                .setPositiveButton("خروج", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        //activity.finish();
+
+                        Intent intent = new Intent(activity , LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("EXIT" , true);
+                        activity.startActivity(intent);
+
+                        /*Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );//***Change Here***
+                        activity.startActivity(intent);*/
+                        dialog.cancel();
+
+
+                        // sign in the user ...
+                    }
+                })
+                .setNegativeButton("بیخیال", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        //cancel(); // Thout this whould be in init
+                    }
+                });
+        return builder.create();
+    }
     public static void Send_Broudcast (final AppCompatActivity activity){
 
         // custom dialog
         final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialogue_new_broudcast);
 
         // set the custom dialog components - text, image and button
@@ -123,11 +184,11 @@ public class Dialogue {
 
 
     }
-
     public static void Send_Report (final AppCompatActivity activity){
 
         // custom dialog
         final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialogue_new_report);
 
         // set the custom dialog components - text, image and button
@@ -187,11 +248,11 @@ public class Dialogue {
 
 
     }
-
     public static void Send_Request (final AppCompatActivity activity ,final List<Thing> things ){
 
         // custom dialog
         final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialogue_new_request);
 
         final TextInputEditText count =  dialog.findViewById(R.id.te_request_count);
@@ -260,6 +321,394 @@ public class Dialogue {
             });
 
         }
+
+
+        dialog.show();
+
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                Toast.makeText(activity, "لغو شد", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
+
+    public static void Send_Feedback (final AppCompatActivity activity ){
+
+        // custom dialog
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialogue_new_feedback);
+
+        final TextInputLayout header =  dialog.findViewById(R.id.ti_enteghad_header);
+        final TextInputLayout content =  dialog.findViewById(R.id.ti_enteghad_sharh);
+
+
+        dialog.findViewById(R.id.btn_send).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str_header   = Objects.requireNonNull(header.getEditText()).getText().toString() , str_content = Objects.requireNonNull(content.getEditText()).getText().toString();
+
+
+                if ((str_header.length() < 3 )||( str_content.length() < 10)){
+                    Toast.makeText(activity, "عنوان یا شرح نا مناسب", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Feedback.send_self_feedback(activity , true ,str_header , str_content );
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                Toast.makeText(activity, "لغو شد", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
+
+    public static void Send_Give_up (final AppCompatActivity activity ){
+        // HAS DATE -COMPLICATED
+        // custom dialog
+        final Dialog dialog;
+        if (cancel_dialogue == null){
+            dialog = new Dialog(activity);
+            cancel_dialogue = dialog;
+        }else {
+            cancel_dialogue.dismiss();
+            cancel_dialogue = null;
+            dialog = new Dialog(activity);
+            cancel_dialogue = dialog;
+        }
+
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialogue_new_giveup);
+
+        final TextView choosen_date =  dialog.findViewById(R.id.tv_enseraf_date);
+        final TextInputLayout reason = dialog.findViewById(R.id.txin_enseraf_reason);
+        dialog.findViewById(R.id.btn_send).setVisibility(View.GONE); // CaNT SEND WITH NO DATE
+
+        Button button = dialog.findViewById(R.id.btn_send);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        dialog.show();
+
+
+
+
+    }
+
+    public static void Send_Give_up (final AppCompatActivity activity,final int y ,final int m ,final int d , String date_str ){
+        // HAS DATE -COMPLICATED
+        // custom dialog+
+
+        final Dialog dialog;
+        if (cancel_dialogue == null){
+            dialog = new Dialog(activity);
+            cancel_dialogue = dialog;
+        }else {
+            TextInputLayout reason1 = cancel_dialogue.findViewById(R.id.txin_enseraf_reason);
+            content1 = Objects.requireNonNull(reason1.getEditText()).getText().toString();
+            Log.d("content :" , content1);
+            cancel_dialogue.dismiss();
+            cancel_dialogue = null;
+            dialog = new Dialog(activity);
+            cancel_dialogue = dialog;
+        }
+
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialogue_new_giveup);
+
+        final TextInputLayout reason = dialog.findViewById(R.id.txin_enseraf_reason);
+        final TextView choosen_date =  dialog.findViewById(R.id.tv_enseraf_date);
+
+
+        choosen_date.setText(date_str);
+        Log.d("content : on set " , content1);
+        Objects.requireNonNull(reason.getEditText()).setText(content1);
+
+
+        dialog.show();
+
+        dialog.findViewById(R.id.btn_send).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // WANT SEND THNIG !
+
+                if (reason.getEditText().getText().toString().length() < 3){
+                    Toast.makeText(activity, "دلبل انصراف ؟", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Date date_of_go = JalaliCalendar.jalali_to_miladi(y , m , d);
+                Cancellation.send_self_cancelation(activity ,true ,reason.getEditText().getText().toString() , date_of_go);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                Toast.makeText(activity, "لغو شد", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
+
+
+    public static void Send_Transfer (final AppCompatActivity activity , final List<Khabgah> khabgahs ,
+                                      final List<Block> blocks, final List<Room> rooms , Properties properties){
+
+
+        final Dialog dialog;
+        if (transfer_dialogue == null){
+            dialog = new Dialog(activity);
+            transfer_dialogue = dialog;
+        }else {
+//            TextInputLayout reason1 = cancel_dialogue.findViewById(R.id.txin_enseraf_reason);
+//            content2 = Objects.requireNonNull(reason1.getEditText()).getText().toString();
+            Log.d("content :" , content1);
+            transfer_dialogue.dismiss();
+            transfer_dialogue = null;
+            dialog = new Dialog(activity);
+            transfer_dialogue = dialog;
+        }
+
+        // custom dialog
+//        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialogue_new_transfer);
+
+        final TextInputEditText count =  dialog.findViewById(R.id.te_request_count);
+        final TextInputLayout count_pa =  dialog.findViewById(R.id.ti_request_count);
+
+        Spinner khs1 =  transfer_dialogue.findViewById(R.id.sp_end_khab);
+        final Spinner bls1 =  transfer_dialogue.findViewById(R.id.sp_end_block);
+        final Spinner rs1 =  transfer_dialogue.findViewById(R.id.sp_end_room);
+
+
+        dialog.findViewById(R.id.btn_send).setVisibility(View.GONE); // CaNT SEND WITH NO DATE
+
+
+        dialog.show();
+
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+//                Toast.makeText(activity, "لغو شد", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        ArrayAdapter<Khabgah> spinnerArrayAdapter = new ArrayAdapter<Khabgah>(activity,   android.R.layout.simple_spinner_item, khabgahs);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+        khs1.setAdapter(spinnerArrayAdapter);
+
+        khs1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 0){
+                    // TODO: 6/1/2018 Check some out of bound Things
+                    bls1.setEnabled(true);
+                    ArrayAdapter<Block> spinnerArrayAdapter = new ArrayAdapter<Block>(activity ,   android.R.layout.simple_spinner_item, khabgahs.get(i).blocks);
+                    spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+                    bls1.setAdapter(spinnerArrayAdapter);
+
+                }else {
+                    bls1.setEnabled(false);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                bls1.setEnabled(false);
+                rs1.setEnabled(false);
+
+            }
+
+        });
+
+
+        bls1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 0){
+                    rs1.setEnabled(true);
+
+                    ArrayAdapter<Room> spinnerArrayAdapter = new ArrayAdapter<Room>(activity ,   android.R.layout.simple_spinner_item, blocks.get(i).rooms);
+                    spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+                    rs1.setAdapter(spinnerArrayAdapter);
+
+                }else {
+                    rs1.setEnabled(false);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                rs1.setEnabled(false);
+            }
+
+        });
+
+
+    }
+    public static void Send_Transfer (final AppCompatActivity activity , final List<Khabgah> khabgahs ,
+                                      final List<Block> blocks, final List<Room> rooms , final Properties properties
+                                        , final int y , final int m , final int d , String date_str){
+
+
+        first_time = true;
+        int index1 = 0,index2 = 0,index3 = 0;
+        final Dialog dialog;
+        if (transfer_dialogue == null){
+            dialog = new Dialog(activity);
+            transfer_dialogue = dialog;
+        }else {
+
+            Spinner khs1 =  transfer_dialogue.findViewById(R.id.sp_end_khab);
+            Spinner bls1 =  transfer_dialogue.findViewById(R.id.sp_end_block);
+            Spinner rs1 =  transfer_dialogue.findViewById(R.id.sp_end_room);
+
+            index1 = khs1.getSelectedItemPosition();
+            index2 = bls1.getSelectedItemPosition();
+            index3 = rs1.getSelectedItemPosition();
+
+            Log.d("content2 :" , content2);
+            transfer_dialogue.dismiss();
+            transfer_dialogue = null;
+            dialog = new Dialog(activity);
+            transfer_dialogue = dialog;
+        }
+
+        // custom dialog
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialogue_new_transfer);
+
+        final TextInputEditText count =  dialog.findViewById(R.id.te_request_count);
+        final TextInputLayout count_pa =  dialog.findViewById(R.id.ti_request_count);
+        TextView chosen_dare =  dialog.findViewById(R.id.tv_choosen_date);
+        Objects.requireNonNull(chosen_dare).setText(date_str);
+
+        final Spinner khs =  dialog.findViewById(R.id.sp_end_khab);
+        final Spinner bls =  dialog.findViewById(R.id.sp_end_block);
+        final Spinner rs =  dialog.findViewById(R.id.sp_end_room);
+
+
+        ArrayAdapter<Khabgah> spinnerArrayAdapter = new ArrayAdapter<Khabgah>(activity,   android.R.layout.simple_spinner_item, khabgahs);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+        khs.setAdapter(spinnerArrayAdapter);
+
+        if (khabgahs.size() > 0){
+            khs.setSelection(index1%khabgahs.size());
+        }
+
+
+
+        final int finalIndex = index2;
+        khs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 0){
+                    // TODO: 6/1/2018 Check some out of bound Things
+                    bls.setEnabled(true);
+                    ArrayAdapter<Block> spinnerArrayAdapter = new ArrayAdapter<Block>(activity ,   android.R.layout.simple_spinner_item, khabgahs.get(i).blocks);
+                    spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+                    bls.setAdapter(spinnerArrayAdapter);
+
+                    if (first_time){
+                        if (blocks.size() > 0){
+                            bls.setSelection(finalIndex %blocks.size());
+                        }
+                    }
+
+                }else {
+                    bls.setEnabled(false);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                bls.setEnabled(false);
+                rs.setEnabled(false);
+            }
+
+        });
+
+
+        final int finalIndex1 = index3;
+        bls.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 0){
+                    rs.setEnabled(true);
+
+                    ArrayAdapter<Room> spinnerArrayAdapter = new ArrayAdapter<Room>(activity ,   android.R.layout.simple_spinner_item, blocks.get(i).rooms);
+                    spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+                    rs.setAdapter(spinnerArrayAdapter);
+
+                    if (first_time){
+                        if (rooms.size() > 0){
+                            rs.setSelection(finalIndex1 %rooms.size());
+                        }
+                        first_time = false;
+                    }
+
+                }else {
+                    rs.setEnabled(false);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                rs.setEnabled(false);
+            }
+
+        });
+
+        dialog.findViewById(R.id.btn_send).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    Transfer.send_self_transfer(activity ,true , properties.kh_id , properties.blook_id, properties.room_id,
+                            ((Khabgah)khs.getSelectedItem()).Id ,((Block)bls.getSelectedItem()).Id,
+                            ((Room)rs.getSelectedItem()).Id , JalaliCalendar.jalali_to_miladi(y ,m,d) );
+                }catch (Exception e){
+                    Toast.makeText(activity, "خطا", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    Log.d("Exception : " ,e.getMessage());
+                }
+
+
+                dialog.dismiss();
+
+            }
+        });
 
 
         dialog.show();

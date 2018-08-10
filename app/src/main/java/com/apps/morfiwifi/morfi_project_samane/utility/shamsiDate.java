@@ -1,6 +1,8 @@
 package com.apps.morfiwifi.morfi_project_samane.utility;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by m.hosein on 11/9/2017.
@@ -85,6 +87,13 @@ public class shamsiDate {
         }
 
         return String.valueOf(sy) + '/' + String.valueOf(sm) + '/' + String.valueOf(sd);
+    }
+
+    public static String persian_date (Date date){
+        shamsiDate shamsiDate = new shamsiDate();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return shamsiDate.shamsiDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) +1 , calendar.get(Calendar.DAY_OF_MONTH));
     }
 }
 

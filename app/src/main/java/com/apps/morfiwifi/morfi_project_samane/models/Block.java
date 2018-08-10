@@ -2,6 +2,7 @@ package com.apps.morfiwifi.morfi_project_samane.models;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.apps.morfiwifi.morfi_project_samane.ui.student.BroadcastActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class Block {
 
-    public static final int CODE = 2;
+    public static final int CODE = 1;
 
     private final static String class_name = "blook";
     private final static String obj_name = "name";
@@ -31,6 +32,7 @@ public class Block {
     private final static String obj_kh_id = "khabgah_id";
 
     private static String[] all_params = {obj_name ,obj_code ,obj_id ,obj_createAt ,obj_kh_id };
+    private static int limit = 100;
 
     public String Id = Init.Empty;
 
@@ -158,6 +160,46 @@ public class Block {
             }
         }
 
+    }
+
+    public static List<Block> load_blooks_fog (boolean force){ // laod all of them FORCED FORGE GROUND BLOCK >>>>
+        if (isloaded && !force){
+            return blocks;
+        }
+
+        isloaded = false; // GETTING NEWER VERSION! NOT READY YET
+        List <Block> khabgahArrayList = new ArrayList<>();
+        ParseQuery query = new ParseQuery(class_name);
+        query.setLimit(limit);
+
+        try {
+            temp = query.find();
+            convert_parse();
+            khabgahArrayList = blocks;
+            isloaded = true;
+        } catch (ParseException e) {
+            Log.e("EXCEPTiON ON RECIVE :", e.getMessage());
+        }
+        return khabgahArrayList;
+    }
+
+    public static Block get(String id) {
+        // t is id
+        // if is loaded find where eq else query force foreground
+        if (blocks == null){
+            load_blooks_fog(false);
+
+        }
+        Block khabgah1 = new Block();
+        if (blocks != null){
+            for (Block khabgah :blocks) {
+                if (khabgah.Id.equals(id)){
+                    khabgah1 = khabgah;
+                    break;
+                }
+            }
+        }
+        return khabgah1;
     }
 
     public static boolean isloaded_all(){

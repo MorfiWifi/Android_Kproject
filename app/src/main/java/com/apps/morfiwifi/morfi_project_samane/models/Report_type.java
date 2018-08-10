@@ -28,7 +28,7 @@ public class Report_type {
     public Date createAt = Calendar.getInstance().getTime();
 
 
-    public static final int CODE = 8;
+    public static final int CODE = 14;
 
     private static String class_name = "gozareshtype";
     private final static String obj_name = "name";

@@ -15,11 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.crypto.Cipher;
-
-//@Entity
-public class Request {
-
+public class Cancellation {
     public enum  State{
         open , working_on  , finished  ;
 
@@ -44,43 +40,36 @@ public class Request {
     }
 
     public String Id = Init.Empty;
-    public int count = 0;
     public String sender_id  = Init.Empty;
-    public String thing_id  = Init.Empty;
+    public String reason  = Init.Empty;
+    public Date canvle_date  = Calendar.getInstance().getTime();
     public int state_int = 0;
-    public Thing thing = new Thing();
-    public boolean iscountable = false;
     public Date createAt = Calendar.getInstance().getTime();
     public State state = State.fromInteger(0);
 
-    public static final int CODE = 15;
-    public static final int CODE_ALL = 16;
-    public static final int CODE_SEND = 17;
+    public static final int CODE = 2;
+    public static final int CODE_ALL = 3;
+    public static final int CODE_SEND = 4;
 
-    private static String class_name = "request";
+    private static String class_name = "cancellation";
     private final static String obj_state = "state";
-    private final static String obj_count = "count";
     private final static String obj_id = "id";
     private final static String obj_createAt = "crateAt";
     private final static String obj_sender_id = "sender_id";
-    private final static String obj_thing_id = "thing_id";
-    private final static String obj_iscountable = "iscounti";
+    private final static String obj_reason = "reason";
+    private final static String obj_cancle_date = "cancle_date";
 
     private static boolean isloaded = false;
     private static List<ParseObject> temp;
-    private static  List<Request> requests;
+    private static  List<Cancellation> cancellations;
     private static int limit = 100;
-    private static String[] all_params = {obj_state ,obj_count ,obj_id ,obj_createAt ,obj_sender_id , obj_thing_id , obj_iscountable };
+    private static String[] all_params = {obj_state ,obj_reason ,obj_id ,obj_createAt ,obj_sender_id , obj_cancle_date  };
 
-    public static void load_self_requests (final AppCompatActivity activity , final boolean draw_loading , boolean force_new){ // laod all of them ...
+    public static void load_self_canclelations (final AppCompatActivity activity , final boolean draw_loading , boolean force_new){ // laod all of them ...
         if (force_new || !isloaded){ // don't have cache or forced
             if (draw_loading)
                 Init.start_loading(activity);
 
-            // WARN CODE >>>>>>>>>>>>>>>>>>>
-            if (!Thing.isIsloaded())
-                Thing.load_things(null , false , false);
-            // WARN CODE >>>>>>>>>>>>>>>>>>>
 
             isloaded = false; // GETTING NEWER VERSION! NOT READY YET
             ParseQuery query = new ParseQuery(class_name);
@@ -91,17 +80,13 @@ public class Request {
                 public void done(List<ParseObject> objects, ParseException e) {
                     Result result;
                     if (e == null){
-                        if (!Thing.isIsloaded()) {
-                            Thing.load_things_fog(false);
-                        }
-
 
                         temp = objects;
                         if (objects.size() <= 0)
                             temp = new ArrayList<ParseObject>();
                         convert_parse();
 
-                        result = new Result( requests , CODE , true);
+                        result = new Result(cancellations, CODE , true);
                         Init.result_of_query(activity , result);
                         isloaded = true;
 
@@ -121,12 +106,12 @@ public class Request {
         }else {
             if (draw_loading)
                 Init.stop_loading(activity);
-            Result result = new Result(requests , CODE , true);
+            Result result = new Result(cancellations, CODE , true);
             Init.result_of_query(activity , result);
         }
     }
 
-    public static void load_requests (final AppCompatActivity activity , final boolean draw_loading ){ // laod all of them ...
+    public static void load_cancelations (final AppCompatActivity activity , final boolean draw_loading ){ // laod all of them ...
         // NO cache advised
         if (draw_loading)
             Init.start_loading(activity);
@@ -138,15 +123,13 @@ public class Request {
             public void done(List<ParseObject> objects, ParseException e) {
                 Result result;
                 if (e == null){
-                    if (!Thing.isIsloaded()) {
-                        Thing.load_things_fog(false);
-                    }
+
                     temp = objects;
                     if (objects.size() <= 0)
                         temp = new ArrayList<ParseObject>();
                     convert_parse();
 
-                    result = new Result( requests , CODE_ALL , true);
+                    result = new Result(cancellations, CODE_ALL , true);
                     Init.result_of_query(activity , result);
                     isloaded = true;
 
@@ -164,7 +147,7 @@ public class Request {
 
     }
 
-    public static void send_self_report(final AppCompatActivity activity , final boolean draw_loading , int count , String thing_id ){
+    public static void send_self_cancelation(final AppCompatActivity activity , final boolean draw_loading , String reason , Date date ){
         if (draw_loading)
             Init.start_loading(activity);
         ParseObject report = new ParseObject(class_name);
@@ -173,9 +156,9 @@ public class Request {
             sender_id  = User.current_user.id;
 
         report.put(obj_sender_id , sender_id);
-        report.put(obj_count , count);
+        report.put(obj_cancle_date , date);
         report.put(obj_state , 0);
-        report.put(obj_thing_id , thing_id);
+        report.put(obj_reason , reason);
 
 
         report.saveInBackground(new SaveCallback() {
@@ -200,33 +183,33 @@ public class Request {
     }
 
 
-    public static List<Request> load_requests_fog (boolean force){ // laod all of them FORCED FORGE GROUND BLOCK >>>>
+    public static List<Cancellation> load_cancelations_fog (boolean force){ // laod all of them FORCED FORGE GROUND BLOCK >>>>
         if (isloaded && !force){
-            return requests;
+            return cancellations;
         }
 
         isloaded = false; // GETTING NEWER VERSION! NOT READY YET
-        List <Request> requests_in = new ArrayList<>();
+        List <Cancellation> cancellationList = new ArrayList<>();
         ParseQuery query = new ParseQuery(class_name);
         query.setLimit(limit);
 
         try {
             temp = query.find();
             convert_parse();
-            requests_in = requests;
+            cancellationList = cancellations;
             isloaded = true;
         } catch (ParseException e) {
             Log.e("EXCEPTiON ON RECIVE :", e.getMessage());
         }
-        return requests_in;
+        return cancellationList;
     }
     private static void convert_parse(){
-        requests = new ArrayList<>();
+        cancellations = new ArrayList<>();
         if (temp != null){
             for (ParseObject parseObject : temp) {
-                Request request = new Request();
-                request.null_self_fixer(parseObject);
-                requests.add(request);
+                Cancellation cancellation = new Cancellation();
+                cancellation.null_self_fixer(parseObject);
+                cancellations.add(cancellation);
             }
         }
     }
@@ -265,21 +248,20 @@ public class Request {
                     }
                     sender_id = t;
                     break;
-                case obj_thing_id:
+                case obj_reason :
                     t = Init.Empty;
-                    object = parseObject.get(obj_thing_id);
+                    object = parseObject.get(obj_reason);
                     if (object != null){
                         t = object.toString();
                     }
-                    thing_id = t;
-                    thing = Thing.get(thing_id);
+                    reason = t;
                     break;
-                case obj_count:
-                    count = parseObject.getInt(obj_count);
-                    break;
-                case obj_iscountable:
-                    if (thing != null)
-                        iscountable = thing.iscountable;
+                    case obj_cancle_date :
+                        object =  parseObject.getDate(obj_cancle_date);
+                        if (object != null){
+                            canvle_date = parseObject.getDate(obj_cancle_date);
+                        }
+                        break;
                 default:
                     break;
 
@@ -289,28 +271,26 @@ public class Request {
 
     }
     public static void Clear(){
-        requests = null;
+        cancellations = null;
         temp   = null;
         isloaded = false;
     }
-    public static Request get(String id) {
+    public static Cancellation get(String id) {
         // t is id
         // if is loaded find where eq else query force foreground
-        if (requests == null){
-            load_requests_fog(false);
+        if (cancellations == null){
+            load_cancelations_fog(false);
         }
 
-        Request request1 = new Request();
-        if (requests != null){
-            for (Request request :requests) {
-                if (request.Id.equals(id)){
-                    request1 = request;
+        Cancellation cancellation1 = new Cancellation();
+        if (cancellations != null){
+            for (Cancellation cancellation : cancellations) {
+                if (cancellation.Id.equals(id)){
+                    cancellation1 = cancellation;
                     break;
                 }
             }
         }
-        return request1;
+        return cancellation1;
     }
-
-
 }

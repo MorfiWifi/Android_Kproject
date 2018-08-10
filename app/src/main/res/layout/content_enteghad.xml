@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.student.EnteghadActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
@@ -19,70 +21,51 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
-    <RelativeLayout
-        android:layout_below="@id/toolbar_pa"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.student.EnteghadActivity">
+        android:layout_below="@id/toolbar_pa"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@drawable/buttom_big_white"
+        android:gravity="center"
+        android:orientation="vertical">
 
-
-        <android.support.design.widget.TextInputLayout
-            android:paddingTop="15dp"
-            android:background="@drawable/buttom_big_white"
-            android:id="@+id/ti_enteghad_header"
-            android:layout_marginTop="15dp"
-            android:layout_centerHorizontal="true"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            >
-            <android.support.design.widget.TextInputEditText
-                android:gravity="center"
-                android:background="@null"
-                android:maxLines="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="عنوان" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:paddingTop="15dp"
-            android:background="@drawable/buttom_big_white"
-            android:id="@+id/ti_enteghad_sharh"
-            android:layout_alignTop="@id/ti_enteghad_header"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+        <TextView
+            android:id="@+id/tv_signup_empty"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity=""
-            android:padding="5dp"
-            >
-
-            <android.support.design.widget.TextInputEditText
-                android:gravity="center"
-                android:background="@null"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="شرح" />
-        </android.support.design.widget.TextInputLayout>
-
-        <Button
-            android:onClick="send_enteghad"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="5dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="خالی !"
+            android:textColor="@color/black"
             android:textSize="20sp"
-            android:textColor="@color/white"
-            android:text="ثبت"
-            android:background="@drawable/buttom_blue_stack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
+            android:visibility="visible" />
 
-</RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rec_general"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <include layout="@layout/bottom_general" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:onClick="new_feedback"
+        android:src="@drawable/ic_add"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        app:elevation="10dp"
+        app:layout_anchor="@+id/linearLayout"
+        app:layout_anchorGravity="right|bottom" />
+
+</android.support.design.widget.CoordinatorLayout>

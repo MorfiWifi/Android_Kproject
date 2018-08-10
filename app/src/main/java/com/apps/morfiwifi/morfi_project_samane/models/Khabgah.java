@@ -2,6 +2,7 @@ package com.apps.morfiwifi.morfi_project_samane.models;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.apps.morfiwifi.morfi_project_samane.ui.student.BroadcastActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class Khabgah {
 
-    public static final int CODE = 1;
+    public static final int CODE = 8;
 
     private final static String class_name = "khabgah";
     private final static String obj_name = "name";
@@ -34,8 +35,9 @@ public class Khabgah {
     private static boolean isloaded = false;
     private static List<ParseObject> temp;
     public static  List<Khabgah> khabgahs;
+    private static int limit = 100;
 
-//    @Transient
+    //    @Transient
     public String Id = Init.Empty;
 //    @Transient
     private Date createAt = Calendar.getInstance().getTime();
@@ -150,6 +152,47 @@ public class Khabgah {
 
     public static boolean isloaded_all(){
         return isloaded;
+    }
+
+
+    public static List<Khabgah> load_khabgahs_fog (boolean force){ // laod all of them FORCED FORGE GROUND BLOCK >>>>
+        if (isloaded && !force){
+            return khabgahs;
+        }
+
+        isloaded = false; // GETTING NEWER VERSION! NOT READY YET
+        List <Khabgah> khabgahArrayList = new ArrayList<>();
+        ParseQuery query = new ParseQuery(class_name);
+        query.setLimit(limit);
+
+        try {
+            temp = query.find();
+            convert_parse();
+            khabgahArrayList = khabgahs;
+            isloaded = true;
+        } catch (ParseException e) {
+            Log.e("EXCEPTiON ON RECIVE :", e.getMessage());
+        }
+        return khabgahArrayList;
+    }
+
+    public static Khabgah get(String id) {
+        // t is id
+        // if is loaded find where eq else query force foreground
+        if (khabgahs == null){
+            load_khabgahs_fog(false);
+
+        }
+        Khabgah khabgah1 = new Khabgah();
+        if (khabgahs != null){
+            for (Khabgah khabgah :khabgahs) {
+                if (khabgah.Id.equals(id)){
+                    khabgah1 = khabgah;
+                    break;
+                }
+            }
+        }
+        return khabgah1;
     }
 
     @Override

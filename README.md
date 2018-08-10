@@ -1,16 +1,17 @@
 ﻿# Android_Kproject
 
 - [x] online Log in 
-- [X] online repors send -std
+- [x] online repors send -std
 - [X] online report view -system worker
-- [ ] online DB Work
+- [x] online DB Work
 - [x] online Messaging
-- [ ] online Exchaingign
+- [x] online Exchaingign
 - [ ] online User based setting save
 - [ ] online notification
 - [ ] Offline settings
 - [x] Pre catch data for speed
-- [X] Using parse services
+- [x] Using parse services
+- [x] Student all parts Online
 
 
 دسته بندی کلاس ها 

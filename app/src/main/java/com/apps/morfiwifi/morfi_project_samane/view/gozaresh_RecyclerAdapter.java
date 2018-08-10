@@ -50,32 +50,6 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
 
 
 
-       /* List<User> users = Repository.GetInstant(activity).getUserDao().queryBuilder()
-                .where(UserDao.Properties.Id.eq(sample_report.name))
-                .list();*/
-
-        /*if (false){
-//            sener_user = users.get(0);
-        }else {
-            sener_user = new User();
-            sener_user.setFName( "Unknown");
-            sener_user.setLName( "Unknown");
-        }*/
-
-        /*final List<Report_type> report_types = Repository.GetInstant(activity).getReport_typeDao().queryBuilder()
-                .where(Report_typeDao.Properties.Id.eq(sample_report.type_id))
-                .list();*/
-
-        /*if (false){
-//            report_type = report_types.get(0);
-        }else {
-            report_type = new Report_type();
-            report_type.name = ( "Unknown");
-            report_type.cod = ( "Unknown");
-        }*/
-
-//        sample_report.report_type = report_type; // setting Directly!
-
         holder.sender_name.setText(sample_report.report_type.name);
         holder.sender_lname.setText(sample_report.state.toString());
 
@@ -85,12 +59,7 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
         calendar.setTime(sample_report.createAt);
         String dati = shamsiDate.shamsiDate(calendar.get(Calendar.YEAR) , calendar.get(Calendar.MONTH)+1 , calendar.get(Calendar.DATE));
 
-//        matn.setText(" موضوع : "+ sample_report.report_type.name);
-//        type.setText( "وضعیت : " + sample_report.state  );
-//        date.setText(dati);
         holder.gozaresh_type.setText(dati);
-
-
 
         holder.lin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,14 +69,6 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                         activity.findViewById(R.id.bottom_sheet_std_gozaresh_rec);
                 final BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-
-                /*if (sample_report.seen_date == null){
-                    // Juset First Update!
-                    sample_report.seen_date = Calendar.getInstance().getTime();
-                    Repository.GetInstant(activity).getReportDao().update(sample_report);
-                }*/
-
-//                report_typeList = Repository.GetInstant(activity).getReport_typeDao().loadAll();
 
                 Report.State[] vals = Report.State.values();
                 

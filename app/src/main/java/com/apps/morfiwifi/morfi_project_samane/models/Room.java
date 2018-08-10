@@ -2,6 +2,7 @@ package com.apps.morfiwifi.morfi_project_samane.models;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.apps.morfiwifi.morfi_project_samane.ui.student.BroadcastActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
@@ -19,7 +20,7 @@ import java.util.List;
 //@Entity
 public class Room {
 
-    public static final int CODE = 3;
+    public static final int CODE = 18;
 
     public static String class_name = "otagh";
     private final static String obj_name = "name";
@@ -34,6 +35,7 @@ public class Room {
 
 
     private static String[] all_params = {obj_name ,obj_code ,obj_id ,obj_createAt ,obj_blook_id };
+    private static int limit = 100;
 
 
     //    @Transient
@@ -157,5 +159,45 @@ public class Room {
     @Override
     public String toString() {
         return name;
+    }
+
+    public static List<Room> load_rooms_fog (boolean force){ // laod all of them FORCED FORGE GROUND BLOCK >>>>
+        if (isloaded && !force){
+            return rooms;
+        }
+
+        isloaded = false; // GETTING NEWER VERSION! NOT READY YET
+        List <Room> khabgahArrayList = new ArrayList<>();
+        ParseQuery query = new ParseQuery(class_name);
+        query.setLimit(limit);
+
+        try {
+            temp = query.find();
+            convert_parse();
+            khabgahArrayList = rooms;
+            isloaded = true;
+        } catch (ParseException e) {
+            Log.e("EXCEPTiON ON RECIVE :", e.getMessage());
+        }
+        return khabgahArrayList;
+    }
+
+    public static Room get(String id) {
+        // t is id
+        // if is loaded find where eq else query force foreground
+        if (rooms == null){
+            load_rooms_fog(false);
+
+        }
+        Room khabgah1 = new Room();
+        if (rooms != null){
+            for (Room khabgah :rooms) {
+                if (khabgah.Id.equals(id)){
+                    khabgah1 = khabgah;
+                    break;
+                }
+            }
+        }
+        return khabgah1;
     }
 }

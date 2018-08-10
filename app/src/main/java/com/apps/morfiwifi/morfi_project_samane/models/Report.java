@@ -48,9 +48,9 @@ public class Report {
 
     public Report_type report_type;
 
-    public static final int CODE = 4;
-    public static final int CODE_ALL = 5;
-    public static final int CODE_SEND = 23;
+    public static final int CODE = 11;
+    public static final int CODE_ALL = 12;
+    public static final int CODE_SEND = 13;
 
     private static String class_name = "report";
     private final static String obj_state = "state";

@@ -12,12 +12,19 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.Cancellation;
+import com.apps.morfiwifi.morfi_project_samane.models.Int_date;
+import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
+import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.apps.morfiwifi.morfi_project_samane.view.general_RecyclerAdapter;
 import com.apps.morfiwifi.morfi_project_samane.view.my_time_lisner;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
+
+import java.util.List;
 
 public class EnserafActivity extends DarkhastActivity implements
         TimePickerDialog.OnTimeSetListener,
@@ -46,6 +53,8 @@ public class EnserafActivity extends DarkhastActivity implements
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Cancellation.load_self_canclelations(this , true , false);
     }
 
     public void pick_date(View view) {
@@ -71,11 +80,9 @@ public class EnserafActivity extends DarkhastActivity implements
         String date = "You picked the following date: "+dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
         Init.Terminal(date);
         String s =  dayOfMonth+ " "+ monthrs[monthOfYear] +" "+ year ;
-        tv_hint.setText(s);
-        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/BNAZANIN.TTF");
-        tv_hint.setTypeface(type);
         is_date_selected = true;
-        //tv_hint.setTypeface();
+        Int_date intDate = new Int_date(year ,monthOfYear , dayOfMonth);//this is persian
+        Dialogue.Send_Give_up( this,year , monthOfYear , dayOfMonth , s  );
     }
 
     
@@ -97,5 +104,19 @@ public class EnserafActivity extends DarkhastActivity implements
 
 
 
+    }
+
+    public void new_canceling(View view) {
+        // TODO: 8/7/2018 show Dialogue ....
+        Dialogue.Send_Give_up(this);
+    }
+
+    public void refresh_view() {
+        Cancellation.load_self_canclelations(this , true , true);
+    }
+
+    public void load_cancelations(List<Cancellation> cancellations) {
+        general_RecyclerAdapter.Init(cancellations
+                , this , Init.Mod.cancelation , true ,true);
     }
 }

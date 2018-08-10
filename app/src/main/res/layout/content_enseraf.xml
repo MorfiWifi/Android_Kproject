@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.student.EnserafActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,82 +21,51 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+android:id="@+id/linearLayout"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_below="@id/toolbar_pa"
+android:layout_marginBottom="10dp"
+android:layout_marginLeft="10dp"
+android:layout_marginRight="10dp"
+android:layout_marginTop="?attr/actionBarSize"
+android:background="@drawable/buttom_big_white"
+android:gravity="center"
+android:orientation="vertical">
+
+<TextView
+    android:id="@+id/tv_signup_empty"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:text="خالی !"
+    android:textColor="@color/black"
+    android:textSize="20sp"
+    android:visibility="visible" />
+
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/rec_general"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
 
 
-    <RelativeLayout
-        android:layout_below="@id/toolbar_pa"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.student.EnserafActivity">
+</android.support.v7.widget.RecyclerView>
 
-        <Button
-            android:onClick="enseraf_taeed"
-            android:id="@+id/btn_enseraf_taiid"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/buttom_blue_stack"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:text="تایید"
-            />
+</LinearLayout>
 
-        <ImageView
-            android:background="@drawable/buttom_big_white"
-            android:id="@+id/img_time_pic"
-            android:layout_marginTop="10dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="ات"
-            android:onClick="pick_date"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/ic_date_range"
-            android:layout_alignRight="@id/tv_enseraf_date"
-            />
+<include layout="@layout/bottom_general" />
 
-        <TextView
+<android.support.design.widget.FloatingActionButton
+android:onClick="new_canceling"
+android:src="@drawable/ic_add"
+android:layout_width="50dp"
+android:layout_height="50dp"
+android:layout_marginRight="15dp"
+android:layout_marginBottom="15dp"
+app:elevation="10dp"
+app:layout_anchor="@+id/linearLayout"
+app:layout_anchorGravity="right|bottom" />
 
-            android:textColorHint="@color/black"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:id="@+id/tv_enseraf_date"
-            android:layout_centerHorizontal="true"
-            android:textSize="20sp"
-            android:hint="تاریخ انتخواب شده"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:paddingTop="15dp"
-            android:background="@drawable/buttom_big_white"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/img_time_pic"
-            android:id="@+id/txin_enseraf_reason"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:gravity="center|top"
-                android:background="@null"
-
-                android:hint="دلیل انصراف" />
-        </android.support.design.widget.TextInputLayout>
-
-
-    </RelativeLayout>
-
-
-
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
