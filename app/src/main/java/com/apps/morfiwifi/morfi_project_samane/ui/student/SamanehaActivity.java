@@ -25,11 +25,20 @@ public class SamanehaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_samaneha);
 
-        List<Samane> samanes = new ArrayList<>();
-        DaoSession session = Repository.GetInstant(this);
-        samanes = session.getSamaneDao().loadAll();
+//        List<Samane> samanes = new ArrayList<>();
+//        DaoSession session = Repository.GetInstant(this);
+//        samanes = session.getSamaneDao().loadAll();
 
-        samane_RecyclerAdapter.Init(samanes , this);
+        Samane samane = new Samane();
+        samane.Code = Samane.khab;
+        samane.Name = "خوابگاه";
+        samane.prop = "NON";
+
+        ArrayList<Samane> list = new ArrayList<>();
+        list.add(samane);
+
+        samane_RecyclerAdapter.Init(list , this);
+
         Properties.load_self_properties(null , false , true);
         Khabgah.load_Khabgahs(null , false , true);
         Room.load_rooms(null , false ,true);

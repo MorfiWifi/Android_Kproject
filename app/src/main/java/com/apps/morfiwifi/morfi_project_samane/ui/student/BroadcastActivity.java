@@ -43,6 +43,12 @@ public class BroadcastActivity extends DarkhastActivity {
 
     }
 
+    @Override
+    public void refresh_view() {
+//        super.refresh_view();
+        Broudcast.getBroudcastList(this , true , true  );
+    }
+
     public void loadlist (){
         Broudcast broudcast = new Broudcast();
         broudcast_RecyclerAdapter.Init(broudcast.getBroudcastList(getApplicationContext()) , this);

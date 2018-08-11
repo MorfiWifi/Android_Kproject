@@ -19,6 +19,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Request;
 import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
+import com.apps.morfiwifi.morfi_project_samane.ui.technical.TechnicalActivity;
 import com.apps.morfiwifi.morfi_project_samane.view.request_RecyclerAdapter;
 
 import java.util.ArrayList;
@@ -69,8 +70,18 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Dialogue dialog = new Dialogue();
-            dialog.Exit_app(this).show();
+
+            if (! this.getClass().getName().equals(StudentMainActivity.class.getName())){
+                Intent intent = new Intent(this , StudentMainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }else {
+                Dialogue dialog = new Dialogue();
+                dialog.Exit_app(this).show();
+//                super.onBackPressed();
+            }
+
+
             //super.onBackPressed(); // YET ON REAL EXITING
         }
     }
@@ -92,6 +103,11 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.action_refresh){
+            if (this instanceof DarkhastActivity){
+                this.refresh_view();
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -116,6 +132,8 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
                 }
                 break;
             case R.id.nav_exit :
+                Dialogue dialogue = new Dialogue();
+                dialogue.Log_out_account(this).show();
                 break;
             case R.id.nav_enteghad :
                 if (!(this instanceof EnteghadActivity)){

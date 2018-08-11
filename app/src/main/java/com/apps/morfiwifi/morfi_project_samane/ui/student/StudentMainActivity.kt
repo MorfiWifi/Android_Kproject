@@ -1,5 +1,7 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.student
 
+import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -9,11 +11,15 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.apps.morfiwifi.morfi_project_samane.R
 import com.apps.morfiwifi.morfi_project_samane.models.Setting
 import com.apps.morfiwifi.morfi_project_samane.models.User
+import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue
+import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ProfileActivity
 import kotlinx.android.synthetic.main.activity_student_main.*
 import kotlinx.android.synthetic.main.app_bar_student_main.*
+import kotlinx.android.synthetic.main.content_student_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 
 class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -38,13 +44,71 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 //        nav_view.tv_navbar_rolename.text = User.current_user.Role
         title = "دانشجو"
         //fixme THis Could be std Profile instead of Main
+
+        rel_prof.setOnClickListener {
+            val intent = Intent(this , StudentProfileActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent )
+        }
+
+        rel_request.setOnClickListener {
+            val intent = Intent(this , DarkhastActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent )
+        }
+
+        rel_inbox.setOnClickListener {
+            val intent = Intent(this , BroadcastActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent )
+        }
+
+        rel_cancelation.setOnClickListener {
+            val intent = Intent(this , EnserafActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent )
+        }
+
+        rel_transfer.setOnClickListener {
+            val intent = Intent(this , JabejaiActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent )
+        }
+
+        rel_report.setOnClickListener {
+            val intent = Intent(this , ReportActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent )
+        }
+
+        rel_feedback.setOnClickListener {
+            val intent = Intent(this , EnteghadActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent )
+        }
+
+        rel_logout.setOnClickListener {
+            val dialogue = Dialogue()
+            dialogue.Log_out_account(this).show()
+        }
+
     }
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+
+            if (this.javaClass.name != StudentMainActivity::class.java.name) {
+                val intent = Intent(this, StudentMainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+            } else {
+                val dialog = Dialogue()
+                dialog.Exit_app(this).show()
+                //                super.onBackPressed();
+            }
+//            super.onBackPressed()
         }
     }
 
@@ -74,8 +138,10 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 startActivity(intent )
             }
             R.id.nav_exit -> {
-                onBackPressed() // YET JUST BACK PRESSED
-            }
+//                onBackPressed() // YET JUST BACK PRESSED
+                val dialogue = Dialogue()
+                dialogue.Log_out_account(this).show()
+                }
             R.id.nav_enteghad -> {
                 val intent = Intent(this , EnteghadActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP

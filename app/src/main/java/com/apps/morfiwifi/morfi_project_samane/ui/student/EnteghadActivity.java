@@ -47,6 +47,7 @@ public class EnteghadActivity extends DarkhastActivity {
         Dialogue.Send_Feedback(this);
     }
 
+    @Override
     public void refresh_view() {
         Feedback.load_self_feedbacks(this , true , true);
     }

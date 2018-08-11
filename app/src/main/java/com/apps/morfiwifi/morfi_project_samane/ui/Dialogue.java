@@ -40,6 +40,7 @@ import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.JalaliCalendar;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -74,11 +75,6 @@ public class Dialogue {
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("EXIT" , true);
                         activity.startActivity(intent);
-
-                        /*Intent intent = new Intent(Intent.ACTION_MAIN);
-                        intent.addCategory(Intent.CATEGORY_HOME);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );//***Change Here***
-                        activity.startActivity(intent);*/
                         dialog.cancel();
 
 
@@ -110,13 +106,10 @@ public class Dialogue {
 
                         Intent intent = new Intent(activity , LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtra("EXIT" , true);
                         activity.startActivity(intent);
+                        Init.start_fresh();
 
-                        /*Intent intent = new Intent(Intent.ACTION_MAIN);
-                        intent.addCategory(Intent.CATEGORY_HOME);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );//***Change Here***
-                        activity.startActivity(intent);*/
+
                         dialog.cancel();
 
 
@@ -458,6 +451,11 @@ public class Dialogue {
                     return;
                 }
 
+                if (JalaliCalendar.jalali_to_miladi(y ,m,d).before( Calendar.getInstance().getTime()) ){
+                    Toast.makeText(activity, "تاریخ نا معتبر است", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Date date_of_go = JalaliCalendar.jalali_to_miladi(y , m , d);
                 Cancellation.send_self_cancelation(activity ,true ,reason.getEditText().getText().toString() , date_of_go);
                 dialog.dismiss();
@@ -695,6 +693,20 @@ public class Dialogue {
             @Override
             public void onClick(View v) {
                 try{
+
+                    if (properties.kh_id.equals(((Khabgah)khs.getSelectedItem()).Id) &&
+                            properties.blook_id.equals(((Block)bls.getSelectedItem()).Id) &&
+                            properties.room_id.equals(((Room)rs.getSelectedItem()).Id)){
+                        Toast.makeText(activity, "محل جدید غیر قابل قبول", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (JalaliCalendar.jalali_to_miladi(y ,m,d).before( Calendar.getInstance().getTime()) ){
+                        Toast.makeText(activity, "تاریخ نا معتبر است", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+
                     Transfer.send_self_transfer(activity ,true , properties.kh_id , properties.blook_id, properties.room_id,
                             ((Khabgah)khs.getSelectedItem()).Id ,((Block)bls.getSelectedItem()).Id,
                             ((Room)rs.getSelectedItem()).Id , JalaliCalendar.jalali_to_miladi(y ,m,d) );

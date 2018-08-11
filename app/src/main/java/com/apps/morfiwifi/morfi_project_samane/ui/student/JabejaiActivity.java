@@ -238,6 +238,7 @@ public class JabejaiActivity extends DarkhastActivity implements
         Dialogue.Send_Transfer(this , khabgahs , blocks , rooms , properties);
     }
 
+    @Override
     public void refresh_view() {
         Transfer.load_self_transfers(this , true , true);
     }

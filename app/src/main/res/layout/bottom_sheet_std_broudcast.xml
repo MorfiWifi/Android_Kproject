@@ -29,6 +29,8 @@
             android:textColor="@android:color/black" >
 
             <ImageView
+                android:layout_margin="10dp"
+                android:id="@+id/im_icon_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ic_account_temp"
@@ -43,6 +45,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"

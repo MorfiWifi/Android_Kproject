@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
 
         <android.support.design.widget.TextInputLayout
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
             android:paddingTop="15dp"
             android:background="@drawable/background_white_mid_thick"
             android:id="@+id/ti_enteghad_header"
@@ -39,7 +41,7 @@
             android:layout_marginTop="97dp"
             android:background="@drawable/background_white_mid_thick"
             android:gravity=""
-            android:padding="5dp"
+            android:padding="10dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:paddingTop="15dp">
@@ -55,11 +57,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/ti_enteghad_sharh"
             android:id="@+id/btn_send"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginBottom="5dp"
-            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
             android:layout_centerHorizontal="true"
             android:textSize="20sp"
             android:textColor="@color/white"

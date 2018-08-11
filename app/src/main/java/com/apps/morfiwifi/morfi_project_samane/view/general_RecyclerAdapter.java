@@ -72,6 +72,7 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                 Cancellation cancellation = (Cancellation) sample;
                 holder.first.setText(" موضوع : "+ "انصراف"+ " وضعیت : " + cancellation.state  );
                 str_1 = cancellation.sender_id;
+                date = cancellation.createAt;
 
                 // CUURNT 1111111111111111111111111111111111111111111111 ^
             }break;
@@ -80,6 +81,8 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                 Feedback feedback = (Feedback) sample;
                 holder.first.setText(" موضوع : "+ "پیشنهاد"+ " وضعیت : " + feedback.state  );
                 str_1 = feedback.sender_id;
+                date = feedback.createAt;
+
                 // Cuurent 22222222222222222222222222222222222222222222 ^
             }break;
             case transfer: {
@@ -87,6 +90,8 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                 Transfer transfer = (Transfer) sample;
                 holder.first.setText(" موضوع : "+ "جابجابی"+ " وضعیت : " + transfer.state  );
                 str_1 = transfer.sender_id;
+                date = transfer.createAt;
+
                 // Cuurent 3333333333333333333333333333333333333333333 ^
             }break;
         }
@@ -151,7 +156,7 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                                     "اطاق : " + transfer.current_room.name + "\n"+
                                     "به خوابگاه : " + transfer.new_kh + "\n"+
                                     "بلوک : " + transfer.new_bl + "\n" +
-                                    "اطاق : " + transfer.new_room_id +"\n"+
+                                    "اطاق : " + transfer.new_room +"\n"+
                                     "در تاریخ : " + shamsiDate.persian_date(transfer.transfer_date)+"\n"+
                             "انجام خواهد شد";
                             str_4 = transfer.sender_id;

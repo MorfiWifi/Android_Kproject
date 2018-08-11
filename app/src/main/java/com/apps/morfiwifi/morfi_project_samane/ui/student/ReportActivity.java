@@ -74,6 +74,12 @@ public class ReportActivity extends DarkhastActivity {
         gozaresh_RecyclerAdapter.Init(reports , types,this);
     }
 
+    @Override
+    public void refresh_view() {
+        report_sent();
+//        super.refresh_view();
+    }
+
     public void report_sent (){
         Report.load_self_reports(this , true , true);
     }

@@ -34,33 +34,7 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-
-
-/*
-        tv_go_signup.setOnClickListener({
-            val intent = Intent(this, SiteMasterActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-        })*/
-
-
-       /* //Remove title bar
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        //Remove notification bar
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-*/
         setContentView(R.layout.activity_login)
-        /*val noteDao: NoteDao;
-        val daoSession = DaoMaster.newDevSession(applicationContext, "DB_DB")
-        noteDao = daoSession.noteDao
-        val note = com.apps.morfiwifi.morfi_project_samane.models.Note()
-        note.id = 1L
-        note.text = "Max"
-        noteDao.insert(note)*/
-
-//        Init.Insert_init_Users(this)
         Init.Login_Signup(this)
 
     }
@@ -74,21 +48,25 @@ class LoginActivity : AppCompatActivity() {
                 user.Role.equals(User.Kind.Student.toString()) -> {
                     role.load_roles(this , false);
                     val intent = Intent(this, SamanehaActivity::class.java)
+                    cleanup()
                     startActivity(intent)
                 }
                 user.Role.equals(User.Kind.Admin.toString()) -> {
                     role.load_roles(this , false);
                     val intent = Intent(this, AdminMainActivity::class.java)
+                    cleanup()
                     startActivity(intent)
                 }
                 user.Role.equals(User.Kind.Site_Master.toString()) -> {
                     role.load_roles(this , false);
                     val intent = Intent(this, SiteMasterActivity::class.java)
+                    cleanup()
                     startActivity(intent)
                 }
                 user.Role.equals(User.Kind.Technical.toString()) -> {
                     role.load_roles(this , false);
                     val intent = Intent(this, TechnicalActivity::class.java)
+                    cleanup()
                     startActivity(intent)
                 }
                 else -> Init.Toas(this , "خطا در ورودی")
@@ -97,6 +75,11 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+    }
+
+    fun cleanup (){
+        txin_user_name.text.clear()
+        txin_pass.text.clear()
     }
 
     fun login (view : View){

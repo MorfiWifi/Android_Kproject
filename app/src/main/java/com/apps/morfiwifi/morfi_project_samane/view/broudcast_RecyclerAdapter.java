@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -42,6 +43,8 @@ public class broudcast_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder_
     @Override
     public void onBindViewHolder(@NonNull ViewHolder_broudcast_std holder, int position) {
         final Broudcast sample_user = broudcastList.get(position);
+        LinearLayout bottom_sheet = (LinearLayout)
+                activity.findViewById(R.id.bottom_sheet_std_broudcast);
         holder.t1.setText(sample_user.header); // YET DIDNT INPUT ANY STUDENT ID !
         holder.t2.setText("NON");
         //sample_user.created_date.toString()
@@ -49,6 +52,7 @@ public class broudcast_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder_
 
         if (sample_user.sender_id.equals(User.current_user.id)){
             holder.image.setBackground(activity.getDrawable(R.drawable.ic_sent));
+
 
         }else {
             holder.image.setBackground(activity.getDrawable(R.drawable.ic_received));
@@ -69,6 +73,15 @@ public class broudcast_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder_
                 TextView matn = bottom_sheet.findViewById(R.id.tv_message_matn);
 //                TextView username = bottom_sheet.findViewById(R.id.tv_std_queue_username);
                 TextView date = bottom_sheet.findViewById(R.id.tv_message_date);
+                ImageView image = bottom_sheet.findViewById(R.id.im_icon_image);
+
+                if (sample_user.sender_id.equals(User.current_user.id)){
+                    image.setBackground(activity.getDrawable(R.drawable.ic_sent));
+
+
+                }else {
+                   image.setBackground(activity.getDrawable(R.drawable.ic_received));
+                }
 
                 name.setText("NON YET");
                 //sample_user.role_name

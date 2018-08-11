@@ -494,31 +494,7 @@ public class User   {
                             }
 
 
-                        }// section for recived role
-
-                        /*query.getInBackground(role_id, new GetCallback<ParseObject>() {
-                            @Override
-                            public void done(ParseObject object, ParseException e) {
-                                if (e == null){
-                                    String Role_name  = object.get("name").toString();
-                                    current_user.Role = Role_name;
-//                                    Toast.makeText(activity, Role_name, Toast.LENGTH_SHORT).show();
-                                    if(activity instanceof LoginActivity){
-                                        ((LoginActivity) activity).login_server(current_user);
-                                    }
-
-                                }else {
-                                    Toast.makeText(activity, "EX " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });*/
-
-
-                        //Role_obj = query.get(role_id ).fetch();
-
-                        //String role_name = Role_obj.get("name").toString();
-                        //current_user.Role = role_name;
-
+                        }
 
                     } catch (Exception e1) {
                         Init.Terminal(e1.getMessage());
@@ -530,9 +506,9 @@ public class User   {
 
 
                     if (current_user.Role != null){
-                        Toast.makeText(activity, "OK YOU ARE IN !", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(activity, "OK YOU ARE IN !", Toast.LENGTH_SHORT).show();
                     }else {
-                        Init.Terminal(current_user.Role + " Role KEY !");
+//                        Init.Terminal(current_user.Role + " Role KEY !");
                     }
 
 

@@ -111,6 +111,8 @@ public class EnserafActivity extends DarkhastActivity implements
         Dialogue.Send_Give_up(this);
     }
 
+
+    @Override
     public void refresh_view() {
         Cancellation.load_self_canclelations(this , true , true);
     }

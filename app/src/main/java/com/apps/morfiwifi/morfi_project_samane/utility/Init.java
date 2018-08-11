@@ -1,5 +1,6 @@
 package com.apps.morfiwifi.morfi_project_samane.utility;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -200,7 +201,10 @@ public class Init {
         Room.Clear();
         Khabgah.Clear();
         Block.Clear();
-
+        Request.Clear();
+        Report.Clear();
+        Transfer.Clear();
+        Feedback.Clear();
         Properties.Clear();
 
 
@@ -423,4 +427,5 @@ public class Init {
 
 
     }
+
 }

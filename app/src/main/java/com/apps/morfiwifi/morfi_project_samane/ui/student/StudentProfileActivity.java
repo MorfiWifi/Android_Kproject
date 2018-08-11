@@ -168,6 +168,11 @@ public class StudentProfileActivity extends DarkhastActivity {
         Toast.makeText(this, "در آینده", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void refresh_view() {
+//        super.refresh_view();
+    }
+
     public void go_sama(View view) {
         String url = "http://reg.scu.ac.ir/SamaWeb/Login.aspx";
         Intent i = new Intent(Intent.ACTION_VIEW);
