@@ -1,6 +1,8 @@
 package com.apps.morfiwifi.morfi_project_samane.models;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
@@ -11,13 +13,6 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-
-import org.greenrobot.greendao.DaoException;
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.ToMany;
-import org.greenrobot.greendao.annotation.Transient;
-
 import java.util.Date;
 import java.util.List;
 
@@ -26,18 +21,28 @@ import java.util.List;
  */
 
 
-@Entity
+//@Entity
 public class User   {
-    @Transient
+
+    public static final int CODE_SEND = 28;
+    public static final int CODE_EXIST_DATA = 29;
+//    public static String Ha= 29;
+
+//    @Transient
     public static String class_name = "User"; // name of Table in parse
-    @Transient
+//    @Transient
     public static  User current_user; // for different tasks
-    @Transient
+//    @Transient
     public String Role;
-    @Transient
+//    @Transient
     public String Role_id;
-    @Transient
+//    @Transient
     public  String id;
+    private int type;
+
+    public int getType() {
+        return type;
+    }
 
     public enum Kind {
         Student, Master, Technical, Site_Master, Self_Service, Admin ;
@@ -81,7 +86,7 @@ public class User   {
 
 
     //private static RetrofitDataService mTService;
-    @org.greenrobot.greendao.annotation.Id(autoincrement = true)
+//    @org.greenrobot.greendao.annotation.Id(autoincrement = true)
     public Long Id;
     public String UserName;
     public String FName;
@@ -97,20 +102,11 @@ public class User   {
     public int Type;
     public Date inset_date;
 
-    @ToMany(referencedJoinProperty = "id")
     public List<Samane> samanes;
-    /** Used to resolve relations */
-    @Generated(hash = 2040040024)
-    private transient DaoSession daoSession;
-    /** Used for active entity operations. */
-    @Generated(hash = 1507654846)
-    private transient UserDao myDao;
 
 
 
-
-
-    @Generated(hash = 316889759)
+//    @Generated(hash = 316889759)
     public User(Long Id, String UserName, String FName, String LName, String Pass, String Pass_hash,
             String Kaet_meli, String Student_id, boolean should_fill_init_forms, boolean Active,
             boolean Deleted, boolean PreActive, int Type, Date inset_date) {
@@ -130,155 +126,9 @@ public class User   {
         this.inset_date = inset_date;
     }
 
-    @Generated(hash = 586692638)
+//    @Generated(hash = 586692638)
     public User() {
     }
-
-
-
-
-
-    /*public static User GetUser (final Context context , final AppCompatActivity activity){
-
-        RetrofitDataProvider provider = new RetrofitDataProvider();
-        mTService = provider.getTService();
-
-        Call<User> call = mTService.GetUser(TokenModel.TokenSTR);
-
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response == null){
-                    Init.Toas(context , "Why Null IN User !");
-                    Init.Println("Why Null IN User !");
-                }
-                else if (response.isSuccessful()){
-                    if (activity instanceof MessageActivity){
-                        ((MessageActivity) activity).update_user(response.body());
-                    }
-                }
-                else {
-                    Init.Println("mid error in user Get");
-                    Init.Toas(context , "mid error in user Get");
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Init.Println("User Really Failed!");
-                Init.Toas(context , "User Really Failed!");
-            }
-        });
-
-        return new User();
-    }*/
-
-
-
-
-
-    public Long getId() {
-        return this.Id;
-    }
-
-
-
-
-
-    public void setId(Long Id) {
-        this.Id = Id;
-    }
-
-
-
-
-
-    public String getFName() {
-        return this.FName;
-    }
-
-
-
-
-
-    public void setFName(String FName) {
-        this.FName = FName;
-    }
-
-
-
-
-
-    public String getLName() {
-        return this.LName;
-    }
-
-
-
-
-
-    public void setLName(String LName) {
-        this.LName = LName;
-    }
-
-
-
-
-
-    public String getPass() {
-        return this.Pass;
-    }
-
-
-
-
-
-    public void setPass(String Pass) {
-        this.Pass = Pass;
-    }
-
-
-
-
-
-    public String getPass_hash() {
-        return this.Pass_hash;
-    }
-
-
-
-
-
-    public void setPass_hash(String Pass_hash) {
-        this.Pass_hash = Pass_hash;
-    }
-
-
-
-
-
-    public String getKaet_meli() {
-        return this.Kaet_meli;
-    }
-
-
-
-
-
-    public void setKaet_meli(String Kaet_meli) {
-        this.Kaet_meli = Kaet_meli;
-    }
-
-
-
-
-
-    public int getType() {
-        return this.Type;
-    }
-
 
 
 
@@ -287,8 +137,8 @@ public class User   {
         this.Type = Type;
     }
 
-    public Kind getKind (){
-        return Kind.values()[getType()% Kind.values().length];
+    public Kind getKind() {
+        return Kind.values()[getType() % Kind.values().length];
     }
 
     public void setkind(Kind kinde){
@@ -303,154 +153,21 @@ public class User   {
     }
 
 
-
-
-
-    /**
-     * To-many relationship, resolved on first access (and after reset).
-     * Changes to to-many relations are not persisted, make changes to the target entity.
-     */
-    @Generated(hash = 1781915660)
-    public List<Samane> getSamanes() {
-        if (samanes == null) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            SamaneDao targetDao = daoSession.getSamaneDao();
-            List<Samane> samanesNew = targetDao._queryUser_Samanes(Id);
-            synchronized (this) {
-                if (samanes == null) {
-                    samanes = samanesNew;
-                }
-            }
-        }
-        return samanes;
-    }
-
-
-
-
-
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    @Generated(hash = 917475477)
-    public synchronized void resetSamanes() {
-        samanes = null;
-    }
-
-
-
-
-
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 128553479)
-    public void delete() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.delete(this);
-    }
-
-
-
-
-
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 1942392019)
-    public void refresh() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.refresh(this);
-    }
-
-
-
-
-
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 713229351)
-    public void update() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.update(this);
-    }
-
-
-
-
-
-    public String getUserName() {
-        return this.UserName;
-    }
-
-    public void setUserName(String UserName) {
-        this.UserName = UserName;
-    }
-
-    public boolean getActive() {
-        return this.Active;
-    }
-
-    public void setActive(boolean Active) {
-        this.Active = Active;
-    }
-
-    public boolean getDeleted() {
-        return this.Deleted;
-    }
-
-    public void setDeleted(boolean Deleted) {
-        this.Deleted = Deleted;
-    }
-
-    public boolean getShould_fill_init_forms() {
-        return this.should_fill_init_forms;
-    }
-
-    public void setShould_fill_init_forms(boolean should_fill_init_forms) {
-        this.should_fill_init_forms = should_fill_init_forms;
-    }
-
-    public String getStudent_id() {
-        return this.Student_id;
-    }
-
-    public void setStudent_id(String Student_id) {
-        this.Student_id = Student_id;
-    }
-
-    public Date getInset_date() {
-        return this.inset_date;
-    }
-
-    public void setInset_date(Date inset_date) {
-        this.inset_date = inset_date;
-    }
-
-    public boolean getPreActive() {
-        return this.PreActive;
-    }
-
-    public void setPreActive(boolean PreActive) {
-        this.PreActive = PreActive;
-    }
-
     
 
     //  PART FOT USING PARSE SERVER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
     public static  void login(String userName , final String pass , final AppCompatActivity activity){
+
+        /// Debugign thing !
+        if (userName.equals("max") && pass.equals("max")){
+//            Intent intent = new Intent(activity , SignupStudent2Activity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            activity.startActivity(intent);
+            return;
+        }
+
+
+
         Init.start_loading(activity);
 
 
@@ -460,7 +177,7 @@ public class User   {
                 if (parseUser != null) {
                     current_user  = new User();
                     current_user.Role = null;
-                    current_user.setUserName(parseUser.getUsername()); // TODO: 7/10/2018  Fild,s You need in User
+                    current_user.UserName =(parseUser.getUsername()); // TODO: 7/10/2018  Fild,s You need in User
                     current_user.id = parseUser.getObjectId();
 
 
@@ -554,21 +271,75 @@ public class User   {
 
     }
 
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 2059241980)
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getUserDao() : null;
+
+
+    public void inser_student (){
+        User user ;
+        Properties properties;
+        // First WE insert User THEN Properties
     }
 
+    private String sequre (String input){
+        return input;
+    }
 
+    private String nu_sequre (String input){
+        return input;
+    }
 
+    public static void chech_user (User user){
+        ParseQuery query = new ParseQuery("User");
+        query.whereEqualTo("User_name" , user.UserName);
+        query.findInBackground(new FindCallback<ParseObject>() {
 
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e!= null){
+                    if (objects == null){
+                        // TODO: 8/17/2018 EVERY THING OK!
 
+                    }else {
 
+                    }
+                }else {
+                    // TODO: 8/17/2018 SOME EROR IN USERS
+                }
+            }
+        });
+    }
 
+    public static void chech_student (User user){
+        ParseQuery query = new ParseQuery("User");
+        query.whereEqualTo(user.UserName , user.UserName);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject>  objects, ParseException e) {
+                if (e== null){
+                    if (objects == null){
+                        // TODO: 8/17/2018 EVERY THING OK!
+                        Log.d("SEND USER :" , "NULL IS THE LIST ERROR");
+                        Result result = new Result(new Exception("NULL DATA RECIVES") , CODE_SEND);
+                    }else {
+                        if (objects.size() == 0){
+                            Log.d("SEND USER :" , "NO PROBLEM OK");
+                            Result result = new Result(null , CODE_SEND , true);
+                        }else {
+                            Log.d("SEND USER :" , "Alredy EXISTING THINGS");
+                            Result result = new Result(null , CODE_EXIST_DATA , false);
+                        }
 
-    //  PART FOT USING PARSE SERVER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                    }
+                }else {
+                    Result result = new Result(e , CODE_SEND);
+                    Log.d("SEND USER :" , e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void chech_prop (Properties properties){
+
+    }
 
 
 

@@ -46,7 +46,7 @@ public class ProfileTechActivity extends TechnicalActivity {
         TextView username = findViewById(R.id.ti_username);
         TextView rank = findViewById(R.id.tv_ranc);
 
-        username.setText(User.current_user.getUserName());
+        username.setText(User.current_user.UserName);
         rank.setText(User.current_user.Role);
     }
 

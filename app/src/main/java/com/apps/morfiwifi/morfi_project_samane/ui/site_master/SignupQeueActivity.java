@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
-import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
+//import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.WriteExcel;
@@ -23,7 +23,7 @@ import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.List;
 
-import static com.apps.morfiwifi.morfi_project_samane.models.UserDao.*;
+//import static com.apps.morfiwifi.morfi_project_samane.models.UserDao.*;
 
 public class SignupQeueActivity extends SiteMasterActivity {
     private List<User> sh_users;
@@ -43,12 +43,12 @@ public class SignupQeueActivity extends SiteMasterActivity {
         navigationView.setNavigationItemSelectedListener(this);
         setTitle("صف ثبت نام");
 
-        sh_users =
+       /* sh_users =
         Repository.GetInstant(this).getUserDao().queryBuilder()
                 .where(Properties.Should_fill_init_forms.eq(true))
                 .where(UserDao.Properties.Active.eq(false))
                 .where(Properties.PreActive.eq(false))
-                .list();
+                .list();*/
 
 //        Init.Toas( this, sh_users.size() +"");
         signup_stu_RecyclerAdapter.Init(sh_users , this);
@@ -96,12 +96,12 @@ public class SignupQeueActivity extends SiteMasterActivity {
     }
 
     public void refresh_view(){
-        sh_users =
+        /*sh_users =
                 Repository.GetInstant(this).getUserDao().queryBuilder()
                         .where(Properties.Should_fill_init_forms.eq(true))
                         .where(UserDao.Properties.Active.eq(false))
                         .where(Properties.PreActive.eq(false))
-                        .list();
+                        .list();*/
 
         signup_stu_RecyclerAdapter.Init(sh_users , this);
     }

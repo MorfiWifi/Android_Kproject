@@ -51,7 +51,6 @@
                 android:gravity="right"
                 android:background="@drawable/buttom_big_white"
                 android:layout_margin="20dp"
-
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -60,33 +59,64 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="کد ملی"/>
 
                 <LinearLayout
-                    android:layout_weight="0.1"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
+
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/ti_kod_melli"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:gravity="center|bottom"
+
+                            android:inputType="text"
+                            android:textColorLink="@color/blue_grey_900" />
+
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="شماره دانشجویی"/>
+
+                <LinearLayout
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputLayout
                         android:gravity="bottom"
                         android:background="@drawable/buttom_big_white"
                         app:passwordToggleEnabled="true"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
                         <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#000000"
+                            android:background="@null"
                             android:gravity="center|bottom"
-                            android:id="@+id/ti_kod_melli"
+                            android:id="@+id/ti_student_cod"
                             android:inputType="text"
                             android:textColorLink="@color/blue_grey_900" />
 
@@ -112,25 +142,22 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
-                    android:layout_weight="0.1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputLayout
                         android:gravity="bottom"
                         android:background="@drawable/buttom_big_white"
                         app:passwordToggleEnabled="true"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
                         <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#000000"
+                            android:background="@null"
                             android:gravity="center|bottom"
                             android:id="@+id/ti_name"
-
-
                             android:inputType="text"
                             android:textColorLink="@color/blue_grey_900" />
 
@@ -144,7 +171,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="نام خانوادگی"/>
@@ -155,25 +182,22 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
-                    android:layout_weight="0.1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputLayout
                         android:gravity="bottom"
                         android:background="@drawable/buttom_big_white"
                         app:passwordToggleEnabled="true"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
                         <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#000000"
+                            android:background="@null"
                             android:gravity="center|bottom"
                             android:id="@+id/ti_lastname"
-
-
                             android:inputType="text"
                             android:textColorLink="@color/blue_grey_900" />
 
@@ -198,25 +222,22 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
-                    android:layout_weight="0.1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputLayout
                         android:gravity="bottom"
                         android:background="@drawable/buttom_big_white"
                         app:passwordToggleEnabled="true"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
                         <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#000000"
+                            android:background="@null"
                             android:gravity="center|bottom"
                             android:id="@+id/ti_username"
-
-
                             android:inputType="text"
                             android:textColorLink="@color/blue_grey_900" />
 
@@ -246,9 +267,8 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
-                    android:layout_weight="0.1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
 
                     <android.support.design.widget.TextInputLayout
@@ -261,7 +281,7 @@
                             android:id="@+id/ti_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#000000"
+                            android:background="@null"
                             android:gravity="center|bottom"
                             android:inputType="textPassword"
                             android:textColorLink="@color/blue_grey_900" />
@@ -274,7 +294,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="تکرار رمز عبور"/>
@@ -287,14 +307,13 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
-                    android:layout_weight="0.1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
 
                     <android.support.design.widget.TextInputLayout
                         android:gravity="bottom"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:passwordToggleEnabled="true">
 
@@ -302,7 +321,7 @@
                             android:id="@+id/ti_password_rep"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#000000"
+                            android:background="@null"
                             android:gravity="center|bottom"
                             android:inputType="textPassword"
                             android:textColorLink="@color/blue_grey_900" />
@@ -310,6 +329,225 @@
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_2nd"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="شماره تماس"/>
+
+                <LinearLayout
+                    android:id="@+id/lin_2nd"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:maxLines="1"
+                        android:maxLength="20"
+                        android:gravity="bottom"
+                        android:background="@drawable/buttom_big_white"
+                        app:passwordToggleEnabled="true"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:maxLines="1"
+                            android:maxLength="20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:gravity="end|bottom"
+                            android:id="@+id/phone_number"
+                            android:inputType="phone"
+                            android:textColorLink="@color/blue_grey_900" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_3rd"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="نام پدر"/>
+
+                <LinearLayout
+                    android:id="@+id/lin_3rd"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:gravity="bottom"
+                        android:background="@drawable/buttom_big_white"
+                        app:passwordToggleEnabled="true"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:maxLines="1"
+                            android:maxLength="20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:gravity="right|bottom"
+                            android:id="@+id/ti_father_name"
+
+
+                            android:inputType="text"
+                            android:textColorLink="@color/blue_grey_900" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_4th"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="نشانی محل سکونت"/>
+
+                <LinearLayout
+
+                    android:id="@+id/lin_4th"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/buttom_big_white"
+                        android:gravity="bottom">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/ti_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:gravity="end"
+                            android:inputType="textMultiLine|textNoSuggestions"
+                            android:lines="3"
+                            android:maxLength="100"
+                            android:maxLines="3" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/lin_usekhab"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Switch
+                        android:id="@+id/sw_using_khab"
+                        android:gravity="center"
+                        android:text="  خوابگاهی ؟  "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/lin_expandable_khabgah"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/background_white_mid_thick"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    >
+
+                    <com.github.florent37.expansionpanel.ExpansionHeader
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:expansion_headerIndicator="@id/headerIndicator2"
+                        app:expansion_layout="@id/expansionLayout2"
+                        >
+
+                        <!-- app:expansion_toggleOnClick="true" -->
+
+                        ...
+                        <!-- HEADER INDICATOR -->
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="مشخصات خوابگاه"
+                            />
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:adjustViewBounds="true"
+                            android:id="@+id/headerIndicator2"
+                            android:layout_gravity="center_vertical|right"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_width="wrap_content"
+                            app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+
+                    </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                    <com.github.florent37.expansionpanel.ExpansionLayout
+                        android:id="@+id/expansionLayout2"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent">
+
+                        <!-- CONTENT -->
+                        <include layout="@layout/lay_std_sigup2_khabgah"/>
+
+
+
+                    </com.github.florent37.expansionpanel.ExpansionLayout>
+
+
+                </LinearLayout>
+
+
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
 
 
             </LinearLayout>
@@ -345,7 +583,7 @@
 
 
         <Button
-            android:onClick="signup"
+            android:id="@+id/btn_signup_ac"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_weight="0.1"

@@ -16,7 +16,7 @@ import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
-import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
+//import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
@@ -88,7 +88,7 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                 type.setText(" موضوع : "+ sample_report.report_type.name+ " وضعیت : " + sample_report.state  );
                 date.setText(dati);
                 if (activity instanceof ReportActivity){
-                    sende_id.setText(" فرستنده : " + User.current_user.getUserName());
+                    sende_id.setText(" فرستنده : " + User.current_user.UserName);
                     bottom_sheet.findViewById(R.id.btn_gozaresh_new_state).setVisibility(View.GONE);
                     states.setVisibility(View.GONE);
                 }else {

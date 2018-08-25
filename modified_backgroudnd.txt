@@ -103,7 +103,7 @@ public static void Insert_init_Users(AppCompatActivity activity){
 
                 session.getMessageDao().insert(m1);
 
-               // session.getMessageDao().insert(m2);// todo Unknown Exception HERE!!
+               // session.getMessageDao().insert(m2);
                 List<Samane> samanes = session.getSamaneDao().loadAll();
                 //users = session.getUserDao().loadAll();
 

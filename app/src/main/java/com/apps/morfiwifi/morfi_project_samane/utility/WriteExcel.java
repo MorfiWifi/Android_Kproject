@@ -50,22 +50,22 @@ public class WriteExcel {
             for (int i = 0; i < property.length; i++) {
                 switch (i){
                     case 0:
-                        props.add(user.getFName());
+                        props.add(user.FName);
                         break;
                     case 1:
-                        props.add(user.getLName());
+                        props.add(user.LName);
                         break;
                     case 2:
-                        props.add(user.getUserName());
+                        props.add(user.UserName);
                         break;
                     case 3:
-                        props.add(user.getPass());
+                        props.add(user.Pass);
                         break;
                     case 4:
                         props.add("NON_YET");
                         break;
                     case 5:
-                        props.add(user.getKaet_meli());
+                        props.add(user.Kaet_meli);
                         break;
                     case 6:
                         props.add("NON_YET");

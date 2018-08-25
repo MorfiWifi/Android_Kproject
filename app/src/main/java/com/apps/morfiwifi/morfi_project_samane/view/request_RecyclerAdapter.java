@@ -99,7 +99,7 @@ public class request_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_req
                 type.setText(" نوع درخواست : "+ sample_report.thing.name+ " وضعیت : " + sample_report.state  );
                 date.setText(dati);
                 if (activity instanceof DarkhastActivity){
-                    sende_id.setText(" فرستنده : " + User.current_user.getUserName());
+                    sende_id.setText(" فرستنده : " + User.current_user.UserName);
                     bottom_sheet.findViewById(R.id.btn_gozaresh_new_state).setVisibility(View.GONE);
                     states.setVisibility(View.GONE);
                 }else {

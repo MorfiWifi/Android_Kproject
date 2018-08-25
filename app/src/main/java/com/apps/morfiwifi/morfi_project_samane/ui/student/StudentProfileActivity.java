@@ -93,7 +93,7 @@ public class StudentProfileActivity extends DarkhastActivity {
         TextView tv_username = findViewById(R.id.tv_username);
         TextView tv_ranc = findViewById(R.id.tv_ranc);
 
-        tv_username.setText(User.current_user.getUserName());
+        tv_username.setText(User.current_user.UserName);
         tv_ranc.setText(User.current_user.Role);
 
         if (properties.use_khabgah){
@@ -156,7 +156,7 @@ public class StudentProfileActivity extends DarkhastActivity {
             tv_isstudying.setText("درحال تحصیل : خبر");
         }
 
-        tv_prof_name.setText("نام کاربری : " + User.current_user.getUserName());
+        tv_prof_name.setText("نام کاربری : " + User.current_user.UserName);
         tv_real_name.setText("نام : " + properties.real_name);
         tv_real_lastname.setText("نام خانوادگی : " + properties.real_lastname);
         tv_natinal_code.setText("کد ملی : " + properties.national_cod);

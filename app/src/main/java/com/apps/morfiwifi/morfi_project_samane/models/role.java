@@ -19,6 +19,7 @@ public class role {
 
     private static boolean isloaded = false;
     static  String class_name = "role";
+    public static  String HARD_CODED_STUDENT_ROLE = "Gd28OPmRhm";
     static  String obj_name = "name";
     static List<ParseObject> temp;
     static List<role> roles;

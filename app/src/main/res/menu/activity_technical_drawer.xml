@@ -6,29 +6,26 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_std_report"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_report"
             android:title="گزارش دانشجوها" />
         <item
             android:id="@+id/nav_post_archive"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_inbox"
             android:title="صندوق پست" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_account_box"
             android:title="پروفایل" />
         <item
+            android:visible="false"
             android:id="@+id/nav_manage_items"
             android:icon="@drawable/ic_menu_manage"
             android:title="اموال" />
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/ic_logout"
+            android:title="خروج" />
     </group>
 
-    <item android:title="دیگر">
-        <menu>
-            <item
-                android:id="@+id/nav_exit"
-                android:icon="@drawable/ic_menu_send"
-                android:title="خروج" />
-        </menu>
-    </item>
 
 </menu>

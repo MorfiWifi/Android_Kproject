@@ -125,7 +125,7 @@ public class Init {
     public static List<Message> get_messages_dao (AppCompatActivity activity){
         List<Message> messages = new ArrayList<>();
         DaoSession session = Repository.GetInstant(activity);
-        messages = session.getMessageDao().loadAll();
+//        messages = session.getMessageDao().loadAll();
         return messages;
     }
 
@@ -134,13 +134,13 @@ public class Init {
     @Nullable
     public static User log_in (String fname , String pass , AppCompatActivity activity){
         DaoSession session = Repository.GetInstant(activity);
-        List<User> users = session.getUserDao().loadAll();
+//        List<User> users = session.getUserDao().loadAll();
 
-        for (User user:users) {
+        /*for (User user:users) {
             if (user.getFName().equals(fname) && user.getPass().equals(pass)){
                 return user;
             }
-        }
+        }*/
         return null;
     }
 
@@ -244,11 +244,55 @@ public class Init {
         }
     }
 
+    public static void user_prop (AppCompatActivity activity , Result result){
+        if (result.exception != null){
+            Log.e(EXEPTION , result.getCode() + " EX CODE"); // Exception Code
+            Log.e(EXEPTION , result.exception.getMessage()); // SOME THING WRONG IN THERE !
+            Toast.makeText(activity, "خطا", Toast.LENGTH_SHORT).show();
+
+
+        }else {
+
+            if (activity == null)
+                return;
+
+            switch (result.getCode()){
+                case User.CODE_SEND :
+                    if (activity.getClass().getName().equals(SignupStudentsActivity.class.getName())){
+
+                    }
+
+                    break;
+                case User.CODE_EXIST_DATA :
+
+                    break;
+                case Properties.CODE_SEND :
+
+                    break;
+                case  Properties.CODE_EXIST_DATA:
+
+                    break;
+                default:
+                    Log.d("User_prop_Unknown_COD :" ,result.getCode()+" = COD" );
+                    break;
+
+
+
+            }
+
+
+        }
+
+
+
+    }
+
     public static void result_of_query (AppCompatActivity activity , Result result){
         if (result.exception != null){
             Log.e(EXEPTION , result.getCode() + " EX CODE"); // Exception Code
             Log.e(EXEPTION , result.exception.getMessage()); // SOME THING WRONG IN THERE !
             Toast.makeText(activity, "خطا", Toast.LENGTH_SHORT).show();
+
         }else {
 
             if (activity == null){
@@ -293,6 +337,9 @@ public class Init {
                         }
                     }
 
+                    if (activity instanceof  SignupStudentsActivity)
+                        ((SignupStudentsActivity) activity).put_kh((List<Khabgah>) result.getMessage());
+
                     break;
                 case Room.CODE:
                     if (activity instanceof JabejaiActivity){
@@ -306,6 +353,8 @@ public class Init {
                         }
 
                     }
+                    if (activity instanceof SignupStudentsActivity)
+                        ((SignupStudentsActivity) activity).put_rooms((List<Room>) result.getMessage());
                     break;
                 case Block.CODE:
                     if (activity instanceof JabejaiActivity){
@@ -318,6 +367,9 @@ public class Init {
                             // OK DO THE THING manage data in activity !
                         }
                     }
+                    if (activity instanceof SignupStudentsActivity)
+                        ((SignupStudentsActivity) activity).put_blocks((List<Block>) result.getMessage());
+
                     break;
 
                 case Report.CODE_SEND :

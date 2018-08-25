@@ -39,9 +39,9 @@ public class signup_stu_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder_signup_stu holder, int position) {
         final User sample_user = users.get(position);
-        holder.id.setText(sample_user.getKaet_meli()); // YET DIDNT INPUT ANY STUDENT ID !
+        holder.id.setText(sample_user.Kaet_meli); // YET DIDNT INPUT ANY STUDENT ID !
         holder.name.setText(sample_user.FName);
-        holder.lastname.setText(sample_user.getLName());
+        holder.lastname.setText(sample_user.LName);
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,18 +59,18 @@ public class signup_stu_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder
                 TextView username = bottom_sheet.findViewById(R.id.tv_std_queue_username);
                 TextView date = bottom_sheet.findViewById(R.id.tv_std_queue_date);
 
-                name.setText(sample_user.getFName());
-                lastname.setText(sample_user.getLName());
-                kartmelli.setText(sample_user.getKaet_meli());
-                username.setText(sample_user.getUserName());
-                date.setText(sample_user.getInset_date().toString());
+                name.setText(sample_user.FName);
+                lastname.setText(sample_user.LName);
+                kartmelli.setText(sample_user.Kaet_meli);
+                username.setText(sample_user.UserName);
+                date.setText(sample_user.inset_date.toString());
 
                 bottom_sheet.findViewById(R.id.btn_std_queue_accept).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         // accepted
-                        sample_user.setPreActive(true);
-                        Repository.GetInstant(activity).getUserDao().update(sample_user);
+                        sample_user.PreActive = (true);
+//                        Repository.GetInstant(activity).getUserDao().update(sample_user);
 
                         if (activity instanceof SignupQeueActivity){
                             ((SignupQeueActivity) activity).refresh_view();
@@ -85,8 +85,8 @@ public class signup_stu_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder
                     @Override
                     public void onClick(View view) {
                         // deleted
-                        sample_user.setDeleted(true); // TODO: 6/26/2018 User Should chainge inputs
-                        Repository.GetInstant(activity).getUserDao().update(sample_user);
+                        sample_user.Deleted = (true); // TODO: 6/26/2018 User Should chainge inputs
+//                        Repository.GetInstant(activity).getUserDao().update(sample_user);
 
 
                         Init.Toas(activity , "مثلا حذف شد");

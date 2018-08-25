@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.PeriodicSync;
 import android.support.v4.app.SupportActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.apps.morfiwifi.morfi_project_samane.ui.student.BroadcastActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import static com.google.android.gms.tasks.Tasks.await;
+import static com.google.android.gms.tasks.Tasks.call;
 
 /**
  * Created by WifiMorfi on 3/20/2018.
@@ -28,6 +30,9 @@ public class Properties {
 
     public static final int CODE = 9; // just for indexing !
     public static final int CODE_ALL = 10; // just for list of all
+    public static final int CODE_SEND = 25;
+    public static final int CODE_EXIST_DATA = 26;
+    public static final int CODE_SEND_ERROR = 27;
 
     // PRE GIVE VALUE FOR NULL FIX FUTURE
     public Date createAt = Calendar.getInstance().getTime();
@@ -42,6 +47,8 @@ public class Properties {
     public String father_name = Init.Empty;
     public String real_name = Init.Empty;
     public String real_lastname = Init.Empty;
+    public boolean isnighty = false;
+    public String std_cod = Init.Empty;
 
 
 
@@ -58,6 +65,8 @@ public class Properties {
     private final static String obj_is_using_kh = "use_kh";
     private final static String obj_real_name = "real_name";
     private final static String obj_real_lastname = "real_lastname";
+    private final static String obj_isnighty = "isnighty";
+    private final static String obj_std_code = "std_code";
 
     private static String[] all_params = {obj_user_id ,obj_kh_id ,obj_blook_id ,obj_room_id,obj_national_cod,obj_father_name,obj_is_studyng,obj_is_using_kh,obj_real_name,obj_real_lastname };
 
@@ -194,6 +203,15 @@ public class Properties {
         String t = "";
         for (String param: all_params) {
             switch (param){
+                case obj_std_code:
+                    t = parseObject.get(obj_std_code).toString();
+                    if (t != null){
+                        std_cod = t;
+                    }
+                    break;
+                case obj_isnighty :
+                    isnighty = parseObject.getBoolean(obj_isnighty);
+                    break;
                 case obj_id :
                     t = parseObject.getObjectId();
                     if (t != null){
@@ -274,5 +292,47 @@ public class Properties {
 
     public static boolean isloaded_all(){
         return isloaded_all;
+    }
+
+
+    public static void insert_properies (final AppCompatActivity activity , final boolean draw_loading , Properties properties){
+
+
+        ParseQuery<ParseObject> national_cod_query = ParseQuery.getQuery(class_name);
+        national_cod_query.whereEqualTo(obj_national_cod , properties.national_cod);
+
+        ParseQuery<ParseObject> std_cod_query = ParseQuery.getQuery(class_name);
+        std_cod_query.whereEqualTo(obj_std_code , properties.std_cod);
+
+        List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
+        queries.add(national_cod_query);
+        queries.add(std_cod_query);
+
+        ParseQuery<ParseObject> mainQuery = ParseQuery.or(queries);
+        mainQuery.findInBackground(new FindCallback<ParseObject>()
+            { public void done(List<ParseObject> results, ParseException e) {
+                // results has the list of players that win a lot or haven't won much.
+                if (e == null){
+                    // TODO: 8/17/2018 NO error ! check if there was any thing !
+                    if (results == null ){
+                        Log.d("Properties Send :" , "NOK THIS IS ERROR !");
+                        Result result = new Result( new Exception("NULL DATA") , CODE_SEND);
+                    }else {
+                        if (results.size() == 0){
+                            Log.d("Properties SEND :" , "OK - THERE IS NO PROBLEM");
+                            Result result = new Result(null , CODE_SEND , true);
+                        }else {
+                            Log.d("Properties SEND :" , "NO THER IS EXISTINGS !");
+                            Result result = new Result( null , CODE_EXIST_DATA , false);
+                        }
+                    }
+
+                }else {
+                    Log.d("Properties Send EX 2:" , e.getMessage());
+                    Result result = new Result(e , CODE_SEND);
+                }
+            }
+            });
+
     }
 }

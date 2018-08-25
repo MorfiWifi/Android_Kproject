@@ -1,11 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.technical.TechnicalActivity"
-    tools:showIn="@layout/app_bar_technical">
+    tools:context="com.apps.morfiwifi.morfi_project_samane.ui.student.StudentMainActivity"
+    tools:showIn="@layout/app_bar_student_main">
 
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp">
+
+                    <RelativeLayout
+                        android:id="@+id/rel_prof"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/background_white_mid_thick"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            android:layout_marginBottom="5dp"
+                            android:paddingBottom="20dp"
+                            android:scaleType="fitCenter"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/im_profile"
+                            android:background="@null"
+                            android:src="@drawable/ic_account"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <ImageView
+                            android:visibility="gone"
+                            android:id="@+id/im_new_profile"
+                            android:layout_alignEnd="@id/im_profile"
+                            android:src="@drawable/ic_new"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:text="پروفایل"
+                            android:layout_alignBottom="@id/im_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp">
+
+                    <RelativeLayout
+                        android:id="@+id/rel_student_reports"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/background_white_mid_thick"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            android:layout_marginBottom="5dp"
+                            android:paddingBottom="20dp"
+                            android:scaleType="fitCenter"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/im_request"
+                            android:background="@null"
+                            android:src="@drawable/ic_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <ImageView
+                            android:visibility="gone"
+                            android:id="@+id/im_new_request"
+                            android:layout_alignEnd="@id/im_request"
+                            android:src="@drawable/ic_new"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:text="گزارش دانشجوها"
+                            android:layout_alignBottom="@id/im_request"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp">
+
+                    <RelativeLayout
+                        android:id="@+id/rel_inbox"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/background_white_mid_thick"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            android:layout_marginBottom="5dp"
+                            android:id="@+id/im_inbox"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@null"
+                            android:paddingBottom="20dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_inbox" />
+
+                        <ImageView
+                            android:visibility="gone"
+                            android:id="@+id/im_new_broudcast"
+                            android:layout_alignEnd="@id/im_inbox"
+                            android:src="@drawable/ic_new"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:text="صندوق پست"
+                            android:layout_alignBottom="@id/im_inbox"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+      </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

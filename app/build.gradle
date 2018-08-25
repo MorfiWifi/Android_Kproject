@@ -5,6 +5,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'Wifimorfi'
+            keyPassword '9Z&3m$aML8lO7OD^'
+            storeFile file('D:/Uni/Google/The_google_keystore.jks')
+            storePassword '2k8J5!tOj5id!4Ty'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         resConfigs "en"
@@ -23,6 +31,7 @@ android {
         release {
             setMinifyEnabled(false)
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard.cfg'
+            signingConfig signingConfigs.config
         }
     }
     buildToolsVersion '27.0.3'

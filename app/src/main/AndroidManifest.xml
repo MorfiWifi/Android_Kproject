@@ -102,7 +102,8 @@
         <activity android:name=".ui.technical.ProfileTechActivity" />
         <activity android:name=".ui.technical.ManageItemsActivity" />
         <activity android:name=".ui.student.BroadcastActivity" />
-        <activity android:name=".ui.student.StudentProfileActivity"></activity>
+        <activity android:name=".ui.student.StudentProfileActivity" />
+        <activity android:name=".SignupStudent2Activity"></activity>
     </application>
 
 </manifest>

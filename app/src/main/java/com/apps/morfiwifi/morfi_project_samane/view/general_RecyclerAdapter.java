@@ -100,7 +100,7 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
         {// Golobal PART
             holder.third.setText(shamsiDate.persian_date(date));
             if (stdmod)
-                holder.second.setText(" فرستنده : " + User.current_user.getUserName());
+                holder.second.setText(" فرستنده : " + User.current_user.UserName);
             else
                 holder.second.setText(" آیدی فرستنده : " + str_1);
 
@@ -168,7 +168,7 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                     }
 
                     if (stdmod){
-                        tv_2nd.setText(" فرستنده : " + User.current_user.getUserName());
+                        tv_2nd.setText(" فرستنده : " + User.current_user.UserName);
                         bottom_sheet.findViewById(R.id.btn_gozaresh_new_state).setVisibility(View.GONE);
                         states.setVisibility(View.GONE);
                         bottom_sheet.findViewById(R.id.rel_bottom).setVisibility(View.INVISIBLE);

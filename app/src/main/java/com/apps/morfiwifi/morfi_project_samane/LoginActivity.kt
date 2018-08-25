@@ -46,25 +46,25 @@ class LoginActivity : AppCompatActivity() {
             Init.start_fresh() // for fixing other user catching problem
             when {
                 user.Role.equals(User.Kind.Student.toString()) -> {
-                    role.load_roles(this , false);
+                    role.load_roles(this , false)
                     val intent = Intent(this, SamanehaActivity::class.java)
                     cleanup()
                     startActivity(intent)
                 }
                 user.Role.equals(User.Kind.Admin.toString()) -> {
-                    role.load_roles(this , false);
+                    role.load_roles(this , false)
                     val intent = Intent(this, AdminMainActivity::class.java)
                     cleanup()
                     startActivity(intent)
                 }
                 user.Role.equals(User.Kind.Site_Master.toString()) -> {
-                    role.load_roles(this , false);
+                    role.load_roles(this , false)
                     val intent = Intent(this, SiteMasterActivity::class.java)
                     cleanup()
                     startActivity(intent)
                 }
                 user.Role.equals(User.Kind.Technical.toString()) -> {
-                    role.load_roles(this , false);
+                    role.load_roles(this , false)
                     val intent = Intent(this, TechnicalActivity::class.java)
                     cleanup()
                     startActivity(intent)

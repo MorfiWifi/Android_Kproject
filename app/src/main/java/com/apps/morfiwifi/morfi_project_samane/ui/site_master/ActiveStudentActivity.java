@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
-import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
+//import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.WriteExcel;
 import com.apps.morfiwifi.morfi_project_samane.view.active_stu_RecyclerAdapter;
@@ -39,12 +39,12 @@ public class ActiveStudentActivity extends SiteMasterActivity {
 
         setTitle("فعال سازی حساب");
 
-        sh_users =
+       /* sh_users =
                 Repository.GetInstant(this).getUserDao().queryBuilder()
                         .where(UserDao.Properties.Should_fill_init_forms.eq(true))
                         .where(UserDao.Properties.Active.eq(false))
                         .where(UserDao.Properties.PreActive.eq(true))
-                        .list();
+                        .list();*/
 
         active_stu_RecyclerAdapter.Init(sh_users , this); // TODO: 6/26/2018 Active Thign !
     }
@@ -82,12 +82,12 @@ public class ActiveStudentActivity extends SiteMasterActivity {
     }
 
     public void refresh_view(){
-        sh_users =
+        /*sh_users =
                 Repository.GetInstant(this).getUserDao().queryBuilder()
                         .where(UserDao.Properties.Should_fill_init_forms.eq(true))
                         .where(UserDao.Properties.Active.eq(false))
                         .where(UserDao.Properties.PreActive.eq(true))
-                        .list();
+                        .list();*/
 
         active_stu_RecyclerAdapter.Init(sh_users , this); // TODO: 6/26/2018 Active Thign !
     }

@@ -736,4 +736,47 @@ public class Dialogue {
 
     }
 
+    public static void Load_user (final AppCompatActivity activity , User user , Properties properties){
+        // TODO: 8/20/2018 fix appearance of dialogue and set things
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialogue_load_user); // WHAT WORTH CAN IT BEE !
+
+        final TextInputEditText matn = (TextInputEditText) dialog.findViewById(R.id.te_gozaresh_matn);
+        final Spinner types = (Spinner) dialog.findViewById(R.id.sp_gozaresh_header);
+
+        ArrayAdapter<Report_type> spinnerArrayAdapter = new ArrayAdapter<Report_type>(activity,   android.R.layout.simple_spinner_item, ((ReportActivity) activity).getTypes());
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+        types.setAdapter(spinnerArrayAdapter);
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.btn_send_report);
+        // if button is clicked, close the custom dialog
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String matn_str = matn.getText().toString();
+//                    String heade_str = header.getText().toString();
+
+                if (matn_str.trim().length() < 1 ){
+                    Toast.makeText(activity, "متن کوتاه است", Toast.LENGTH_SHORT).show();
+                    Init.Terminal("WHAT KIND OF MESSAGE IS THIS ????");
+                    return;
+                }
+
+                Report_type report_type = (Report_type) types.getSelectedItem();
+                if (report_type != null){
+                    Report.send_self_report(activity ,true , matn_str , report_type.id);
+
+                }else {
+                    Toast.makeText(activity, "نوع گزارش خالی است", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
 }

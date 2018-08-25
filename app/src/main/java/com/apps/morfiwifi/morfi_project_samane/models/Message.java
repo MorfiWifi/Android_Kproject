@@ -12,7 +12,7 @@ import java.util.List;
  * Created by WifiMorfi on 3/20/2018.
  */
 
-@Entity
+//@Entity
 public class Message {
     public  static ArrayList<Message> arrayList = new ArrayList<>();
 
@@ -60,7 +60,7 @@ public class Message {
 
     // Use Sendre ID as Outer Value ( Auto mated in server -Complexity here rises!)
     // Chaingigng in ID
-    @org.greenrobot.greendao.annotation.Id (autoincrement = true)
+//    @org.greenrobot.greendao.annotation.Id (autoincrement = true)
     public Long Id;
     public String Send_Date;
     public String Recive_Date;
@@ -73,22 +73,28 @@ public class Message {
     public int State_message;
     public boolean CanAnsewr;
     public Long answer_id;
+/*
 
 
     @ToOne
     private User sender; // Also Reciver !!
 
-    /** Used to resolve relations */
+    */
+/** Used to resolve relations *//*
+
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
 
-    /** Used for active entity operations. */
+    */
+/** Used for active entity operations. *//*
+
     @Generated(hash = 859287859)
     private transient MessageDao myDao;
 
     @Generated(hash = 2105518247)
     private transient boolean sender__refreshed;
 
+*/
 
     //public User.Kind Reciver_Type;
 
@@ -104,7 +110,7 @@ public class Message {
         Reciver_Type = 0;
     }
 
-    @Generated(hash = 628032992)
+//    @Generated(hash = 628032992)
     public Message(Long Id, String Send_Date, String Recive_Date, String Tags, String Matn, String Sender_ID,
             String Reciver_ID, String Readed, int Reciver_Type, int State_message, boolean CanAnsewr, Long answer_id) {
         this.Id = Id;
@@ -199,6 +205,7 @@ public class Message {
     }*/
 
 
+   /*
     private static String STR (List<Message> messages){
         String res = "";
         for (int i = 0; i < messages.size(); i++) {
@@ -282,7 +289,7 @@ public class Message {
         this.Reciver_Type = Reciver_Type;
     }
 
-    /** To-one relationship, resolved on first access. */
+    *//** To-one relationship, resolved on first access. *//*
     @Generated(hash = 677842067)
     public User getSender() {
         if (sender != null || !sender__refreshed) {
@@ -296,13 +303,13 @@ public class Message {
         return sender;
     }
 
-    /** To-one relationship, returned entity is not refreshed and may carry only the PK property. */
+    *//** To-one relationship, returned entity is not refreshed and may carry only the PK property. *//*
     @Generated(hash = 306704630)
     public User peakSender() {
         return sender;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    *//** called by internal mechanisms, do not call yourself. *//*
     @Generated(hash = 122650586)
     public void setSender(User sender) {
         synchronized (this) {
@@ -311,10 +318,10 @@ public class Message {
         }
     }
 
-    /**
+    *//**
      * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
      * Entity must attached to an entity context.
-     */
+     *//*
     @Generated(hash = 128553479)
     public void delete() {
         if (myDao == null) {
@@ -323,10 +330,10 @@ public class Message {
         myDao.delete(this);
     }
 
-    /**
+    *//**
      * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
      * Entity must attached to an entity context.
-     */
+     *//*
     @Generated(hash = 1942392019)
     public void refresh() {
         if (myDao == null) {
@@ -335,10 +342,10 @@ public class Message {
         myDao.refresh(this);
     }
 
-    /**
+    *//**
      * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
      * Entity must attached to an entity context.
-     */
+     *//*
     @Generated(hash = 713229351)
     public void update() {
         if (myDao == null) {
@@ -371,12 +378,12 @@ public class Message {
         this.answer_id = answer_id;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    *//** called by internal mechanisms, do not call yourself. *//*
     @Generated(hash = 747015224)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getMessageDao() : null;
-    }
+    }*/
 
 
 }

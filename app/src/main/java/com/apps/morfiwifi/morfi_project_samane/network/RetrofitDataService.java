@@ -35,7 +35,7 @@ import retrofit2.http.Path;
 public interface RetrofitDataService {
 ////////////////////////////call api service
 
-    // TODO: 12/12/2017  added for Testing TOKEN!
+
     @POST("/login")
     void basicLogin(Callback<UserModel> cb);
 
