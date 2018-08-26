@@ -6,43 +6,42 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_account"
             android:title="پروفایل" />
         <item
             android:id="@+id/nav_sighup"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_signup_queue"
             android:title="صف ثبت نام" />
         <item
             android:id="@+id/nav_active_user"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="صف فعال سازی" />
+            android:icon="@drawable/ic_active_user"
+            android:title="فعال سازی" />
         <item
             android:id="@+id/nav_enseraf"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_getout"
             android:title="صف انصراف" />
         <item
             android:id="@+id/nav_adduser"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_user_add"
             android:title="اضافه کردن کاربر" />
 
         <item
             android:id="@+id/nav_statesic"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_statestic"
             android:title="آمارگیری" />
 
         <item
             android:id="@+id/nav_search"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_search"
             android:title="جستجو" />
+
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/ic_logout"
+            android:title="خروج" />
+
     </group>
 
-    <item android:title="بیشتر">
-        <menu>
-            <item
-                android:id="@+id/nav_exit"
-                android:icon="@drawable/ic_close"
-                android:title="خروج" />
-        </menu>
-    </item>
+
 
 </menu>
