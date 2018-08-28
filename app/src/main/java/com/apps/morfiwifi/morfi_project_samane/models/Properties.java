@@ -36,8 +36,8 @@ public class Properties {
 
     // PRE GIVE VALUE FOR NULL FIX FUTURE
     public Date createAt = Calendar.getInstance().getTime();
-    public Boolean use_khabgah = true;
-    public boolean is_studying = true;
+    public Boolean use_khabgah = false;
+    public boolean is_studying = false;
     public String kh_id = Init.Empty ;
     public String user_id = Init.Empty;
     public String id = Init.Empty;

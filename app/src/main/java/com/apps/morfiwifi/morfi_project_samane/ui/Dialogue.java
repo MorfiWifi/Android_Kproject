@@ -89,6 +89,7 @@ public class Dialogue {
                 });
         return builder.create();
     }
+
     public AlertDialog Log_out_account (final AppCompatActivity activity ){
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         // Get the layout inflater

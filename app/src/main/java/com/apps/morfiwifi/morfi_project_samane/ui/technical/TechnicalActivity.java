@@ -167,7 +167,8 @@ public class TechnicalActivity extends AppCompatActivity
                 startActivity(intent);
             }
         } else if (id == R.id.nav_exit) {
-            // TODO: 6/8/2018 EXIT CODE FOR TECHNIKAL MAN !
+            Dialogue dialogue = new Dialogue();
+            dialogue.Log_out_account(this).show();
 
         } else  {
 

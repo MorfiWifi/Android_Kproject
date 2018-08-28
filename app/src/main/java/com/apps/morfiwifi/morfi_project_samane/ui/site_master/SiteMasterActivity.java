@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 
 public class SiteMasterActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -221,6 +222,8 @@ public class SiteMasterActivity extends AppCompatActivity
             }
         } else if (id == R.id.nav_exit) {
             // Wait YET ....
+            Dialogue dialogue = new Dialogue();
+            dialogue.Log_out_account(this).show();
 
         }
 
