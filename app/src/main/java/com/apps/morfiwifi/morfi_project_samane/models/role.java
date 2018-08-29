@@ -19,10 +19,12 @@ public class role {
 
     private static boolean isloaded = false;
     static  String class_name = "role";
+    final static  String obj_cod = "cod";
     public static  String HARD_CODED_STUDENT_ROLE = "Gd28OPmRhm";
     static  String obj_name = "name";
     static List<ParseObject> temp;
     static List<role> roles;
+    public final static int CODE = 28;
 
     public String name ;
 
@@ -36,6 +38,7 @@ public class role {
 
     }
 
+    public int cod = 100;
     public String id ;
     public Date craeateAt;
 
@@ -131,6 +134,62 @@ public class role {
         return ;
 
     }
+    public static void load_roles_accesasables  (final AppCompatActivity activity , final boolean draw_loading , boolean force){
+        if ( !isloaded || force){
+            try {
+                if (User.current_user == null)
+                    return;
+                if (User.current_user.cod == 0 )
+                    return;
+                ParseQuery query = new ParseQuery(class_name);
+                query.whereLessThan("cod" , User.current_user.cod+1);// equals are added!
+
+
+                if ( draw_loading){
+                    Init.start_loading(activity);
+                }
+
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> objects, ParseException e) {
+                        if (e == null){
+                            temp = objects;
+                            convert_parse_role();
+                            isloaded = false; //  this is not all so no catch
+                            Result result = new Result(roles ,CODE , true );
+                            Init.result_of_query(activity , result);
+
+                            if ( draw_loading){
+//                                broudcast_RecyclerAdapter.Init(roles , activity);
+                                Init.stop_loading(activity);
+                            }
+                        }else {
+                            Init.Terminal("Some ERROR IN RETRIVING BROUDCASTS");
+                            Result result = new Result(e ,CODE );
+                            Init.result_of_query(activity , result);
+                            if ( draw_loading ){
+//                                broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                                Init.stop_loading(activity);
+                            }
+                        }
+                    }
+                });
+            }catch (Exception e){
+                roles = new ArrayList<>();
+            }
+        }else {
+
+            List<role> roless = new ArrayList<>();
+            for (role roli:roles) {
+                if (roli.cod <= User.current_user.cod)
+                    roless.add(roli);
+            }
+
+
+            Result result = new Result(roless ,CODE , true );
+            Init.result_of_query(activity , result);
+        }
+    }
     private static void convert_parse_role(){
         if (temp != null){
             roles = new ArrayList<>();
@@ -139,6 +198,7 @@ public class role {
                 role.id = parseObject.getObjectId();
                 role.craeateAt = parseObject.getCreatedAt();
                 role.name = parseObject.get(obj_name).toString();
+                role.cod = parseObject.getInt(obj_cod);
                 roles.add(role);
             }
         }else {

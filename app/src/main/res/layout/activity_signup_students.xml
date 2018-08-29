@@ -65,6 +65,7 @@
                     android:text="کد ملی"/>
 
                 <LinearLayout
+                    android:background="@drawable/buttom_big_white"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginRight="20dp"
@@ -73,13 +74,12 @@
                     android:layout_height="wrap_content">
 
 
-                        <android.support.design.widget.TextInputEditText
+                        <EditText
                             android:id="@+id/ti_kod_melli"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:gravity="center|bottom"
-
                             android:inputType="text"
                             android:textColorLink="@color/blue_grey_900" />
 
@@ -111,7 +111,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
-                        <android.support.design.widget.TextInputEditText
+                        <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -152,7 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
-                        <android.support.design.widget.TextInputEditText
+                        <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -192,7 +192,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
-                        <android.support.design.widget.TextInputEditText
+                        <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -232,7 +232,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
-                        <android.support.design.widget.TextInputEditText
+                        <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -277,7 +277,7 @@
                         android:layout_height="wrap_content"
                         app:passwordToggleEnabled="true">
 
-                        <android.support.design.widget.TextInputEditText
+                        <EditText
                             android:id="@+id/ti_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -317,7 +317,7 @@
                         android:layout_height="wrap_content"
                         app:passwordToggleEnabled="true">
 
-                        <android.support.design.widget.TextInputEditText
+                        <EditText
                             android:id="@+id/ti_password_rep"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -358,7 +358,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
-                        <android.support.design.widget.TextInputEditText
+                        <EditText
                             android:maxLines="1"
                             android:maxLength="20"
                             android:layout_width="match_parent"
@@ -401,7 +401,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
-                        <android.support.design.widget.TextInputEditText
+                        <EditText
                             android:maxLines="1"
                             android:maxLength="20"
                             android:layout_width="match_parent"
@@ -445,7 +445,7 @@
                         android:background="@drawable/buttom_big_white"
                         android:gravity="bottom">
 
-                        <android.support.design.widget.TextInputEditText
+                        <EditText
                             android:id="@+id/ti_address"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

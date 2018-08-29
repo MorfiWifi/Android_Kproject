@@ -12,14 +12,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Request;
 import com.apps.morfiwifi.morfi_project_samane.models.Thing;
-import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
-import com.apps.morfiwifi.morfi_project_samane.ui.technical.TechnicalActivity;
 import com.apps.morfiwifi.morfi_project_samane.view.request_RecyclerAdapter;
 
 import java.util.ArrayList;
@@ -174,8 +171,8 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
 
                 break;
             case R.id.nav_jabeja :
-                if (!(this instanceof JabejaiActivity)){
-                    intent = new Intent(this , JabejaiActivity.class);
+                if (!(this instanceof TransferActivity)){
+                    intent = new Intent(this , TransferActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent );
                 }

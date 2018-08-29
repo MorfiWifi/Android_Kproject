@@ -1,6 +1,5 @@
 package com.apps.morfiwifi.morfi_project_samane.utility;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -26,15 +25,15 @@ import com.apps.morfiwifi.morfi_project_samane.models.Message;
 import com.apps.morfiwifi.morfi_project_samane.models.Request;
 import com.apps.morfiwifi.morfi_project_samane.models.Result;
 import com.apps.morfiwifi.morfi_project_samane.models.Room;
-import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
+import com.apps.morfiwifi.morfi_project_samane.ui.site_master.AddUserActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.EnserafActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.EnteghadActivity;
-import com.apps.morfiwifi.morfi_project_samane.ui.student.JabejaiActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.student.TransferActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentProfileActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.technical.StdReportActivity;
@@ -51,7 +50,6 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 ///////////////////////////////////////////////////////////////////////////
 // BLOOCK ZERO >> !
@@ -228,8 +226,8 @@ public class Init {
 
     public static void stop_loading( AppCompatActivity activity){
         if (activity != null){
-            if (activity instanceof JabejaiActivity){
-                if (!((JabejaiActivity) activity).isIsloaded()){
+            if (activity instanceof TransferActivity){
+                if (!((TransferActivity) activity).isIsloaded()){
                     if (loading != null){
                         loading.dismiss();
                     }
@@ -304,12 +302,12 @@ public class Init {
                 case Properties.CODE :
                     if (activity instanceof StudentProfileActivity){
                         ((StudentProfileActivity) activity).loadproperties((Properties) result.getMessage());
-                    }if (activity instanceof JabejaiActivity){
-                        ((JabejaiActivity) activity).put_proprtties((Properties) result.getMessage());
+                    }if (activity instanceof TransferActivity){
+                        ((TransferActivity) activity).put_proprtties((Properties) result.getMessage());
                         // Wee Need 3 THING !
-                    if (!((JabejaiActivity) activity).isIsloaded()){
+                    if (!((TransferActivity) activity).isIsloaded()){
 
-//                        ((JabejaiActivity) activity).load_steppers();
+//                        ((TransferActivity) activity).load_steppers();
 
 
                         // OK DO THE THING manage data in activity !
@@ -326,12 +324,12 @@ public class Init {
 
                         break;
                 case Khabgah.CODE:
-                    if (activity instanceof JabejaiActivity){
-                        ((JabejaiActivity) activity).put_khabgahs((ArrayList<Khabgah>) result.getMessage());
+                    if (activity instanceof TransferActivity){
+                        ((TransferActivity) activity).put_khabgahs((ArrayList<Khabgah>) result.getMessage());
 
-                        if (!((JabejaiActivity) activity).isIsloaded()){
+                        if (!((TransferActivity) activity).isIsloaded()){
 
-//                            ((JabejaiActivity) activity).load_steppers();
+//                            ((TransferActivity) activity).load_steppers();
 
                             // OK DO THE THING manage data in activity !
                         }
@@ -342,13 +340,13 @@ public class Init {
 
                     break;
                 case Room.CODE:
-                    if (activity instanceof JabejaiActivity){
-                        ((JabejaiActivity) activity).put_rooms((ArrayList<Room>) result.getMessage());
+                    if (activity instanceof TransferActivity){
+                        ((TransferActivity) activity).put_rooms((ArrayList<Room>) result.getMessage());
 
-                        if (!((JabejaiActivity) activity).isIsloaded()){
+                        if (!((TransferActivity) activity).isIsloaded()){
 
 
-//                            ((JabejaiActivity) activity).load_steppers();
+//                            ((TransferActivity) activity).load_steppers();
                             // OK DO THE THING manage data in activity !
                         }
 
@@ -357,13 +355,13 @@ public class Init {
                         ((SignupStudentsActivity) activity).put_rooms((List<Room>) result.getMessage());
                     break;
                 case Block.CODE:
-                    if (activity instanceof JabejaiActivity){
-                        ((JabejaiActivity) activity).put_blooks((ArrayList<Block>) result.getMessage());
+                    if (activity instanceof TransferActivity){
+                        ((TransferActivity) activity).put_blooks((ArrayList<Block>) result.getMessage());
 
-                        if (!((JabejaiActivity) activity).isIsloaded()){
+                        if (!((TransferActivity) activity).isIsloaded()){
 
 
-//                            ((JabejaiActivity) activity).load_steppers();
+//                            ((TransferActivity) activity).load_steppers();
                             // OK DO THE THING manage data in activity !
                         }
                     }
@@ -428,15 +426,15 @@ public class Init {
 
                     break;
                 case Transfer.CODE_SEND:
-                    if (activity.getClass().getName().equals(JabejaiActivity.class.getName())){
-                        ((JabejaiActivity)activity).refresh_view();
+                    if (activity.getClass().getName().equals(TransferActivity.class.getName())){
+                        ((TransferActivity)activity).refresh_view();
                     }
 
 
                     break;
                 case Transfer.CODE:
-                    if (activity.getClass().getName().equals(JabejaiActivity.class.getName())){
-                        ((JabejaiActivity)activity).load_transfers((List<Transfer>) result.getMessage());
+                    if (activity.getClass().getName().equals(TransferActivity.class.getName())){
+                        ((TransferActivity)activity).load_transfers((List<Transfer>) result.getMessage());
                     }
 
 
@@ -469,6 +467,14 @@ public class Init {
 
 
                     break;
+
+                case role.CODE:
+                    if (activity.getClass().getName().equals(AddUserActivity.class.getName())){
+                        ((AddUserActivity)activity).set_roles((List<role>) result.getMessage());
+                    }
+
+
+
                     default:
                         Log.i("result error : " , "Unknown CODE sent in ");
 

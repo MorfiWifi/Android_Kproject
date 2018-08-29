@@ -1,6 +1,5 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.student;
 
-import android.graphics.Typeface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -8,23 +7,16 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
-import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
-import com.apps.morfiwifi.morfi_project_samane.models.Feedback;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
 import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
-import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.view.general_RecyclerAdapter;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
@@ -35,11 +27,11 @@ import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JabejaiActivity extends DarkhastActivity implements
+public class TransferActivity extends DarkhastActivity implements
         TimePickerDialog.OnTimeSetListener,
         DatePickerDialog.OnDateSetListener,
         View.OnClickListener{
-    private JabejaiActivity activity;
+    private TransferActivity activity;
     private List<Block> st_blocks;
     private List<Block> end_blocks;
     private List<Room> st_rooms;

@@ -13,6 +13,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
 import java.util.Date;
 import java.util.List;
 
@@ -26,10 +28,24 @@ public class User   {
 
     public static final int CODE_SEND = 28;
     public static final int CODE_EXIST_DATA = 29;
+    public static String OK = "OK";
+
+
 //    public static String Ha= 29;
 
 //    @Transient
-    public static String class_name = "User"; // name of Table in parse
+    public static final String class_name = "User"; // name of Table in parse
+//    private static final String obj_name = "User"; // name of Table in parse
+    private static final String obj_id = "id"; // name of Table in parse
+//    private static final String obj_Lname = "User"; // name of Table in parse
+    private static final String obj_Uname = "username"; // name of Table in parse
+    private static final String obj_role_id = "role_id"; // name of Table in parse
+    private static final String obj_activated = "activeted"; // name of Table in parse
+    private static final String obj_preactive = "preactive"; // name of Table in parse
+    private static final String obj_email = "email"; // name of Table in parse
+    private static final String obj_password = "password"; // name of Table in parse
+
+
 //    @Transient
     public static  User current_user; // for different tasks
 //    @Transient
@@ -101,6 +117,7 @@ public class User   {
     public boolean PreActive = false;
     public int Type;
     public Date inset_date;
+    public int cod = 0;
 
     public List<Samane> samanes;
 
@@ -179,6 +196,8 @@ public class User   {
                     current_user.Role = null;
                     current_user.UserName =(parseUser.getUsername()); // TODO: 7/10/2018  Fild,s You need in User
                     current_user.id = parseUser.getObjectId();
+                    current_user.PreActive = parseUser.getBoolean("preactive");
+                    current_user.Active = parseUser.getBoolean("activate");
 
 
                     // TODO: 7/9/2018 Do what ever tekes its log in !
@@ -202,6 +221,9 @@ public class User   {
                                 Role_name  = object.get("name").toString();
                                 current_user.Role = Role_name;
                                 current_user.Role_id = object.getObjectId();
+                                current_user.cod = object.getInt("cod");
+
+
 //                                    Toast.makeText(activity, Role_name, Toast.LENGTH_SHORT).show();
                                 if(activity instanceof LoginActivity){
                                     ((LoginActivity) activity).login_server(current_user);
@@ -308,7 +330,39 @@ public class User   {
         });
     }
 
-    public static void chech_student (User user){
+    public static void insert_user (final AppCompatActivity activity , final boolean draw_loading , int count , User user ){
+
+        ParseObject object = new ParseObject(class_name);
+        object.put(obj_activated , user.Active);
+        object.put(obj_preactive , user.PreActive);
+        object.put(obj_Uname , user.UserName);
+        object.put(obj_role_id , user.Role_id);
+        object.put(obj_password , user.Pass);
+
+        // TODO: 8/30/2018 check properites and upload them too
+
+
+        object.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null){
+                    Result result = new Result(OK , CODE_SEND , true);
+                    Init.result_of_query(activity , result);
+                }else {
+                    Result result = new Result(e , CODE_SEND );
+                    Init.result_of_query(activity , result);
+                }
+
+            }
+        });
+
+
+
+
+
+    }
+
+    public static void chech_student (final AppCompatActivity activity , final boolean draw_loading  ,User user){
         ParseQuery query = new ParseQuery("User");
         query.whereEqualTo(user.UserName , user.UserName);
         query.findInBackground(new FindCallback<ParseObject>() {
@@ -323,6 +377,11 @@ public class User   {
                         if (objects.size() == 0){
                             Log.d("SEND USER :" , "NO PROBLEM OK");
                             Result result = new Result(null , CODE_SEND , true);
+
+
+
+
+
                         }else {
                             Log.d("SEND USER :" , "Alredy EXISTING THINGS");
                             Result result = new Result(null , CODE_EXIST_DATA , false);

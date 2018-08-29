@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
@@ -56,7 +58,7 @@ public class SignupStudentsActivity extends AppCompatActivity {
             }
         });
 
-        final TextInputEditText  kod_melli= (TextInputEditText) findViewById(R.id.ti_kod_melli) ;
+        final EditText kod_melli= findViewById(R.id.ti_kod_melli) ;
 
         Button bottom = findViewById(R.id.btn_signup_ac);
         bottom.setOnClickListener(new View.OnClickListener() {
@@ -189,14 +191,14 @@ public class SignupStudentsActivity extends AppCompatActivity {
         int err = 0;
 
 //        design.widget.TextInputEditText
-        TextInputEditText kod_melli = (TextInputEditText) findViewById(R.id.ti_kod_melli);
-//        TextInputEditText name = (TextInputEditText) findViewById(R.id.ti_name);
-//        TextInputEditText last_name =(TextInputEditText)  findViewById(R.id.ti_lastname);
-//        TextInputEditText user_name =(TextInputEditText)  findViewById(R.id.ti_username);
-//        TextInputEditText password =(TextInputEditText)  findViewById(R.id.ti_password);
-//        TextInputEditText password_re = (TextInputEditText) findViewById(R.id.ti_password_rep);
-//        TextInputEditText std_code =(TextInputEditText)  findViewById(R.id.ti_student_cod);
-//        SwitchCompat switc = findViewById(R.id.sw_remember);
+        EditText kod_melli =  findViewById(R.id.ti_kod_melli);
+        EditText name =  findViewById(R.id.ti_name);
+        EditText last_name =  findViewById(R.id.ti_lastname);
+        EditText user_name = findViewById(R.id.ti_username);
+        EditText password =  findViewById(R.id.ti_password);
+        EditText password_re =  findViewById(R.id.ti_password_rep);
+        EditText std_code =  findViewById(R.id.ti_student_cod);
+        SwitchCompat switc = findViewById(R.id.sw_remember);
 
         // ******************************************************** checking all property...
         if (kod_melli.getText().toString().trim().length() < 3){
@@ -204,7 +206,6 @@ public class SignupStudentsActivity extends AppCompatActivity {
             err++;
         }
 
-        /*
         if (name.getText().toString().trim().length() < 3){
             name.setError("نام خالی !");
             err++;
@@ -234,13 +235,12 @@ public class SignupStudentsActivity extends AppCompatActivity {
         if (std_code.getText().toString().trim().length() < 4){
             std_code.setError("شماره دانشجویی ؟");
             err++;
-        }*/
+        }
         // ******************************************************** checking all property...
 
 
         if (err == 0){
 
-/*
 
 
             Properties properties = new Properties();
@@ -256,25 +256,24 @@ public class SignupStudentsActivity extends AppCompatActivity {
             user.Active = false;
             user.PreActive = false; // YET NO LEVEL OF ACTIVATION
 
-            User.chech_student(user);
-*/
+
 
             // THING,s IN PROGRESS ....
 
 
 
-           /* // if there is no eror do the thing ...
+            // if there is no eror do the thing ...
             User m = new User();
-            m.setKaet_meli(kod_melli.getText().toString());
+            m.Kaet_meli = kod_melli.getText().toString();
             m.set_Type(User.Kind.Student);
-            m.setPass(password.getText().toString());
-            m.setFName(name.getText().toString());
-            m.setLName(last_name.getText().toString());
-            m.setUserName(user_name.getText().toString());
-            m.setActive(false);
-            m.setShould_fill_init_forms(true);
-            m.setInset_date(Calendar.getInstance().getTime());
-            m.setPreActive(false);
+            m.Pass = password.getText().toString();
+            m.FName = (name.getText().toString());
+            m.LName = (last_name.getText().toString());
+            m.UserName = (user_name.getText().toString());
+            m.Active = (false);
+            m.should_fill_init_forms = (true);
+            m.inset_date = (Calendar.getInstance().getTime());
+            m.PreActive = (false);
 
 
             // chek username pass exist -> kod melli & uid !
@@ -283,14 +282,17 @@ public class SignupStudentsActivity extends AppCompatActivity {
             if (op_finished){
                 Init.Toas(this ,"لطفا خارج شوید !");
             }else {
+                User.chech_student(this ,true, user);
+
+
                 if (switc.isChecked()){ //todo : check what you would do ....for remeber
-                    Repository.GetInstant(this).getUserDao().insert(m);
+//                    Repository.GetInstant(this).getUserDao().insert(m);
                     Init.Toas(this ,"پس از فعال شدن مطلع خواهید شد");
                 }else {
-                    Repository.GetInstant(this).getUserDao().insert(m);
+//                    Repository.GetInstant(this).getUserDao().insert(m);
                     Init.Toas(this ,"پس از فعال شدن می توانید وارد شوید");
                 }
-            }*/
+            }
 
 
 
@@ -298,6 +300,41 @@ public class SignupStudentsActivity extends AppCompatActivity {
             op_finished =true;
         }
 
+
+
+    }
+
+    public void say_finish (){
+        Toast.makeText(this, "ثبت نام انجام شد", Toast.LENGTH_SHORT).show();
+        clear_things();
+    }
+
+    public void say_error () {
+        Toast.makeText(this, "خطایی رخ داده", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void say_exsists () {
+        Toast.makeText(this, "مشخصات غیر مجاز است", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void clear_things() {
+        EditText kod_melli =  findViewById(R.id.ti_kod_melli);
+        EditText name =  findViewById(R.id.ti_name);
+        EditText last_name =  findViewById(R.id.ti_lastname);
+        EditText user_name = findViewById(R.id.ti_username);
+        EditText password =  findViewById(R.id.ti_password);
+        EditText password_re =  findViewById(R.id.ti_password_rep);
+        EditText std_code =  findViewById(R.id.ti_student_cod);
+
+        kod_melli.getText().clear();
+        name.getText().clear();
+        last_name.getText().clear();
+        user_name.getText().clear();
+        password.getText().clear();
+        password_re.getText().clear();
+        std_code.getText().clear();
 
 
     }

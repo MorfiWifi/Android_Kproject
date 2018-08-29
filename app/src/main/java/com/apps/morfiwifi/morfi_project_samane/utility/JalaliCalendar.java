@@ -2,9 +2,6 @@ package com.apps.morfiwifi.morfi_project_samane.utility;
 
 import android.util.Log;
 
-import com.apps.morfiwifi.morfi_project_samane.ui.student.JabejaiActivity;
-
-import java.io.CharArrayReader;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;

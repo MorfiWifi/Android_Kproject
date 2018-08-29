@@ -25,97 +25,261 @@
 
 
     <ScrollView
+        android:layout_marginBottom="60dp"
         android:layout_below="@id/app_bar_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true">
 
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_marginTop="5dp"
-                android:text="انتخواب نوع کاربر"
-                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="انتخواب نوع کاربر" />
 
             <Spinner
                 android:id="@+id/sp_user_types"
-                android:background="@drawable/background_white_mid_thick"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/background_white_mid_thick" />
 
             <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_white_mid_thick"
                 android:hint="نام کاربری"
-                android:background="@drawable/background_white_mid_thick"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
 
                 <EditText
-                    android:background="@null"
-                    android:gravity="left"
-                    android:maxLength="20"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:maxLines="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:gravity="left"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                app:passwordToggleEnabled="true"
-                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_white_mid_thick"
                 android:hint="رمز عبور"
-                android:background="@drawable/background_white_mid_thick"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                app:passwordToggleEnabled="true">
 
                 <EditText
-                    android:background="@null"
-                    android:gravity="left"
-                    android:maxLength="20"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:maxLines="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:gravity="left"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                app:passwordToggleEnabled="true"
-                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:hint="تکرار رمز عبور"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/background_white_mid_thick"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:hint="تکرار رمز عبور"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                app:passwordToggleEnabled="true">
 
                 <EditText
-                    android:background="@null"
-                    android:gravity="left"
-                    android:maxLength="20"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:maxLines="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:gravity="left"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/sw_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="مشخصات تکمیلی 1 :" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:id="@+id/lin_expandable_info1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_white_mid_thick"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.github.florent37.expansionpanel.ExpansionHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:expansion_headerIndicator="@id/headerIndicator1"
+                    app:expansion_layout="@id/expansionLayout1">
+
+                    <!-- app:expansion_toggleOnClick="true" -->
+
+                    ...
+                    <!-- HEADER INDICATOR -->
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="مشخصات بخش 1" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/headerIndicator1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginLeft="16dp"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+
+                </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                <com.github.florent37.expansionpanel.ExpansionLayout
+                    android:id="@+id/expansionLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- CONTENT -->
+                    <include layout="@layout/lay_std_sigup2_khabgah" />
+
+
+                </com.github.florent37.expansionpanel.ExpansionLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/sw_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="مشخصات تکمیلی 2 :" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:id="@+id/lin_expandable_info2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_white_mid_thick"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.github.florent37.expansionpanel.ExpansionHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:expansion_headerIndicator="@id/headerIndicator2"
+                    app:expansion_layout="@id/expansionLayout2">
+
+                    <!-- app:expansion_toggleOnClick="true" -->
+
+                    ...
+                    <!-- HEADER INDICATOR -->
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="مشخصات بخش 2" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/headerIndicator2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginLeft="16dp"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+
+                </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                <com.github.florent37.expansionpanel.ExpansionLayout
+                    android:id="@+id/expansionLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- CONTENT -->
+                    <include layout="@layout/lay_std_sigup2_khabgah" />
+
+
+                </com.github.florent37.expansionpanel.ExpansionLayout>
+
+
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -125,6 +289,16 @@
 
 
 
+    <Button
+        android:visibility="visible"
+        android:layout_margin="10dp"
+        android:layout_alignParentBottom="true"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:text="اضافه شود"
+        android:background="@drawable/buttom_blue_stack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 

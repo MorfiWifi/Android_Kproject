@@ -157,6 +157,9 @@ public class SiteMasterActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if (id == R.id.action_refresh){
+            refresh_view();
+        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -249,5 +252,9 @@ public class SiteMasterActivity extends AppCompatActivity
     protected void onStop() {
         stop_loading();
         super.onStop();
+    }
+
+    protected void refresh_view(){
+
     }
 }

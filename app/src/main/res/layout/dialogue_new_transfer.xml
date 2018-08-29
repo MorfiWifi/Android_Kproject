@@ -14,7 +14,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.student.JabejaiActivity">
+            tools:context=".ui.student.TransferActivity">
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_below="@id/tv_choosen_date"
