@@ -75,11 +75,13 @@
 
 
                         <EditText
+                            android:paddingEnd="5dp"
+                            android:paddingStart="5dp"
                             android:id="@+id/ti_kod_melli"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:gravity="center|bottom"
+                            android:gravity="end"
                             android:inputType="text"
                             android:textColorLink="@color/blue_grey_900" />
 
@@ -112,10 +114,12 @@
                         android:layout_width="match_parent">
 
                         <EditText
+                            android:paddingEnd="5dp"
+                            android:paddingStart="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:gravity="center|bottom"
+                            android:gravity="end"
                             android:id="@+id/ti_student_cod"
                             android:inputType="text"
                             android:textColorLink="@color/blue_grey_900" />
@@ -153,10 +157,12 @@
                         android:layout_width="match_parent">
 
                         <EditText
+                            android:paddingEnd="5dp"
+                            android:paddingStart="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:gravity="center|bottom"
+                            android:gravity="end"
                             android:id="@+id/ti_name"
                             android:inputType="text"
                             android:textColorLink="@color/blue_grey_900" />
@@ -193,10 +199,12 @@
                         android:layout_width="match_parent">
 
                         <EditText
+                            android:paddingEnd="5dp"
+                            android:paddingStart="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:gravity="center|bottom"
+                            android:gravity="end"
                             android:id="@+id/ti_lastname"
                             android:inputType="text"
                             android:textColorLink="@color/blue_grey_900" />
@@ -233,10 +241,12 @@
                         android:layout_width="match_parent">
 
                         <EditText
+                            android:paddingEnd="5dp"
+                            android:paddingStart="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:gravity="center|bottom"
+                            android:gravity="end"
                             android:id="@+id/ti_username"
                             android:inputType="text"
                             android:textColorLink="@color/blue_grey_900" />
@@ -278,11 +288,13 @@
                         app:passwordToggleEnabled="true">
 
                         <EditText
+                            android:paddingEnd="5dp"
+                            android:paddingStart="5dp"
                             android:id="@+id/ti_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:gravity="center|bottom"
+                            android:gravity="end"
                             android:inputType="textPassword"
                             android:textColorLink="@color/blue_grey_900" />
 
@@ -313,16 +325,18 @@
 
                     <android.support.design.widget.TextInputLayout
                         android:gravity="bottom"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:passwordToggleEnabled="true">
 
                         <EditText
+                            android:paddingEnd="5dp"
+                            android:paddingStart="5dp"
                             android:id="@+id/ti_password_rep"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:gravity="center|bottom"
+                            android:gravity="end"
                             android:inputType="textPassword"
                             android:textColorLink="@color/blue_grey_900" />
 
@@ -359,13 +373,15 @@
                         android:layout_width="match_parent">
 
                         <EditText
+                            android:paddingEnd="5dp"
+                            android:paddingStart="5dp"
                             android:maxLines="1"
                             android:maxLength="20"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:gravity="end|bottom"
-                            android:id="@+id/phone_number"
+                            android:gravity="end"
+                            android:id="@+id/ti_phone_number"
                             android:inputType="phone"
                             android:textColorLink="@color/blue_grey_900" />
 
@@ -402,15 +418,15 @@
                         android:layout_width="match_parent">
 
                         <EditText
+                            android:paddingEnd="5dp"
+                            android:paddingStart="5dp"
                             android:maxLines="1"
                             android:maxLength="20"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:gravity="right|bottom"
+                            android:gravity="end"
                             android:id="@+id/ti_father_name"
-
-
                             android:inputType="text"
                             android:textColorLink="@color/blue_grey_900" />
 
@@ -446,6 +462,8 @@
                         android:gravity="bottom">
 
                         <EditText
+                            android:paddingEnd="5dp"
+                            android:paddingStart="5dp"
                             android:id="@+id/ti_address"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

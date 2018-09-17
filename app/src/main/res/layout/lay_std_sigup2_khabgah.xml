@@ -11,11 +11,20 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="prof_name"
+        android:text="خوابگاه"
         android:gravity="center"
         />
 
+    <Spinner
+        android:id="@+id/sp_kh"
+        android:background="@drawable/background_white_mid_thick"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <TextView
+        android:layout_marginTop="10dp"
         android:visibility="visible"
         android:id="@+id/tv_night_mod"
         android:layout_below="@id/tv_isstudying"
@@ -23,101 +32,41 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="night_mod"
+        android:text="بلوک"
         android:gravity="center"
         />
 
+    <Spinner
+        android:id="@+id/sp_block"
+        android:background="@drawable/background_white_mid_thick"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <TextView
+        android:layout_marginTop="10dp"
         android:visibility="visible"
         android:layout_below="@id/tv_isstudying"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="night_mod"
+        android:text="اتاق"
         android:gravity="center"
         />
-    <TextView
-        android:visibility="visible"
-        android:layout_below="@id/tv_isstudying"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:text="night_mod"
-        android:gravity="center"
-        /> <TextView
-    android:visibility="visible"
-    android:layout_below="@id/tv_isstudying"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/black"
-    android:textSize="20sp"
-    android:text="night_mod"
-    android:gravity="center"
-    /> <TextView
-    android:visibility="visible"
-    android:layout_below="@id/tv_isstudying"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/black"
-    android:textSize="20sp"
-    android:text="night_mod"
-    android:gravity="center"
-    /> <TextView
-    android:visibility="visible"
-    android:layout_below="@id/tv_isstudying"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/black"
-    android:textSize="20sp"
-    android:text="night_mod"
-    android:gravity="center"
-    /> <TextView
-    android:visibility="visible"
-    android:layout_below="@id/tv_isstudying"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/black"
-    android:textSize="20sp"
-    android:text="night_mod"
-    android:gravity="center"
-    /> <TextView
-    android:visibility="visible"
-    android:layout_below="@id/tv_isstudying"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/black"
-    android:textSize="20sp"
-    android:text="night_mod"
-    android:gravity="center"
-    /> <TextView
-    android:visibility="visible"
-    android:layout_below="@id/tv_isstudying"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/black"
-    android:textSize="20sp"
-    android:text="night_mod"
-    android:gravity="center"
-    /> <TextView
-    android:visibility="visible"
-    android:layout_below="@id/tv_isstudying"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/black"
-    android:textSize="20sp"
-    android:text="night_mod"
-    android:gravity="center"
-    /> <TextView
-    android:visibility="visible"
-    android:layout_below="@id/tv_isstudying"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/black"
-    android:textSize="20sp"
-    android:text="night_mod"
-    android:gravity="center"
-    />
+
+    <Spinner
+        android:id="@+id/sp_room"
+        android:background="@drawable/background_white_mid_thick"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
+
 
 </LinearLayout>

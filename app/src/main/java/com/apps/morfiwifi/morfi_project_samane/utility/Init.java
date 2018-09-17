@@ -299,6 +299,34 @@ public class Init {
 
 
             switch (result.getCode()){
+                case User.CODE_EXIST_DATA :
+                    if (activity instanceof SignupStudentsActivity){
+                        ((SignupStudentsActivity) activity).say_exsists_user();
+                    }
+                    break;
+                    case User.CODE_SEND:
+                        if (activity instanceof SignupStudentsActivity){
+                            ((SignupStudentsActivity) activity).user_isok();
+                        }
+                        break;
+                case Properties.CODE_EXIST_DATA:
+                    if (activity instanceof SignupStudentsActivity){
+                        ((SignupStudentsActivity) activity).say_exsists_prop();
+                    }
+
+                    break;
+                    case Properties.CODE_SEND:
+                        if (activity instanceof SignupStudentsActivity){
+                            ((SignupStudentsActivity) activity).prop_isok();
+                        }
+                        break;
+                        case Properties.CODE_SEND_ERROR:
+                            if (activity instanceof SignupStudentsActivity){
+                                ((SignupStudentsActivity) activity).say_error();
+                            }
+                            break;
+
+
                 case Properties.CODE :
                     if (activity instanceof StudentProfileActivity){
                         ((StudentProfileActivity) activity).loadproperties((Properties) result.getMessage());

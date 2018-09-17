@@ -26,7 +26,7 @@ import java.util.List;
 //@Entity
 public class User   {
 
-    public static final int CODE_SEND = 28;
+    public static final int CODE_SEND = 99;
     public static final int CODE_EXIST_DATA = 29;
     public static String OK = "OK";
 
@@ -330,7 +330,7 @@ public class User   {
         });
     }
 
-    public static void insert_user (final AppCompatActivity activity , final boolean draw_loading , int count , User user ){
+    public static void insert_user (final AppCompatActivity activity , final boolean draw_loading  , User user ){
 
         ParseObject object = new ParseObject(class_name);
         object.put(obj_activated , user.Active);
@@ -341,16 +341,21 @@ public class User   {
 
         // TODO: 8/30/2018 check properites and upload them too
 
-
+        if (draw_loading)
+            Init.start_loading(activity);
         object.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null){
                     Result result = new Result(OK , CODE_SEND , true);
                     Init.result_of_query(activity , result);
+                    if (draw_loading)
+                        Init.stop_loading(activity);
                 }else {
                     Result result = new Result(e , CODE_SEND );
                     Init.result_of_query(activity , result);
+                    if (draw_loading)
+                        Init.stop_loading(activity);
                 }
 
             }
@@ -364,7 +369,9 @@ public class User   {
 
     public static void chech_student (final AppCompatActivity activity , final boolean draw_loading  ,User user){
         ParseQuery query = new ParseQuery("User");
-        query.whereEqualTo(user.UserName , user.UserName);
+        query.whereEqualTo(User.obj_Uname , user.UserName);
+        if (draw_loading)
+            Init.start_loading(activity);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject>  objects, ParseException e) {
@@ -373,10 +380,16 @@ public class User   {
                         // TODO: 8/17/2018 EVERY THING OK!
                         Log.d("SEND USER :" , "NULL IS THE LIST ERROR");
                         Result result = new Result(new Exception("NULL DATA RECIVES") , CODE_SEND);
+                        Init.result_of_query(activity , result);
+                        if (draw_loading)
+                            Init.stop_loading(activity);
                     }else {
                         if (objects.size() == 0){
                             Log.d("SEND USER :" , "NO PROBLEM OK");
                             Result result = new Result(null , CODE_SEND , true);
+                            Init.result_of_query(activity , result);
+                            if (draw_loading)
+                                Init.stop_loading(activity);
 
 
 
@@ -385,12 +398,18 @@ public class User   {
                         }else {
                             Log.d("SEND USER :" , "Alredy EXISTING THINGS");
                             Result result = new Result(null , CODE_EXIST_DATA , false);
+                            Init.result_of_query(activity , result);
+                            if (draw_loading)
+                                Init.stop_loading(activity);
                         }
 
                     }
                 }else {
                     Result result = new Result(e , CODE_SEND);
                     Log.d("SEND USER :" , e.getMessage());
+                    Init.result_of_query(activity , result);
+                    if (draw_loading)
+                        Init.stop_loading(activity);
                 }
             }
         });

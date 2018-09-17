@@ -1,18 +1,18 @@
 package com.apps.morfiwifi.morfi_project_samane;
 
+import android.content.Context;
 import android.content.Intent;
-import android.renderscript.ScriptGroup;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -22,7 +22,6 @@ import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
-import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 
 import java.util.ArrayList;
@@ -30,11 +29,14 @@ import java.util.Calendar;
 import java.util.List;
 
 public class SignupStudentsActivity extends AppCompatActivity {
-    boolean op_finished = false;
+    boolean op_finished = false , isprop_ok = false , isuser_ok = false , isuser_checked = false , isprop_checked  =false;
     List<Khabgah> khabgahs;
     List<Block> blocks;
     List<Room> rooms;
     boolean is_kh_loaded=false,is_block_loaded= false,is_rooms_loaded = false,is_all_loaded = false;
+    static boolean first_time = true;
+    User user_glob ;
+    Properties properties_glob;
 
 
     @Override
@@ -46,7 +48,11 @@ public class SignupStudentsActivity extends AppCompatActivity {
         Room.load_rooms(this , true , false);
         Block.load_blocks(this , true , false);
 
-        Switch sw = findViewById(R.id.sw_using_khab);
+
+
+
+
+        final Switch sw = findViewById(R.id.sw_using_khab);
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -58,33 +64,105 @@ public class SignupStudentsActivity extends AppCompatActivity {
             }
         });
 
+        final AppCompatActivity activity = this;
         final EditText kod_melli= findViewById(R.id.ti_kod_melli) ;
 
         Button bottom = findViewById(R.id.btn_signup_ac);
+
         bottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean check_nat = true;
+                boolean iserror = false;
+                boolean iscorrect = false;
+                int kp = 200;
+                int a  = 200;
 
                 int err = 0;
 //                kod_melli = (TextInputEditText) findViewById(R.id.ti_kod_melli);
 
 //        design.widget.TextInputEditText
 //                TextInputEditText kod_melli = (TextInputEditText) findViewById(R.id.ti_kod_melli);
-//        TextInputEditText name = (TextInputEditText) findViewById(R.id.ti_name);
-//        TextInputEditText last_name =(TextInputEditText)  findViewById(R.id.ti_lastname);
-//        TextInputEditText user_name =(TextInputEditText)  findViewById(R.id.ti_username);
-//        TextInputEditText password =(TextInputEditText)  findViewById(R.id.ti_password);
-//        TextInputEditText password_re = (TextInputEditText) findViewById(R.id.ti_password_rep);
-//        TextInputEditText std_code =(TextInputEditText)  findViewById(R.id.ti_student_cod);
-//        SwitchCompat switc = findViewById(R.id.sw_remember);
+                EditText name =  findViewById(R.id.ti_name);
+                EditText last_name = findViewById(R.id.ti_lastname);
+                EditText user_name = findViewById(R.id.ti_username);
+                EditText password =findViewById(R.id.ti_password);
+                EditText password_re =  findViewById(R.id.ti_password_rep);
+                EditText std_code =  findViewById(R.id.ti_student_cod);
+
+                EditText std_phone =  findViewById(R.id.ti_phone_number);
+                EditText std_father_name =  findViewById(R.id.ti_father_name);
+                EditText std_adress =  findViewById(R.id.ti_address);
+                SwitchCompat switc = findViewById(R.id.sw_remember);
 
                 // ******************************************************** checking all property...
-                if (kod_melli.getText().toString().trim().length() < 3){
-                    kod_melli.setError("کد ملی خالی !");
+
+
+                if (kod_melli.getText().toString().trim().length() < 10){
+                    kod_melli.setError("کد ملی کوتاه است!");
                     err++;
+                    check_nat = false;
                 }
 
-        /*
+                if (kod_melli.getText().toString().trim().length() < 1){
+                    kod_melli.setError("کد ملی خالی!");
+                    err++;
+                    check_nat = false;
+                }
+
+
+                // CHECK NATIONAL CODE >>>>>>>>>>>>>>>>>>>>>..
+                if (check_nat){
+                    try {
+                        String melli =  kod_melli.getText().toString();
+
+                        long melli_int =  Long.parseLong(melli);
+                        a = Integer.parseInt(String.valueOf(melli.charAt(9))) ;
+                        int b = Integer.parseInt(String.valueOf(melli.charAt(8))) ;
+                        int c = Integer.parseInt(String.valueOf(melli.charAt(7))) ;
+                        int d = Integer.parseInt(String.valueOf(melli.charAt(6))) ;
+                        int e = Integer.parseInt(String.valueOf(melli.charAt(5))) ;
+                        int f = Integer.parseInt(String.valueOf(melli.charAt(4))) ;
+                        int g = Integer.parseInt(String.valueOf(melli.charAt(3))) ;
+                        int h = Integer.parseInt(String.valueOf(melli.charAt(2))) ;
+                        int i = Integer.parseInt(String.valueOf(melli.charAt(1))) ;
+                        int j = Integer.parseInt(String.valueOf(melli.charAt(0))) ;
+                        // a is current a
+
+                        int  k  =  b *2+ c*3 + d*4 + e*5 + f*6+
+                                g*7 + h*8 + i *9 + j *10;
+
+                        System.out.println(k);
+                        kp = k % 11;
+
+
+                        Log.d("NATIONAL :" , "KP = "+kp + " , A = " + a) ;
+                        if (kp == 0 && kp == a){
+                            iscorrect = true;
+                            Log.d("NATIONAL :" , " IS CORRECT 1");
+                        }else if(kp == 1 && a == 1){
+                            Log.d("NATIONAL :" , " IS CORRECT 2");
+                            iscorrect = true;
+                        }else if(kp > 1 && a == (11 - kp)){
+                            Log.d("NATIONAL :" , " IS CORRECT 3");
+                            iscorrect = true;
+                        }else if (iserror){
+                            Log.d("NATIONAL :" , " IS NOT CORRECT");
+                        }
+
+                    }catch (Exception e){
+                        Log.d("Sign UP Page :" , "EXCEP " + e.getMessage());
+                    }
+                }
+
+                if (check_nat && !iscorrect){
+                    kod_melli.setError("کد ملی صحیح نمی باشد");
+                    err ++;
+                }
+                // CHECK NATIONAL CODE >>>>>>>>>>>>>>>>>>>>>..
+
+
+
         if (name.getText().toString().trim().length() < 3){
             name.setError("نام خالی !");
             err++;
@@ -114,20 +192,54 @@ public class SignupStudentsActivity extends AppCompatActivity {
         if (std_code.getText().toString().trim().length() < 4){
             std_code.setError("شماره دانشجویی ؟");
             err++;
-        }*/
+        }
+
+                if (std_phone.getText().toString().trim().length() < 4){
+                    std_phone.setError("شماره تماس ؟");
+                    err++;
+                }
+
+                if (std_father_name.getText().toString().trim().length() < 1){
+                    std_father_name.setError("نام پدر ؟");
+                    err++;
+                }
+                if (std_adress.getText().toString().trim().length() < 4){
+                    std_adress.setError("نشانی ؟");
+                    err++;
+                }
+
+                if (sw.isChecked()){
+                    err =  chech_user_kh(err); // get and sets errors count ! USE TOAST FOR ADVISE
+                }
                 // ******************************************************** checking all property...
 
 
                 if (err == 0){
 
-/*
 
 
             Properties properties = new Properties();
             properties.std_cod = std_code.getText().toString();
             properties.national_cod = kod_melli.getText().toString();
+            properties.use_khabgah = false;
+            if (sw.isChecked()){
+                Spinner kh = findViewById(R.id.sp_kh);
+                Spinner block = findViewById(R.id.sp_block);
+                Spinner room = findViewById(R.id.sp_room);
 
-            Properties.insert_properies(this , true , properties);
+                Khabgah khabgah  = (Khabgah) kh.getSelectedItem();
+                Block block1  = (Block) block.getSelectedItem();
+                Room room1 = (Room) room.getSelectedItem();
+
+
+                properties.use_khabgah = true;
+                properties.kh_id = khabgah.Id;
+                properties.room_id = room1.Id;
+                properties.blook_id =block1.Id;
+            }
+
+
+            Properties.check_properties(activity , true , properties);
 
             User user = new User();
             user.UserName = user_name.getText().toString();
@@ -136,8 +248,11 @@ public class SignupStudentsActivity extends AppCompatActivity {
             user.Active = false;
             user.PreActive = false; // YET NO LEVEL OF ACTIVATION
 
-            User.chech_student(user);
-*/
+
+                    user_glob = user;
+                    properties_glob = properties;
+
+            User.chech_student(activity , true , user);
 
                     // THING,s IN PROGRESS ....
 
@@ -185,6 +300,23 @@ public class SignupStudentsActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private int chech_user_kh(int err) {
+        Spinner kh = findViewById(R.id.sp_kh);
+        Spinner block = findViewById(R.id.sp_block);
+        Spinner room = findViewById(R.id.sp_room);
+
+        Khabgah khabgah  = (Khabgah) kh.getSelectedItem();
+        Block block1  = (Block) block.getSelectedItem();
+        Room room1 = (Room) room.getSelectedItem();
+
+        if (khabgah == null || block1 == null || room1 == null){
+            err ++;
+            Toast.makeText(this, "خطا در بخش خوابگاه", Toast.LENGTH_SHORT).show();
+        }
+
+        return err;
     }
 
     public void signup(View view) {
@@ -247,7 +379,7 @@ public class SignupStudentsActivity extends AppCompatActivity {
             properties.std_cod = std_code.getText().toString();
             properties.national_cod = kod_melli.getText().toString();
 
-            Properties.insert_properies(this , true , properties);
+            Properties.check_properties(this , true , properties);
 
             User user = new User();
             user.UserName = user_name.getText().toString();
@@ -327,6 +459,9 @@ public class SignupStudentsActivity extends AppCompatActivity {
         EditText password =  findViewById(R.id.ti_password);
         EditText password_re =  findViewById(R.id.ti_password_rep);
         EditText std_code =  findViewById(R.id.ti_student_cod);
+        EditText std_phone =  findViewById(R.id.ti_phone_number);
+        EditText std_father_name =  findViewById(R.id.ti_father_name);
+        EditText std_adress =  findViewById(R.id.ti_address);
 
         kod_melli.getText().clear();
         name.getText().clear();
@@ -335,6 +470,9 @@ public class SignupStudentsActivity extends AppCompatActivity {
         password.getText().clear();
         password_re.getText().clear();
         std_code.getText().clear();
+        std_phone.getText().clear();
+        std_father_name.getText().clear();
+        std_adress.getText().clear();
 
 
     }
@@ -408,8 +546,144 @@ public class SignupStudentsActivity extends AppCompatActivity {
                 }
             }
 
+//            int index1 = 0,index2 = 0,index3 = 0;
 
+            first_time = true;
+            final Spinner kh = findViewById(R.id.sp_kh);
+            final Spinner block = findViewById(R.id.sp_block);
+            final Spinner room = findViewById(R.id.sp_room);
+
+            ArrayAdapter<Khabgah> kh_adapter = new ArrayAdapter<>(this,   android.R.layout.simple_spinner_item, khabgahs);
+            kh.setAdapter(kh_adapter);
+
+            ArrayAdapter<Block> bl_adapter = new ArrayAdapter<>(this,   android.R.layout.simple_spinner_item, blocks);
+            block.setAdapter(bl_adapter);
+
+            ArrayAdapter<Room> r_adapter = new ArrayAdapter<>(this,   android.R.layout.simple_spinner_item, rooms);
+            room.setAdapter(r_adapter);
+
+            final Context activity = getApplicationContext();
+
+            kh.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i >= 0){
+                        // TODO: 6/1/2018 Check some out of bound Things
+                        block.setEnabled(true);
+                        ArrayAdapter<Block> spinnerArrayAdapter = new ArrayAdapter<Block>(activity ,   android.R.layout.simple_spinner_item, khabgahs.get(i).blocks);
+                        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+                        block.setAdapter(spinnerArrayAdapter);
+
+                        if (first_time){
+                            if (blocks.size() > 0){
+                                block.setSelection(0 %blocks.size());
+                            }
+                        }
+
+                        if (khabgahs.get(i).blocks.size() < 1){
+                            room.setEnabled(false);
+                        }else {
+                            room.setEnabled(true);
+                        }
+
+                    }else {
+                        block.setEnabled(false);
+                        room.setEnabled(false);
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    block.setEnabled(false);
+                    room.setEnabled(false);
+                }
+
+            });
+
+
+//            final int finalIndex1 = index3;
+            block.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i >= 0){
+                        room.setEnabled(true);
+
+                        ArrayAdapter<Room> spinnerArrayAdapter = new ArrayAdapter<Room>(activity ,   android.R.layout.simple_spinner_item, blocks.get(i).rooms);
+                        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+                        room.setAdapter(spinnerArrayAdapter);
+
+                        if (first_time){
+                            if (rooms.size() > 0){
+                                room.setSelection(0 %rooms.size());
+                            }
+                            first_time = false;
+                        }
+
+                    }else {
+                        room.setEnabled(false);
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    room.setEnabled(false);
+                }
+
+            });
 
         }
+    }
+
+
+    public void all_don (){
+        if (isprop_checked && isuser_checked){
+            if (!isuser_ok && !isprop_ok){
+                Toast.makeText(this, "مشخصات فردی و دانشجویی نا معتبر است", Toast.LENGTH_SHORT).show();
+            }else if (!isprop_ok){
+                Toast.makeText(this, "مشخصات دانشجویی نا معتبر است", Toast.LENGTH_SHORT).show();
+            }else if (!isuser_ok){
+                Toast.makeText(this, "مشخصات فردی نا معتبر است", Toast.LENGTH_SHORT).show();
+            }else {
+
+                User.insert_user(this , true   , user_glob);
+                Properties.insert_properties(this , true , properties_glob);
+
+
+
+
+
+
+
+            }
+        }
+
+    }
+
+
+    public void prop_isok() {
+        isprop_checked  =true;
+        isprop_ok = true;
+        all_don();
+    }
+
+    public void say_exsists_prop() {
+        isprop_checked  =true;
+        isprop_ok = false;
+        all_don();
+    }
+
+    public void say_exsists_user() {
+        isuser_checked  =true;
+        isuser_ok = false;
+        all_don();
+    }
+
+    public void user_isok() {
+        isuser_checked  =true;
+        isuser_ok = true;
+        all_don();
+
     }
 }

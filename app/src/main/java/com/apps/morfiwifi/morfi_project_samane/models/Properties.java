@@ -13,6 +13,7 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -295,7 +296,7 @@ public class Properties {
     }
 
 
-    public static void insert_properies (final AppCompatActivity activity , final boolean draw_loading , Properties properties){
+    public static void check_properties(final AppCompatActivity activity , final boolean draw_loading , Properties properties){
 
 
         ParseQuery<ParseObject> national_cod_query = ParseQuery.getQuery(class_name);
@@ -308,6 +309,9 @@ public class Properties {
         queries.add(national_cod_query);
         queries.add(std_cod_query);
 
+        if (draw_loading)
+            Init.start_loading(activity);
+
         ParseQuery<ParseObject> mainQuery = ParseQuery.or(queries);
         mainQuery.findInBackground(new FindCallback<ParseObject>()
             { public void done(List<ParseObject> results, ParseException e) {
@@ -317,22 +321,72 @@ public class Properties {
                     if (results == null ){
                         Log.d("Properties Send :" , "NOK THIS IS ERROR !");
                         Result result = new Result( new Exception("NULL DATA") , CODE_SEND);
+                        Init.result_of_query(activity , result);
+                        if (draw_loading)
+                            Init.stop_loading(activity);
                     }else {
                         if (results.size() == 0){
                             Log.d("Properties SEND :" , "OK - THERE IS NO PROBLEM");
                             Result result = new Result(null , CODE_SEND , true);
+                            Init.result_of_query(activity , result);
+                            if (draw_loading)
+                                Init.stop_loading(activity);
                         }else {
                             Log.d("Properties SEND :" , "NO THER IS EXISTINGS !");
                             Result result = new Result( null , CODE_EXIST_DATA , false);
+                            Init.result_of_query(activity , result);
+                            if (draw_loading)
+                                Init.stop_loading(activity);
+                            // Nat cod or STD cod exists
                         }
                     }
 
                 }else {
                     Log.d("Properties Send EX 2:" , e.getMessage());
                     Result result = new Result(e , CODE_SEND);
+                    Init.result_of_query(activity , result);
+                    if (draw_loading)
+                        Init.stop_loading(activity);
                 }
             }
             });
+
+    }
+    public static void insert_properties(final AppCompatActivity activity , final boolean draw_loading , Properties properties){
+
+        ParseObject object = new ParseObject(class_name);
+        object.put(obj_national_cod , properties.national_cod);
+        object.put(obj_is_studyng , properties.is_studying);
+        object.put(obj_is_using_kh , properties.use_khabgah);
+        object.put(obj_father_name , properties.father_name);
+        object.put(obj_std_code , properties.std_cod);
+        object.put(obj_isnighty , properties.isnighty);
+        object.put(obj_user_id , properties.user_id);
+        object.put(obj_kh_id , properties.kh_id);
+        object.put(obj_blook_id , properties.blook_id);
+        object.put(obj_room_id , properties.room_id);
+
+        // TODO: 8/30/2018 check properites and upload them too
+
+        if (draw_loading)
+            Init.start_loading(activity);
+        object.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null){
+                    Result result = new Result(CODE_SEND , CODE_SEND , true);
+                    Init.result_of_query(activity , result);
+                    if (draw_loading)
+                        Init.stop_loading(activity);
+                }else {
+                    Result result = new Result(e , CODE_SEND );
+                    Init.result_of_query(activity , result);
+                    if (draw_loading)
+                        Init.stop_loading(activity);
+                }
+
+            }
+        });
 
     }
 }

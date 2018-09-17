@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
             //Init.current_login = User
 
             if(!user.Active){
-                Toast.makeText(applicationContext , "ورود غیر مجاز" , Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext , "ورود غیر مجاز است" , Toast.LENGTH_SHORT).show()
                 return
             }
 
