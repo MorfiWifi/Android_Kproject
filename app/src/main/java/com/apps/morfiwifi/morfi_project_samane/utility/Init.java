@@ -235,6 +235,23 @@ public class Init {
                 }
             }
 
+            if (activity instanceof SignupStudentsActivity){
+                if (((SignupStudentsActivity) activity).isfirst()){
+                    // while first time run noormally
+                    if (loading != null){
+                        loading.dismiss();
+                    }
+                }
+            }
+
+            if (activity instanceof SignupStudentsActivity){
+                if (((SignupStudentsActivity) activity).isuserloaded() || ((SignupStudentsActivity) activity).isproploaded()){
+                    if (loading != null){
+                        loading.dismiss();
+                    }
+                }
+            }
+
 
             if (loading != null){
                 loading.dismiss();
@@ -304,7 +321,8 @@ public class Init {
                         ((SignupStudentsActivity) activity).say_exsists_user();
                     }
                     break;
-                    case User.CODE_SEND:
+
+                    case User.COD_CHECKING:
                         if (activity instanceof SignupStudentsActivity){
                             ((SignupStudentsActivity) activity).user_isok();
                         }
@@ -315,7 +333,7 @@ public class Init {
                     }
 
                     break;
-                    case Properties.CODE_SEND:
+                    case Properties.COD_CHECKING:
                         if (activity instanceof SignupStudentsActivity){
                             ((SignupStudentsActivity) activity).prop_isok();
                         }
@@ -325,6 +343,17 @@ public class Init {
                                 ((SignupStudentsActivity) activity).say_error();
                             }
                             break;
+                case Properties.CODE_SEND:
+                    if (activity instanceof SignupStudentsActivity){
+                        ((SignupStudentsActivity) activity).prop_inserted();
+                    }
+                    break;
+
+                case User.CODE_SEND:
+                    if (activity instanceof SignupStudentsActivity){
+                        ((SignupStudentsActivity) activity).user_inserted();
+                    }
+                    break;
 
 
                 case Properties.CODE :

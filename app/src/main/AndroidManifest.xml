@@ -19,6 +19,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".App"
@@ -103,7 +104,8 @@
         <activity android:name=".ui.technical.ManageItemsActivity" />
         <activity android:name=".ui.student.BroadcastActivity" />
         <activity android:name=".ui.student.StudentProfileActivity" />
-        <activity android:name=".SignupStudent2Activity"></activity>
+        <activity android:name=".SignupStudent2Activity" />
+        <activity android:name=".ui.others.TestActivity" />
     </application>
 
 </manifest>

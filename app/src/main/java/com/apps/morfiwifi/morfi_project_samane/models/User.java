@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.others.TestActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
@@ -14,6 +15,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.SignUpCallback;
 
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,7 @@ import java.util.List;
 public class User   {
 
     public static final int CODE_SEND = 99;
+    public static final int COD_CHECKING = 98;
     public static final int CODE_EXIST_DATA = 29;
     public static String OK = "OK";
 
@@ -40,7 +43,7 @@ public class User   {
 //    private static final String obj_Lname = "User"; // name of Table in parse
     private static final String obj_Uname = "username"; // name of Table in parse
     private static final String obj_role_id = "role_id"; // name of Table in parse
-    private static final String obj_activated = "activeted"; // name of Table in parse
+    private static final String obj_activated = "activete"; // name of Table in parse
     private static final String obj_preactive = "preactive"; // name of Table in parse
     private static final String obj_email = "email"; // name of Table in parse
     private static final String obj_password = "password"; // name of Table in parse
@@ -177,9 +180,9 @@ public class User   {
 
         /// Debugign thing !
         if (userName.equals("max") && pass.equals("max")){
-//            Intent intent = new Intent(activity , SignupStudent2Activity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            activity.startActivity(intent);
+            Intent intent = new Intent(activity , TestActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            activity.startActivity(intent);
             return;
         }
 
@@ -332,39 +335,38 @@ public class User   {
 
     public static void insert_user (final AppCompatActivity activity , final boolean draw_loading  , User user ){
 
-        ParseObject object = new ParseObject(class_name);
-        object.put(obj_activated , user.Active);
-        object.put(obj_preactive , user.PreActive);
-        object.put(obj_Uname , user.UserName);
-        object.put(obj_role_id , user.Role_id);
-        object.put(obj_password , user.Pass);
+        ParseUser parseUser = new ParseUser();
+        parseUser.setPassword(user.Pass);
+        parseUser.setUsername(user.UserName);
+        parseUser.put(obj_activated , user.Active);
+        parseUser.put(obj_preactive , user.PreActive);
+        parseUser.put(obj_role_id , user.Role_id);
+
 
         // TODO: 8/30/2018 check properites and upload them too
 
         if (draw_loading)
             Init.start_loading(activity);
-        object.saveInBackground(new SaveCallback() {
+
+        parseUser.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
+
                 if (e == null){
                     Result result = new Result(OK , CODE_SEND , true);
                     Init.result_of_query(activity , result);
+                    Log.d("INSERT USER :" , "SUCSESS USER INSERT");
                     if (draw_loading)
                         Init.stop_loading(activity);
                 }else {
+                    Log.d("INSERT USER :" , e.getMessage());
                     Result result = new Result(e , CODE_SEND );
                     Init.result_of_query(activity , result);
                     if (draw_loading)
                         Init.stop_loading(activity);
                 }
-
             }
         });
-
-
-
-
-
     }
 
     public static void chech_student (final AppCompatActivity activity , final boolean draw_loading  ,User user){
@@ -379,14 +381,14 @@ public class User   {
                     if (objects == null){
                         // TODO: 8/17/2018 EVERY THING OK!
                         Log.d("SEND USER :" , "NULL IS THE LIST ERROR");
-                        Result result = new Result(new Exception("NULL DATA RECIVES") , CODE_SEND);
+                        Result result = new Result(new Exception("NULL DATA RECIVES") , COD_CHECKING);
                         Init.result_of_query(activity , result);
                         if (draw_loading)
                             Init.stop_loading(activity);
                     }else {
                         if (objects.size() == 0){
                             Log.d("SEND USER :" , "NO PROBLEM OK");
-                            Result result = new Result(null , CODE_SEND , true);
+                            Result result = new Result(null , COD_CHECKING , true);
                             Init.result_of_query(activity , result);
                             if (draw_loading)
                                 Init.stop_loading(activity);

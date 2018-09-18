@@ -29,7 +29,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class SignupStudentsActivity extends AppCompatActivity {
-    boolean op_finished = false , isprop_ok = false , isuser_ok = false , isuser_checked = false , isprop_checked  =false;
+    boolean op_finished = false , isprop_ok = false , isuser_ok = false , isuser_checked = false , isprop_checked  =false , first_loading = true;
     List<Khabgah> khabgahs;
     List<Block> blocks;
     List<Room> rooms;
@@ -72,6 +72,9 @@ public class SignupStudentsActivity extends AppCompatActivity {
         bottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
                 boolean check_nat = true;
                 boolean iserror = false;
                 boolean iscorrect = false;
@@ -443,6 +446,7 @@ public class SignupStudentsActivity extends AppCompatActivity {
 
     public void say_error () {
         Toast.makeText(this, "خطایی رخ داده", Toast.LENGTH_SHORT).show();
+        Log.d("SIGN UP :" , "SOME ERROR -no feed here");
 
     }
 
@@ -473,11 +477,22 @@ public class SignupStudentsActivity extends AppCompatActivity {
         std_phone.getText().clear();
         std_father_name.getText().clear();
         std_adress.getText().clear();
-
+        op_finished = false ;
+        isprop_ok = false ;
+        isuser_ok = false ;
+        isuser_checked = false ;
+        isprop_checked  =false ;
+        first_loading = true;
+        is_kh_loaded=false;
+        is_block_loaded= false;
+        is_rooms_loaded = false;
+        is_all_loaded = false;
+         first_time = true;
 
     }
 
     public void go_login_page(View view) {
+        clear_things();
         Intent intent =  new Intent( this , LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -549,6 +564,7 @@ public class SignupStudentsActivity extends AppCompatActivity {
 //            int index1 = 0,index2 = 0,index3 = 0;
 
             first_time = true;
+            first_loading = false;
             final Spinner kh = findViewById(R.id.sp_kh);
             final Spinner block = findViewById(R.id.sp_block);
             final Spinner room = findViewById(R.id.sp_room);
@@ -636,26 +652,32 @@ public class SignupStudentsActivity extends AppCompatActivity {
         }
     }
 
+    public boolean isloaded (){
+        return (isuser_checked && isprop_checked);
+    }
+
+    public boolean isuserloaded () {
+        return isuser_checked;
+    }
+
+    public boolean isproploaded(){
+        return isprop_checked;
+    }
+
+    public boolean isfirst (){
+        return first_loading;
+    }
 
     public void all_don (){
         if (isprop_checked && isuser_checked){
             if (!isuser_ok && !isprop_ok){
                 Toast.makeText(this, "مشخصات فردی و دانشجویی نا معتبر است", Toast.LENGTH_SHORT).show();
             }else if (!isprop_ok){
-                Toast.makeText(this, "مشخصات دانشجویی نا معتبر است", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "مشخصات دانشجویی نا معتبر است (شماره دانشجویی)", Toast.LENGTH_SHORT).show();
             }else if (!isuser_ok){
-                Toast.makeText(this, "مشخصات فردی نا معتبر است", Toast.LENGTH_SHORT).show();
-            }else {
-
-                User.insert_user(this , true   , user_glob);
-                Properties.insert_properties(this , true , properties_glob);
-
-
-
-
-
-
-
+                Toast.makeText(this, "مشخصات فردی نا معتبر است (کدملی/نام کاربری)", Toast.LENGTH_SHORT).show();
+            }else if (isuser_ok && isprop_ok){
+                Toast.makeText(this, "کاربر ثبت شد", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -665,6 +687,15 @@ public class SignupStudentsActivity extends AppCompatActivity {
     public void prop_isok() {
         isprop_checked  =true;
         isprop_ok = true;
+
+        if ( isuserloaded()){
+            // then try uploading things ....
+            User.insert_user(this , true   , user_glob);
+            Properties.insert_properties(this , true , properties_glob);
+
+            Log.d("SIGN UP :" , "USER DATA & PROP SENT");
+        }
+
         all_don();
     }
 
@@ -683,7 +714,31 @@ public class SignupStudentsActivity extends AppCompatActivity {
     public void user_isok() {
         isuser_checked  =true;
         isuser_ok = true;
+
+        if ( isprop_ok){
+            // then try uploading things ....
+            User.insert_user(this , true   , user_glob);
+            Properties.insert_properties(this , true , properties_glob);
+
+            Log.d("SIGN UP :" , "USER DATA & PROP SENT");
+        }
         all_don();
 
+    }
+
+    public void user_inserted (){
+        Toast.makeText(this, "مشخصات کابری با موففقیت ثبت شد", Toast.LENGTH_SHORT).show();
+    }
+
+    public  void prop_inserted (){
+        Toast.makeText(this, "مشخصات پرسنلی با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
+    }
+
+    public void  user_insert_filed (){
+        Toast.makeText(this, "خطا در ثبت کاربر", Toast.LENGTH_SHORT).show();
+    }
+
+    public void  prop_insert_faild (){
+        Toast.makeText(this, "خطا در ثبت مشخصات پرسنلی", Toast.LENGTH_SHORT).show();
     }
 }

@@ -34,6 +34,7 @@ public class Properties {
     public static final int CODE_SEND = 25;
     public static final int CODE_EXIST_DATA = 26;
     public static final int CODE_SEND_ERROR = 27;
+    public static final int COD_CHECKING = 97;
 
     // PRE GIVE VALUE FOR NULL FIX FUTURE
     public Date createAt = Calendar.getInstance().getTime();
@@ -320,14 +321,14 @@ public class Properties {
                     // TODO: 8/17/2018 NO error ! check if there was any thing !
                     if (results == null ){
                         Log.d("Properties Send :" , "NOK THIS IS ERROR !");
-                        Result result = new Result( new Exception("NULL DATA") , CODE_SEND);
+                        Result result = new Result( new Exception("NULL DATA") , COD_CHECKING);
                         Init.result_of_query(activity , result);
                         if (draw_loading)
                             Init.stop_loading(activity);
                     }else {
                         if (results.size() == 0){
                             Log.d("Properties SEND :" , "OK - THERE IS NO PROBLEM");
-                            Result result = new Result(null , CODE_SEND , true);
+                            Result result = new Result(null , COD_CHECKING , true);
                             Init.result_of_query(activity , result);
                             if (draw_loading)
                                 Init.stop_loading(activity);
@@ -343,7 +344,7 @@ public class Properties {
 
                 }else {
                     Log.d("Properties Send EX 2:" , e.getMessage());
-                    Result result = new Result(e , CODE_SEND);
+                    Result result = new Result(e , COD_CHECKING);
                     Init.result_of_query(activity , result);
                     if (draw_loading)
                         Init.stop_loading(activity);
