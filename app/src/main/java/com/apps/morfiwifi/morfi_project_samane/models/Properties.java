@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import static com.google.android.gms.tasks.Tasks.await;
 import static com.google.android.gms.tasks.Tasks.call;
@@ -30,6 +31,7 @@ import static com.google.android.gms.tasks.Tasks.call;
 public class Properties {
 
     public static final int CODE = 9; // just for indexing !
+    public static final int CODE_OTHER = 78; // just for indexing !
     public static final int CODE_ALL = 10; // just for list of all
     public static final int CODE_SEND = 25;
     public static final int CODE_EXIST_DATA = 26;
@@ -70,16 +72,19 @@ public class Properties {
     private final static String obj_isnighty = "isnighty";
     private final static String obj_std_code = "std_code";
 
-    private static String[] all_params = {obj_user_id ,obj_kh_id ,obj_blook_id ,obj_room_id,obj_national_cod,obj_father_name,obj_is_studyng,obj_is_using_kh,obj_real_name,obj_real_lastname };
+    private static String[] all_params = {obj_id ,obj_user_id ,obj_kh_id ,obj_blook_id ,obj_room_id,obj_national_cod,obj_father_name,obj_is_studyng,obj_is_using_kh,obj_real_name,obj_real_lastname };
 
 
     //bug we NEED ONE FOR STUDENTS AND LIST FOR HIGH RANKS !!!
     private static boolean isloaded = false;
+    private static boolean is_other_loaded = false;
     private static boolean isloaded_all = false;
     private static List<ParseObject> temp;
     private static  List<Properties> propertiesList ; // For loading list of all - SECURITY FIXES REQUIRED
     private static  Properties properties ; // additional information about user !
+    private static  Properties properties_other ; // additional information about user !
     private static  ParseObject tempi ; // additional information about user !
+    private static  ParseObject temp_other ; // additional information about user !
 
     //NOTE USE LOADING FROM Init.start_loading(activity); => THIS DOSE'NT CONSIDER TYPE OF ACTIVITY !
 
@@ -171,9 +176,60 @@ public class Properties {
         }
     }
 
+    public static void load_properties (final AppCompatActivity activity , final boolean draw_loading , boolean force_new , String user_id){
+        if (force_new || !is_other_loaded){ // don't have cache or forced
+            if (draw_loading)
+                Init.start_loading(activity);
+            is_other_loaded = false;
+            ParseQuery query = new ParseQuery(class_name);
+            query.whereEqualTo(obj_user_id , user_id);
+
+            query.findInBackground(new FindCallback<ParseObject>(){
+                @Override
+                public void done(List<ParseObject> objects, ParseException e) {
+                    Result result;
+                    if (e == null){
+                        if (objects.size() > 0)
+                            temp_other = objects.get(0);
+                        else
+                            temp_other = new ParseObject(class_name);
+                        convert_other_parse();
+                        result = new Result(properties_other , CODE_OTHER , true);
+                        Init.result_of_query(activity , result);
+                        is_other_loaded = true;
+
+                        if (draw_loading)
+                            Init.stop_loading(activity);
+
+                    }else {
+                        result = new Result(e , CODE_OTHER);
+                        if (draw_loading)
+                            Init.stop_loading(activity);
+                        Init.result_of_query(activity , result);
+                    }
+                }
+            });
+
+
+        }else {
+            if (draw_loading)
+                Init.stop_loading(activity);
+            if (!properties_other.user_id.equals(user_id)){
+                load_properties(activity , true , true , user_id); // waset wat wee want
+                return;
+            }
+            Result result = new Result(properties_other , CODE_OTHER , true);
+            Init.result_of_query(activity , result);
+        }
+    }
+
     private static void convert_self_parse() {
         properties = new Properties();
         properties.null_self_fixer(tempi);
+    }
+    private static void convert_other_parse() {
+        properties_other = new Properties();
+        properties_other.null_self_fixer(temp_other);
     }
 
 
@@ -203,12 +259,13 @@ public class Properties {
     private void null_self_fixer (ParseObject parseObject){
         // TODO: 7/25/2018 COMPLET OBJECT BUILDIGN SYS
         String t = "";
+        Object object ;
         for (String param: all_params) {
             switch (param){
                 case obj_std_code:
-                    t = parseObject.get(obj_std_code).toString();
-                    if (t != null){
-                        std_cod = t;
+                    object = parseObject.get(obj_std_code);
+                    if (object != null){
+                        std_cod  = parseObject.get(obj_std_code).toString();
                     }
                     break;
                 case obj_isnighty :
@@ -228,39 +285,39 @@ public class Properties {
                     break;
 
                 case obj_blook_id:
-                    t = parseObject.get(obj_blook_id).toString();
-                    if (t != null){
-                        blook_id = t;
+                    object = parseObject.get(obj_blook_id);
+                    if (object != null){
+                        blook_id = parseObject.get(obj_blook_id).toString();
                     }
                     break;
                 case obj_kh_id:
-                    t = parseObject.get(obj_kh_id).toString();
-                    if (t != null){
-                        kh_id = t;
+                    object = parseObject.get(obj_kh_id);
+                    if (object != null){
+                        kh_id = parseObject.get(obj_kh_id).toString();
                     }
                     break;
                 case obj_room_id:
-                    t = parseObject.get(obj_room_id).toString();
-                    if (t != null){
-                        room_id = t;
+                    object = parseObject.get(obj_room_id);
+                    if (object != null){
+                        room_id = parseObject.get(obj_room_id).toString();
                     }
                     break;
                 case obj_national_cod:
-                    t = parseObject.get(obj_national_cod).toString();
-                    if (t != null){
-                        national_cod = t;
+                    object =parseObject.get(obj_national_cod);
+                    if (object != null){
+                        national_cod = parseObject.get(obj_national_cod).toString();
                     }
                     break;
                 case obj_father_name:
-                    t = parseObject.get(obj_father_name).toString();
-                    if (t != null){
-                        father_name = t;
+                    object = parseObject.get(obj_father_name);
+                    if (object != null){
+                        father_name = parseObject.get(obj_father_name).toString();
                     }
                     break;
                 case obj_user_id:
-                    t = parseObject.get(obj_user_id).toString();
-                    if (t != null){
-                        user_id = t;
+                    object = parseObject.get(obj_user_id);
+                    if (object != null){
+                        user_id = parseObject.get(obj_user_id).toString();
                     }
                     break;
                 case obj_is_studyng :
@@ -272,12 +329,17 @@ public class Properties {
                     use_khabgah = c;
                     break;
                 case obj_real_name :
-                    t = parseObject.get(obj_real_name).toString();
-                    real_name = t;
+                    object  = parseObject.get(obj_real_name);
+                    if (object != null){
+                        real_name =  parseObject.get(obj_real_name).toString();
+                    }
+
                     break;
                 case obj_real_lastname :
-                    t = parseObject.get(obj_real_lastname).toString();
-                    real_lastname = t;
+                    object =  parseObject.get(obj_real_lastname);
+                    if (object != null ){
+                        real_lastname = parseObject.get(obj_real_lastname).toString();
+                    }
                     break;
                     default:
                         break;
@@ -287,6 +349,7 @@ public class Properties {
         }
 
     }
+
 
     public static boolean isloaded_self(){
         return isloaded;
@@ -366,6 +429,8 @@ public class Properties {
         object.put(obj_kh_id , properties.kh_id);
         object.put(obj_blook_id , properties.blook_id);
         object.put(obj_room_id , properties.room_id);
+        object.put(obj_real_name , properties.real_name);
+        object.put(obj_real_lastname , properties.real_lastname);
 
         // TODO: 8/30/2018 check properites and upload them too
 
@@ -389,5 +454,9 @@ public class Properties {
             }
         });
 
+    }
+
+    public static void clear_other() {
+        is_other_loaded = false;
     }
 }

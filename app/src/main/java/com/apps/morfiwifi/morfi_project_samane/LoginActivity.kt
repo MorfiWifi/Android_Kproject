@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.apps.morfiwifi.morfi_project_samane.models.DataPref
+import com.apps.morfiwifi.morfi_project_samane.models.Properties
 import com.apps.morfiwifi.morfi_project_samane.models.User
 import com.apps.morfiwifi.morfi_project_samane.models.role
 import com.apps.morfiwifi.morfi_project_samane.ui.admin.AdminMainActivity
@@ -45,10 +46,10 @@ class LoginActivity : AppCompatActivity() {
         if (user != null){
             //Init.current_login = User
 
-            if(!user.Active){
+            /*if(!user.Active){ todo cant use this till next designe!
                 Toast.makeText(applicationContext , "ورود غیر مجاز است" , Toast.LENGTH_SHORT).show()
                 return
-            }
+            }*/
 
             Init.start_fresh() // for fixing other user catching problem
             when {

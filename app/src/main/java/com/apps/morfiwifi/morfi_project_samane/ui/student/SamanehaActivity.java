@@ -29,21 +29,30 @@ public class SamanehaActivity extends AppCompatActivity {
 //        DaoSession session = Repository.GetInstant(this);
 //        samanes = session.getSamaneDao().loadAll();
 
-        Samane samane = new Samane();
-        samane.Code = Samane.khab;
-        samane.Name = "خوابگاه";
-        samane.prop = "NON";
 
-        ArrayList<Samane> list = new ArrayList<>();
-        list.add(samane);
 
-        samane_RecyclerAdapter.Init(list , this);
 
-        Properties.load_self_properties(null , false , true);
+        Properties.load_self_properties(this , true , false);
         Khabgah.load_Khabgahs(null , false , true);
         Room.load_rooms(null , false ,true);
         Block.load_blocks(null , false , true);
 
         // .Init(Init.get_messages_dao(this), this)
+    }
+
+
+    public void set_property(Properties properties){
+        Samane samane = new Samane();
+        ArrayList<Samane> list = new ArrayList<>();
+        if (!properties.id.equals(Init.Empty)){
+            if (properties.use_khabgah){
+                samane.Code = Samane.khab;
+                samane.Name = "خوابگاه";
+                samane.prop = "NON";
+                list.add(samane);
+            }
+
+        }
+        samane_RecyclerAdapter.Init(list , this);
     }
 }

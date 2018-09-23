@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Properties;
@@ -46,6 +47,11 @@ public class ActiveStudentActivity extends SiteMasterActivity {
                         .where(UserDao.Properties.PreActive.eq(true))
                         .list();*/
 
+       // GET NEEED ACTIVE USERS >>>>!
+//        User.getall_active_users();
+        User.getall_need_active_students(this , true , false);
+
+
         active_stu_RecyclerAdapter.Init(sh_users , this); // TODO: 6/26/2018 Active Thign !
     }
 
@@ -76,19 +82,32 @@ public class ActiveStudentActivity extends SiteMasterActivity {
             //item.setVisible(true);
             WriteExcel.Export_Active_Queue(sh_users , this);
             // TODO: 6/25/2018 Export THE EXCEL THING
+            //bug fix THIS EXCELL USER CHAINGED SINCE THEN!
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void refresh_view(){
-        /*sh_users =
-                Repository.GetInstant(this).getUserDao().queryBuilder()
-                        .where(UserDao.Properties.Should_fill_init_forms.eq(true))
-                        .where(UserDao.Properties.Active.eq(false))
-                        .where(UserDao.Properties.PreActive.eq(true))
-                        .list();*/
-
+    public void put_users (List<User> users){
+        this.sh_users = users;
         active_stu_RecyclerAdapter.Init(sh_users , this); // TODO: 6/26/2018 Active Thign !
+    }
+
+    @Override
+    public void refresh_view(){
+        Properties.clear_other();
+        User.getall_need_active_students(this , true , true);
+    }
+
+    public void load_other_properties (Properties properties){
+        active_stu_RecyclerAdapter.expand_buttom_sheet(properties);
+    }
+
+    public void DELETED() {
+        Toast.makeText(this, "کاربر حذف شد", Toast.LENGTH_SHORT).show();
+    }
+
+    public void ACTIVATED() {
+        Toast.makeText(this, "کار بر فعال شد", Toast.LENGTH_SHORT).show();
     }
 }

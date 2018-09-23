@@ -225,6 +225,11 @@ public class SignupStudentsActivity extends AppCompatActivity {
             properties.std_cod = std_code.getText().toString();
             properties.national_cod = kod_melli.getText().toString();
             properties.use_khabgah = false;
+            properties.real_lastname = last_name.getText().toString();
+            properties.real_name = name.getText().toString();
+            properties.father_name = std_father_name.getText().toString();
+            //bug user ID SHOULD BE IN PROPERTY !!!!! (SEQUENCE )
+            properties.user_id ="";
             if (sw.isChecked()){
                 Spinner kh = findViewById(R.id.sp_kh);
                 Spinner block = findViewById(R.id.sp_block);
@@ -690,8 +695,8 @@ public class SignupStudentsActivity extends AppCompatActivity {
 
         if ( isuserloaded()){
             // then try uploading things ....
-            User.insert_user(this , true   , user_glob);
-            Properties.insert_properties(this , true , properties_glob);
+            User.insert_user(this , true   , user_glob , properties_glob);
+//            Properties.insert_properties(this , true , properties_glob);
 
             Log.d("SIGN UP :" , "USER DATA & PROP SENT");
         }
@@ -717,8 +722,8 @@ public class SignupStudentsActivity extends AppCompatActivity {
 
         if ( isprop_ok){
             // then try uploading things ....
-            User.insert_user(this , true   , user_glob);
-            Properties.insert_properties(this , true , properties_glob);
+            User.insert_user(this , true   , user_glob , properties_glob);
+//            Properties.insert_properties(this , true , properties_glob);
 
             Log.d("SIGN UP :" , "USER DATA & PROP SENT");
         }
@@ -728,10 +733,12 @@ public class SignupStudentsActivity extends AppCompatActivity {
 
     public void user_inserted (){
         Toast.makeText(this, "مشخصات کابری با موففقیت ثبت شد", Toast.LENGTH_SHORT).show();
+//        Init.FIX_PROP_ID(user_glob,properties_glob);
     }
 
     public  void prop_inserted (){
         Toast.makeText(this, "مشخصات پرسنلی با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
+//        Init.FIX_PROP_ID(user_glob,properties_glob);
     }
 
     public void  user_insert_filed (){

@@ -29,10 +29,12 @@ import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
+import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ActiveStudentActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.AddUserActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.EnserafActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.EnteghadActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.student.SamanehaActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.TransferActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentProfileActivity;
@@ -42,6 +44,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.apache.commons.net.ntp.NTPUDPClient;
 import org.apache.commons.net.ntp.TimeInfo;
@@ -64,6 +67,35 @@ public class Init {
     public static String MOD = "pars" ;
     public final static String Empty = "خالی" ;
     public final static String EXEPTION  = "SAMANE EXCEPTION : " ;
+/*
+
+    public static void FIX_PROP_ID(User user_glob, Properties properties_glob) {
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("username" , user_glob.UserName);
+        try {
+            List<ParseUser> users = new ArrayList<>();
+            users = query.find();
+            String id = users.get(0).getObjectId();
+
+            ParseQuery<ParseObject> query2 = ParseQuery.getQuery("property");
+            query2.whereEqualTo("std_code" , properties_glob.std_cod);
+            List<ParseObject> props = new ArrayList<>();
+            props = query2.find();
+
+            String id_p = props.get(0).getObjectId();
+            props.get(0).put("std_id" , user_glob.id);
+            props.get(0).save();
+
+
+        }catch (Exception e){
+            Log.d("EXCEPTION", e.getMessage() );
+
+        }
+
+
+        ParseUser parseUser = new ParseUser();
+    }
+*/
 
     public enum Mod {
         cancelation , feedback , transfer
@@ -73,7 +105,7 @@ public class Init {
     private static ProgressDialog loading;
 
 
-    public static  void Pront_mark(){
+    public static  void Print_mark(){
         System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
         System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
         System.out.println("MNssssssyMMMMMhssssssmMMMMMMMdssssshMMMMMMMNssssyyyyyydmNMMM");
@@ -316,6 +348,34 @@ public class Init {
 
 
             switch (result.getCode()){
+
+                case User.CODE_STD_ACTIVATED:
+                    if (activity instanceof ActiveStudentActivity){
+                        ((ActiveStudentActivity) activity).ACTIVATED();
+                        ((ActiveStudentActivity) activity).refresh_view();// NOT SHOWING THIS ONE!
+                    }
+
+                    break;
+                case User.CODE_STD_DELETED:
+                    if (activity instanceof ActiveStudentActivity){
+                        ((ActiveStudentActivity) activity).DELETED();
+                        ((ActiveStudentActivity) activity).refresh_view();// NOT SHOWING THIS ONE!
+                    }
+
+                    break;
+
+                case Properties.CODE_OTHER:
+                    if (activity instanceof ActiveStudentActivity){
+                        ((ActiveStudentActivity) activity).load_other_properties((Properties) result.getMessage());
+                    }
+                    break;
+                case User.CODE_NON_ACTIVE_STD:
+                    if (activity instanceof ActiveStudentActivity){
+                        Log.d("NON ACTICE USERS :" ,"RECIVE SUCCESS");
+                        ((ActiveStudentActivity) activity).put_users((List<User>) result.getMessage());
+                    }
+
+                    break;
                 case User.CODE_EXIST_DATA :
                     if (activity instanceof SignupStudentsActivity){
                         ((SignupStudentsActivity) activity).say_exsists_user();
@@ -357,6 +417,9 @@ public class Init {
 
 
                 case Properties.CODE :
+                    if (activity instanceof SamanehaActivity){
+                        ((SamanehaActivity) activity).set_property((Properties) result.getMessage());
+                    }
                     if (activity instanceof StudentProfileActivity){
                         ((StudentProfileActivity) activity).loadproperties((Properties) result.getMessage());
                     }if (activity instanceof TransferActivity){

@@ -11,18 +11,28 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ActiveStudentActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SignupQeueActivity;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class active_stu_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_active_stu> {
     private List<User> users; // our items !
     private static  RecyclerView recyclerView; //this
     private static AppCompatActivity activity; // super activity
+    private Properties properties;
+    private static User current_user;
+    private static BottomSheetBehavior bottomSheetBehavior;
+    private static  LinearLayout bottom_sheet;
+    private static void set_buttom_sheet(LinearLayout bottom_sheet1,BottomSheetBehavior bottomSheetBehavior1){
+        bottom_sheet = bottom_sheet1;
+        bottomSheetBehavior = bottomSheetBehavior1;}
 
     public active_stu_RecyclerAdapter (List<User> users) {
         this.users = users;
@@ -34,12 +44,81 @@ public class active_stu_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_
         return new ViewHolder_active_stu(view);
     }
 
+    public static void expand_buttom_sheet (Properties properties){
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+
+        TextView name = bottom_sheet.findViewById(R.id.tv_std_queue_name);
+        TextView lastname = bottom_sheet.findViewById(R.id.tv_std_queue_lastname);
+        TextView kartmelli = bottom_sheet.findViewById(R.id.tv_std_queue_kodmelli);
+        TextView username = bottom_sheet.findViewById(R.id.tv_std_queue_username);
+        TextView date = bottom_sheet.findViewById(R.id.tv_std_queue_date);
+
+        name.setText(properties.real_name);
+        lastname.setText(properties.real_lastname);
+        kartmelli.setText(properties.national_cod);
+        username.setText(current_user.UserName);
+
+        shamsiDate shamsiDate = new shamsiDate();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(current_user.createAt);
+
+        String date_STR = shamsiDate.shamsiDate(calendar.get(Calendar.YEAR)  , (calendar.get(Calendar.MONTH)+1) ,  calendar.get(Calendar.DAY_OF_MONTH));
+
+
+        date.setText(date_STR);
+
+        bottom_sheet.findViewById(R.id.btn_std_queue_accept).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // accepted
+//                sample_user.Active = (true);
+//                sample_user.PreActive = (true);
+//                sample_user.should_fill_init_forms = (false);
+//                        Repository.GetInstant(activity).getUserDao().update(sample_user);
+
+
+                User.active_std( activity , true,current_user);
+//                Init.Toas(activity , " فعال شد"); // TODO: 9/23/2018 wait for second to complete
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
+        });
+
+        bottom_sheet.findViewById(R.id.btn_std_queue_del).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // deleted
+//                if (current_user.id != null*/)
+                User.delete_std(activity , true,current_user);
+
+//                Init.Toas(activity , "مثلا حذف شد");
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
+        });
+
+
+
+        bottom_sheet.findViewById(R.id.im_close_message).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // close
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
+        });
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder_active_stu holder, int position) {
         final User sample_user = users.get(position);
-        holder.id.setText(sample_user.Kaet_meli); // YET DIDNT INPUT ANY STUDENT ID !
-        holder.name.setText(sample_user.FName);
-        holder.lastname.setText(sample_user.LName);
+        holder.id.setText("ID : "+ sample_user.id); // YET DIDNT INPUT ANY STUDENT ID !
+        holder.name.setText(sample_user.UserName);
+
+        shamsiDate shamsiDate = new shamsiDate();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(sample_user.createAt);
+
+        String date_STR = shamsiDate.shamsiDate(calendar.get(Calendar.YEAR)  , (calendar.get(Calendar.MONTH)+1) ,  calendar.get(Calendar.DAY_OF_MONTH));
+        holder.lastname.setText(date_STR);
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,58 +126,16 @@ public class active_stu_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_
                 // TODO: 6/6/2018 Loadup - show some Butotm sheet - just Do it
                 LinearLayout bottom_sheet = (LinearLayout)
                         activity.findViewById(R.id.bottom_sheet_active_std_queue);
+
+
                 final BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                current_user = sample_user;
 
-
-                TextView name = bottom_sheet.findViewById(R.id.tv_std_queue_name);
-                TextView lastname = bottom_sheet.findViewById(R.id.tv_std_queue_lastname);
-                TextView kartmelli = bottom_sheet.findViewById(R.id.tv_std_queue_kodmelli);
-                TextView username = bottom_sheet.findViewById(R.id.tv_std_queue_username);
-                TextView date = bottom_sheet.findViewById(R.id.tv_std_queue_date);
-
-                name.setText(sample_user.FName);
-                lastname.setText(sample_user.LName);
-                kartmelli.setText(sample_user.Kaet_meli);
-                username.setText(sample_user.UserName);
-                date.setText(sample_user.inset_date.toString());
-
-                bottom_sheet.findViewById(R.id.btn_std_queue_accept).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // accepted
-                        sample_user.Active = (true);
-                        sample_user.PreActive = (true);
-                        sample_user.should_fill_init_forms = (false);
-//                        Repository.GetInstant(activity).getUserDao().update(sample_user);
-
-                        if (activity instanceof ActiveStudentActivity){
-                            ((ActiveStudentActivity) activity).refresh_view();
-                        }
-
-                        Init.Toas(activity , " فعال شد");
-                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    }
-                });
-
-                bottom_sheet.findViewById(R.id.btn_std_queue_del).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // deleted
-                        Init.Toas(activity , "مثلا حذف شد");
-                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    }
-                });
+                Properties.load_properties(activity , true , false , sample_user.id);
 
 
 
-                bottom_sheet.findViewById(R.id.im_close_message).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // close
-                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    }
-                });
+
 
 
             }
@@ -134,6 +171,10 @@ public class active_stu_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
         recyclerView.setAdapter(new active_stu_RecyclerAdapter(users));
+        LinearLayout bottom_sheet = (LinearLayout)
+                activity.findViewById(R.id.bottom_sheet_active_std_queue);
+         bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
+        set_buttom_sheet(bottom_sheet ,bottomSheetBehavior);
 
     }
 }
