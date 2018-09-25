@@ -29,9 +29,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard.cfg'
         }
         release {
-            setMinifyEnabled(false)
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard.cfg'
-            signingConfig signingConfigs.config
+            minifyEnabled false  // shrink
+            useProguard true    // obfuscate
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     buildToolsVersion '27.0.3'

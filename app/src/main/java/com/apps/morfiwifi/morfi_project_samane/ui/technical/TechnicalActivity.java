@@ -35,6 +35,7 @@ public class TechnicalActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+        final AppCompatActivity activity = this;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -88,6 +89,14 @@ public class TechnicalActivity extends AppCompatActivity
             }
         });
 
+       /* findViewById(R.id.rel_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialogue dialogue = new Dialogue();
+                dialogue.Log_out_account(activity).show();
+            }
+        });*/
+
 
 
     }
@@ -131,6 +140,7 @@ public class TechnicalActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -198,10 +208,14 @@ public class TechnicalActivity extends AppCompatActivity
         super.onStop();
     }
 
+    public void refresh_view (){
+
+    }
     public void refresh(MenuItem item) {
         //        // TODO: 7/17/2018  refresh This activity posts complet Other ACS
         Init.Terminal("Refresh Clicked .....");
         String class_name =  this.getClass().getName();
+        refresh_view();
 
 
         if (class_name.equals(TechnicalActivity.class.getName())){

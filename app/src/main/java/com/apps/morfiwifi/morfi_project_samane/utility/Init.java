@@ -348,6 +348,10 @@ public class Init {
 
 
             switch (result.getCode()){
+                case Report.CODE_CHAINGE:
+                    if (activity instanceof  StdReportActivity)
+                        ((StdReportActivity) activity).report_chainged();
+                    break;
 
                 case User.CODE_STD_ACTIVATED:
                     if (activity instanceof ActiveStudentActivity){

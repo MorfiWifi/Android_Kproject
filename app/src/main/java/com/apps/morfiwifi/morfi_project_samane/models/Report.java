@@ -1,9 +1,11 @@
 package com.apps.morfiwifi.morfi_project_samane.models;
 
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -21,6 +23,51 @@ import java.util.List;
 
 //@Entity
 public class Report {
+    public static void chainge_status(final AppCompatActivity activity, final boolean draw_loading, String id, final int m) {
+        ParseQuery query = new ParseQuery(class_name);
+
+        if (draw_loading)
+            Init.start_loading(activity);
+
+        query.getInBackground(id, new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e == null){
+                    object.put(obj_state , m);
+                    object.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null){
+                                Result result = new Result("OBJECT ENHANCED" , CODE_CHAINGE , true);
+                                Init.result_of_query(activity , result);
+                                if (draw_loading)
+                                    Init.stop_loading(activity);
+                            }else {
+                                Result result = new Result(new Exception("OBJECT ENHANCED") , CODE_CHAINGE );
+                                Init.result_of_query(activity , result);
+                                Log.d("REPORT :" , e.getMessage());
+                                if (draw_loading)
+                                    Init.stop_loading(activity);
+                            }
+                        }
+                    });
+
+
+                }else {
+                    Result result = new Result(new Exception("OBJECT ENHANCED") , CODE_CHAINGE );
+                    Init.result_of_query(activity , result);
+                    Log.d("REPORT :" , e.getMessage());
+                    if (draw_loading)
+                        Init.stop_loading(activity);
+                }
+
+            }
+
+
+        });
+
+    }
+
     public enum  State{
         open , working_on  , finished  ;
 
@@ -51,6 +98,7 @@ public class Report {
     public static final int CODE = 11;
     public static final int CODE_ALL = 12;
     public static final int CODE_SEND = 13;
+    public static final int CODE_CHAINGE = 756;
 
     private static String class_name = "report";
     private final static String obj_state = "state";
@@ -141,6 +189,8 @@ public class Report {
             isloaded = false; // GETTING NEWER VERSION! NOT READY YET
             ParseQuery query = new ParseQuery(class_name);
             query.setLimit(limit);
+            query.orderByDescending("createdAt");
+
             query.findInBackground(new FindCallback<ParseObject>(){
                 @Override
                 public void done(List<ParseObject> objects, ParseException e) {

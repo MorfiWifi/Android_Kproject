@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.ui.others.TestActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.parse.FindCallback;
@@ -135,6 +136,66 @@ public class User   {
         });
     }
 
+    public static void user_info_dialogue(final AppCompatActivity activity, final String user_id) {
+        ParseQuery query = ParseUser.getQuery();
+
+        Init.start_loading(activity);
+
+        query.getInBackground(user_id, new GetCallback<ParseUser>() {
+
+            @Override
+            public void done(final ParseUser object, ParseException e) {
+                if (e == null ){
+                    ParseQuery query1 = new ParseQuery(Properties.class_name);
+                    query1.whereEqualTo(Properties.obj_user_id , user_id);
+                    query1.findInBackground(new FindCallback<ParseObject>() {
+                        @Override
+                        public void done(List objects, ParseException e) {
+                            if (e == null){
+                                Properties properties = new Properties();
+                                if (objects.size() < 1){ // we hame no props
+
+                                }else { // we hame more then 0 props
+//                                    Properties properties = new Properties();
+                                    ParseObject first = (ParseObject) objects.get(0);
+                                    properties.use_khabgah = first.getBoolean(Properties.obj_is_using_kh);
+                                    properties.id = first.getObjectId();
+                                    properties.real_name = first.get(Properties.obj_real_name).toString();
+                                    properties.real_lastname = first.get(Properties.obj_real_lastname).toString();
+                                    properties.father_name = first.get(Properties.obj_father_name).toString();
+                                    properties.national_cod = first.get(Properties.obj_national_cod).toString();
+                                }
+
+                                Init.stop_loading(activity);
+                                User user = new User();
+                                user.UserName = object.getUsername();
+
+                                Dialogue.load_user_info(activity , user , properties);
+
+                            }else {
+                                Init.stop_loading(activity);
+                                Log.d("GETting prop inf :" , e.getMessage());
+                            }
+
+                        }
+
+                    });
+
+
+
+                }else {
+                    Init.stop_loading(activity);
+                    Log.d("GETting USER inf :" , e.getMessage());
+                }
+            }
+        });
+
+
+
+
+
+
+    }
 
 
     public enum Kind {

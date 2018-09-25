@@ -780,4 +780,41 @@ public class Dialogue {
         dialog.show();
     }
 
+    public static void load_user_info(AppCompatActivity activity, User user , Properties properties) {
+
+         final Dialog dialog = new Dialog(activity);;
+        // custom dialog
+//        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialogue_user_info);
+
+        TextView username =  dialog.findViewById(R.id.tv_usename);
+        TextView real_name = dialog.findViewById(R.id.tv_real_name);
+        TextView real_lastnaem = dialog.findViewById(R.id.tv_rel_lastname);
+        TextView fathername = dialog.findViewById(R.id.tv_father_name);
+        TextView national_code = dialog.findViewById(R.id.tv_national_code);
+        TextView use_kh = dialog.findViewById(R.id.tv_use_kh);
+
+        username.setText(user.UserName);
+        real_lastnaem.setText(properties.real_lastname);
+        real_name.setText(properties.real_name);
+        fathername.setText(properties.father_name);
+        national_code.setText(properties.national_cod);
+        if (properties.use_khabgah){
+            use_kh.setText("از خوابگاه استفاده می کند");
+        }else {
+            use_kh.setText("از خوابگاه استفاده نمی کند");
+        }
+
+        dialog.show();
+
+        dialog.findViewById(R.id.btn_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+//        dialog.seti
+
+    }
 }

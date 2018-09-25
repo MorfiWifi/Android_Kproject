@@ -53,4 +53,14 @@ public class StdReportActivity extends TechnicalActivity {
 
     }
 
+
+    @Override
+    public void refresh_view() {
+        Report.load_reports(this , true );
+    }
+
+    public void report_chainged() {
+        refresh_view();
+
+    }
 }

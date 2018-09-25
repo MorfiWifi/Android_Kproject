@@ -239,7 +239,7 @@ public class SignupStudentsActivity extends AppCompatActivity {
                 Block block1  = (Block) block.getSelectedItem();
                 Room room1 = (Room) room.getSelectedItem();
 
-
+                properties.is_studying = true;
                 properties.use_khabgah = true;
                 properties.kh_id = khabgah.Id;
                 properties.room_id = room1.Id;

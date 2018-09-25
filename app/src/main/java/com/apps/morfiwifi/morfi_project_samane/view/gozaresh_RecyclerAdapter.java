@@ -1,5 +1,6 @@
 package com.apps.morfiwifi.morfi_project_samane.view;
 
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 //import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
+import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
@@ -78,6 +81,7 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                 final Spinner states = bottom_sheet.findViewById(R.id.sp_new_state);
                 TextView date = bottom_sheet.findViewById(R.id.tv_gozaresh_date);
                 TextView sende_id = bottom_sheet.findViewById(R.id.tv_gozaresh_sender_id);
+                ImageButton account = bottom_sheet.findViewById(R.id.im_load_user_data);
 
                 shamsiDate shamsiDate = new shamsiDate();
                 Calendar calendar = Calendar.getInstance();
@@ -91,10 +95,20 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                     sende_id.setText(" فرستنده : " + User.current_user.UserName);
                     bottom_sheet.findViewById(R.id.btn_gozaresh_new_state).setVisibility(View.GONE);
                     states.setVisibility(View.GONE);
+                    account.setVisibility(View.GONE);
                 }else {
                     sende_id.setText("آیدی فرستنده : " + sample_report.sender_id);
                     bottom_sheet.findViewById(R.id.btn_gozaresh_new_state).setVisibility(View.VISIBLE);
                     states.setVisibility(View.VISIBLE);
+                    account.setVisibility(View.VISIBLE);
+                    account.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            User.user_info_dialogue(activity  , sample_report.sender_id);
+
+                            ;
+                        }
+                    });
                 }
 
 
@@ -109,7 +123,9 @@ public class gozaresh_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_go
                         Report.State new_state = (Report.State) states.getSelectedItem();
 //                        sample_report.set_State(new_state);
 //                        Repository.GetInstant(activity).getReportDao().update(sample_report);
-                        Init.Toas(activity , "تفییرات اعمال شد");
+                        int m =  ((Report.State) states.getSelectedItem()).ordinal();
+                        Report.chainge_status (  activity,true, sample_report.Id ,  m);
+//                        Init.Toas(activity , "تفییرات اعمال شد");
                         // Juset checking ....
                         Init(reportList, activity);
                     }

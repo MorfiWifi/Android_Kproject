@@ -56,21 +56,21 @@ public class Properties {
 
 
 
-    private final static String class_name = "property";
-    private final static String obj_user_id = "std_id";
-    private final static String obj_kh_id = "kh_id";
-    private final static String obj_blook_id = "bl_id";
-    private final static String obj_room_id = "oth_id";
-    private final static String obj_national_cod = "kod_meli";
-    private final static String obj_father_name = "father_name";
-    private final static String obj_createAt = "crateAt";
-    private final static String obj_id = "id";
-    private final static String obj_is_studyng = "isstudying";
-    private final static String obj_is_using_kh = "use_kh";
-    private final static String obj_real_name = "real_name";
-    private final static String obj_real_lastname = "real_lastname";
-    private final static String obj_isnighty = "isnighty";
-    private final static String obj_std_code = "std_code";
+    public final static String class_name = "property";
+    public final static String obj_user_id = "std_id";
+    public final static String obj_kh_id = "kh_id";
+    public final static String obj_blook_id = "bl_id";
+    public final static String obj_room_id = "oth_id";
+    public final static String obj_national_cod = "kod_meli";
+    public final static String obj_father_name = "father_name";
+    public final static String obj_createAt = "crateAt";
+    public final static String obj_id = "id";
+    public final static String obj_is_studyng = "isstudying";
+    public final static String obj_is_using_kh = "use_kh";
+    public final static String obj_real_name = "real_name";
+    public final static String obj_real_lastname = "real_lastname";
+    public final static String obj_isnighty = "isnighty";
+    public final static String obj_std_code = "std_code";
 
     private static String[] all_params = {obj_id ,obj_user_id ,obj_kh_id ,obj_blook_id ,obj_room_id,obj_national_cod,obj_father_name,obj_is_studyng,obj_is_using_kh,obj_real_name,obj_real_lastname };
 

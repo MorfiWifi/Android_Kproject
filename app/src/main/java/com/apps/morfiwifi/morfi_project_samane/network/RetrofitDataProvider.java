@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 */
 /**
- * this class make Retrofit API Service
+ * this class make Retrofit API MYService
  *//*
 
 public class RetrofitDataProvider {
@@ -53,7 +53,7 @@ public class RetrofitDataProvider {
 
     */
 /**
-     * can get Retrofit Service
+     * can get Retrofit MYService
      *
      * @return
      *//*

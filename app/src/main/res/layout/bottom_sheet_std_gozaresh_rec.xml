@@ -65,23 +65,36 @@
 
                 <TextView
                     android:id="@+id/tv_gozaresh_type"
-                    android:layout_weight="6"
+
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="نوع گزارش : وضغیت"
                     android:textColor="@color/black"
                     android:gravity="center"
                     />
 
-                <TextView
-                    android:id="@+id/tv_gozaresh_sender_id"
-                    android:layout_weight="6"
+                <LinearLayout
+
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="آی دی فرستده"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    />
+                    android:layout_height="wrap_content">
+                    <ImageButton
+                        android:id="@+id/im_load_user_data"
+                        android:visibility="gone"
+                        android:src="@drawable/ic_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tv_gozaresh_sender_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="آی دی فرستده"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        />
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_marginTop="5dp"
