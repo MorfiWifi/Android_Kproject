@@ -33,6 +33,11 @@ import java.util.List;
 //@Entity
 public class User   {
 
+    private static  String maxiwell;
+    static {
+        User.maxiwell = "Adsda";
+    }
+
     public static final int CODE_SEND = 99;
     public static final int COD_CHECKING = 98;
     public static final int CODE_EXIST_DATA = 29;

@@ -1,11 +1,8 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.student;
 
-import android.graphics.Bitmap;
-import android.graphics.Typeface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,11 +11,9 @@ import android.widget.TextView;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Cancellation;
 import com.apps.morfiwifi.morfi_project_samane.models.Int_date;
-import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.view.general_RecyclerAdapter;
-import com.apps.morfiwifi.morfi_project_samane.view.my_time_lisner;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
@@ -26,7 +21,7 @@ import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import java.util.List;
 
-public class EnserafActivity extends DarkhastActivity implements
+public class CancelationActivity extends DarkhastActivity implements
         TimePickerDialog.OnTimeSetListener,
         DatePickerDialog.OnDateSetListener,
         View.OnClickListener{
@@ -38,7 +33,7 @@ public class EnserafActivity extends DarkhastActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enseraf);
+        setContentView(R.layout.activity_cancelation);
         tv_hint = findViewById(R.id.tv_enseraf_date);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,7 +55,7 @@ public class EnserafActivity extends DarkhastActivity implements
     public void pick_date(View view) {
         PersianCalendar persianCalendar = new PersianCalendar();
         DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
-                EnserafActivity.this,
+                CancelationActivity.this,
                 persianCalendar.getPersianYear(),
                 persianCalendar.getPersianMonth(),
                 persianCalendar.getPersianDay()

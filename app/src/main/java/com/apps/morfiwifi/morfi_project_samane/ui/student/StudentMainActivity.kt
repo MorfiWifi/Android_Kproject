@@ -58,7 +58,7 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         }
 
         rel_cancelation.setOnClickListener {
-            val intent = Intent(this , EnserafActivity::class.java)
+            val intent = Intent(this , CancelationActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent )
         }
@@ -157,7 +157,7 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 startActivity(intent )
             }
             R.id.nav_enseraf ->{
-                val intent = Intent(this , EnserafActivity::class.java)
+                val intent = Intent(this , CancelationActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent )
             }

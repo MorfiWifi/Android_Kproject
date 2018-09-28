@@ -18,8 +18,6 @@ import android.view.MenuItem;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Broudcast;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
-import com.apps.morfiwifi.morfi_project_samane.ui.site_master.EnserafQeueActivity;
-import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SiteMasterActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 
 public class TechnicalActivity extends AppCompatActivity

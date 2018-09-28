@@ -795,15 +795,15 @@ public class Dialogue {
         TextView national_code = dialog.findViewById(R.id.tv_national_code);
         TextView use_kh = dialog.findViewById(R.id.tv_use_kh);
 
-        username.setText(user.UserName);
-        real_lastnaem.setText(properties.real_lastname);
-        real_name.setText(properties.real_name);
-        fathername.setText(properties.father_name);
-        national_code.setText(properties.national_cod);
+        username.setText( "نام کاربری"+" : " +user.UserName);
+        real_lastnaem.setText( "نام خانوادگی "+" : " +properties.real_lastname  );
+        real_name.setText(  "نام " +" : " + properties.real_name);
+        fathername.setText( "نام پدر "+" : " +properties.father_name  );
+        national_code.setText("کدملی "+" : " +properties.national_cod  );
         if (properties.use_khabgah){
-            use_kh.setText("از خوابگاه استفاده می کند");
+            use_kh.setText("* از خوابگاه استفاده می کند");
         }else {
-            use_kh.setText("از خوابگاه استفاده نمی کند");
+            use_kh.setText("* از خوابگاه استفاده نمی کند");
         }
 
         dialog.show();

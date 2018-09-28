@@ -163,8 +163,8 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
 
                 break;
             case R.id.nav_enseraf :
-                if (!(this instanceof EnserafActivity)){
-                    intent = new Intent(this , EnserafActivity.class);
+                if (!(this instanceof CancelationActivity)){
+                    intent = new Intent(this , CancelationActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent );
                 }

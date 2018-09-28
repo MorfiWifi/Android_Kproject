@@ -89,7 +89,7 @@ public class SiteMasterActivity extends AppCompatActivity
         findViewById(R.id.rel_go_out_queue).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , EnserafQeueActivity.class);
+                Intent intent = new Intent(getApplicationContext() , CancelationQeueActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -190,8 +190,8 @@ public class SiteMasterActivity extends AppCompatActivity
             }
 
         } else if (id == R.id.nav_enseraf) {
-            if (!(this.getClass().getName().equals(EnserafQeueActivity.class.getName()))){
-                intent = new Intent(this , EnserafQeueActivity.class);
+            if (!(this.getClass().getName().equals(CancelationQeueActivity.class.getName()))){
+                intent = new Intent(this , CancelationQeueActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

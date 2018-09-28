@@ -111,6 +111,16 @@ public class Cancellation {
         }
     }
 
+    public static void load_canclelations (final AppCompatActivity activity , final boolean draw_loading , boolean force_new){
+        if (force_new || !isloaded) { // don't have cache or forced
+            if (draw_loading)
+                Init.start_loading(activity);
+
+        }else {
+
+        }
+
+    }
     public static void load_cancelations (final AppCompatActivity activity , final boolean draw_loading ){ // laod all of them ...
         // NO cache advised
         if (draw_loading)

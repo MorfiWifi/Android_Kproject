@@ -72,7 +72,7 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.TestDaoActivity" />
         <activity android:name=".ui.student.SamanehaActivity" />
-        <activity android:name=".ui.student.EnserafActivity" />
+        <activity android:name=".ui.student.CancelationActivity" />
         <activity android:name=".ui.student.TransferActivity" />
         <activity android:name=".ui.student.DarkhastActivity" />
         <activity android:name=".ui.student.ReportActivity" />
@@ -87,7 +87,7 @@
             android:label="@string/title_activity_site_master"
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.site_master.SignupQeueActivity" />
-        <activity android:name=".ui.site_master.EnserafQeueActivity" />
+        <activity android:name=".ui.site_master.CancelationQeueActivity" />
         <activity android:name=".ui.site_master.AddUserActivity" />
         <activity android:name=".ui.site_master.StatesticActivity" />
         <activity android:name=".ui.site_master.SearchActivity" />
