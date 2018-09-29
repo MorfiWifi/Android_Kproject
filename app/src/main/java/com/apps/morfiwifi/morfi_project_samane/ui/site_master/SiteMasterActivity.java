@@ -1,10 +1,14 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.site_master;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,13 +18,60 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
+import com.apps.morfiwifi.morfi_project_samane.util.MYService;
 
 public class SiteMasterActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ProgressDialog loading;
+
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(this.getClass().getName() , "Broaud cast RECIVED HANDELING >>>0");
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                String string = bundle.getString(MYService.FILEPATH);
+                int resultCode = bundle.getInt(MYService.RESULT);
+                if (resultCode == RESULT_OK) {
+                    Toast.makeText(context,
+                            "Download complete. Download URI: " + string,
+                            Toast.LENGTH_LONG).show();
+//                    textView.setText("Download done");
+                } else {
+                    Toast.makeText(context, "Download failed",
+                            Toast.LENGTH_LONG).show();
+//                    textView.setText("Download failed");
+                }
+            }
+        }
+    };
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
+        Log.d("SERVICE :" , "SERVICE unREGISTERED !") ;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(receiver, new IntentFilter(
+                MYService.NOTIFICATION));
+        Log.d("SERVICE :" , "SERVICE REGISTERED !") ;
+
+        Intent intent = new Intent(this, MYService.class);
+        intent.putExtra(MYService.FILENAME, "index.html");
+        intent.putExtra(MYService.URL,
+                "http://www.vogella.com/index.html");
+        startService(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

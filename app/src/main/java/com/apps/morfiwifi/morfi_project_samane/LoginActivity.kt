@@ -1,5 +1,6 @@
 package com.apps.morfiwifi.morfi_project_samane
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -15,8 +16,12 @@ import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SiteMasterActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.student.SamanehaActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentMainActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.technical.TechnicalActivity
+import com.apps.morfiwifi.morfi_project_samane.util.MYService
 import com.apps.morfiwifi.morfi_project_samane.utility.Init
 import kotlinx.android.synthetic.main.activity_login.*
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.IntentFilter
 
 
 class LoginActivity : AppCompatActivity() {
@@ -38,7 +43,6 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
         Init.Login_Signup(this)
-
     }
 
     fun login_server (user : User){
@@ -149,4 +153,16 @@ class LoginActivity : AppCompatActivity() {
 
        // m.save()
     }
+
+    override fun onResume() {
+        super.onResume()
+//        registerReceiver(receiver, IntentFilter(MYService.NOTIFICATION))
+    }
+
+    override fun onPause() {
+        super.onPause()
+//        unregisterReceiver(receiver)
+    }
+
+
 }

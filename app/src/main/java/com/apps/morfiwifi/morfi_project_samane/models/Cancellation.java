@@ -1,10 +1,12 @@
 package com.apps.morfiwifi.morfi_project_samane.models;
 
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -37,34 +39,35 @@ public class Cancellation {
                     return "مشخص نیست";
             }
         }
-    }
 
+    }
     public String Id = Init.Empty;
+
     public String sender_id  = Init.Empty;
     public String reason  = Init.Empty;
     public Date canvle_date  = Calendar.getInstance().getTime();
     public int state_int = 0;
     public Date createAt = Calendar.getInstance().getTime();
     public State state = State.fromInteger(0);
-
     public static final int CODE = 2;
+
     public static final int CODE_ALL = 3;
     public static final int CODE_SEND = 4;
-
+    public static final int CODE_CHAINGED = 1934;
     private static String class_name = "cancellation";
+
     private final static String obj_state = "state";
     private final static String obj_id = "id";
     private final static String obj_createAt = "crateAt";
     private final static String obj_sender_id = "sender_id";
     private final static String obj_reason = "reason";
     private final static String obj_cancle_date = "cancle_date";
-
     private static boolean isloaded = false;
+
     private static List<ParseObject> temp;
     private static  List<Cancellation> cancellations;
     private static int limit = 100;
     private static String[] all_params = {obj_state ,obj_reason ,obj_id ,obj_createAt ,obj_sender_id , obj_cancle_date  };
-
     public static void load_self_canclelations (final AppCompatActivity activity , final boolean draw_loading , boolean force_new){ // laod all of them ...
         if (force_new || !isloaded){ // don't have cache or forced
             if (draw_loading)
@@ -121,6 +124,7 @@ public class Cancellation {
         }
 
     }
+
     public static void load_cancelations (final AppCompatActivity activity , final boolean draw_loading ){ // laod all of them ...
         // NO cache advised
         if (draw_loading)
@@ -156,7 +160,6 @@ public class Cancellation {
         });
 
     }
-
     public static void send_self_cancelation(final AppCompatActivity activity , final boolean draw_loading , String reason , Date date ){
         if (draw_loading)
             Init.start_loading(activity);
@@ -213,6 +216,7 @@ public class Cancellation {
         }
         return cancellationList;
     }
+
     private static void convert_parse(){
         cancellations = new ArrayList<>();
         if (temp != null){
@@ -278,6 +282,37 @@ public class Cancellation {
 
             }
         }
+
+    }
+    public static void set_new_state(final AppCompatActivity activity, String id, final int ordinal) {
+
+        ParseQuery query = new ParseQuery(class_name);
+        query.getInBackground(id, new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e == null){
+                    object.put(obj_state , ordinal);
+
+                    object.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e== null){
+                                Result result = new Result("CANCELATION ENHANCED" , CODE_CHAINGED, true);
+                                Init.result_of_query(activity ,result );
+                            }else {
+
+                            }
+                        }
+                    });
+
+
+
+                }else {
+
+                }
+            }
+        });
+
 
     }
     public static void Clear(){

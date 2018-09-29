@@ -273,7 +273,7 @@
                     android:layout_height="wrap_content">
 
                     <!-- CONTENT -->
-                    <include layout="@layout/lay_std_sigup2_khabgah" />
+                    <include layout="@layout/lay_std_sigup2_prop" />
 
 
                 </com.github.florent37.expansionpanel.ExpansionLayout>
@@ -290,6 +290,8 @@
 
 
     <Button
+        android:onClick="add_user"
+        android:id="@+id/btn_add_user"
         android:visibility="visible"
         android:layout_margin="10dp"
         android:layout_alignParentBottom="true"

@@ -3,6 +3,7 @@ package com.apps.morfiwifi.morfi_project_samane.models;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
+import com.apps.morfiwifi.morfi_project_samane.ui.site_master.AddUserActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.BroadcastActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.view.broudcast_RecyclerAdapter;
@@ -158,6 +159,7 @@ public class role {
                             isloaded = false; //  this is not all so no catch
                             Result result = new Result(roles ,CODE , true );
                             Init.result_of_query(activity , result);
+
 
                             if ( draw_loading){
 //                                broudcast_RecyclerAdapter.Init(roles , activity);

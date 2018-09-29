@@ -31,6 +31,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ActiveStudentActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.AddUserActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.site_master.CancelationQeueActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.CancelationActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.EnteghadActivity;
@@ -576,6 +577,14 @@ public class Init {
 
 
                     break;
+                case Cancellation.CODE_CHAINGED:
+                    if (activity.getClass().getName().equals(CancelationQeueActivity.class.getName())){
+                        ((CancelationQeueActivity)activity).refresh();
+                    }
+
+
+                    break;
+
                 case Cancellation.CODE_SEND:
                     if (activity.getClass().getName().equals(CancelationActivity.class.getName())){
                         ((CancelationActivity)activity).refresh_view();
@@ -583,7 +592,14 @@ public class Init {
 
 
                     break;
+                    case  Cancellation.CODE_ALL:
+                        if (activity instanceof CancelationQeueActivity){
+                            ((CancelationQeueActivity) activity).set_cancelations((List<Cancellation>) result.getMessage());
+                        }
+                        break;
                 case Cancellation.CODE:
+
+
                     if (activity.getClass().getName().equals(CancelationActivity.class.getName())){
                         ((CancelationActivity)activity).load_cancelations((List<Cancellation>) result.getMessage());
                     }

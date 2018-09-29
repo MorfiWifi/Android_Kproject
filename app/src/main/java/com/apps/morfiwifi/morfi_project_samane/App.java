@@ -3,6 +3,7 @@ package com.apps.morfiwifi.morfi_project_samane;
 import com.apps.morfiwifi.morfi_project_samane.util.Security;
 import com.parse.Parse;
 import android.app.Application;
+import android.content.Intent;
 import android.util.Base64;
 import android.util.Log;
 
@@ -44,6 +45,8 @@ public class App extends Application {
                 //.server("http://192.168.1.110:1337/parse/")
                 .build()
         );
+
+
     }
 
 }

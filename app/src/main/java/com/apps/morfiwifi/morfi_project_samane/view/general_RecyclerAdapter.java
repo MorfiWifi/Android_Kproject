@@ -192,10 +192,20 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                         @Override
                         public void onClick(View view) {
                             // accepted
+
+                            if (mod.equals(Init.Mod.cancelation)){
+                                Cancellation.set_new_state ( activity, ((Cancellation)objects.get(position)).Id , (( Report.State)states.getSelectedItem()).ordinal());
+
+
+
+                            }
+
+
+
                             Report.State new_state = (Report.State) states.getSelectedItem();
 //                        sample_report.set_State(new_state);
 //                        Repository.GetInstant(activity).getReportDao().update(sample_report);
-                            Init.Toas(activity , "تفییرات اعمال شد");
+//                            Init.Toas(activity , "تفییرات اعمال شد");
                             // TODO: 8/9/2018 Do THing IN NON STD USERS ON 3TYPE MESSAGES in GENERAL
                             // Juset checking ....
 //                            Init(objects, activity);

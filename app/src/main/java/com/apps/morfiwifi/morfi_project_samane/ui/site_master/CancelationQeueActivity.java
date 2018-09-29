@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.Cancellation;
+import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.apps.morfiwifi.morfi_project_samane.view.general_RecyclerAdapter;
+
+import java.util.List;
 
 public class CancelationQeueActivity extends SiteMasterActivity {
 
@@ -27,5 +32,24 @@ public class CancelationQeueActivity extends SiteMasterActivity {
 
 
         setTitle("انصراف ها");
+
+        Cancellation.load_cancelations(this , true);
+    }
+
+    public void set_cancelations (List<Cancellation> cancelations){
+
+        general_RecyclerAdapter.Init(cancelations
+                , this , Init.Mod.cancelation , false ,true);
+    }
+
+    public void refresh (){
+        refresh_view();
+    }
+
+
+    @Override
+    protected void refresh_view() {
+//        super.refresh_view();
+        Cancellation.load_cancelations(this , true);
     }
 }

@@ -13,9 +13,12 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -38,6 +41,10 @@ public class AddUserActivity extends SiteMasterActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
         role.load_roles_accesasables(this , true , false);
+
+
+
+
         final Switch sw1 = findViewById(R.id.sw_first);
         final Switch sw2 = findViewById(R.id.sw_second);
 
@@ -122,4 +129,22 @@ public class AddUserActivity extends SiteMasterActivity {
     protected void refresh_view() {
         role.load_roles_accesasables(this , true , true);
     }
+
+    public  int check_propertyes (){
+
+        return 0;
+    }
+
+    public void add_user(View view) {
+        Toast.makeText(this, "NOT TRYING INSERT USER", Toast.LENGTH_SHORT).show();
+        // if std full property is requre !
+        // if mot std property is pre requred !
+        User user = new User();
+//        user.UserName = username;
+//
+//        User.insert_user();
+
+
+    }
+
 }
