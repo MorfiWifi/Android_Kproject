@@ -20,7 +20,7 @@ public class TestActivity extends AppCompatActivity {
 
     public void do_the_test(View view) {
         MessageNotification messageNotification = new MessageNotification();
-        MessageNotification.notify(this , "MY STRING " , 1);
+        MessageNotification.notify2(this , "MY STRING " , 1);
     }
 
     public void do_service(){

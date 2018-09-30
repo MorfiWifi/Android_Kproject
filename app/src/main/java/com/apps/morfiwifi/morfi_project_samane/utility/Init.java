@@ -1,8 +1,13 @@
 package com.apps.morfiwifi.morfi_project_samane.utility;
 
 import android.app.ProgressDialog;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.SignupStudentsActivity;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
@@ -29,6 +35,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
+import com.apps.morfiwifi.morfi_project_samane.ui.notification.MessageNotification;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ActiveStudentActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.AddUserActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.CancelationQeueActivity;
@@ -40,19 +47,26 @@ import com.apps.morfiwifi.morfi_project_samane.ui.student.TransferActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentProfileActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.technical.StdReportActivity;
+import com.apps.morfiwifi.morfi_project_samane.util.MYService;
+import com.apps.morfiwifi.morfi_project_samane.util.MyJobService;
+import com.apps.morfiwifi.morfi_project_samane.util.MyTestReceiver;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.parse.FindCallback;
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import org.apache.commons.net.ntp.NTPUDPClient;
 import org.apache.commons.net.ntp.TimeInfo;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 ///////////////////////////////////////////////////////////////////////////
 // BLOOCK ZERO >> !
@@ -67,6 +81,59 @@ public class Init {
     public static String MOD = "pars" ;
     public final static String Empty = "خالی" ;
     public final static String EXEPTION  = "SAMANE EXCEPTION : " ;
+
+    public static void test_notif(AppCompatActivity activity) {
+        /*HashMap<String, String> test = new HashMap<>();
+        test.put("message", "testing");
+        test.put("customData", "abc");
+        ParseCloud.callFunctionInBackground("pushChannelTest", test, new FunctionCallback<Object>() {
+            @Override
+            public void done(Object object, ParseException e) {
+                if (e == null ){
+                    Log.d("TEST NOTIF" , "CALL BACK NO ERROR");
+                }else {
+                    Log.d("TEST NOTIF" , e.getMessage());
+                }
+            }
+        });*/
+
+       /* JobScheduler jobScheduler = (JobScheduler) activity.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+
+        JobInfo jobInfo = new JobInfo.Builder(11, new ComponentName(activity, MyJobService.class))
+                // only add if network access is required
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+//                .setExtras("sada" , "asdas");
+                .build();
+
+        jobScheduler.schedule(jobInfo);*/
+
+        // Construct our Intent specifying the Service
+        Intent i = new Intent(activity, MYService.class);
+        // Add extras to the bundle
+        i.putExtra("foo", "bar");
+        i.putExtra("receiver", receiverForTest);
+        // Start the service
+        activity.startService(i);
+
+        MessageNotification.notify(activity , "ADSSDAasda" , 65);
+
+    }
+
+    public static MyTestReceiver receiverForTest;
+    public static void setupServiceReceiver(@NotNull final LoginActivity loginActivity) {
+        receiverForTest = new MyTestReceiver(new Handler());
+        // This is where we specify what happens when data is received from the service
+        receiverForTest.setReceiver(new MyTestReceiver.Receiver() {
+            @Override
+            public void onReceiveResult(int resultCode, Bundle resultData) {
+                if (resultCode == loginActivity.RESULT_OK) {
+                    String resultValue = resultData.getString("resultValue");
+                    Toast.makeText(loginActivity, resultValue, Toast.LENGTH_SHORT).show();
+                    Log.d("SERVICE :" , "RECIVER IN INIT CLASS !");
+                }
+            }
+        });
+    }
 /*
 
     public static void FIX_PROP_ID(User user_glob, Properties properties_glob) {

@@ -105,9 +105,24 @@
         <activity android:name=".ui.student.BroadcastActivity" />
         <activity android:name=".ui.student.StudentProfileActivity" />
         <activity android:name=".ui.others.TestActivity" />
+
         <service
             android:name=".util.MYService"
-            android:exported="false"/>
+            android:exported="false" />
+        <service
+            android:name=".util.MyJobService"
+            android:label="Test"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver
+            android:name=".util.YourBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -22,6 +22,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.IntentFilter
+import android.util.Log
+import com.apps.morfiwifi.morfi_project_samane.ui.notification.MessageNotification
 
 
 class LoginActivity : AppCompatActivity() {
@@ -41,8 +43,17 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
+        MessageNotification.createNotificationChannel(applicationContext)
+
         setContentView(R.layout.activity_login)
         Init.Login_Signup(this)
+
+        Init.setupServiceReceiver(this) // ALWAYS FIRST SET UP THEN WORK WITH!
+        Init.test_notif(this)
+
+        Log.d("LOG IN " , "TEST FUNCTION HAS RUNED !")
+
+
     }
 
     fun login_server (user : User){

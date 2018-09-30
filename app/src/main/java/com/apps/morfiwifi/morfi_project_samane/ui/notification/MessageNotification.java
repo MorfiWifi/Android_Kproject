@@ -2,6 +2,7 @@ package com.apps.morfiwifi.morfi_project_samane.ui.notification;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -12,8 +13,13 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
+import android.util.Log;
 
+import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
 import com.apps.morfiwifi.morfi_project_samane.R;
+
+import junit.runner.Version;
 
 /**
  * Helper class for showing and canceling message
@@ -43,6 +49,48 @@ public class MessageNotification {
      *
      * @see #cancel(Context)
      */
+
+    public static void createNotificationChannel( Context context) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "SAMANE NOTIFICATION";
+//                    getString(R.string.channel_name);
+            String description = "THIS IS SAMANE NOTIFICATION DESCRIPTION THAT PROVIDE DATA";
+//                    getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            String CHANNEL_ID = "SAMANE_ID";
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            Log.d("NOTIFICATION :" , "REGISTERED THE THING");
+        }
+    }
+
+    public static void notify2(final Context context,
+                              final String exampleString, final int number) {
+        Log.d("NOTIFICATION :" , "TOLD HIM TO SHOW UP");
+
+        String CHANNEL_ID = "SAMANE_ID";
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_account_billing)
+                .setContentTitle("TITLE")
+                .setContentText("CONTENT")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                ;
+//        mBuilder.notify();
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+
+// notificationId is a unique int for each notification that you must define
+        int notificationId = 56;
+        notificationManager.notify(notificationId, mBuilder.build());
+
+    }
+
     public static void notify(final Context context,
                               final String exampleString, final int number) {
         final Resources res = context.getResources();
@@ -58,84 +106,179 @@ public class MessageNotification {
         final String text = res.getString(
                 R.string.message_notification_placeholder_text_template, exampleString);
 
-        final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
 
-                // Set appropriate defaults for the notification light, sound,
-                // and vibration.
-                .setDefaults(Notification.DEFAULT_ALL)
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1){
+            int notifyID = 1;
+            String CHANNEL_ID = "my_channel_01";// The id of the channel.
+//            CharSequence name = getString(R.string.channel_name);// The user-visible name of the channel.
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, "MYNAME", importance);
 
-                // Set required fields, including the small icon, the
-                // notification title, and text.
-                .setSmallIcon(R.drawable.ic_stat_message)
-                .setContentTitle(title)
-                .setContentText(text)
+            final NotificationCompat.Builder builder = new NotificationCompat.Builder(context ,CHANNEL_ID )
 
-                // All fields below this line are optional.
+                    // Set appropriate defaults for the notification light, sound,
+                    // and vibration.
+                    .setDefaults(Notification.DEFAULT_ALL)
 
-                // Use a default priority (recognized on devices running Android
-                // 4.1 or later)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    // Set required fields, including the small icon, the
+                    // notification title, and text.
+                    .setSmallIcon(R.drawable.ic_stat_message)
+                    .setContentTitle(title)
+                    .setContentText(text)
+                    // SETT ING UP CHANE LL L>>>>>>>>>>>>>>>>>>>>>>
 
-                // Provide a large icon, shown with the notification in the
-                // notification drawer on devices running Android 3.0 or later.
-                .setLargeIcon(picture)
+                    .setChannelId(CHANNEL_ID)
 
-                // Set ticker text (preview) information for this notification.
-                .setTicker(ticker)
+                    // All fields below this line are optional.
 
-                // Show a number. This is useful when stacking notifications of
-                // a single type.
-                .setNumber(number)
+                    // Use a default priority (recognized on devices running Android
+                    // 4.1 or later)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-                // If this notification relates to a past or upcoming event, you
-                // should set the relevant time information using the setWhen
-                // method below. If this call is omitted, the notification's
-                // timestamp will by set to the time at which it was shown.
-                // TODO: Call setWhen if this notification relates to a past or
-                // upcoming event. The sole argument to this method should be
-                // the notification timestamp in milliseconds.
-                //.setWhen(...)
+                    // Provide a large icon, shown with the notification in the
+                    // notification drawer on devices running Android 3.0 or later.
+                    .setLargeIcon(picture)
 
-                // Set the pending intent to be initiated when the user touches
-                // the notification.
-                .setContentIntent(
-                        PendingIntent.getActivity(
-                                context,
-                                0,
-                                new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com")),
-                                PendingIntent.FLAG_UPDATE_CURRENT))
+                    // Set ticker text (preview) information for this notification.
+                    .setTicker(ticker)
 
-                // Show expanded text content on devices running Android 4.1 or
-                // later.
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(text)
-                        .setBigContentTitle(title)
-                        .setSummaryText("Dummy summary text"))
+                    // Show a number. This is useful when stacking notifications of
+                    // a single type.
+                    .setNumber(number)
 
-                // Example additional actions for this notification. These will
-                // only show on devices running Android 4.1 or later, so you
-                // should ensure that the activity in this notification's
-                // content intent provides access to the same actions in
-                // another way.
-                .addAction(
-                        R.drawable.ic_action_stat_share,
-                        res.getString(R.string.action_share),
-                        PendingIntent.getActivity(
-                                context,
-                                0,
-                                Intent.createChooser(new Intent(Intent.ACTION_SEND)
-                                        .setType("text/plain")
-                                        .putExtra(Intent.EXTRA_TEXT, "Dummy text"), "Dummy title"),
-                                PendingIntent.FLAG_UPDATE_CURRENT))
-                .addAction(
-                        R.drawable.ic_action_stat_reply,
-                        res.getString(R.string.action_reply),
-                        null)
+                    // If this notification relates to a past or upcoming event, you
+                    // should set the relevant time information using the setWhen
+                    // method below. If this call is omitted, the notification's
+                    // timestamp will by set to the time at which it was shown.
+                    // TODO: Call setWhen if this notification relates to a past or
+                    // upcoming event. The sole argument to this method should be
+                    // the notification timestamp in milliseconds.
+                    //.setWhen(...)
 
-                // Automatically dismiss the notification when it is touched.
-                .setAutoCancel(true);
+                    // Set the pending intent to be initiated when the user touches
+                    // the notification.
+                    .setContentIntent(
+                            PendingIntent.getActivity(
+                                    context,
+                                    0,
+                                    new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com")),
+                                    PendingIntent.FLAG_UPDATE_CURRENT))
 
-        notify(context, builder.build());
+                    // Show expanded text content on devices running Android 4.1 or
+                    // later.
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText(text)
+                            .setBigContentTitle(title)
+                            .setSummaryText("Dummy summary text"))
+
+                    // Example additional actions for this notification. These will
+                    // only show on devices running Android 4.1 or later, so you
+                    // should ensure that the activity in this notification's
+                    // content intent provides access to the same actions in
+                    // another way.
+                    .addAction(
+                            R.drawable.ic_action_stat_share,
+                            res.getString(R.string.action_share),
+                            PendingIntent.getActivity(
+                                    context,
+                                    0,
+                                    Intent.createChooser(new Intent(Intent.ACTION_SEND)
+                                            .setType("text/plain")
+                                            .putExtra(Intent.EXTRA_TEXT, "Dummy text"), "Dummy title"),
+                                    PendingIntent.FLAG_UPDATE_CURRENT))
+                    .addAction(
+                            R.drawable.ic_action_stat_reply,
+                            res.getString(R.string.action_reply),
+                            null)
+
+                    // Automatically dismiss the notification when it is touched.
+                    .setAutoCancel(true);
+
+            notify(context, builder.build());
+        }else {
+            final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+
+                    // Set appropriate defaults for the notification light, sound,
+                    // and vibration.
+                    .setDefaults(Notification.DEFAULT_ALL)
+
+                    // Set required fields, including the small icon, the
+                    // notification title, and text.
+                    .setSmallIcon(R.drawable.ic_stat_message)
+                    .setContentTitle(title)
+                    .setContentText(text)
+
+                    // All fields below this line are optional.
+
+                    // Use a default priority (recognized on devices running Android
+                    // 4.1 or later)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+                    // Provide a large icon, shown with the notification in the
+                    // notification drawer on devices running Android 3.0 or later.
+                    .setLargeIcon(picture)
+
+                    // Set ticker text (preview) information for this notification.
+                    .setTicker(ticker)
+
+                    // Show a number. This is useful when stacking notifications of
+                    // a single type.
+                    .setNumber(number)
+
+                    // If this notification relates to a past or upcoming event, you
+                    // should set the relevant time information using the setWhen
+                    // method below. If this call is omitted, the notification's
+                    // timestamp will by set to the time at which it was shown.
+                    // TODO: Call setWhen if this notification relates to a past or
+                    // upcoming event. The sole argument to this method should be
+                    // the notification timestamp in milliseconds.
+                    //.setWhen(...)
+
+                    // Set the pending intent to be initiated when the user touches
+                    // the notification.
+                    .setContentIntent(
+                            PendingIntent.getActivity(
+                                    context,
+                                    0,
+                                    new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com")),
+                                    PendingIntent.FLAG_UPDATE_CURRENT))
+
+                    // Show expanded text content on devices running Android 4.1 or
+                    // later.
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText(text)
+                            .setBigContentTitle(title)
+                            .setSummaryText("Dummy summary text"))
+
+                    // Example additional actions for this notification. These will
+                    // only show on devices running Android 4.1 or later, so you
+                    // should ensure that the activity in this notification's
+                    // content intent provides access to the same actions in
+                    // another way.
+                    .addAction(
+                            R.drawable.ic_action_stat_share,
+                            res.getString(R.string.action_share),
+                            PendingIntent.getActivity(
+                                    context,
+                                    0,
+                                    Intent.createChooser(new Intent(Intent.ACTION_SEND)
+                                            .setType("text/plain")
+                                            .putExtra(Intent.EXTRA_TEXT, "Dummy text"), "Dummy title"),
+                                    PendingIntent.FLAG_UPDATE_CURRENT))
+                    .addAction(
+                            R.drawable.ic_action_stat_reply,
+                            res.getString(R.string.action_reply),
+                            null)
+
+                    // Automatically dismiss the notification when it is touched.
+                    .setAutoCancel(true);
+
+            notify(context, builder.build());
+        }
+
+
+
+
     }
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)
