@@ -123,6 +123,9 @@
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".ui.site_master.FirstActivity" />
+        <activity android:name=".ui.site_master.SecondActivity"></activity>
     </application>
 
 </manifest>

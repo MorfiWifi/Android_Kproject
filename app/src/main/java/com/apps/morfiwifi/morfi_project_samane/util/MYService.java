@@ -68,13 +68,13 @@ public class MYService extends IntentService {
         Bundle bundle = new Bundle();
         bundle.putString("resultValue", "My Result Value. Passed in: " + val);
         // Here we call send passing a resultCode and the bundle of extras
-        rec.send(Activity.RESULT_OK, bundle);
+//        rec.send(Activity.RESULT_OK, bundle);
         Log.d("SERVICE :" , "HANDLING SOME INTENT");
 //        publishResults("SOME THING OUT", 56);
 
 
-        MessageNotification.notify(getApplicationContext() , "ASDADAASDSA" , 45);
-
+//        MessageNotification.notify(getApplicationContext() , "ASDADAASDSA" , 45);
+//        MessageNotification.notify2();
 
         handler = new Handler();
         final Runnable r = new Runnable() {
@@ -86,7 +86,7 @@ public class MYService extends IntentService {
             }
         };
 
-        handler.postDelayed(r, 1000);
+        handler.postDelayed(r, 2000);
         Log.d("SERVICE :" , "NOTIFICATION WILL RUB IN 1s");
 
 

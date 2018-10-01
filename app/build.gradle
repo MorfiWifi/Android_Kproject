@@ -29,6 +29,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard.cfg'
         }
         release {
+//            android.Manifest. = true // extr OBFUSCATEس
             minifyEnabled false  // shrink
             useProguard true    // obfuscate
             debuggable false
@@ -40,7 +41,7 @@ android {
             path 'src/main/jni/Android.mk'
         }
     }
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.2'
 }
 ext {
     parseVersion = "1.17.3"

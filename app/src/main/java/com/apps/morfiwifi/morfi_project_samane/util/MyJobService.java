@@ -8,7 +8,7 @@ public class MyJobService extends JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
         // runs on the main thread, so this Toast will appear
-        Toast.makeText(this, "JOBSERVICES", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "JOBSERVICES", Toast.LENGTH_SHORT).show();
         // perform work here, i.e. network calls asynchronously
 
         // returning false means the work has been done, return true if the job is being run asynchronously

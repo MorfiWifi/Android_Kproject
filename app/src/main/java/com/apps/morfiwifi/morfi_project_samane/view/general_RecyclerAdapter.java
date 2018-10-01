@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -119,6 +120,7 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                     TextView tv_1st = bottom_sheet.findViewById(R.id.tv_1st);
                     TextView tv_2nd = bottom_sheet.findViewById(R.id.tv_2nd);
                     TextView tv_3rd = bottom_sheet.findViewById(R.id.tv_3rd);
+                    ImageButton loud_user_data = bottom_sheet.findViewById(R.id.im_load_user_data);
 
 
                     final Spinner states = bottom_sheet.findViewById(R.id.sp_new_state);
@@ -133,24 +135,36 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                     String str_4     = Init.Empty;
                     switch (mod){
                         case cancelation:
-                            Cancellation cancellation = (Cancellation) objects.get(position);
+                            final Cancellation cancellation = (Cancellation) objects.get(position);
                             temp_text = "انصراف از خوابگاه در تاریخ : " +shamsiDate.persian_date(cancellation.canvle_date)+ " \n"+
                                     "انجام خواهد شد";
                             str_4 = cancellation.sender_id;
                             str_2 = shamsiDate.persian_date(cancellation.createAt);
                             str_3 = " موضوع : "+ "انصراف"+ " وضعیت : " + cancellation.state ;
+                            loud_user_data.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    User.user_info_dialogue(activity ,cancellation.sender_id );
+                                }
+                            });
                             break;
                         case feedback:
-                            Feedback feedback = (Feedback) objects.get(position);
+                            final Feedback feedback = (Feedback) objects.get(position);
                             temp_text =  "عنوان : " + feedback.header +"\n"+
                                     "متن : " +feedback.content;
                             str_4 = feedback.sender_id;
                             str_2 = shamsiDate.persian_date(feedback.createAt);
                             str_3 = " موضوع : "+ "پیشنهاد"+ " وضعیت : " + feedback.state;
+                            loud_user_data.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    User.user_info_dialogue(activity , feedback.sender_id);
+                                }
+                            });
                             break;
 
                         case transfer:
-                            Transfer transfer = (Transfer) objects.get(position);
+                            final Transfer transfer = (Transfer) objects.get(position);
                             temp_text = "جابجایی از خوابگاه : " + transfer.current_kh.name +"\n"+
                                     "بلوک : " + transfer.current_bl.name + "\n" +
                                     "اطاق : " + transfer.current_room.name + "\n"+
@@ -162,6 +176,12 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                             str_4 = transfer.sender_id;
                             str_2 = shamsiDate.persian_date(transfer.createAt);
                             str_3 = " موضوع : "+ "جابجابی"+ " وضعیت : " + transfer.state;
+                            loud_user_data.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    User.user_info_dialogue(activity ,transfer.sender_id );
+                                }
+                            });
                             break;
                             default:
 
@@ -172,11 +192,14 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                         bottom_sheet.findViewById(R.id.btn_gozaresh_new_state).setVisibility(View.GONE);
                         states.setVisibility(View.GONE);
                         bottom_sheet.findViewById(R.id.rel_bottom).setVisibility(View.INVISIBLE);
+                        loud_user_data.setVisibility(View.GONE);
                     }else {
                         tv_2nd.setText("آیدی فرستنده : " + str_4);
                         bottom_sheet.findViewById(R.id.btn_gozaresh_new_state).setVisibility(View.VISIBLE);
                         states.setVisibility(View.VISIBLE);
                         bottom_sheet.findViewById(R.id.rel_bottom).setVisibility(View.VISIBLE);
+                        loud_user_data.setVisibility(View.VISIBLE);
+
                     }
 
 

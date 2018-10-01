@@ -44,6 +44,7 @@ public class MyTestReceiver extends ResultReceiver {
 
 
 
+
            /* Intent intent = new Intent(this , LoginActivity.class);
 
 
