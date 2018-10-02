@@ -18,12 +18,15 @@ import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentMainActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.technical.TechnicalActivity
 import com.apps.morfiwifi.morfi_project_samane.util.MYService
 import com.apps.morfiwifi.morfi_project_samane.utility.Init
-import kotlinx.android.synthetic.main.activity_login.*
+//import kotlinx.android.synthetic.main.activity_login.*
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.IntentFilter
 import android.util.Log
+import com.apps.morfiwifi.morfi_project_samane.R.id.txin_pass
+import com.apps.morfiwifi.morfi_project_samane.R.id.txin_user_name
 import com.apps.morfiwifi.morfi_project_samane.ui.notification.MessageNotification
+import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {

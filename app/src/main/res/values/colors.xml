@@ -284,4 +284,10 @@
     <color name="grey_900">#212121</color>
 
     <color name="black">#000000</color>
+
+
+    <color name="tab_border">#a7a7aa</color>
+    <color name="tab_background">#f6f6f7</color>
+
+
 </resources>

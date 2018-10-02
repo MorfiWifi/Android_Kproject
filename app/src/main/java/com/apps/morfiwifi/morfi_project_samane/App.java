@@ -1,11 +1,16 @@
 package com.apps.morfiwifi.morfi_project_samane;
 
 import com.apps.morfiwifi.morfi_project_samane.util.Security;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+//import com.onesignal.OneSignal;
 import com.parse.Parse;
 import android.app.Application;
 import android.content.Intent;
 import android.util.Base64;
 import android.util.Log;
+
+import java.io.FileInputStream;
 
 public class App extends Application {
 
@@ -31,6 +36,23 @@ public class App extends Application {
     Log.d("THE KEY1 DEC :" , Security.Decript_STR(getserver()));
 
 
+
+    try {
+        FileInputStream serviceAccount =
+                new FileInputStream("path/to/serviceAccountKey.json");
+
+        FirebaseOptions options = new FirebaseOptions.Builder()
+//                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .setDatabaseUrl("firebase-adminsdk-lzwhq@exam1-4e724.iam.gserviceaccount.com")
+                .build();
+
+        FirebaseApp.initializeApp(getApplicationContext());
+
+    }catch (Exception e){
+        Log.d("FIERBASE : " , e.getMessage());
+    }
+
+
         Parse.initialize(new Parse.Configuration.Builder(this)
 //                .applicationId(Security.Decript_STR(getNativeKey1()))
                 .applicationId(getNativeKey1())
@@ -46,6 +68,12 @@ public class App extends Application {
                 .build()
         );
 
+        /*OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.DEBUG);
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();*/
 
     }
 

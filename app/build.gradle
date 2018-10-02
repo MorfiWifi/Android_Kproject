@@ -22,6 +22,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        /*manifestPlaceholders = [
+                onesignal_app_id: 'b0e9096c-c879-4055-ab37-da1501504b88',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]*/
     }
     buildTypes {
         debug {
@@ -42,17 +47,20 @@ android {
         }
     }
     buildToolsVersion '28.0.2'
+
 }
 ext {
     parseVersion = "1.17.3"
 }
 dependencies {
+//    implementation 'com.onesignal:OneSignal:3.10.1'
     implementation 'com.github.florent37:expansionpanel:1.1.1'
     implementation "com.parse:parse-android:$parseVersion"
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     // Add for push notification support -- add FCM or GCM but not both.
     implementation "com.parse:parse-fcm-android:$parseVersion"
     // migrate to FCM
+//    implementation 'com.google.firebase:firebase-core:16.0.3'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'commons-net:commons-net:3.3'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.50'
@@ -75,8 +83,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
-
+//apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 // In your app projects build.gradle file:
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
-
+apply plugin: 'com.google.gms.google-services'

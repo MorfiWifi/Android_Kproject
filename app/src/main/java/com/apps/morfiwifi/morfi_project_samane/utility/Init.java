@@ -115,7 +115,7 @@ public class Init {
         // Start the service
         activity.startService(i);
 
-        MessageNotification.notify(activity , "ADSSDAasda" , 65);
+//        MessageNotification.notify(activity , "ADSSDAasda" , 65);
 
     }
 

@@ -48,7 +48,7 @@ public class CancelationQeueActivity extends SiteMasterActivity {
 
 
     @Override
-    protected void refresh_view() {
+    public void refresh_view() {
 //        super.refresh_view();
         Cancellation.load_cancelations(this , true);
     }

@@ -126,7 +126,7 @@ public class AddUserActivity extends SiteMasterActivity {
 
 
     @Override
-    protected void refresh_view() {
+    public void refresh_view() {
         role.load_roles_accesasables(this , true , true);
     }
 
