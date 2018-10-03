@@ -1,20 +1,20 @@
 ﻿# Android_Kproject
 [![Build Status](https://api.travis-ci.org/pages-themes/cayman.svg)](https://github.com/MorfiWifi/Android_Kproject)  Version : 0.0.1
 
-	
-	- [x] online Log in 
-	- [x] online repors send -std
-	- [X] online report view -system worker
-	- [x] online DB Work
-	- [x] online Messaging
-	- [x] online Exchaingign
-	- [ ] online User based setting save
-	- [ ] online notification
-	- [ ] Offline settings
-	- [x] Pre catch data for speed
-	- [x] Using parse services
-	- [x] Student all parts Online
-	
+
+- [x] online Log in 
+- [x] online repors send -std
+- [X] online report view -system worker
+- [x] online DB Work
+- [x] online Messaging
+- [x] online Exchaingign
+- [ ] online User based setting save
+- [ ] online notification
+- [ ] Offline settings
+- [x] Pre catch data for speed
+- [x] Using parse services
+- [x] Student all parts Online
+
 
 دسته بندی کلاس ها 
 کلاس ها شامل چند پکیج کلی هستند که مشخص می کند از چه نوعی هستند.
