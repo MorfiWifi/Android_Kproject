@@ -1,5 +1,5 @@
 ﻿# Android_Kproject
-[![Build Status](https://api.travis-ci.org/pages-themes/cayman.svg)] [![Version](0.0.1)]
+[![Build Status](https://api.travis-ci.org/pages-themes/cayman.svg)] Version : 0.0.1
 
 	```
 	- [x] online Log in 
