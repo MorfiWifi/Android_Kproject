@@ -1,7 +1,7 @@
 ﻿# Android_Kproject
-[![Build Status](https://api.travis-ci.org/pages-themes/cayman.svg)](https://travis-ci.org/pages-themes/cayman) [![Version](https://badge.fury.io/rb/jekyll-theme-cayman.svg)](https://badge.fury.io/rb/jekyll-theme-cayman)
+[![Build Status](https://api.travis-ci.org/pages-themes/cayman.svg)] [![Version](0.0.1)]
 
-	```yml
+	```
 	- [x] online Log in 
 	- [x] online repors send -std
 	- [X] online report view -system worker
