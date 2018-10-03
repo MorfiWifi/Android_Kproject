@@ -4,6 +4,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.apps.morfiwifi.morfi_project_samane.advance.entity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -15,9 +16,11 @@ import com.parse.SaveCallback;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
-public class Cancellation {
+public class Cancellation implements entity {
+    private HashMap<String , Object> map = new HashMap<>(); // this map is for ech singele one ! raw data in !
     public enum  State{
         open , working_on  , finished  ;
 
@@ -41,6 +44,17 @@ public class Cancellation {
         }
 
     }
+
+    /*@Override
+    public Object get(int index) {
+        return null;
+    }*/
+
+    @Override
+    public Object get_index(String index) {
+        return  map.get(index);
+    }
+
     public String Id = Init.Empty;
 
     public String sender_id  = Init.Empty;
@@ -54,15 +68,15 @@ public class Cancellation {
     public static final int CODE_ALL = 3;
     public static final int CODE_SEND = 4;
     public static final int CODE_CHAINGED = 1934;
-    private static String class_name = "cancellation";
+    public static String class_name = "cancellation";
 
-    private final static String obj_state = "state";
-    private final static String obj_id = "id";
-    private final static String obj_createAt = "crateAt";
-    private final static String obj_sender_id = "sender_id";
-    private final static String obj_reason = "reason";
-    private final static String obj_cancle_date = "cancle_date";
-    private static boolean isloaded = false;
+    public final static String obj_state = "state";
+    public final static String obj_id = "id";
+    public final static String obj_createAt = "crateAt";
+    public final static String obj_sender_id = "sender_id";
+    public final static String obj_reason = "reason";
+    public final static String obj_cancle_date = "cancle_date";
+    public static boolean isloaded = false;
 
     private static List<ParseObject> temp;
     private static  List<Cancellation> cancellations;
@@ -238,12 +252,14 @@ public class Cancellation {
                     t = parseObject.getObjectId();
                     if (t != null){
                         Id = t;
+                        map.put(obj_id , Id);
                     }
                     break;
                 case obj_createAt:
                     Date date = parseObject.getCreatedAt();
                     if (date != null){
                         createAt = date;
+                        map.put(obj_createAt , date);
                     }
                     break;
 
@@ -252,6 +268,7 @@ public class Cancellation {
                     if (object != null){
                         state_int = parseObject.getInt(obj_state);
                         state = State.fromInteger(state_int);
+                        map.put(obj_state , state.toString()); // String of state!
                     }
                     break;
                 case obj_sender_id:
@@ -261,6 +278,7 @@ public class Cancellation {
                         t = object.toString();
                     }
                     sender_id = t;
+                    map.put(obj_sender_id , sender_id);
                     break;
                 case obj_reason :
                     t = Init.Empty;
@@ -269,11 +287,13 @@ public class Cancellation {
                         t = object.toString();
                     }
                     reason = t;
+                    map.put(obj_reason , reason);
                     break;
                     case obj_cancle_date :
                         object =  parseObject.getDate(obj_cancle_date);
                         if (object != null){
                             canvle_date = parseObject.getDate(obj_cancle_date);
+                            map.put(obj_cancle_date , canvle_date);
                         }
                         break;
                 default:

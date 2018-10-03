@@ -44,9 +44,9 @@ public class samane_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_sama
     public void onBindViewHolder(ViewHolder_samane holder, final int position ) {
         final Samane sample_message = samanes.get(position);
 
-//        holder.t3.setText(sample_message.Recive_Date);
+//        Holder.t3.setText(sample_message.Recive_Date);
         holder.t1.setText(sample_message.Name); // Use Message Header Insetead!
-//        holder.sender_lname.setText(sample_message.Tags); // Minimall Tags! (Not All OF Them !)
+//        Holder.sender_lname.setText(sample_message.Tags); // Minimall Tags! (Not All OF Them !)
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override

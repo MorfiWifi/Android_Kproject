@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -17,8 +18,42 @@ import java.util.List;
 
 import javax.crypto.Cipher;
 
+import static com.apps.morfiwifi.morfi_project_samane.models.Cancellation.CODE_CHAINGED;
+
 //@Entity
 public class Request {
+
+    public static void set_new_state(final AppCompatActivity activity, String id, final int ordinal) {
+
+
+        ParseQuery query = new ParseQuery(class_name);
+        query.getInBackground(id, new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e == null){
+                    object.put(obj_state , ordinal);
+
+                    object.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e== null){
+                                Result result = new Result("CANCELATION ENHANCED" , CODE_CHAINGED, true);
+                                Init.result_of_query(activity ,result );
+                            }else {
+
+                            }
+                        }
+                    });
+
+
+
+                }else {
+
+                }
+            }
+        });
+
+    }
 
     public enum  State{
         open , working_on  , finished  ;
@@ -56,6 +91,7 @@ public class Request {
     public static final int CODE = 15;
     public static final int CODE_ALL = 16;
     public static final int CODE_SEND = 17;
+    public static final int CODE_CHAINGED = 1994;
 
     private static String class_name = "request";
     private final static String obj_state = "state";

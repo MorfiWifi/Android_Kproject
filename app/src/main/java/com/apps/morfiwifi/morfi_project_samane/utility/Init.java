@@ -39,6 +39,7 @@ import com.apps.morfiwifi.morfi_project_samane.ui.notification.MessageNotificati
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ActiveStudentActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.AddUserActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.CancelationQeueActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.site_master.StatesticActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.CancelationActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.EnteghadActivity;
@@ -165,7 +166,7 @@ public class Init {
 */
 
     public enum Mod {
-        cancelation , feedback , transfer
+        cancelation , feedback , transfer , request
     }
 
     public static User current_login;
@@ -415,7 +416,25 @@ public class Init {
 
 
             switch (result.getCode()){
+
+                case Request.CODE_CHAINGED:
+                    Log.d("Statistic :" , "REQUESt CODE CHAINGED");
+                    if (activity instanceof StatesticActivity)
+                        ((StatesticActivity) activity).refresh_view();
+
+
+                    break;
+                case Transfer.CODE_CHAINGED:
+                    Log.d("Statistic :" , "TRANSFER CODE CHAINGED");
+                    if (activity instanceof StatesticActivity)
+                        ((StatesticActivity) activity).refresh_view();
+
+                    break;
+
+
                 case Report.CODE_CHAINGE:
+                    if (activity instanceof  StatesticActivity)
+                        ((StatesticActivity) activity).refresh_view();
                     if (activity instanceof  StdReportActivity)
                         ((StdReportActivity) activity).report_chainged();
                     break;
@@ -630,6 +649,22 @@ public class Init {
 
 
                     break;
+
+                case Feedback.CODE_ALL:
+                    if (activity instanceof  StatesticActivity){
+                        ((StatesticActivity) activity).load_feeds((List<Feedback>) result.getMessage());
+                    }
+                    break;
+                case Request.CODE_ALL:
+                    if (activity instanceof StatesticActivity){
+                        ((StatesticActivity) activity).load_reqs((List<Request>) result.getMessage());
+                    }
+                    break;
+                case Transfer.CODE_ALL:
+                    if (activity instanceof StatesticActivity){
+                        ((StatesticActivity) activity).load_trans((List<Transfer>) result.getMessage());
+                    }
+                    break;
                 case Feedback.CODE_SEND:
                     if (activity.getClass().getName().equals(EnteghadActivity.class.getName())){
                         ((EnteghadActivity)activity).refresh_view();
@@ -645,6 +680,8 @@ public class Init {
 
                     break;
                 case Cancellation.CODE_CHAINGED:
+                    if (activity instanceof  StatesticActivity)
+                        ((StatesticActivity) activity).refresh_view();
                     if (activity.getClass().getName().equals(CancelationQeueActivity.class.getName())){
                         ((CancelationQeueActivity)activity).refresh();
                     }

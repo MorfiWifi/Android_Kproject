@@ -95,6 +95,15 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
 
                 // Cuurent 3333333333333333333333333333333333333333333 ^
             }break;
+            case request:{
+                Request request = (Request) sample;
+                holder.first.setText(" موضوع : "+ "درخواست "+ " وضعیت : " + request.state  );
+                str_1 = request.sender_id;
+                date = request.createAt;
+            }break;
+
+
+
         }
 
 
@@ -183,6 +192,27 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                                 }
                             });
                             break;
+
+                        case request:
+                            final Request request = (Request) objects.get(position);
+                            temp_text = " درخواست : " + request.thing.name +"\n"+
+                                    "تعداد : " + request.count + "\n" +
+                                    "کد : " + request.thing.code + "\n"+
+//                                    "به خوابگاه : " + request.new_kh + "\n"+
+//                                    "بلوک : " + request.new_bl + "\n" +
+//                                    "اطاق : " + request.new_room +"\n"+
+//                                    "در تاریخ : " + shamsiDate.persian_date(request.transfer_date)+"\n"+
+                                    "در خواست شده است";
+                            str_4 = request.sender_id;
+                            str_2 = shamsiDate.persian_date(request.createAt);
+                            str_3 = " موضوع : "+ " درخواست "+ " وضعیت : " + request.state;
+                            loud_user_data.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    User.user_info_dialogue(activity ,request.sender_id );
+                                }
+                            });
+                            break;
                             default:
 
                     }
@@ -218,9 +248,12 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
 
                             if (mod.equals(Init.Mod.cancelation)){
                                 Cancellation.set_new_state ( activity, ((Cancellation)objects.get(position)).Id , (( Report.State)states.getSelectedItem()).ordinal());
-
-
-
+                            }else if (mod.equals(Init.Mod.feedback)){
+                                Feedback.set_new_state ( activity, ((Feedback)objects.get(position)).Id , (( Report.State)states.getSelectedItem()).ordinal());
+                            }else if (mod.equals(Init.Mod.request)){
+                                Request.set_new_state ( activity, ((Request)objects.get(position)).Id , (( Report.State)states.getSelectedItem()).ordinal());
+                            }else if (mod.equals(Init.Mod.transfer)){
+                                Transfer.set_new_state ( activity, ((Transfer)objects.get(position)).Id , (( Report.State)states.getSelectedItem()).ordinal());
                             }
 
 
@@ -254,8 +287,8 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
 
 
 
-//        holder.sender_name.setText(sample_report.thing.name);
-//        holder.sender_lname.setText(sample_report.state.toString());
+//        Holder.sender_name.setText(sample_report.thing.name);
+//        Holder.sender_lname.setText(sample_report.state.toString());
 
 
         shamsiDate shamsiDate = new shamsiDate();
@@ -263,7 +296,7 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
 //        calendar.setTime(sample_report.createAt);
         String dati = shamsiDate.shamsiDate(calendar.get(Calendar.YEAR) , calendar.get(Calendar.MONTH)+1 , calendar.get(Calendar.DATE));
 
-//        holder.gozaresh_type.setText(dati);
+//        Holder.gozaresh_type.setText(dati);
 
 
 

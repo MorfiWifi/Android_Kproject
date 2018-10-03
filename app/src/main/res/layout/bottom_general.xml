@@ -191,7 +191,7 @@
             <Button
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/white"
                 android:visibility="visible"
                 android:id="@+id/btn_gozaresh_new_state"
@@ -199,7 +199,7 @@
                 android:background="@drawable/buttom_green_bg"
                 android:text="وضعیت جدید"
                 android:layout_width="100dp"
-                android:layout_height="100dp" />
+                android:layout_height="60dp" />
 
 
 

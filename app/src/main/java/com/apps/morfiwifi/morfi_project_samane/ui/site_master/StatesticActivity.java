@@ -23,6 +23,9 @@ import com.apps.morfiwifi.morfi_project_samane.fragments.Site_feeds;
 import com.apps.morfiwifi.morfi_project_samane.fragments.Site_logs;
 import com.apps.morfiwifi.morfi_project_samane.fragments.Transfers;
 import com.apps.morfiwifi.morfi_project_samane.fragments.Requests;
+import com.apps.morfiwifi.morfi_project_samane.models.Feedback;
+import com.apps.morfiwifi.morfi_project_samane.models.Request;
+import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 
 import java.util.ArrayList;
@@ -31,6 +34,13 @@ import java.util.List;
 public class StatesticActivity extends SiteMasterActivity{
 
     private Handler handler;
+    Requests rec ;
+    Transfers tranc;
+//    that it create
+    Site_logs log ;
+    Site_feeds feed;
+    Extra_frag extra;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,15 +93,29 @@ public class StatesticActivity extends SiteMasterActivity{
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.insertNewFragment(new Requests ());
-        adapter.insertNewFragment(new Transfers());
 
-        //fake center fragment, so that it creates place for raised center tab.
-        adapter.insertNewFragment(new Site_logs());
 
-        adapter.insertNewFragment(new Site_feeds());
-        adapter.insertNewFragment(new Extra_frag());
+        rec = new Requests();
+        tranc = new Transfers();
+//      create;
+        log = new Site_logs();
+        feed = new Site_feeds();
+        extra = new Extra_frag();
+
+        rec.setActivity(this);
+        tranc.setActivity(this);
+        log.setActivity(this);
+        feed.setActivity(this);
+        extra.setActivity(this);
+
+        adapter.insertNewFragment(rec);
+        adapter.insertNewFragment(tranc);
+        adapter.insertNewFragment(log);
+        adapter.insertNewFragment(feed);
+        adapter.insertNewFragment(extra);
         viewPager.setAdapter(adapter);
+        this.viewPager = viewPager;
+
     }
 
 
@@ -140,7 +164,7 @@ public class StatesticActivity extends SiteMasterActivity{
         // BASED ON CHOOSEN TAB !
         // TODO: 10/2/2018 REFRESH THE VIEW BASED ON CHOOSEN TAB ....
 
-        Init.start_loading(this);
+        /*Init.start_loading(this);
         final StatesticActivity activity = this;
         handler = new Handler();
         final Runnable r = new Runnable() {
@@ -152,7 +176,51 @@ public class StatesticActivity extends SiteMasterActivity{
             }
         };
 
-        handler.postDelayed(r, 500);
+        handler.postDelayed(r, 500);*/
+
+        int current_page = viewPager.getCurrentItem();
+        Log.d("STATISTICS :" , "page current : " +current_page );
+        switch (current_page){
+            case 0 :
+                Log.d("STATISTICS :" , "page num : " +1 );
+                Request.load_requests(this , true);
+                break;
+            case 1:
+                Log.d("STATISTICS :" , "page num : " +2 );
+                Transfer.load_transfers(this , true);
+                break;
+            case 2:
+                Log.d("STATISTICS :" , "page num : " +3 );
+                break;
+
+            case 3:
+                Feedback.load_feedbacks(this , true);
+                Log.d("STATISTICS :" , "page num : " +4 );
+                break;
+            case 4:
+                Log.d("STATISTICS :" , "page num : " +5 );
+                break;
+                default:
+
+                    break;
+        }
 
     }
+
+    public void load_reqs (List<Request> requests){
+        rec.load_request(requests);
+        Log.d("STATISICS : " , "REQUESTS LOADED");
+    }
+
+    public void load_trans (List<Transfer> transfers){
+        tranc.load_transfers(transfers);
+        Log.d("STATISICS : " , "TRANSFER LOADED");
+    }
+
+    public void load_feeds (List<Feedback> feedbacks){
+        feed.load_feeds(feedbacks);
+        Log.d("STATISICS : " , "FEEDS LOADED");
+    }
+
+
 }

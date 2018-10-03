@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -16,6 +17,37 @@ import java.util.Date;
 import java.util.List;
 
 public class Feedback {
+    public static void set_new_state(final AppCompatActivity activity, String id, final int ordinal) {
+
+
+        ParseQuery query = new ParseQuery(class_name);
+        query.getInBackground(id, new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e == null){
+                    object.put(obj_state , ordinal);
+
+                    object.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e== null){
+                                Result result = new Result("CANCELATION ENHANCED" , CODE_CHAINGED, true);
+                                Init.result_of_query(activity ,result );
+                            }else {
+
+                            }
+                        }
+                    });
+
+
+
+                }else {
+
+                }
+            }
+        });
+    }
+
     public enum  State{
         open , working_on  , finished  ;
 
@@ -50,6 +82,7 @@ public class Feedback {
     public static final int CODE = 5;
     public static final int CODE_ALL = 6;
     public static final int CODE_SEND = 7;
+    public static final int CODE_CHAINGED = 2007;
 
     private static String class_name = "feedback";
     private final static String obj_state = "state";
