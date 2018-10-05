@@ -77,6 +77,7 @@ import java.util.List;
  */
 public class Init {
     public static String Parse_serevr = "pars";
+    public static final String FRAGMENT = "FRAGMENT";
     public static String ASP_server = "ASP";
     public static String Offline = "offline";
     public static String MOD = "pars" ;

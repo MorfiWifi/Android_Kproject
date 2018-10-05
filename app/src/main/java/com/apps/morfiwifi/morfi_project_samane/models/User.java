@@ -355,7 +355,7 @@ public class User   {
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("role");
                     ParseObject Role_obj ;
                     String Role_name;
-                    Init.stop_loading(activity);
+//                    Init.stop_loading(activity);
 
                     query.getInBackground(role_id, new GetCallback<ParseObject>() {
                         @Override

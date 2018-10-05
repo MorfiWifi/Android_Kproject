@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 
-public class Extra_frag extends Fragment {
+public class frag_extra extends Fragment {
     AppCompatActivity activity ;
     public void setActivity (AppCompatActivity activity){
         this.activity = activity;
@@ -21,6 +21,7 @@ public class Extra_frag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+//        activity.setTitle("ETRAS FRAG");
         View v = inflater.inflate(R.layout.fragment_log_lay, container, false);
 //        v.findViewById()
         TextView text = (TextView)v.findViewById(R.id.tv_general_text);

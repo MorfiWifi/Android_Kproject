@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 
-public class Site_logs extends Fragment {
+public class frag_log extends Fragment {
     AppCompatActivity activity ;
     public void setActivity (AppCompatActivity activity){
         this.activity = activity;
@@ -26,7 +26,7 @@ public class Site_logs extends Fragment {
 //        v.findViewById()
         TextView text = (TextView)v.findViewById(R.id.tv_general_text);
 //        text.setText("rotated text here");
-
+//        activity.setTitle("LOGS");
         RotateAnimation rotate= (RotateAnimation)AnimationUtils.loadAnimation(getContext(),R.anim.rotate);
         text.setAnimation(rotate);
 

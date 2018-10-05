@@ -1,9 +1,11 @@
 package com.apps.morfiwifi.morfi_project_samane.view;
 
+import android.content.Context;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Request;
 import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
+import com.apps.morfiwifi.morfi_project_samane.ui.site_master.StatesticActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
@@ -41,6 +44,8 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
     private List<Object> objects; // our items !
     private static RecyclerView recyclerView; //this
     private static AppCompatActivity activity; // super activit
+    private static View view; // super activit
+    private static boolean isFragment = false;
     User sener_user ;
     List<Thing> things;
 
@@ -118,6 +123,15 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                 @Override
                 public void onClick(View view) {
                     // TODO: 6/6/2018 Loadup - show some Butotm sheet - just Do it
+                    if (activity == null){
+                        View activity = view;
+                    }
+
+                    if (isFragment){
+                        ((StatesticActivity)activity).show_bottom_sheet(objects.get(position));
+                        return; //bug   BAD WORK FLOW MAY APPIER
+                    }
+
                     LinearLayout bottom_sheet = (LinearLayout)
                             activity.findViewById(R.id.bottom_general);
                     final BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
@@ -256,20 +270,10 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                                 Transfer.set_new_state ( activity, ((Transfer)objects.get(position)).Id , (( Report.State)states.getSelectedItem()).ordinal());
                             }
 
-
-
                             Report.State new_state = (Report.State) states.getSelectedItem();
-//                        sample_report.set_State(new_state);
-//                        Repository.GetInstant(activity).getReportDao().update(sample_report);
-//                            Init.Toas(activity , "تفییرات اعمال شد");
-                            // TODO: 8/9/2018 Do THing IN NON STD USERS ON 3TYPE MESSAGES in GENERAL
-                            // Juset checking ....
-//                            Init(objects, activity);
+//
                         }
                     });
-
-
-
 
                     bottom_sheet.findViewById(R.id.im_close_message).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -305,6 +309,10 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
 
     @Override
     public int getItemCount() {
+        if (objects == null)
+            return 0;
+
+
         return objects.size();
     }
 
@@ -324,12 +332,65 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
         }
     }
 
+    public static void view_fixer_fr(RecyclerView recyclerView , List<Object> reportList, View activity){
+        if (recyclerView == null){
+            Log.d(Init.FRAGMENT , "RECYCLER WASS NULL SKIPING!!");
+            return;
+        }
+        if (reportList == null){
+
+            activity.findViewById(R.id.tv_signup_empty).setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }else{
+            if (reportList.size() == 0){
+                activity.findViewById(R.id.tv_signup_empty).setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+            }
+            else {
+                activity.findViewById(R.id.tv_signup_empty).setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
     public static void Init(Object object, AppCompatActivity activity , final Init.Mod mod, boolean stdmod , boolean show_bottom_sheet ){
         List<Object> objects = ((List<Object>) object);
         view_fixer(objects, activity);
+        general_RecyclerAdapter.isFragment = false;
         recyclerView = activity.findViewById(R.id.rec_general);
         general_RecyclerAdapter.activity = activity;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setAdapter(new general_RecyclerAdapter(objects ,stdmod, show_bottom_sheet ,mod ));
+
+    }
+
+    public static void Init_fragment (Object object, Context context, View view , final Init.Mod mod, boolean stdmod , boolean show_bottom_sheet ,AppCompatActivity activity ){
+        List<Object> objects = ((List<Object>) object);
+
+
+        switch (mod){
+            case cancelation:
+//                recyclerView = activity.findViewById(R.id.rec_general_fr_cancelation);
+                recyclerView = view.findViewById(R.id.rec_general);
+                break;
+            case transfer:
+                recyclerView = view.findViewById(R.id.rec_general_fr_transfer);
+                break;
+            case request:
+                recyclerView = view.findViewById(R.id.rec_general_fr_request);
+                break;
+            case feedback:
+                recyclerView = view.findViewById(R.id.rec_general_fr_feedback);
+                break;
+                default:
+                    recyclerView = view.findViewById(R.id.rec_general);
+        }
+        view_fixer_fr(recyclerView,objects, view);
+        general_RecyclerAdapter.isFragment = true;
+        general_RecyclerAdapter.activity = activity;
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
         recyclerView.setAdapter(new general_RecyclerAdapter(objects ,stdmod, show_bottom_sheet ,mod ));

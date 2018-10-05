@@ -6,27 +6,22 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.TabHost;
-import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
-import com.apps.morfiwifi.morfi_project_samane.fragments.Extra_frag;
-import com.apps.morfiwifi.morfi_project_samane.fragments.Site_feeds;
-import com.apps.morfiwifi.morfi_project_samane.fragments.Site_logs;
-import com.apps.morfiwifi.morfi_project_samane.fragments.Transfers;
-import com.apps.morfiwifi.morfi_project_samane.fragments.Requests;
+import com.apps.morfiwifi.morfi_project_samane.fragments.frag_extra;
+import com.apps.morfiwifi.morfi_project_samane.fragments.frag_feed;
+import com.apps.morfiwifi.morfi_project_samane.fragments.frag_log;
+import com.apps.morfiwifi.morfi_project_samane.fragments.frag_transfer;
+import com.apps.morfiwifi.morfi_project_samane.fragments.frag_request;
 import com.apps.morfiwifi.morfi_project_samane.models.Feedback;
 import com.apps.morfiwifi.morfi_project_samane.models.Request;
 import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
-import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +29,14 @@ import java.util.List;
 public class StatesticActivity extends SiteMasterActivity{
 
     private Handler handler;
-    Requests rec ;
-    Transfers tranc;
+    frag_request rec ;
+    frag_transfer tranc;
 //    that it create
-    Site_logs log ;
-    Site_feeds feed;
-    Extra_frag extra;
+    frag_log log ;
+    frag_feed feed;
+    frag_extra extra;
     ViewPager viewPager;
+    boolean isDetroying = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +51,12 @@ public class StatesticActivity extends SiteMasterActivity{
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+        Transfer.load_transfers(this , false);
+        Feedback.load_feedbacks(this , false);
+        Request.load_requests(this , true);
 
 //        getApplicationContext()
 //
@@ -95,12 +97,12 @@ public class StatesticActivity extends SiteMasterActivity{
 
 
 
-        rec = new Requests();
-        tranc = new Transfers();
+        rec = new frag_request();
+        tranc = new frag_transfer();
 //      create;
-        log = new Site_logs();
-        feed = new Site_feeds();
-        extra = new Extra_frag();
+        log = new frag_log();
+        feed = new frag_feed();
+        extra = new frag_extra();
 
         rec.setActivity(this);
         tranc.setActivity(this);
@@ -116,8 +118,78 @@ public class StatesticActivity extends SiteMasterActivity{
         viewPager.setAdapter(adapter);
         this.viewPager = viewPager;
 
+        title_fixer();
     }
 
+    private void title_fixer() {
+        handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+//                System.out.print("sad");
+
+                int index = viewPager.getCurrentItem();
+                switch (index){
+                    case 0:
+                        setTitle("درخواست ها");
+                        break;
+                    case 1:
+                        setTitle("جابجایی ها");
+                        break;
+                    case 2:
+                        setTitle("لاگ");
+                        break;
+                    case 3:
+                        setTitle("پیشنهادات");
+                        break;
+                    case 4 :
+                        setTitle("آمار تجمعی");
+                        break;
+                        default:
+                            setTitle("آمار");
+
+                }
+                if (!isDetroying){
+                    handler.postDelayed(this , 200);
+                }
+
+            }
+        };
+        handler.postDelayed(runnable ,200);
+    }
+
+    public void show_bottom_sheet(Object object) {
+        int current_page = viewPager.getCurrentItem();
+        Log.d("STATISTICS :" , "page current : " +current_page );
+        switch (current_page){
+            case 0 :
+                Log.d("STATISTICS :" , "page num : " +0 );
+//                Request.load_requests(this , true);
+                rec.show_bottom_sheet((Request) object);
+                break;
+            case 1:
+//                Log.d("STATISTICS :" , "page num : " +1 );
+//                tranc.do_refrersh();
+//                Transfer.load_transfers(this , true);
+                tranc.show_bottom_sheet((Transfer) object);
+                break;
+            case 2:
+                Log.d("STATISTICS :" , "page num : " +2 );
+                break;
+
+            case 3:
+//                Feedback.load_feedbacks(this , true);
+                Log.d("STATISTICS :" , "page num : " +3 );
+                feed.show_bottom_sheet((Feedback) object);
+                break;
+            case 4:
+                Log.d("STATISTICS :" , "page num : " +4 );
+                break;
+            default:
+
+                break;
+        }
+    }
 
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -159,46 +231,38 @@ public class StatesticActivity extends SiteMasterActivity{
     }*/
 
     @Override
+    protected void onDestroy() {
+        isDetroying = true;
+        super.onDestroy();
+    }
+
+    @Override
     public void refresh_view() {
-//        super.refresh_view();
-        // BASED ON CHOOSEN TAB !
-        // TODO: 10/2/2018 REFRESH THE VIEW BASED ON CHOOSEN TAB ....
-
-        /*Init.start_loading(this);
-        final StatesticActivity activity = this;
-        handler = new Handler();
-        final Runnable r = new Runnable() {
-            public void run() {
-//                tv.append("Hello World");
-//                handler.postDelayed(this, 1000);
-                Init.stop_loading(activity);
-                Log.d("SERVICE :" , "NOTIFICATION NOTYFIED");
-            }
-        };
-
-        handler.postDelayed(r, 500);*/
-
         int current_page = viewPager.getCurrentItem();
         Log.d("STATISTICS :" , "page current : " +current_page );
         switch (current_page){
             case 0 :
-                Log.d("STATISTICS :" , "page num : " +1 );
+                Log.d("STATISTICS :" , "page num : " +0 );
+                rec.hide_bootom_sheet();
                 Request.load_requests(this , true);
                 break;
             case 1:
-                Log.d("STATISTICS :" , "page num : " +2 );
+                Log.d("STATISTICS :" , "page num : " +1 );
+//                tranc.do_refrersh();.
+                tranc.hide_bottom_sheet();
                 Transfer.load_transfers(this , true);
                 break;
             case 2:
-                Log.d("STATISTICS :" , "page num : " +3 );
+                Log.d("STATISTICS :" , "page num : " +2 );
                 break;
 
             case 3:
+                feed.hide_bootom_sheet();
                 Feedback.load_feedbacks(this , true);
-                Log.d("STATISTICS :" , "page num : " +4 );
+                Log.d("STATISTICS :" , "page num : " +3 );
                 break;
             case 4:
-                Log.d("STATISTICS :" , "page num : " +5 );
+                Log.d("STATISTICS :" , "page num : " +4 );
                 break;
                 default:
 
