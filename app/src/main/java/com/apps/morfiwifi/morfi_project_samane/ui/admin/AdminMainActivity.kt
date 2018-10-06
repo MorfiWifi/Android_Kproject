@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.apps.morfiwifi.morfi_project_samane.R
+import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue
 import kotlinx.android.synthetic.main.activity_admin_main.*
 import kotlinx.android.synthetic.main.app_bar_admin_main.*
 
@@ -71,8 +72,8 @@ class AdminMainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.nav_manage -> {
 
             }
-            R.id.nav_share -> {
-
+            R.id.nav_about_us -> {
+                Dialogue.about_us(this , "SOME")
             }
             R.id.nav_send -> {
 

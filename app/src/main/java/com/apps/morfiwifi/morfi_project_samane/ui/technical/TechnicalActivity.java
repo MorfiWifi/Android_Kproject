@@ -162,7 +162,10 @@ public class TechnicalActivity extends AppCompatActivity
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
-        } else if (id == R.id.nav_profile) {
+        }else if (id == R.id.nav_about_us) {
+            Dialogue.about_us(this , "SOME");
+        }
+        else if (id == R.id.nav_profile) {
             if (!(this.getClass().getName().equals(ProfileTechActivity.class.getName()))){
                 intent = new Intent(this , ProfileTechActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

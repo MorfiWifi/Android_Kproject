@@ -124,6 +124,7 @@ public class TransferActivity extends DarkhastActivity implements
 //        Toast.makeText(activity, "prop loaded", Toast.LENGTH_SHORT).show();
     }
     private void FIX_ARRAYS (){
+
         if (rooms != null && blocks != null && khabgahs != null){
             for (int i = 0; i < khabgahs.size(); i++) {
                 khabgahs.get(i).blocks = new ArrayList<Block>();

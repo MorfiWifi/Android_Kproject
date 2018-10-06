@@ -136,6 +136,10 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 val dialogue = Dialogue()
                 dialogue.Log_out_account(this).show()
                 }
+            R.id.nav_about_us -> {
+//                onBackPressed() // YET JUST BACK PRESSED
+                Dialogue.about_us(this , "SOME")
+            }
             R.id.nav_enteghad -> {
                 val intent = Intent(this , EnteghadActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP

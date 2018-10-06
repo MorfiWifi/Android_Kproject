@@ -3,6 +3,9 @@ package com.apps.morfiwifi.morfi_project_samane.ui;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
@@ -14,6 +17,8 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +59,7 @@ public class Dialogue {
     private static Block block;
     private static Room room;
     static boolean first_time = true;
-
+//
 
     public AlertDialog Exit_app (final AppCompatActivity activity ){
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -737,49 +742,6 @@ public class Dialogue {
 
     }
 
-    public static void Load_user (final AppCompatActivity activity , User user , Properties properties){
-        // TODO: 8/20/2018 fix appearance of dialogue and set things
-        final Dialog dialog = new Dialog(activity);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialogue_load_user); // WHAT WORTH CAN IT BEE !
-
-        final TextInputEditText matn = (TextInputEditText) dialog.findViewById(R.id.te_gozaresh_matn);
-        final Spinner types = (Spinner) dialog.findViewById(R.id.sp_gozaresh_header);
-
-        ArrayAdapter<Report_type> spinnerArrayAdapter = new ArrayAdapter<Report_type>(activity,   android.R.layout.simple_spinner_item, ((ReportActivity) activity).getTypes());
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
-        types.setAdapter(spinnerArrayAdapter);
-
-        Button dialogButton = (Button) dialog.findViewById(R.id.btn_send_report);
-        // if button is clicked, close the custom dialog
-        dialogButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String matn_str = matn.getText().toString();
-//                    String heade_str = header.getText().toString();
-
-                if (matn_str.trim().length() < 1 ){
-                    Toast.makeText(activity, "متن کوتاه است", Toast.LENGTH_SHORT).show();
-                    Init.Terminal("WHAT KIND OF MESSAGE IS THIS ????");
-                    return;
-                }
-
-                Report_type report_type = (Report_type) types.getSelectedItem();
-                if (report_type != null){
-                    Report.send_self_report(activity ,true , matn_str , report_type.id);
-
-                }else {
-                    Toast.makeText(activity, "نوع گزارش خالی است", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
-
     public static void load_user_info(AppCompatActivity activity, User user , Properties properties) {
 
          final Dialog dialog = new Dialog(activity);;
@@ -814,6 +776,52 @@ public class Dialogue {
                 dialog.dismiss();
             }
         });
+//        dialog.seti
+
+    }
+
+    public static void about_us (final AppCompatActivity activity, String version ) {
+
+        final Dialog dialog = new Dialog(activity);;
+        // custom dialog
+//        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialogue_about_app);
+
+        TextView app_version =  dialog.findViewById(R.id.tv_app_version);
+        ImageButton app_close =  dialog.findViewById(R.id.imb_close);
+        int versionNumber = 0;
+        String versionName = "0";
+        PackageInfo pinfo = null;
+        try {
+            pinfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
+//            versionNumber = pinfo.versionCode;
+            versionName = pinfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.d("DIALOUE ABOUT US :" , e.getMessage());
+        }
+
+
+        app_version.setText("ورژن " + versionName);
+
+        dialog.show();
+
+        dialog.findViewById(R.id.btn_get_source_cod).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(activity.getString(R.string.github_url)));
+                activity.startActivity(i);
+            }
+        });
+
+        app_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
 //        dialog.seti
 
     }

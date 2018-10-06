@@ -38,6 +38,13 @@
             android:title="خروج" />
     </group>
 
-
+    <item android:title="برنامه">
+        <menu>
+            <item
+                android:id="@+id/nav_about_us"
+                android:icon="@drawable/ic_info_about_us"
+                android:title="درباره ما" />
+        </menu>
+    </item>
 
 </menu>

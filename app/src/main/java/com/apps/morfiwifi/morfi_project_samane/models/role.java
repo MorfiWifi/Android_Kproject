@@ -73,7 +73,7 @@ public class role {
             try {
                 ParseQuery query = new ParseQuery(class_name);
                 if (activity instanceof BroadcastActivity && draw_loading){
-                    ((BroadcastActivity) activity).start_loading();
+                    Init.start_loading(activity);
                 }
                 query.findInBackground(new FindCallback<ParseObject>() {
                     @Override
@@ -84,13 +84,13 @@ public class role {
                             isloaded = true;
                             if (activity instanceof BroadcastActivity && draw_loading){
 //                                broudcast_RecyclerAdapter.Init(roles , activity);
-                                ((BroadcastActivity) activity).stop_loading();
+                                Init.stop_loading(activity);
                             }
                         }else {
                             Init.Terminal("Some ERROR IN RETRIVING BROUDCASTS");
                             if (activity instanceof BroadcastActivity && draw_loading ){
 //                                broudcast_RecyclerAdapter.Init(broudcastList , activity);
-                                ((BroadcastActivity) activity).stop_loading();
+                                Init.stop_loading(activity);
                             }
                         }
                     }
@@ -105,7 +105,7 @@ public class role {
                 try {
                     ParseQuery query = new ParseQuery(class_name);
                     if (activity instanceof  BroadcastActivity && draw_loading){
-                        ((BroadcastActivity) activity).start_loading();
+                        Init.start_loading(activity);
                     }
                     query.findInBackground(new FindCallback<ParseObject>() {
                         @Override
@@ -116,7 +116,7 @@ public class role {
                                 isloaded = true;
                                 if (activity instanceof BroadcastActivity && draw_loading){
 //                                    broudcast_RecyclerAdapter.Init(roles , activity);
-                                    ((BroadcastActivity) activity).stop_loading();
+                                    Init.stop_loading(activity);
                                 }
                             }else {
                                 Init.Terminal("Some ERROR IN RETRIVING BROUDCASTS");
@@ -127,7 +127,7 @@ public class role {
                     roles = new ArrayList<>();
                     if (activity instanceof BroadcastActivity && draw_loading){
 //                        broudcast_RecyclerAdapter.Init(roles , activity);
-                        ((BroadcastActivity) activity).stop_loading();
+                        Init.stop_loading(activity);
                     }
                 }
             }

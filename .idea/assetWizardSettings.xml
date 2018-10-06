@@ -99,7 +99,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/H:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_local_activity_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/H:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_close_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -109,8 +109,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="4b4b4b" />
-                            <entry key="outputName" value="ic_active_user" />
+                            <entry key="color" value="8a8a8a" />
+                            <entry key="outputName" value="ic_close_gray" />
                             <entry key="sourceFile" value="C:\Users\Wifimorfi\Desktop\squares-in-squares.svg" />
                           </map>
                         </option>

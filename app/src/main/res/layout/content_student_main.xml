@@ -30,7 +30,7 @@
                     <RelativeLayout
                         android:id="@+id/rel_prof"
                         android:layout_margin="10dp"
-                        android:background="@drawable/background_white_mid_thick"
+                        android:background="@drawable/button_mid_thick"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -74,7 +74,7 @@
                     <RelativeLayout
                         android:id="@+id/rel_request"
                         android:layout_margin="10dp"
-                        android:background="@drawable/background_white_mid_thick"
+                        android:background="@drawable/button_mid_thick"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -125,7 +125,7 @@
                     <RelativeLayout
                         android:id="@+id/rel_report"
                         android:layout_margin="10dp"
-                        android:background="@drawable/background_white_mid_thick"
+                        android:background="@drawable/button_mid_thick"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -170,7 +170,7 @@
                     <RelativeLayout
                         android:id="@+id/rel_transfer"
                         android:layout_margin="10dp"
-                        android:background="@drawable/background_white_mid_thick"
+                        android:background="@drawable/button_mid_thick"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -221,7 +221,7 @@
                     <RelativeLayout
                         android:id="@+id/rel_cancelation"
                         android:layout_margin="10dp"
-                        android:background="@drawable/background_white_mid_thick"
+                        android:background="@drawable/button_mid_thick"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -265,7 +265,7 @@
                     <RelativeLayout
                         android:id="@+id/rel_inbox"
                         android:layout_margin="10dp"
-                        android:background="@drawable/background_white_mid_thick"
+                        android:background="@drawable/button_mid_thick"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -317,7 +317,7 @@
                     <RelativeLayout
                         android:id="@+id/rel_feedback"
                         android:layout_margin="10dp"
-                        android:background="@drawable/background_white_mid_thick"
+                        android:background="@drawable/button_mid_thick"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -361,7 +361,7 @@
                     <RelativeLayout
                         android:id="@+id/rel_logout"
                         android:layout_margin="10dp"
-                        android:background="@drawable/background_white_mid_thick"
+                        android:background="@drawable/button_mid_thick"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 

@@ -269,7 +269,9 @@ public class SiteMasterActivity extends AppCompatActivity
                 startActivity(intent);
             }
 
-        }else if (id == R.id.nav_active_user) {
+        }else if (id == R.id.nav_about_us) {
+            Dialogue.about_us(this , "SOME !");
+        } else if (id == R.id.nav_active_user) {
             if (!(this.getClass().getName().equals(ActiveStudentActivity.class.getName()))){
                 intent = new Intent(this , ActiveStudentActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

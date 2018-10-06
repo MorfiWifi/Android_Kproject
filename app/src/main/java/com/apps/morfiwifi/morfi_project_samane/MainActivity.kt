@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import com.apps.morfiwifi.morfi_project_samane.models.Message
 import com.apps.morfiwifi.morfi_project_samane.models.User
+import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue
 import com.apps.morfiwifi.morfi_project_samane.ui.ReciverActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.TestDaoActivity
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate
@@ -162,8 +163,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_manage -> {
 
             }
-            R.id.nav_share -> {
-
+            R.id.nav_about_us -> {
+                Dialogue.about_us(this , "SOME")
             }
             R.id.nav_send -> {
 

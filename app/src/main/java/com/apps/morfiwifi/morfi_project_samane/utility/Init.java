@@ -312,6 +312,7 @@ public class Init {
 
     }
 
+    static int addUser_stop_count = 0;
     public static void start_loading( AppCompatActivity activity){
         if (activity != null){
             if (loading != null){
@@ -336,6 +337,16 @@ public class Init {
                 }
             }
 
+            /*if (activity instanceof AddUserActivity){
+                Log.d("STOP count :" , addUser_stop_count + " tryes!");
+                if (addUser_stop_count < 5){
+                    addUser_stop_count ++ ;
+                    return;
+                }
+                addUser_stop_count = 100;
+                Log.d("STOP count :" , addUser_stop_count + " got out!");
+            }*/
+
             if (activity instanceof SignupStudentsActivity){
                 if (((SignupStudentsActivity) activity).isfirst()){
                     // while first time run noormally
@@ -357,6 +368,8 @@ public class Init {
             if (loading != null){
                 loading.dismiss();
             }
+        }else {
+            Log.d("STOP count :" , "NULL ACTIVITY !!");
         }
     }
 
@@ -549,6 +562,9 @@ public class Init {
                     if (activity instanceof  SignupStudentsActivity)
                         ((SignupStudentsActivity) activity).put_kh((List<Khabgah>) result.getMessage());
 
+                    if (activity instanceof  AddUserActivity)
+                        ((AddUserActivity) activity).set_kh((List<Khabgah>) result.getMessage());
+
                     break;
                 case Room.CODE:
                     if (activity instanceof TransferActivity){
@@ -564,6 +580,9 @@ public class Init {
                     }
                     if (activity instanceof SignupStudentsActivity)
                         ((SignupStudentsActivity) activity).put_rooms((List<Room>) result.getMessage());
+
+                    if (activity instanceof AddUserActivity)
+                        ((AddUserActivity) activity).set_rooms((List<Room>) result.getMessage());
                     break;
                 case Block.CODE:
                     if (activity instanceof TransferActivity){
@@ -579,6 +598,8 @@ public class Init {
                     if (activity instanceof SignupStudentsActivity)
                         ((SignupStudentsActivity) activity).put_blocks((List<Block>) result.getMessage());
 
+                    if (activity instanceof AddUserActivity)
+                        ((AddUserActivity) activity).set_bls((List<Block>) result.getMessage());
                     break;
 
                 case Report.CODE_SEND :

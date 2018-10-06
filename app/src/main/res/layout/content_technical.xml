@@ -30,7 +30,7 @@
                     <RelativeLayout
                         android:id="@+id/rel_prof"
                         android:layout_margin="10dp"
-                        android:background="@drawable/background_white_mid_thick"
+                        android:background="@drawable/button_mid_thick"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -74,7 +74,7 @@
                     <RelativeLayout
                         android:id="@+id/rel_student_reports"
                         android:layout_margin="10dp"
-                        android:background="@drawable/background_white_mid_thick"
+                        android:background="@drawable/button_mid_thick"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -127,7 +127,7 @@
                     <RelativeLayout
                         android:id="@+id/rel_inbox"
                         android:layout_margin="10dp"
-                        android:background="@drawable/background_white_mid_thick"
+                        android:background="@drawable/button_mid_thick"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
