@@ -8,6 +8,9 @@
 # Java class files
 *.class
 
+# PlayStore bundle files
+*.aab
+
 # Generated files
 bin/
 gen/

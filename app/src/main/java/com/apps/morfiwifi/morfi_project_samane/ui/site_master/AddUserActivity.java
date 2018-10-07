@@ -3,7 +3,6 @@ package com.apps.morfiwifi.morfi_project_samane.ui.site_master;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,29 +10,37 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
+import com.apps.morfiwifi.morfi_project_samane.models.MUSER;
+import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddUserActivity extends SiteMasterActivity {
+    static final  String LOG_CODE = "ADD USER SITE";
     List<role> roles;
     List<Khabgah> khabgahs;
     List<Block> blocks;
     List<Room> rooms;
     boolean dorm_loaded  =false;
     boolean isroleloaded = false;
+    private User user = null;
+    private Properties properties = null;
+    private MUSER muser = null;
+    role role = null;
+    private boolean isprop_ok = false;
+    private boolean isuserloaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,13 +136,6 @@ public class AddUserActivity extends SiteMasterActivity {
 
     }
 
-    private void clean_up(){
-        // TODO: 8/29/2018 cleaning things up
-
-
-    }
-
-
     @Override
     public void refresh_view() {
         role.load_roles_accesasables(this , true , true);
@@ -146,16 +146,330 @@ public class AddUserActivity extends SiteMasterActivity {
         return 0;
     }
 
+    private void log_it (String s){
+        Log.d(LOG_CODE , s);
+    }
     public void add_user(View view) {
-        Toast.makeText(this, "NOT TRYING INSERT USER", Toast.LENGTH_SHORT).show();
-        // if std full property is requre !
-        // if mot std property is pre requred !
-        User user = new User();
-//        user.UserName = username;
-//
-//        User.insert_user();
+        // lets DO some thing big ...
+        log_it("add user started");
+
+        int Errors = 0;
+        Switch pr1 = findViewById(R.id.sw_first);
+        Switch pr2 = findViewById(R.id.sw_second);
+        Spinner spinner = findViewById(R.id.sp_user_types);
+
+        boolean add_kh = pr1.isChecked();
+        boolean add_full_prop = pr2.isChecked();
+
+        role = (role) spinner.getSelectedItem();
+        if (role == null){
+            Toast.makeText(this, "نوع کاربر مشخص نیست", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // first check USER NAME PASS
+        Errors = validate_user_account_info(Errors);
+
+        if (Errors > 0){
+            // FIRST CHECK THE GENERAL ACCOUNT THING
+            return;
+        }
+
+         // role of selected
+        
+        if (role.cod == 0){
+            if (!add_full_prop){ // STUDENT WITH NO PROPETEY !!!
+                Toast.makeText(this, "مشخصات کامل دانشچو ضروزی است", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
 
 
+        if (add_kh){
+            Errors = validate_khabgah_info (Errors);
+        }
+
+        if (add_full_prop){
+            Errors = validate_propetie_info (Errors);
+        }
+
+        if (Errors >0){
+            // SHOULD FIX THESE FIRST
+            return;
+        }
+
+
+        add_user_to_system ();
+        log_it("add user ended");
+    }
+
+    private void add_user_to_system() {
+        log_it("add user method  started");
+        if (user == null || role == null ){
+            Toast.makeText(this, "خطای دخلی رخداده!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        if (properties == null){
+            Toast.makeText(this, "کاربر بدون مشخصات تکمیلی در حال اضافه شدن", Toast.LENGTH_SHORT).show();
+        }
+
+        muser = new MUSER();
+        muser.activate = true;
+        muser.preactive =true;
+
+        if (role.cod == 0){
+            log_it("chek user method  started std");
+            User.chech_student(this , true ,user );
+            log_it("add user method  ended std");
+        }else {
+            log_it("chek user method  started");
+            User.chech_student(this , true , user);
+            log_it("add user method  ended");
+        }
+
+
+
+        log_it("add user method  ended");
+    }
+
+    public void prop_isok() {
+//        isprop_checked  =true;
+        isprop_ok = true;
+
+        if ( isuserloaded){
+            // then try uploading things ....
+            User.insert_user(this , true   , user , properties , muser);
+//            Properties.insert_properties(this , true , properties_glob);
+
+            Log.d("SIGN UP :" , "USER DATA & PROP SENT");
+        }
+
+        all_don();
+    }
+
+    public void user_isok() {
+//        use  =true;
+        isuserloaded = true;
+
+        if ( isprop_ok){
+            // then try uploading things ....
+            User.insert_user(this , true   , user , properties , muser);
+//            Properties.insert_properties(this , true , properties_glob);
+
+            Log.d("SIGN UP :" , "USER DATA & PROP SENT");
+        }
+        all_don();
+
+    }
+    public void all_don (){
+        if (isuserloaded && isprop_ok){
+            if (!isuserloaded && !isprop_ok){
+                Toast.makeText(this, "مشخصات فردی و دانشجویی نا معتبر است", Toast.LENGTH_SHORT).show();
+            }else if (!isprop_ok){
+                Toast.makeText(this, "مشخصات کاربر نا معتبر است (شماره دانشجویی/کاربری)", Toast.LENGTH_SHORT).show();
+            }else if (!isuserloaded){
+                Toast.makeText(this, "مشخصات فردی نا معتبر است (کدملی/نام کاربری)", Toast.LENGTH_SHORT).show();
+            }else if (isuserloaded && isprop_ok){
+                Toast.makeText(this, "کاربر ثبت شد", Toast.LENGTH_SHORT).show();
+            }
+        }
+        clear();
+    }
+
+    public void user_inserted (){
+        Toast.makeText(this, "مشخصات کابری با موففقیت ثبت شد", Toast.LENGTH_SHORT).show();
+//        Init.FIX_PROP_ID(user_glob,properties_glob);
+    }
+
+    public  void prop_inserted (){
+        Toast.makeText(this, "مشخصات پرسنلی با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
+//        Init.FIX_PROP_ID(user_glob,properties_glob);
+    }
+
+    private int validate_khabgah_info(int errors) {
+        log_it("validate khabgah started");
+        Spinner khab = findViewById(R.id.sp_kh);
+        Spinner block = findViewById(R.id.sp_block);
+        Spinner room = findViewById(R.id.sp_room);
+
+        Object kh = khab.getSelectedItem();
+        Object bl = block.getSelectedItem();
+        Object ro = room.getSelectedItem();
+
+        if (kh == null || bl == null || ro == null){
+            Toast.makeText(this, "خطا در بخش خابگاه/مشخصات تکمیلی 1", Toast.LENGTH_SHORT).show();
+            errors++;
+            return errors;
+        }
+
+        properties = new Properties();
+        properties.kh_id = ((Khabgah)kh).Id;
+        properties.blook_id = ((Block)bl).Id;
+        properties.room_id = ((Room)ro).Id;
+        properties.use_khabgah = true;
+
+
+        log_it("validate khabgah ended");
+        return errors;
+    }
+
+    private int validate_propetie_info(int errors) {
+        // YA BOOYAH!
+        log_it("validate properties started");
+        EditText kod_meli = findViewById(R.id.ti_kod_melli);
+        EditText cod = findViewById(R.id.ti_student_cod);
+        EditText real_name = findViewById(R.id.ti_name);
+        EditText real_lastname = findViewById(R.id.ti_lastname);
+        EditText phone_number = findViewById(R.id.ti_phone_number);
+        EditText father_name = findViewById(R.id.ti_father_name);
+        EditText address = findViewById(R.id.ti_address);
+
+        if (kod_meli.getText().toString().length() < 1){
+            kod_meli.setError("کد ملی خالی است");
+            errors++;
+        }else {
+
+            int kp = 200;
+            int a  = 200;
+
+            try {
+                String melli =  kod_meli.getText().toString();
+
+                long melli_int =  Long.parseLong(melli);
+                a = Integer.parseInt(String.valueOf(melli.charAt(9))) ;
+                int b = Integer.parseInt(String.valueOf(melli.charAt(8))) ;
+                int c = Integer.parseInt(String.valueOf(melli.charAt(7))) ;
+                int d = Integer.parseInt(String.valueOf(melli.charAt(6))) ;
+                int e = Integer.parseInt(String.valueOf(melli.charAt(5))) ;
+                int f = Integer.parseInt(String.valueOf(melli.charAt(4))) ;
+                int g = Integer.parseInt(String.valueOf(melli.charAt(3))) ;
+                int h = Integer.parseInt(String.valueOf(melli.charAt(2))) ;
+                int i = Integer.parseInt(String.valueOf(melli.charAt(1))) ;
+                int j = Integer.parseInt(String.valueOf(melli.charAt(0))) ;
+                // a is current a
+
+                int  k  =  b *2+ c*3 + d*4 + e*5 + f*6+
+                        g*7 + h*8 + i *9 + j *10;
+
+                System.out.println(k);
+                kp = k % 11;
+
+
+                Log.d("NATIONAL :" , "KP = "+kp + " , A = " + a) ;
+                boolean iscorrect;
+                if (kp == 0 && kp == a){
+                    iscorrect = true;
+                    Log.d("NATIONAL :" , " IS CORRECT 1");
+                }else if(kp == 1 && a == 1){
+                    Log.d("NATIONAL :" , " IS CORRECT 2");
+                    iscorrect = true;
+                }else if(kp > 1 && a == (11 - kp)){
+                    Log.d("NATIONAL :" , " IS CORRECT 3");
+                    iscorrect = true;
+                }else {
+                    iscorrect = false;
+                    Log.d("NATIONAL :" , " IS NOT CORRECT");
+                }
+
+                if (!iscorrect){
+                    kod_meli.setError("فرمت کد ملی صحیح نیست");
+                    errors ++;
+                }
+
+            }catch (Exception e){
+                    kod_meli.setError("فرمت کد ملی صحیح نیست");
+                    errors ++;
+                Log.d("Sign UP Page :" , "EXCEP " + e.getMessage());
+            }
+        }
+        if (cod.getText().toString().length() < 1){
+            cod.setError("شماره دانشجویی/پرسنلی خالی است");
+            errors++;
+        }
+        if (real_name.getText().toString().length() < 1){
+            real_name.setError("نام خالی است");
+            errors++;
+        }
+        if (real_lastname.getText().toString().length() < 1){
+            real_lastname.setError("نام خانوادگی خالی است");
+            errors++;
+        }
+        if (phone_number.getText().toString().length() < 1){
+            phone_number.setError("شماره تماس خالی است");
+            errors++;
+        }
+        if (father_name.getText().toString().length() < 1){
+            father_name.setError("نام پدر خالی است");
+            errors++;
+        }
+        if (address.getText().toString().length() < 1){
+            address.setError("آدرس خالی است");
+            errors++;
+        }
+
+        if (errors > 0 ){
+            //fix them first
+            return errors;
+        }
+
+        if (properties != null){
+            properties.father_name = father_name.getText().toString();
+            properties.national_cod = kod_meli.getText().toString();
+            properties.real_name = real_name.getText().toString();
+            properties.real_lastname = real_lastname.getText().toString();
+            properties.std_cod = cod.getText().toString();
+
+            // ADRESS & PHONE ? fixme property full load&UPLOAD
+
+            properties.phone = phone_number.getText().toString();
+            properties.adress = address.getText().toString();
+        }
+        log_it("validate properties ended");
+        return errors;
+    }
+
+    private int validate_user_account_info(int errors) {
+        log_it("validate user account started");
+        EditText username =  findViewById(R.id.et_usernmae);
+        EditText pass = findViewById(R.id.et_pass);
+        EditText repass = findViewById(R.id.et_repass);
+
+//        username.setError("");
+//        pass.setError("");
+//        repass.setError("");
+
+        if (username.getText().length() == 0){
+            username.setError("نام کاربری خالی!");
+            errors++;
+        }else if (username.getText().length() < 3){
+            username.setError("نام کاربری کتاه است");
+            errors++;
+        }
+
+        if (pass.getText().length() == 0){
+            pass.setError("رمز عبور خالی!");
+            errors++;
+        }else if (pass.getText().length() < 3){
+            pass.setError("رمز عبور کتاه است");
+            errors++;
+        }
+
+        if (!pass.getText().toString().equals(repass.getText().toString())){
+            repass.setError("عدم تطابق رمز عبور");
+            errors++;
+        }
+
+        if (errors == 0){
+            user = new User();
+            user.UserName = username.getText().toString();
+            user.Pass = pass.getText().toString();
+            user.Active = true;
+            user.Role_id = role.id;
+        }
+
+        log_it("validate user account ended");
+        return errors;
     }
 
     private void FIX_ARRAYS (){
@@ -284,4 +598,25 @@ public class AddUserActivity extends SiteMasterActivity {
         FIX_ARRAYS();
     }
 
+    private void clear(){
+        properties = null;
+        user= null;
+        isuserloaded = false;
+        isprop_ok = false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        clear();
+        super.onDestroy();
+    }
+
+    public void prp_exists() {
+        Toast.makeText(this, "متاسفاته مشخات تکمیلی 1/2 نا معتبر است", Toast.LENGTH_SHORT).show();
+        
+    }
+
+    public void say_exsists_user() {
+        Toast.makeText(this, "متاسفاته مشخات حساب کاربر نا معتبر است", Toast.LENGTH_SHORT).show();
+    }
 }

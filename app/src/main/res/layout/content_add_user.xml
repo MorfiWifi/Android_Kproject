@@ -65,6 +65,7 @@
                 android:paddingTop="5dp">
 
                 <EditText
+                    android:id="@+id/et_usernmae"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -90,6 +91,7 @@
                 app:passwordToggleEnabled="true">
 
                 <EditText
+                    android:id="@+id/et_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -115,6 +117,7 @@
                 app:passwordToggleEnabled="true">
 
                 <EditText
+                    android:id="@+id/et_repass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"

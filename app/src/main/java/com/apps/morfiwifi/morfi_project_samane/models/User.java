@@ -628,6 +628,71 @@ public class User   {
         });
     }
 
+    public static void insert_user (final AppCompatActivity activity , final boolean draw_loading  , User user , final Properties properties  , final MUSER muser){
+        if (properties == null) {
+            // its a normal User insert non Student!
+        }
+
+        final ParseUser parseUser = new ParseUser();
+        parseUser.setPassword(user.Pass);
+        parseUser.setUsername(user.UserName);
+        parseUser.put(obj_activate, user.Active);
+        parseUser.put(obj_preactive , user.PreActive);
+        parseUser.put(obj_role_id , user.Role_id);
+        if (properties != null){
+//            parseUser.setACL(new ParseACL());
+            ParseACL acl =new ParseACL();
+            acl.setPublicWriteAccess(true);
+            acl.setPublicReadAccess(true);
+            parseUser.setACL(acl);//bug this SHOULD BE RE MAINTAINDE _SEQURITY BRIDGE !
+        }
+
+
+        // TODO: 8/30/2018 check properites and upload them too
+
+        if (draw_loading)
+            Init.start_loading(activity);
+
+        parseUser.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+
+                if (e == null){
+                    Log.d("INSER USER ID : " ,parseUser.getObjectId() );
+
+
+
+
+
+                    Result result = new Result(OK , CODE_SEND , true);
+                    Init.result_of_query(activity , result);
+                    Log.d("INSERT USER :" , "SUCSESS USER INSERT");
+                    if (draw_loading)
+                        Init.stop_loading(activity);
+
+
+
+                    if (properties != null) {
+
+                        User.insert_muser (activity ,false , muser.activate , muser.preactive, muser.delete , parseUser.getObjectId() );
+                        properties.user_id = parseUser.getObjectId();
+                        Properties.insert_properties(activity , true , properties);
+                    }else {
+                        User.insert_muser (activity ,false , muser.activate , muser.preactive, muser.delete , parseUser.getObjectId() );
+                    }
+
+                }else {
+                    Log.d("INSERT USER :" , e.getMessage());
+                    Result result = new Result(e , CODE_SEND );
+                    Init.result_of_query(activity , result);
+                    if (draw_loading)
+                        Init.stop_loading(activity);
+                }
+            }
+        });
+    }
+
+
     private static void insert_muser(final AppCompatActivity activity , boolean draw_loading , boolean active, boolean preActive, boolean deleted  , String user_id ) {
         if (draw_loading)
             Init.start_loading(activity);

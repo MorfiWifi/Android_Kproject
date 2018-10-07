@@ -51,6 +51,8 @@ public class Properties {
     public String father_name = Init.Empty;
     public String real_name = Init.Empty;
     public String real_lastname = Init.Empty;
+    public String adress = Init.Empty;
+    public String phone = Init.Empty;
     public boolean isnighty = false;
     public String std_cod = Init.Empty;
 
@@ -71,8 +73,10 @@ public class Properties {
     public final static String obj_real_lastname = "real_lastname";
     public final static String obj_isnighty = "isnighty";
     public final static String obj_std_code = "std_code";
+    public final static String obj_adrsss = "adress";
+    public final static String obj_phone = "phone";
 
-    private static String[] all_params = {obj_id ,obj_user_id ,obj_kh_id ,obj_blook_id ,obj_room_id,obj_national_cod,obj_father_name,obj_is_studyng,obj_is_using_kh,obj_real_name,obj_real_lastname };
+    private static String[] all_params = {obj_id ,obj_user_id ,obj_kh_id ,obj_blook_id ,obj_room_id,obj_national_cod,obj_father_name,obj_is_studyng,obj_is_using_kh,obj_real_name,obj_real_lastname , obj_adrsss , obj_phone };
 
 
     //bug we NEED ONE FOR STUDENTS AND LIST FOR HIGH RANKS !!!
@@ -341,6 +345,18 @@ public class Properties {
                         real_lastname = parseObject.get(obj_real_lastname).toString();
                     }
                     break;
+                case obj_adrsss :
+                    object =  parseObject.get(obj_adrsss);
+                    if (object != null ){
+                        adress = parseObject.get(obj_adrsss).toString();
+                    }
+                    break;
+                case obj_phone :
+                    object =  parseObject.get(obj_phone);
+                    if (object != null ){
+                        phone = parseObject.get(obj_phone).toString();
+                    }
+                    break;
                     default:
                         break;
 
@@ -431,6 +447,8 @@ public class Properties {
         object.put(obj_room_id , properties.room_id);
         object.put(obj_real_name , properties.real_name);
         object.put(obj_real_lastname , properties.real_lastname);
+        object.put(obj_adrsss , properties.adress);
+        object.put(obj_phone , properties.phone);
 
         // TODO: 8/30/2018 check properites and upload them too
 

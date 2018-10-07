@@ -42,18 +42,7 @@ public class SignupQeueActivity extends SiteMasterActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         setTitle("صف ثبت نام");
-
-       /* sh_users =
-        Repository.GetInstant(this).getUserDao().queryBuilder()
-                .where(Properties.Should_fill_init_forms.eq(true))
-                .where(UserDao.Properties.Active.eq(false))
-                .where(Properties.PreActive.eq(false))
-                .list();*/
-
-//        Init.Toas( this, sh_users.size() +"");
         signup_stu_RecyclerAdapter.Init(sh_users , this);
-
-        //findViewById(R.id.action_export_list).setVisibility(View.GONE);
 
     }
 
@@ -71,9 +60,6 @@ public class SignupQeueActivity extends SiteMasterActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement

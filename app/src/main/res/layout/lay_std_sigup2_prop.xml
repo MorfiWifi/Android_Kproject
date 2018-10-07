@@ -94,6 +94,7 @@
                         android:layout_width="match_parent">
 
                         <EditText
+                            android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
                             android:backgroundTint="@null"
                             android:layout_gravity="center"
@@ -133,13 +134,14 @@
                     android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputLayout
-                        android:gravity="bottom"
+                        android:gravity="center"
                         android:background="@drawable/buttom_big_white"
                         app:passwordToggleEnabled="true"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
                         <EditText
+                            android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
                             android:paddingEnd="5dp"
                             android:paddingStart="5dp"
@@ -176,13 +178,14 @@
                     android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputLayout
-                        android:gravity="bottom"
+                        android:gravity="center"
                         android:background="@drawable/buttom_big_white"
                         app:passwordToggleEnabled="true"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
                         <EditText
+                            android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
                             android:paddingEnd="5dp"
                             android:paddingStart="5dp"
@@ -225,17 +228,19 @@
                     <android.support.design.widget.TextInputLayout
                         android:maxLines="1"
                         android:maxLength="20"
-                        android:gravity="bottom"
+                        android:gravity="center"
                         android:background="@drawable/buttom_big_white"
                         app:passwordToggleEnabled="true"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
                         <EditText
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:hint="09--------"
                             android:id="@+id/ti_phone_number"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
-                            android:layout_marginBottom="10dp"
                             android:background="@null"
                             android:gravity="end"
                             android:inputType="phone"
@@ -271,13 +276,14 @@
                     android:layout_height="match_parent">
 
                     <android.support.design.widget.TextInputLayout
-                        android:gravity="bottom"
+                        android:gravity="center"
                         android:background="@drawable/buttom_big_white"
                         app:passwordToggleEnabled="true"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
 
                         <EditText
+                            android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
                             android:paddingEnd="5dp"
                             android:paddingStart="5dp"
@@ -320,7 +326,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/buttom_big_white"
-                        android:gravity="bottom">
+                        android:gravity="center">
 
                         <EditText
                             android:paddingEnd="5dp"

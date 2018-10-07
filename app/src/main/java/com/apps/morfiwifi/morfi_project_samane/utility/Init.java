@@ -484,11 +484,19 @@ public class Init {
                     if (activity instanceof SignupStudentsActivity){
                         ((SignupStudentsActivity) activity).say_exsists_user();
                     }
+
+                    if (activity instanceof AddUserActivity){
+                        ((AddUserActivity) activity).say_exsists_user();
+                    }
                     break;
 
                     case User.COD_CHECKING:
                         if (activity instanceof SignupStudentsActivity){
                             ((SignupStudentsActivity) activity).user_isok();
+                        }
+
+                        if (activity instanceof AddUserActivity){
+                            ((AddUserActivity) activity).user_isok();
                         }
                         break;
                 case Properties.CODE_EXIST_DATA:
@@ -496,10 +504,18 @@ public class Init {
                         ((SignupStudentsActivity) activity).say_exsists_prop();
                     }
 
+                    if (activity instanceof AddUserActivity){
+                        ((AddUserActivity) activity).prp_exists();
+                    }
+
                     break;
                     case Properties.COD_CHECKING:
                         if (activity instanceof SignupStudentsActivity){
                             ((SignupStudentsActivity) activity).prop_isok();
+                        }
+
+                        if (activity instanceof AddUserActivity){
+                            ((AddUserActivity) activity).prop_isok();
                         }
                         break;
                         case Properties.CODE_SEND_ERROR:
