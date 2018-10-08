@@ -153,7 +153,7 @@ public class StudentProfileActivity extends DarkhastActivity {
         if (properties.is_studying){
             tv_isstudying.setText("درحال تحصیل : بله");
         }else {
-            tv_isstudying.setText("درحال تحصیل : خبر");
+            tv_isstudying.setText("درحال تحصیل : خیر");
         }
 
         tv_prof_name.setText("نام کاربری : " + User.current_user.UserName);

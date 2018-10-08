@@ -41,6 +41,8 @@ public class AddUserActivity extends SiteMasterActivity {
     role role = null;
     private boolean isprop_ok = false;
     private boolean isuserloaded = false;
+    boolean add_kh = true;
+    boolean add_full_prop = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,8 +160,8 @@ public class AddUserActivity extends SiteMasterActivity {
         Switch pr2 = findViewById(R.id.sw_second);
         Spinner spinner = findViewById(R.id.sp_user_types);
 
-        boolean add_kh = pr1.isChecked();
-        boolean add_full_prop = pr2.isChecked();
+         add_kh = pr1.isChecked();
+         add_full_prop = pr2.isChecked();
 
         role = (role) spinner.getSelectedItem();
         if (role == null){
@@ -221,10 +223,14 @@ public class AddUserActivity extends SiteMasterActivity {
         if (role.cod == 0){
             log_it("chek user method  started std");
             User.chech_student(this , true ,user );
+            Properties.check_properties(this , true , properties);
             log_it("add user method  ended std");
         }else {
             log_it("chek user method  started");
             User.chech_student(this , true , user);
+            if (properties != null){
+                Properties.check_properties(this , true , properties);
+            }
             log_it("add user method  ended");
         }
 
@@ -235,10 +241,12 @@ public class AddUserActivity extends SiteMasterActivity {
 
     public void prop_isok() {
 //        isprop_checked  =true;
+        log_it("prop wa ok");
         isprop_ok = true;
 
         if ( isuserloaded){
             // then try uploading things ....
+            log_it("trying insert prop");
             User.insert_user(this , true   , user , properties , muser);
 //            Properties.insert_properties(this , true , properties_glob);
 
@@ -251,18 +259,18 @@ public class AddUserActivity extends SiteMasterActivity {
     public void user_isok() {
 //        use  =true;
         isuserloaded = true;
-
-        if ( isprop_ok){
+        log_it("user was ok");
+        if ( isprop_ok || ( (!add_full_prop) && (!add_kh) )){
             // then try uploading things ....
+            log_it("trying insert user");
             User.insert_user(this , true   , user , properties , muser);
 //            Properties.insert_properties(this , true , properties_glob);
-
-            Log.d("SIGN UP :" , "USER DATA & PROP SENT");
         }
         all_don();
 
     }
     public void all_don (){
+        log_it("all don is running");
         if (isuserloaded && isprop_ok){
             if (!isuserloaded && !isprop_ok){
                 Toast.makeText(this, "مشخصات فردی و دانشجویی نا معتبر است", Toast.LENGTH_SHORT).show();
@@ -271,15 +279,16 @@ public class AddUserActivity extends SiteMasterActivity {
             }else if (!isuserloaded){
                 Toast.makeText(this, "مشخصات فردی نا معتبر است (کدملی/نام کاربری)", Toast.LENGTH_SHORT).show();
             }else if (isuserloaded && isprop_ok){
-                Toast.makeText(this, "کاربر ثبت شد", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "کاربر ثبت شد", Toast.LENGTH_SHORT).show();
             }
         }
-        clear();
+
     }
 
     public void user_inserted (){
         Toast.makeText(this, "مشخصات کابری با موففقیت ثبت شد", Toast.LENGTH_SHORT).show();
 //        Init.FIX_PROP_ID(user_glob,properties_glob);
+        clear();
     }
 
     public  void prop_inserted (){
@@ -603,6 +612,33 @@ public class AddUserActivity extends SiteMasterActivity {
         user= null;
         isuserloaded = false;
         isprop_ok = false;
+
+        EditText kod_meli = findViewById(R.id.ti_kod_melli);
+        EditText cod = findViewById(R.id.ti_student_cod);
+        EditText real_name = findViewById(R.id.ti_name);
+        EditText real_lastname = findViewById(R.id.ti_lastname);
+        EditText phone_number = findViewById(R.id.ti_phone_number);
+        EditText father_name = findViewById(R.id.ti_father_name);
+        EditText address = findViewById(R.id.ti_address);
+
+        EditText username =  findViewById(R.id.et_usernmae);
+        EditText pass = findViewById(R.id.et_pass);
+        EditText repass = findViewById(R.id.et_repass);
+
+        username.getText().clear();
+        pass.getText().clear();
+        repass.getText().clear();
+
+        kod_meli.getText().clear();
+         cod.getText().clear();
+        real_lastname.getText().clear();
+        real_name.getText().clear();
+        phone_number.getText().clear();
+        father_name.getText().clear();
+        address.getText().clear();
+        // clear user name - pass ...
+
+
     }
 
     @Override
@@ -612,11 +648,13 @@ public class AddUserActivity extends SiteMasterActivity {
     }
 
     public void prp_exists() {
-        Toast.makeText(this, "متاسفاته مشخات تکمیلی 1/2 نا معتبر است", Toast.LENGTH_SHORT).show();
+        log_it("prop exists");
+        Toast.makeText(this, "متاسفاته مشخصات تکمیلی 1/2 نا معتبر است", Toast.LENGTH_SHORT).show();
         
     }
 
     public void say_exsists_user() {
-        Toast.makeText(this, "متاسفاته مشخات حساب کاربر نا معتبر است", Toast.LENGTH_SHORT).show();
+        log_it("user existts");
+        Toast.makeText(this, "متاسفاته مشخصات حساب کاربر نا معتبر است", Toast.LENGTH_SHORT).show();
     }
 }

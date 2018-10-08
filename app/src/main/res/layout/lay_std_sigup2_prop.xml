@@ -232,12 +232,13 @@
                         android:background="@drawable/buttom_big_white"
                         app:passwordToggleEnabled="true"
                         android:layout_height="wrap_content"
+
                         android:layout_width="match_parent">
 
                         <EditText
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
-                            android:hint="09--------"
+
                             android:id="@+id/ti_phone_number"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"

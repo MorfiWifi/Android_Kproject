@@ -527,11 +527,19 @@ public class Init {
                     if (activity instanceof SignupStudentsActivity){
                         ((SignupStudentsActivity) activity).prop_inserted();
                     }
+
+                    if (activity instanceof AddUserActivity){
+                        ((AddUserActivity) activity).prop_inserted();
+                    }
                     break;
 
                 case User.CODE_SEND:
                     if (activity instanceof SignupStudentsActivity){
                         ((SignupStudentsActivity) activity).user_inserted();
+                    }
+
+                    if (activity instanceof AddUserActivity){
+                        ((AddUserActivity) activity).user_inserted();
                     }
                     break;
 
