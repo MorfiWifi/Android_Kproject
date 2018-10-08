@@ -39,6 +39,7 @@ import com.apps.morfiwifi.morfi_project_samane.ui.notification.MessageNotificati
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ActiveStudentActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.AddUserActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.CancelationQeueActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ProfileActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.StatesticActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.CancelationActivity;
@@ -422,6 +423,12 @@ public class Init {
             Log.e(EXEPTION , result.exception.getMessage()); // SOME THING WRONG IN THERE !
             Toast.makeText(activity, "خطا", Toast.LENGTH_SHORT).show();
 
+            if (activity != null){
+                if (activity instanceof ProfileActivity){
+                    ((ProfileActivity) activity).set_properties(null);
+                }
+            }
+
         }else {
 
             if (activity == null){
@@ -552,18 +559,9 @@ public class Init {
                         ((StudentProfileActivity) activity).loadproperties((Properties) result.getMessage());
                     }if (activity instanceof TransferActivity){
                         ((TransferActivity) activity).put_proprtties((Properties) result.getMessage());
-                        // Wee Need 3 THING !
-                    if (!((TransferActivity) activity).isIsloaded()){
-
-//                        ((TransferActivity) activity).load_steppers();
-
-
-                        // OK DO THE THING manage data in activity !
                     }
-
-
-
-
+                    if (activity instanceof ProfileActivity){
+                        ((ProfileActivity)activity).set_properties((Properties) result.getMessage());
                     }
 
 

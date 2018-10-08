@@ -92,6 +92,7 @@ public class Cancellation implements entity {
             ParseQuery query = new ParseQuery(class_name);
             query.whereEqualTo(obj_sender_id , User.current_user.id);
             query.setLimit(limit);
+            query.orderByDescending("createdAt");
             query.findInBackground(new FindCallback<ParseObject>(){
                 @Override
                 public void done(List<ParseObject> objects, ParseException e) {
@@ -146,6 +147,7 @@ public class Cancellation implements entity {
         isloaded = false; // GETTING NEWER VERSION! NOT READY YET
         ParseQuery query = new ParseQuery(class_name);
         query.setLimit(limit);
+        query.orderByDescending("createdAt");
         query.findInBackground(new FindCallback<ParseObject>(){
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
@@ -218,6 +220,7 @@ public class Cancellation implements entity {
         isloaded = false; // GETTING NEWER VERSION! NOT READY YET
         List <Cancellation> cancellationList = new ArrayList<>();
         ParseQuery query = new ParseQuery(class_name);
+        query.orderByDescending("createdAt");
         query.setLimit(limit);
 
         try {

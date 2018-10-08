@@ -1,5 +1,6 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.technical;
 
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -34,8 +35,12 @@ public class ProfileTechActivity extends TechnicalActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setTitle("پروفایل");
+//        setTitle("پروفایل");
         toolbar.setElevation(0);
+
+        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setTitle("پروفایل");
+        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
 
         load_profile();
 

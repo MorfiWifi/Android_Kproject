@@ -101,6 +101,7 @@ public class SiteMasterActivity extends AppCompatActivity
         setTitle("پنل مسئول سایت");
 
 
+        final AppCompatActivity activity = this;
         findViewById(R.id.rel_prof).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +115,8 @@ public class SiteMasterActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 // TODO: 8/26/2018 add log out function in site master
+                Dialogue dialogue = new Dialogue();
+                dialogue.Log_out_account(activity).show();
 
             }
         });

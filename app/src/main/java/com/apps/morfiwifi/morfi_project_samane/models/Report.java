@@ -143,6 +143,7 @@ public class Report {
             ParseQuery query = new ParseQuery(class_name);
             query.whereEqualTo(obj_sender_id , User.current_user.id);
             query.setLimit(limit);
+            query.orderByDescending("createdAt");
             query.findInBackground(new FindCallback<ParseObject>(){
                 @Override
                 public void done(List<ParseObject> objects, ParseException e) {

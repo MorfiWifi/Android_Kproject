@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_prof_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="prof_name"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:layout_below="@id/tv_prof_name"
+        android:id="@+id/tv_real_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="prof_lastname"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:layout_below="@id/tv_real_name"
+        android:id="@+id/tv_real_lastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="prof_nationalcode"
+        android:gravity="center"
+        />
+    <TextView
+        android:layout_below="@id/tv_real_lastname"
+        android:id="@+id/tv_natinal_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="prof_nationalcode"
+        android:gravity="center"
+        />
+    <TextView
+        android:layout_below="@id/tv_natinal_code"
+        android:id="@+id/tv_signup_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="prof_nationalcode"
+        android:gravity="center"
+        />
+</RelativeLayout>
