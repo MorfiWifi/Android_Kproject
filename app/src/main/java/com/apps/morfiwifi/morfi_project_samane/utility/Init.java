@@ -1,9 +1,6 @@
 package com.apps.morfiwifi.morfi_project_samane.utility;
 
 import android.app.ProgressDialog;
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,11 +32,10 @@ import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
-import com.apps.morfiwifi.morfi_project_samane.ui.notification.MessageNotification;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ActiveStudentActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.AddUserActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.CancelationQeueActivity;
-import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ProfileActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.site_master.Site_ProfileActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.StatesticActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.CancelationActivity;
@@ -48,14 +44,12 @@ import com.apps.morfiwifi.morfi_project_samane.ui.student.SamanehaActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.TransferActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentProfileActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.technical.ProfileTechActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.technical.StdReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.util.MYService;
-import com.apps.morfiwifi.morfi_project_samane.util.MyJobService;
 import com.apps.morfiwifi.morfi_project_samane.util.MyTestReceiver;
 import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.parse.FindCallback;
-import com.parse.FunctionCallback;
-import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -68,7 +62,6 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 ///////////////////////////////////////////////////////////////////////////
 // BLOOCK ZERO >> !
@@ -424,8 +417,8 @@ public class Init {
             Toast.makeText(activity, "خطا", Toast.LENGTH_SHORT).show();
 
             if (activity != null){
-                if (activity instanceof ProfileActivity){
-                    ((ProfileActivity) activity).set_properties(null);
+                if (activity instanceof Site_ProfileActivity){
+                    ((Site_ProfileActivity) activity).set_properties(null);
                 }
             }
 
@@ -560,10 +553,13 @@ public class Init {
                     }if (activity instanceof TransferActivity){
                         ((TransferActivity) activity).put_proprtties((Properties) result.getMessage());
                     }
-                    if (activity instanceof ProfileActivity){
-                        ((ProfileActivity)activity).set_properties((Properties) result.getMessage());
+                    if (activity instanceof Site_ProfileActivity){
+                        ((Site_ProfileActivity)activity).set_properties((Properties) result.getMessage());
                     }
 
+                    if (activity instanceof ProfileTechActivity){
+                        ((ProfileTechActivity)activity).set_properties((Properties) result.getMessage());
+                    }
 
                     break;
                     case Properties.CODE_ALL:

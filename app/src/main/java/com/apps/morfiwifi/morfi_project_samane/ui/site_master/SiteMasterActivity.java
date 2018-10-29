@@ -105,7 +105,7 @@ public class SiteMasterActivity extends AppCompatActivity
         findViewById(R.id.rel_prof).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , ProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext() , Site_ProfileActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -232,8 +232,8 @@ public class SiteMasterActivity extends AppCompatActivity
 
         Intent intent;
         if (id == R.id.nav_profile) {
-            if (!(this.getClass().getName().equals(ProfileActivity.class.getName()))){
-                intent = new Intent(this , ProfileActivity.class);
+            if (!(this.getClass().getName().equals(Site_ProfileActivity.class.getName()))){
+                intent = new Intent(this , Site_ProfileActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

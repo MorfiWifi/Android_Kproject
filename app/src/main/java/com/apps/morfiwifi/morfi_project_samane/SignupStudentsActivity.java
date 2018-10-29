@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,6 +50,8 @@ public class SignupStudentsActivity extends AppCompatActivity {
         Block.load_blocks(this , true , false);
 
 
+//        EditText std_phone =  findViewById(R.id.ti_phone_number);
+//        std_phone.addTextChangedListener(new TextWatcher("###-###-####"));
 
 
 

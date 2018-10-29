@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.apps.morfiwifi.morfi_project_samane.ui.student.StudentMainActivity"
+    android:background="@drawable/backgound_gradient"
     tools:showIn="@layout/app_bar_student_main">
 
     <ScrollView

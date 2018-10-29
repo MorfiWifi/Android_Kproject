@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.site_master.ProfileActivity"
+    tools:context=".ui.site_master.Site_ProfileActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
@@ -118,7 +118,7 @@
             <!--persnal information-->
             <LinearLayout
 
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/lin_colapse1"
                 android:layout_margin="5dp"
                 android:background="@drawable/background_white_mid_thick"
@@ -185,7 +185,7 @@
             <!--std khab gah -->
             <LinearLayout
                 android:id="@+id/lin_expan_khabgah"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_margin="5dp"
                 android:background="@drawable/background_white_mid_thick"
                 android:layout_below="@id/lin_colapse1"

@@ -21,7 +21,7 @@ import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
 
 import java.util.Calendar;
 
-public class ProfileActivity extends SiteMasterActivity {
+public class Site_ProfileActivity extends SiteMasterActivity {
 
     Properties properties = null;
     @Override

@@ -25,6 +25,7 @@ import android.content.IntentFilter
 import android.util.Log
 import com.apps.morfiwifi.morfi_project_samane.R.id.txin_pass
 import com.apps.morfiwifi.morfi_project_samane.R.id.txin_user_name
+import com.apps.morfiwifi.morfi_project_samane.ui.Startup
 import com.apps.morfiwifi.morfi_project_samane.ui.notification.MessageNotification
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -40,6 +41,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 //        Init.test_loading(this)
+
+        intent = Intent(this , Startup::class.java)
+        startActivity(intent)
+
 
         val exit_code = intent.getBooleanExtra("EXIT" , false)
         if (exit_code){

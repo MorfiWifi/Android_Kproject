@@ -364,7 +364,12 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
         recyclerView.setHasFixedSize(false);
         recyclerView.setAdapter(new general_RecyclerAdapter(objects ,stdmod, show_bottom_sheet ,mod ));
 
+
     }
+
+   /* public void asdad(){ // this is USED for single item chainge - loading pics and info along time...
+        notifyItemChanged(5);
+    }*/
 
     public static void Init_fragment (Object object, Context context, View view , final Init.Mod mod, boolean stdmod , boolean show_bottom_sheet ,AppCompatActivity activity ){
         List<Object> objects = ((List<Object>) object);
