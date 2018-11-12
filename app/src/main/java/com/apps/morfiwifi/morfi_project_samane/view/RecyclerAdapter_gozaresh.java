@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -15,45 +16,40 @@ import android.widget.TextView;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
-import com.apps.morfiwifi.morfi_project_samane.models.Request;
-import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
-import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
+//import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
-import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
 
 import java.util.Calendar;
 import java.util.List;
 
-public class request_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_request>  {
+public class RecyclerAdapter_gozaresh extends RecyclerView.Adapter<ViewHolder_gozaresh> {
 
-
-
-    private List<Request> reportList; // our items !
-    private static RecyclerView recyclerView; //this
+    private List<Report> reportList; // our items !
+    private static  RecyclerView recyclerView; //this
     private static AppCompatActivity activity; // super activit
     User sener_user ;
-    List<Thing> things;
+    Report_type report_type;
+    List<Report_type> report_typeList;
 
-    public request_RecyclerAdapter (List<Request> reportList) {
+    public RecyclerAdapter_gozaresh(List<Report> reportList) {
         this.reportList = reportList;
     }
 
     @Override
-    public ViewHolder_request onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder_gozaresh onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gozaresh_recive_item , parent , false); // Report Item
-        return new ViewHolder_request(view);
+        return new ViewHolder_gozaresh(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder_request holder, int position) {
+    public void onBindViewHolder(ViewHolder_gozaresh holder, int position) {
+        final Report sample_report = reportList.get(position);
 
 
 
-        final Request sample_report = reportList.get(position);
-
-        holder.sender_name.setText(sample_report.thing.name);
+        holder.sender_name.setText(sample_report.report_type.name);
         holder.sender_lname.setText(sample_report.state.toString());
 
 
@@ -63,8 +59,6 @@ public class request_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_req
         String dati = shamsiDate.shamsiDate(calendar.get(Calendar.YEAR) , calendar.get(Calendar.MONTH)+1 , calendar.get(Calendar.DATE));
 
         holder.gozaresh_type.setText(dati);
-
-
 
         holder.lin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,36 +70,41 @@ public class request_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_req
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
                 Report.State[] vals = Report.State.values();
-
-
+                
+                
                 TextView matn = bottom_sheet.findViewById(R.id.tv_gozaresh_matn_rec);
                 TextView type = bottom_sheet.findViewById(R.id.tv_gozaresh_type);
                 final Spinner states = bottom_sheet.findViewById(R.id.sp_new_state);
                 TextView date = bottom_sheet.findViewById(R.id.tv_gozaresh_date);
                 TextView sende_id = bottom_sheet.findViewById(R.id.tv_gozaresh_sender_id);
+                ImageButton account = bottom_sheet.findViewById(R.id.im_load_user_data);
 
                 shamsiDate shamsiDate = new shamsiDate();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(sample_report.createAt);
                 String dati = shamsiDate.shamsiDate(calendar.get(Calendar.YEAR) , calendar.get(Calendar.MONTH)+1 , calendar.get(Calendar.DATE));
 
-                if (sample_report.iscountable){
-                    matn.setVisibility(View.VISIBLE);
-                    matn.setText("تعداد : " +sample_report.count);
-                }else {
-                    matn.setVisibility(View.GONE);
-                }
-
-                type.setText(" نوع درخواست : "+ sample_report.thing.name+ " وضعیت : " + sample_report.state  );
+                matn.setText(sample_report.matn);
+                type.setText(" موضوع : "+ sample_report.report_type.name+ " وضعیت : " + sample_report.state  );
                 date.setText(dati);
-                if (activity instanceof DarkhastActivity){
+                if (activity instanceof ReportActivity){
                     sende_id.setText(" فرستنده : " + User.current_user.UserName);
                     bottom_sheet.findViewById(R.id.btn_gozaresh_new_state).setVisibility(View.GONE);
                     states.setVisibility(View.GONE);
+                    account.setVisibility(View.GONE);
                 }else {
                     sende_id.setText("آیدی فرستنده : " + sample_report.sender_id);
                     bottom_sheet.findViewById(R.id.btn_gozaresh_new_state).setVisibility(View.VISIBLE);
                     states.setVisibility(View.VISIBLE);
+                    account.setVisibility(View.VISIBLE);
+                    account.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            User.user_info_dialogue(activity  , sample_report.sender_id);
+
+                            ;
+                        }
+                    });
                 }
 
 
@@ -120,7 +119,9 @@ public class request_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_req
                         Report.State new_state = (Report.State) states.getSelectedItem();
 //                        sample_report.set_State(new_state);
 //                        Repository.GetInstant(activity).getReportDao().update(sample_report);
-                        Init.Toas(activity , "تفییرات اعمال شد");
+                        int m =  ((Report.State) states.getSelectedItem()).ordinal();
+                        Report.chainge_status (  activity,true, sample_report.Id ,  m);
+//                        Init.Toas(activity , "تفییرات اعمال شد");
                         // Juset checking ....
                         Init(reportList, activity);
                     }
@@ -147,41 +148,41 @@ public class request_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_req
         return reportList.size();
     }
 
-    public static void view_fixer(List<Request> reportList, AppCompatActivity activity){
+    public static void view_fixer(List<Report> reportList, AppCompatActivity activity){
         if (reportList == null){
             activity.findViewById(R.id.tv_signup_empty).setVisibility(View.VISIBLE);
-            activity.findViewById(R.id.rec_request).setVisibility(View.GONE);
+            activity.findViewById(R.id.rec_gozaresh_recive).setVisibility(View.GONE);
         }else{
             if (reportList.size() == 0){
                 activity.findViewById(R.id.tv_signup_empty).setVisibility(View.VISIBLE);
-                activity.findViewById(R.id.rec_request).setVisibility(View.GONE);
+                activity.findViewById(R.id.rec_gozaresh_recive).setVisibility(View.GONE);
             }
             else {
                 activity.findViewById(R.id.tv_signup_empty).setVisibility(View.GONE);
-                activity.findViewById(R.id.rec_request).setVisibility(View.VISIBLE);
+                activity.findViewById(R.id.rec_gozaresh_recive).setVisibility(View.VISIBLE);
             }
         }
     }
 
-    public static void Init(List<Request> reportList, AppCompatActivity activity){
+    public static void Init(List<Report> reportList, AppCompatActivity activity){
         view_fixer(reportList, activity);
-        recyclerView = activity.findViewById(R.id.rec_request);
-        request_RecyclerAdapter.activity = activity;
+        recyclerView = activity.findViewById(R.id.rec_gozaresh_recive);
+        RecyclerAdapter_gozaresh.activity = activity;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
-        recyclerView.setAdapter(new request_RecyclerAdapter(reportList));
+        recyclerView.setAdapter(new RecyclerAdapter_gozaresh(reportList));
 
     }
 
-    public static void Init(List<Request> reportList , List<Thing> things, AppCompatActivity activity){
+    public static void Init(List<Report> reportList , List<Report_type> report_types, AppCompatActivity activity){
         view_fixer(reportList, activity);
-        recyclerView = activity.findViewById(R.id.rec_request);
-        request_RecyclerAdapter.activity = activity;
+        recyclerView = activity.findViewById(R.id.rec_gozaresh_recive);
+        RecyclerAdapter_gozaresh.activity = activity;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
-        recyclerView.setAdapter(new request_RecyclerAdapter(reportList));
+        recyclerView.setAdapter(new RecyclerAdapter_gozaresh(reportList));
 
     }
 

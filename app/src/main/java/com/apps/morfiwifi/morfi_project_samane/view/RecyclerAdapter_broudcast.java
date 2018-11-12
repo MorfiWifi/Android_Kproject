@@ -14,29 +14,25 @@ import android.widget.TextView;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Broudcast;
-import com.apps.morfiwifi.morfi_project_samane.models.Message;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
-import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ActiveStudentActivity;
-import com.apps.morfiwifi.morfi_project_samane.util.Repository;
-import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
 
 import java.util.Calendar;
 import java.util.List;
 
-public class broudcast_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder_broudcast_std>{
+public class RecyclerAdapter_broudcast extends RecyclerView.Adapter<ViewHolder_broudcast_std>{
     private List<Broudcast> broudcastList;
     private static  RecyclerView recyclerView;
     private static AppCompatActivity activity;
 
-    public broudcast_RecyclerAdapter(List<Broudcast> broudcastList) {
+    public RecyclerAdapter_broudcast(List<Broudcast> broudcastList) {
         this.broudcastList = broudcastList;
     }
 
     @NonNull
     @Override
     public ViewHolder_broudcast_std onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item , parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message, parent , false);
         return new ViewHolder_broudcast_std(view);
     }
 
@@ -138,11 +134,11 @@ public class broudcast_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder_
     public static void Init(List<Broudcast> broudcastList , AppCompatActivity activity){
         view_fixer(broudcastList , activity);
         recyclerView = activity.findViewById(R.id.rec_broudcast_std);
-        broudcast_RecyclerAdapter.activity = activity;
+        RecyclerAdapter_broudcast.activity = activity;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
-        recyclerView.setAdapter(new broudcast_RecyclerAdapter(broudcastList));
+        recyclerView.setAdapter(new RecyclerAdapter_broudcast(broudcastList));
 
     }
 }

@@ -18,7 +18,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
-import com.apps.morfiwifi.morfi_project_samane.view.general_RecyclerAdapter;
+import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_general;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
@@ -237,7 +237,7 @@ public class TransferActivity extends DarkhastActivity implements
     }
 
     public void load_transfers(List<Transfer> transfers) {
-        general_RecyclerAdapter.Init(transfers
+        RecyclerAdapter_general.Init(transfers
                 , this , Init.Mod.transfer , true ,true);
     }
 }

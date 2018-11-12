@@ -123,8 +123,18 @@
             </intent-filter>
         </receiver>
 
-
-        <activity android:name=".ui.Startup"></activity>
+        <activity android:name=".ui.Startup" />
+        <activity android:name=".ui.ticket.TicketMessageActivity"
+            android:theme="@style/AppTheme.NoTitle"
+            />
+        <activity
+            android:name=".ui.student.StudentTicketActivity"
+            android:label="@string/title_activity_srudent_ticket"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.site_master.SiteTicketActivity"
+            android:label="@string/title_activity_site_ticket"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

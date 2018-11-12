@@ -3,7 +3,6 @@ package com.apps.morfiwifi.morfi_project_samane.ui.site_master;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -14,10 +13,8 @@ import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 //import com.apps.morfiwifi.morfi_project_samane.models.UserDao;
-import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.WriteExcel;
-import com.apps.morfiwifi.morfi_project_samane.view.active_stu_RecyclerAdapter;
-import com.apps.morfiwifi.morfi_project_samane.view.signup_stu_RecyclerAdapter;
+import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_active_stu;
 
 import java.util.List;
 
@@ -52,7 +49,7 @@ public class ActiveStudentActivity extends SiteMasterActivity {
         User.getall_need_active_students(this , true , false);
 
 
-        active_stu_RecyclerAdapter.Init(sh_users , this); // TODO: 6/26/2018 Active Thign !
+        RecyclerAdapter_active_stu.Init(sh_users , this); // TODO: 6/26/2018 Active Thign !
     }
 
     @Override
@@ -90,7 +87,7 @@ public class ActiveStudentActivity extends SiteMasterActivity {
 
     public void put_users (List<User> users){
         this.sh_users = users;
-        active_stu_RecyclerAdapter.Init(sh_users , this); // TODO: 6/26/2018 Active Thign !
+        RecyclerAdapter_active_stu.Init(sh_users , this); // TODO: 6/26/2018 Active Thign !
     }
 
     @Override
@@ -100,7 +97,7 @@ public class ActiveStudentActivity extends SiteMasterActivity {
     }
 
     public void load_other_properties (Properties properties){
-        active_stu_RecyclerAdapter.expand_buttom_sheet(properties);
+        RecyclerAdapter_active_stu.expand_buttom_sheet(properties);
     }
 
     public void DELETED() {

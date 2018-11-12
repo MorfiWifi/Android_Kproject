@@ -1,0 +1,251 @@
+package com.apps.morfiwifi.morfi_project_samane.ui.ticket;
+
+import android.os.Handler;
+import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.Ticket;
+import com.apps.morfiwifi.morfi_project_samane.models.Ticket_Message;
+import com.apps.morfiwifi.morfi_project_samane.models.User;
+import com.apps.morfiwifi.morfi_project_samane.utility.Init;
+import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_ticket;
+import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_tickmessage;
+import com.parse.ParseCloud;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.wang.avi.AVLoadingIndicatorView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class TicketMessageActivity extends AppCompatActivity {
+    private static Ticket ticket = null;
+    RecyclerAdapter_tickmessage recycler;
+    HashMap< Ticket_Message , Integer> map = new HashMap<>();
+    List<Ticket_Message> ticket_messages = new ArrayList<>();
+    int chainge = 0;
+    String message = "";
+    boolean isLoadig = true, isSaving = false;
+    final Handler handler = new Handler(); // update View Handler in MAIN TH;
+    Runnable runnable_view = new Runnable() {
+        @Override
+        public void run() {
+            if (isLoadig){
+                star_loading();
+            }else {
+                stop_loading();
+            }
+            if (isSaving){
+//                findViewById(R.id.fab_new_ticket).setVisibility(View.GONE);
+            }else {
+//                findViewById(R.id.fab_new_ticket).setVisibility(View.VISIBLE);
+            }
+            if (chainge > 0){
+                recycler.Set_List(ticket_messages);
+                chainge = 0;
+            }
+            handler.postDelayed(this , 200);
+        }
+    };
+
+    Runnable runnable_getTickets = new Runnable() {
+        @Override
+        public void run() {
+//            boolean isloaded = false;
+
+            if (ticket == null)
+                return;
+            if (ticket.parseObject== null)
+                return;
+
+            try {
+                isLoadig = true;
+                HashMap<String , Object> hashMap = new HashMap<>();
+                hashMap.put("ticket" , ticket.parseObject.getObjectId());
+                List<ParseObject> list =
+                        (List<ParseObject>) ParseCloud.callFunction("ticket_message" , hashMap );
+
+                ticket_messages = new ArrayList<>();// first load then send !
+                for (ParseObject pa :list) {
+                    Ticket_Message t = new Ticket_Message(false , pa);
+                    ticket_messages.add(t);
+                }
+                chainge++;
+                isLoadig = false;
+            } catch (ParseException e) {
+                Log.e(getClass().getName() , e.getMessage());
+                chainge++;
+                isLoadig = false;
+            }
+        }
+    };
+    Runnable runnable_sendTickets = new Runnable() {
+        @Override
+        public void run() {
+
+            ParseObject tic_message = new ParseObject("ticket_message");
+            tic_message.put("mess" , message);
+            tic_message.put("CreatedBy" , ParseUser.getCurrentUser());
+            tic_message.put("SENDER_USERNAME" , ParseUser.getCurrentUser().getUsername()); // this won't chainge
+            tic_message.put("ATTACHED" , "NON"); // file attach (server adress)
+            tic_message.put("ERJA" , false);
+            tic_message.put("HAS_ATTACHED" , false);
+
+            ticket.parseObject.add("ticket_message" , tic_message); // Add message to ticket..
+
+            try {
+                Ticket_Message messagei = new Ticket_Message(true , tic_message);
+                ticket_messages.add(0 ,messagei);
+                map.put(  messagei , ticket_messages.indexOf(messagei));
+                chainge++;
+                isSaving = true;
+                ticket.parseObject.save();
+                isSaving = false;
+                chainge++;
+                message = "";
+                if (map.containsKey(messagei)){
+                    int p = map.get(messagei);
+                    ticket_messages.get(p).isLoading = false;
+                }
+            } catch (ParseException e) {
+                Log.e(getClass().getName() , e.getMessage());
+                isSaving = false;
+                message = "";
+                chainge++;
+            }
+        }
+    };
+    Thread thread = new Thread(runnable_getTickets);
+    Thread thread_send ;
+
+    @Override
+    protected void onDestroy() {
+        handler.removeCallbacks(runnable_view);
+        super.onDestroy();
+    }
+
+
+
+
+    public static void setTicket(Ticket ticket) {
+            TicketMessageActivity.ticket = ticket;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ticket_message);
+
+        boolean haveTicket =
+        getIntent().getExtras().getBoolean("TIVKET_ARRIVED" , false);
+        String sender =
+        getIntent().getExtras().getString("SENDER" , Init.Empty);
+
+        if (haveTicket && ticket != null){
+            TextView status =
+            findViewById(R.id.tv_ticket_status);
+
+            String head = Init.notNull(ticket.parseObject.get("header")) +
+                    (ticket.parseObject.getBoolean("isopen")?": باز" : ": بسته") ;
+            status.setText(head);
+            if (!ticket.parseObject.getBoolean("isopen")){
+                findViewById(R.id.lin_sending_aria).setVisibility(View.GONE);
+            }else {
+                findViewById(R.id.lin_sending_aria).setVisibility(View.VISIBLE);
+            }
+        }
+        recycler = RecyclerAdapter_tickmessage.Init(null , this);
+        load_ticket_messages();
+        start_view_thread();
+
+
+        TextInputEditText m = findViewById(R.id.ti_tick_mess);
+        m.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 1){
+                    findViewById(R.id.im_sed_tickmess).setVisibility(View.VISIBLE);
+                }else if (s.length() <= 1){
+                    findViewById(R.id.im_sed_tickmess).setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    public void start_view_thread(){
+        handler.removeCallbacks(runnable_view);
+        handler.postDelayed(runnable_view , 200);
+    }
+    public void load_ticket_messages(){
+        if (!thread.isAlive()){
+            thread = new Thread(runnable_getTickets);
+            thread.start();
+        }
+
+    }
+
+    public void star_loading (){
+        findViewById(R.id.tv_please_bepashent).setVisibility(View.VISIBLE);
+        findViewById(R.id.rec_tick_message).setVisibility(View.GONE);
+        AVLoadingIndicatorView avi = findViewById(R.id.avi_loading);
+        avi.setVisibility(View.VISIBLE);
+        if (!avi.isActivated()){
+            avi.show();
+        }
+    }
+
+    public void stop_loading (){
+        findViewById(R.id.tv_please_bepashent).setVisibility(View.GONE);
+        findViewById(R.id.rec_tick_message).setVisibility(View.VISIBLE);
+        AVLoadingIndicatorView avi = findViewById(R.id.avi_loading);
+        avi.setVisibility(View.GONE);
+        avi.hide();
+    }
+
+    public void click_send(View view) {
+        TextInputEditText editText =
+        findViewById(R.id.ti_tick_mess);
+        message = editText.getText().toString();
+        editText.getText().clear();
+        if (isSaving){
+            Toast.makeText(this, "صبر ...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (thread_send == null){
+            thread_send = new Thread(runnable_sendTickets);
+            thread_send.start();
+            return;
+        }
+
+        if (!thread_send.isAlive()){
+            thread_send = new Thread(runnable_sendTickets);
+            thread_send.start();
+        }else {
+            Toast.makeText(this, "مشکلی برای ارسال وجود دارد", Toast.LENGTH_SHORT).show();
+        }
+
+
+        //SOME JUB .....
+    }
+}

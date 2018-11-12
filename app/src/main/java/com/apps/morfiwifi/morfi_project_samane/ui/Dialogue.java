@@ -17,8 +17,8 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,10 +41,10 @@ import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentTicketActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.JalaliCalendar;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -788,7 +788,7 @@ public class Dialogue {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialogue_about_app);
 
-        TextView app_version =  dialog.findViewById(R.id.tv_app_version);
+        TextView app_version =  dialog.findViewById(R.id.tv_ticket_header);
         ImageButton app_close =  dialog.findViewById(R.id.imb_close);
         int versionNumber = 0;
         String versionName = "0";
@@ -812,6 +812,64 @@ public class Dialogue {
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(activity.getString(R.string.github_url)));
                 activity.startActivity(i);
+            }
+        });
+
+        app_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+//        dialog.seti
+
+    }
+    public static void new_ticket_student (final AppCompatActivity activity) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.dismiss();
+        // custom dialog
+//        final Dialog dialog = new Dialog(activity); et_ticket_header
+
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialogue_new_ticket_student);
+        final EditText ticket_header = dialog.findViewById(R.id.et_ticket_header);
+//        TextView app_version =  dialog.findViewById(R.id.tv_app_version);
+        ImageButton app_close =  dialog.findViewById(R.id.imb_close);
+//        int versionNumber = 0;
+//        String versionName = "0";
+//        PackageInfo pinfo = null;
+//        try {
+//            pinfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
+//            versionNumber = pinfo.versionCode;
+//            versionName = pinfo.versionName;
+//        } catch (PackageManager.NameNotFoundException e) {
+//            Log.d("DIALOUE ABOUT US :" , e.getMessage());
+//        }
+
+
+//        app_version.setText("ورژن " + versionName);
+
+        dialog.show();
+
+        dialog.findViewById(R.id.btn_get_source_cod).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (ticket_header.getText().toString().trim().length() < 2){
+                    return;
+                }
+                dialog.dismiss();
+
+//                Intent i = new Intent(Intent.ACTION_VIEW);
+//                i.setData(Uri.parse(activity.getString(R.string.github_url)));
+//                activity.startActivity(i);
+//
+                if (activity instanceof StudentTicketActivity){
+                    ((StudentTicketActivity) activity).insert_ticket_header(ticket_header.getText().toString());
+                }
             }
         });
 

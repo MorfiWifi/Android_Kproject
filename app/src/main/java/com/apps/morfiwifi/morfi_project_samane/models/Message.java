@@ -145,7 +145,7 @@ public class Message {
                         ((MessageActivity) activity).update_messages(STR(response.body()));
                     }
                     if (activity instanceof ReciverActivity){
-                        message_RecyclerAdapter.Init(response.body() , activity);
+                        RecyclerAdapter_message.Init(response.body() , activity);
                         //((MessageActivity) activity).update_messages(STR(response.body()));
                     }
                 }

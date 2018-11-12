@@ -144,6 +144,11 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 val intent = Intent(this , EnteghadActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent )
+            }//nav_ticket
+            R.id.nav_ticket -> {
+                val intent = Intent(this , StudentTicketActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent )
             }
             R.id.nav_darkhast -> {
                 val intent = Intent(this , DarkhastActivity::class.java)

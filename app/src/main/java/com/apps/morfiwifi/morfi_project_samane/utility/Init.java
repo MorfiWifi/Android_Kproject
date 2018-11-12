@@ -78,6 +78,22 @@ public class Init {
     public final static String Empty = "خالی" ;
     public final static String EXEPTION  = "SAMANE EXCEPTION : " ;
 
+    public static String notNull (Object s){
+        if (s != null){
+            return s.toString();
+        }else {
+            return Empty;
+        }
+    }
+
+    public static String notNull (Object s , String def){
+        if (s != null){
+            return s.toString();
+        }else {
+            return def;
+        }
+    }
+
     public static void test_notif(AppCompatActivity activity) {
         /*HashMap<String, String> test = new HashMap<>();
         test.put("message", "testing");

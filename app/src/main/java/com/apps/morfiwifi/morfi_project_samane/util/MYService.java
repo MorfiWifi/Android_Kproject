@@ -70,7 +70,7 @@ public class MYService extends IntentService {
         // Here we call send passing a resultCode and the bundle of extras
 //        rec.send(Activity.RESULT_OK, bundle);
         Log.d("SERVICE :" , "HANDLING SOME INTENT");
-//        publishResults("SOME THING OUT", 56);
+//        publishResults("SOME THING OUT",F 56);
 
 
 //        MessageNotification.notify(getApplicationContext() , "ASDADAASDSA" , 45);

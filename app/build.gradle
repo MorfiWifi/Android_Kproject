@@ -5,6 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+//    testOptions.unitTests.includeAndroidResources = true
     signingConfigs {
         config {
             keyAlias 'Wifimorfi'
@@ -21,7 +22,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0 beta"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         /*manifestPlaceholders = [
                 onesignal_app_id: 'b0e9096c-c879-4055-ab37-da1501504b88',
                 // Project number pulled from dashboard, local value is ignored.
@@ -42,12 +43,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests {
+            unitTests.returnDefaultValues = true
+            includeAndroidResources = true
+        }
+    }
     externalNativeBuild {
         ndkBuild {
             path 'src/main/jni/Android.mk'
         }
     }
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
 
     lintOptions {
 
@@ -86,10 +93,20 @@ dependencies {
     implementation 'com.flipboard:bottomsheet-commons:1.5.3'
     // optional
     implementation 'org.greenrobot:greendao:3.2.2'
-
+//    implementation "org.assertj:assertj-core:2.6.0"
+    testImplementation "org.robolectric:robolectric:4.0.1"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    androidTestImplementation 'androidx.test:1.0'
+//    androidTestImplementation 'org.robolectric:robolectric:4.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+//    implementation 'junit:junit:4.12'
+    // Required -- JUnit 4 framework
+    testImplementation 'junit:junit:4.12'
+    // Optional -- Robolectric environment
+    testImplementation 'androidx.test:core:1.0.0'
+    // Optional -- Mockito framework
+    testImplementation 'org.mockito:mockito-core:2.19.0'
 }
 //apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 // In your app projects build.gradle file:

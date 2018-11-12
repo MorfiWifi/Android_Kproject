@@ -8,7 +8,7 @@ import android.util.Log;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.BroadcastActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.technical.TechnicalActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
-import com.apps.morfiwifi.morfi_project_samane.view.broudcast_RecyclerAdapter;
+import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_broudcast;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -142,20 +142,20 @@ public class Broudcast {
                             Conver_Parse();
                             isloaded = true;
                             if (activity instanceof BroadcastActivity && display_loading){
-                                broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                                RecyclerAdapter_broudcast.Init(broudcastList , activity);
                                 ((BroadcastActivity) activity).stop_loading();
                             }else if (activity instanceof  TechnicalActivity && display_loading){
-                                broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                                RecyclerAdapter_broudcast.Init(broudcastList , activity);
                                 ((TechnicalActivity) activity).stop_loading();
                             }
                         }else {
                             Init.Terminal("Some ERROR IN RETRIVING BROUDCASTS");
                             if (activity instanceof BroadcastActivity && display_loading){
-                                broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                                RecyclerAdapter_broudcast.Init(broudcastList , activity);
                                 ((BroadcastActivity) activity).stop_loading();
                             }else if (activity instanceof  TechnicalActivity && display_loading){
                                 ((TechnicalActivity) activity).stop_loading();
-                                broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                                RecyclerAdapter_broudcast.Init(broudcastList , activity);
                             }
                         }
                     }
@@ -171,7 +171,7 @@ public class Broudcast {
                     ParseQuery query = new ParseQuery(Broudcast);
                     query.whereEqualTo(recive_role_id1 , User.current_user.Role_id);
                     if (activity instanceof BroadcastActivity && display_loading){
-                        broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                        RecyclerAdapter_broudcast.Init(broudcastList , activity);
                         ((BroadcastActivity) activity).start_loading();
                     }else if (activity instanceof  TechnicalActivity && display_loading){
                         ((TechnicalActivity) activity).start_loading();
@@ -184,11 +184,11 @@ public class Broudcast {
                                 Conver_Parse();
                                 isloaded = true;
                                 if (activity instanceof BroadcastActivity && display_loading){
-                                    broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                                    RecyclerAdapter_broudcast.Init(broudcastList , activity);
                                     ((BroadcastActivity) activity).stop_loading();
                                 }else if (activity instanceof  TechnicalActivity && display_loading){
                                     ((TechnicalActivity) activity).stop_loading();
-                                    broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                                    RecyclerAdapter_broudcast.Init(broudcastList , activity);
                                 }
                             }else {
                                 Init.Terminal("Some ERROR IN RETRIVING BROUDCASTS");
@@ -198,10 +198,10 @@ public class Broudcast {
                 }catch (Exception e){
                     broudcastList = new ArrayList<>();
                     if (activity instanceof BroadcastActivity && display_loading){
-                        broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                        RecyclerAdapter_broudcast.Init(broudcastList , activity);
                         ((BroadcastActivity) activity).stop_loading();
                     }else if (activity instanceof  TechnicalActivity && display_loading){
-                        broudcast_RecyclerAdapter.Init(broudcastList , activity);
+                        RecyclerAdapter_broudcast.Init(broudcastList , activity);
                         ((TechnicalActivity) activity).stop_loading();
                     }
                 }

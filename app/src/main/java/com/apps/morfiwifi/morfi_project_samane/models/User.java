@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.ui.others.TestActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.ticket.TicketMessageActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -323,7 +324,7 @@ public class User   {
         Init.start_fresh();
         /// Debugign thing !
         if (userName.equals("max") && pass.equals("max")){
-            Intent intent = new Intent(activity , TestActivity.class);
+            Intent intent = new Intent(activity , TicketMessageActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             activity.startActivity(intent);
             return;

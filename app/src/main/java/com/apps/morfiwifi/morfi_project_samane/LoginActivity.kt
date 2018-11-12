@@ -74,6 +74,7 @@ class LoginActivity : AppCompatActivity() {
                 return
             }*/
 
+
             Init.start_fresh() // for fixing other user catching problem
             when {
                 user.Role.equals(User.Kind.Student.toString()) -> {

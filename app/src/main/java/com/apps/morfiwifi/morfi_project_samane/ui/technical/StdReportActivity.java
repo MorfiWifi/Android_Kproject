@@ -10,11 +10,9 @@ import android.util.Log;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
-import com.apps.morfiwifi.morfi_project_samane.util.Repository;
-import com.apps.morfiwifi.morfi_project_samane.view.gozaresh_RecyclerAdapter;
+import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_gozaresh;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class StdReportActivity extends TechnicalActivity {
 
@@ -42,14 +40,14 @@ public class StdReportActivity extends TechnicalActivity {
 
 
 //        List<Report> reportList = Repository.GetInstant(this).getReportDao().loadAll();
-//        gozaresh_RecyclerAdapter.Init(reportList, this);
+//        RecyclerAdapter_gozaresh.Init(reportList, this);
 
 
         Log.d("STDREPORT ACCTIVITY : " , "THIS ONE HAS LOADED");
     }
 
     public void loadstd_reports(ArrayList<Report> reports){
-        gozaresh_RecyclerAdapter.Init(reports, this);
+        RecyclerAdapter_gozaresh.Init(reports, this);
 
     }
 

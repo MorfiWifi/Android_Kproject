@@ -7,19 +7,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Broudcast;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Report_type;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
-import com.apps.morfiwifi.morfi_project_samane.utility.Init;
-import com.apps.morfiwifi.morfi_project_samane.view.broudcast_RecyclerAdapter;
-import com.apps.morfiwifi.morfi_project_samane.view.gozaresh_RecyclerAdapter;
+import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_gozaresh;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +65,7 @@ public class ReportActivity extends DarkhastActivity {
         isloaded = true;
         this.types = types;
         Broudcast broudcast = new Broudcast();
-        gozaresh_RecyclerAdapter.Init(reports , types,this);
+        RecyclerAdapter_gozaresh.Init(reports , types,this);
     }
 
     @Override

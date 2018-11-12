@@ -3,10 +3,8 @@ package com.apps.morfiwifi.morfi_project_samane.models;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
-import com.apps.morfiwifi.morfi_project_samane.ui.site_master.AddUserActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.BroadcastActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
-import com.apps.morfiwifi.morfi_project_samane.view.broudcast_RecyclerAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -83,13 +81,13 @@ public class role {
                             convert_parse_role();
                             isloaded = true;
                             if (activity instanceof BroadcastActivity && draw_loading){
-//                                broudcast_RecyclerAdapter.Init(roles , activity);
+//                                RecyclerAdapter_broudcast.Init(roles , activity);
                                 Init.stop_loading(activity);
                             }
                         }else {
                             Init.Terminal("Some ERROR IN RETRIVING BROUDCASTS");
                             if (activity instanceof BroadcastActivity && draw_loading ){
-//                                broudcast_RecyclerAdapter.Init(broudcastList , activity);
+//                                RecyclerAdapter_broudcast.Init(broudcastList , activity);
                                 Init.stop_loading(activity);
                             }
                         }
@@ -115,7 +113,7 @@ public class role {
                                 convert_parse_role();
                                 isloaded = true;
                                 if (activity instanceof BroadcastActivity && draw_loading){
-//                                    broudcast_RecyclerAdapter.Init(roles , activity);
+//                                    RecyclerAdapter_broudcast.Init(roles , activity);
                                     Init.stop_loading(activity);
                                 }
                             }else {
@@ -126,7 +124,7 @@ public class role {
                 }catch (Exception e){
                     roles = new ArrayList<>();
                     if (activity instanceof BroadcastActivity && draw_loading){
-//                        broudcast_RecyclerAdapter.Init(roles , activity);
+//                        RecyclerAdapter_broudcast.Init(roles , activity);
                         Init.stop_loading(activity);
                     }
                 }
@@ -162,7 +160,7 @@ public class role {
 
 
                             if ( draw_loading){
-//                                broudcast_RecyclerAdapter.Init(roles , activity);
+//                                RecyclerAdapter_broudcast.Init(roles , activity);
                                 Init.stop_loading(activity);
                             }
                         }else {
@@ -170,7 +168,7 @@ public class role {
                             Result result = new Result(e ,CODE );
                             Init.result_of_query(activity , result);
                             if ( draw_loading ){
-//                                broudcast_RecyclerAdapter.Init(broudcastList , activity);
+//                                RecyclerAdapter_broudcast.Init(broudcastList , activity);
                                 Init.stop_loading(activity);
                             }
                         }

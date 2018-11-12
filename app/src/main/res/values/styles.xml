@@ -35,6 +35,7 @@
     <style name="RippleTheme">
         <item name="colorControlHighlight">#FFF</item>
     </style>
+
     <style name="RippleItemBackground">
         <item name="android:theme">@style/RippleTheme</item>
         <item name="android:background">@drawable/ripple_selector</item>

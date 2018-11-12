@@ -13,7 +13,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Cancellation;
 import com.apps.morfiwifi.morfi_project_samane.models.Int_date;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
-import com.apps.morfiwifi.morfi_project_samane.view.general_RecyclerAdapter;
+import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_general;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
@@ -113,7 +113,7 @@ public class CancelationActivity extends DarkhastActivity implements
     }
 
     public void load_cancelations(List<Cancellation> cancellations) {
-        general_RecyclerAdapter.Init(cancellations
+        RecyclerAdapter_general.Init(cancellations
                 , this , Init.Mod.cancelation , true ,true);
     }
 }

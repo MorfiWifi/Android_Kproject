@@ -46,4 +46,6 @@
 
     <string name="app_intro">سامانه ی خوابگاه ها پیاده سازی شده در اندروید استدیو و با استفاده از سرویس parse server برای توسعه برنامه های تحت سرور باتشکر @wifimorfi</string>
     <string name="github_url">https://github.com/MorfiWifi/Android_Kproject</string>
+    <string name="title_activity_srudent_ticket">SrudentTicketActivity</string>
+    <string name="title_activity_site_ticket">SiteTicketActivity</string>
 </resources>

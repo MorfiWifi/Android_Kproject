@@ -15,14 +15,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
-import com.apps.morfiwifi.morfi_project_samane.models.Feedback;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
 import com.apps.morfiwifi.morfi_project_samane.models.Request;
-import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
-import com.apps.morfiwifi.morfi_project_samane.view.general_RecyclerAdapter;
+import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_general;
 
 import java.util.List;
 
@@ -45,7 +43,7 @@ public class frag_request extends Fragment {
         // Inflate the layout for this fragment
 //        activity.setTitle("REQUESTS");
         View v = inflater.inflate(R.layout.fragment_request_lay, container, false);
-        general_RecyclerAdapter.Init_fragment(_static , getContext()
+        RecyclerAdapter_general.Init_fragment(_static , getContext()
                 , v , Init.Mod.request , false ,true ,activity); // getview || view ?
         Log.d(Init.FRAGMENT , "request ONCREATE INFLATED");
         return v;
@@ -56,7 +54,7 @@ public class frag_request extends Fragment {
         _static = requests;
         if (getView() == null)
             return;
-        general_RecyclerAdapter.Init_fragment(_static , getContext()
+        RecyclerAdapter_general.Init_fragment(_static , getContext()
                 , getView() , Init.Mod.request , false ,true , activity);
 
     }

@@ -17,7 +17,7 @@ import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Request;
 import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
-import com.apps.morfiwifi.morfi_project_samane.view.request_RecyclerAdapter;
+import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_request;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,6 +157,13 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
                 }
 
                 break;
+                case R.id.nav_ticket :
+                if (!(this instanceof StudentTicketActivity)){ // HSould Chainge ...todo chainge this activity ASAP!
+                    intent = new Intent(this , StudentTicketActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent );
+                }
+                    break;
             case R.id.nav_manage_box :
                 if (!(this instanceof BroadcastActivity)){ // HSould Chainge ...todo chainge this activity ASAP!
                     intent = new Intent(this , BroadcastActivity.class);
@@ -231,7 +238,7 @@ public class DarkhastActivity extends AppCompatActivity implements NavigationVie
     public void load_requests(List<Request> requests) {
         things = Thing.load_things_fog(false); // should already be loaded
         requests = requests;
-        request_RecyclerAdapter.Init(requests , things , this);
+        RecyclerAdapter_request.Init(requests , things , this);
         // load recycler with data...
 
     }

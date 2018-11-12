@@ -5,18 +5,14 @@ import android.os.Bundle;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Block;
-import com.apps.morfiwifi.morfi_project_samane.models.DaoSession;
 import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
-import com.apps.morfiwifi.morfi_project_samane.models.Message;
 import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.Samane;
-import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
-import com.apps.morfiwifi.morfi_project_samane.view.samane_RecyclerAdapter;
+import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_samane;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SamanehaActivity extends AppCompatActivity {
 
@@ -53,6 +49,6 @@ public class SamanehaActivity extends AppCompatActivity {
             }
 
         }
-        samane_RecyclerAdapter.Init(list , this);
+        RecyclerAdapter_samane.Init(list , this);
     }
 }

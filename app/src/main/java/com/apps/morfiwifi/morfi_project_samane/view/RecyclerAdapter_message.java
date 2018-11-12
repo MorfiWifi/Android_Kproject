@@ -24,18 +24,18 @@ import java.util.List;
  */
 
 
-public class message_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_message> {
+public class RecyclerAdapter_message extends RecyclerView.Adapter<ViewHolder_message> {
     private List<Message> messages;
     private static  RecyclerView recyclerView;
     private static AppCompatActivity activity;
 
-    public message_RecyclerAdapter(List<Message> messages) {
+    public RecyclerAdapter_message(List<Message> messages) {
         this.messages = messages;
     }
 
     @Override
     public ViewHolder_message onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item , parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message, parent , false);
         return new ViewHolder_message(view);
     }
 
@@ -112,12 +112,12 @@ public class message_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_mes
 
     public static void Init(List<Message> messages , AppCompatActivity activity){
         recyclerView = activity.findViewById(R.id.rec_messages_recycle);
-        message_RecyclerAdapter.activity = activity;
+        RecyclerAdapter_message.activity = activity;
         //recyclerView.refreshDrawableState();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
-        recyclerView.setAdapter(new message_RecyclerAdapter(messages));
+        recyclerView.setAdapter(new RecyclerAdapter_message(messages));
 
     }
 }

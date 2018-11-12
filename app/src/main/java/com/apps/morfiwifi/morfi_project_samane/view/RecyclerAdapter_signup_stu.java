@@ -1,6 +1,5 @@
 package com.apps.morfiwifi.morfi_project_samane.view;
 
-import android.content.Intent;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,27 +11,25 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
-import com.apps.morfiwifi.morfi_project_samane.models.Samane;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SignupQeueActivity;
-import com.apps.morfiwifi.morfi_project_samane.util.Repository;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 
 import java.util.List;
 
-public class signup_stu_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder_signup_stu>{
+public class RecyclerAdapter_signup_stu extends RecyclerView.Adapter<ViewHolder_signup_stu>{
 
     private List<User> users; // our items !
     private static  RecyclerView recyclerView; //this
     private static AppCompatActivity activity; // super activity
 
-    public signup_stu_RecyclerAdapter (List<User> users) {
+    public RecyclerAdapter_signup_stu(List<User> users) {
         this.users = users;
     }
 
     @Override
     public ViewHolder_signup_stu onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.signup_item , parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_signup, parent , false);
         return new ViewHolder_signup_stu(view);
     }
 
@@ -133,11 +130,11 @@ public class signup_stu_RecyclerAdapter  extends RecyclerView.Adapter<ViewHolder
     public static void Init(List<User> users , AppCompatActivity activity){
         view_fixer(users , activity);
         recyclerView = activity.findViewById(R.id.rec_signup_su_recyclere);
-        signup_stu_RecyclerAdapter.activity = activity;
+        RecyclerAdapter_signup_stu.activity = activity;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
-        recyclerView.setAdapter(new signup_stu_RecyclerAdapter(users));
+        recyclerView.setAdapter(new RecyclerAdapter_signup_stu(users));
 
     }
 }

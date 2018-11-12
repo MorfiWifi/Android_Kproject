@@ -13,16 +13,12 @@ import android.widget.TextView;
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
-import com.apps.morfiwifi.morfi_project_samane.ui.site_master.ActiveStudentActivity;
-import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SignupQeueActivity;
-import com.apps.morfiwifi.morfi_project_samane.util.Repository;
-import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
 
 import java.util.Calendar;
 import java.util.List;
 
-public class active_stu_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_active_stu> {
+public class RecyclerAdapter_active_stu extends RecyclerView.Adapter<ViewHolder_active_stu> {
     private List<User> users; // our items !
     private static  RecyclerView recyclerView; //this
     private static AppCompatActivity activity; // super activity
@@ -34,13 +30,13 @@ public class active_stu_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_
         bottom_sheet = bottom_sheet1;
         bottomSheetBehavior = bottomSheetBehavior1;}
 
-    public active_stu_RecyclerAdapter (List<User> users) {
+    public RecyclerAdapter_active_stu(List<User> users) {
         this.users = users;
     }
 
     @Override
     public ViewHolder_active_stu onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.signup_item , parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_signup, parent , false);
         return new ViewHolder_active_stu(view);
     }
 
@@ -166,11 +162,11 @@ public class active_stu_RecyclerAdapter extends RecyclerView.Adapter<ViewHolder_
     public static void Init(List<User> users , AppCompatActivity activity){
         view_fixer(users , activity);
         recyclerView = activity.findViewById(R.id.rec_signup_su_recyclere);
-        active_stu_RecyclerAdapter.activity = activity;
+        RecyclerAdapter_active_stu.activity = activity;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
-        recyclerView.setAdapter(new active_stu_RecyclerAdapter(users));
+        recyclerView.setAdapter(new RecyclerAdapter_active_stu(users));
         LinearLayout bottom_sheet = (LinearLayout)
                 activity.findViewById(R.id.bottom_sheet_active_std_queue);
          bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);

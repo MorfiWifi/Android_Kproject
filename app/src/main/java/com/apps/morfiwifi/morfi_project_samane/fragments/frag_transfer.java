@@ -16,15 +16,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
-import com.apps.morfiwifi.morfi_project_samane.models.Cancellation;
-import com.apps.morfiwifi.morfi_project_samane.models.Feedback;
 import com.apps.morfiwifi.morfi_project_samane.models.Report;
-import com.apps.morfiwifi.morfi_project_samane.models.Request;
 import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
-import com.apps.morfiwifi.morfi_project_samane.view.general_RecyclerAdapter;
+import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_general;
 
 import java.util.List;
 import java.util.Objects;
@@ -54,7 +51,7 @@ public class frag_transfer extends Fragment {
 
         Log.d(Init.FRAGMENT , "_static ONCREATE INFLATED");
         View view = inflater.inflate(R.layout.fragment_transfer_lay, container, false);
-        general_RecyclerAdapter.Init_fragment(_static , getContext()
+        RecyclerAdapter_general.Init_fragment(_static , getContext()
                 , view , Init.Mod.transfer , false ,true ,activity); // getview || view ?
         return view;
     }
@@ -96,7 +93,7 @@ public class frag_transfer extends Fragment {
         if (getView() == null)
             return;
         //todo feeds init the RECYCLER
-        general_RecyclerAdapter.Init_fragment(transfers , getContext()
+        RecyclerAdapter_general.Init_fragment(transfers , getContext()
                 , getView() , Init.Mod.transfer , false ,true , activity);
     }
 
@@ -106,7 +103,7 @@ public class frag_transfer extends Fragment {
 
     public void do_refrersh (){
         if (_static != null){
-            general_RecyclerAdapter.Init_fragment(_static , getContext()
+            RecyclerAdapter_general.Init_fragment(_static , getContext()
                     , getView() , Init.Mod.transfer , false ,true , activity);
         }
     }

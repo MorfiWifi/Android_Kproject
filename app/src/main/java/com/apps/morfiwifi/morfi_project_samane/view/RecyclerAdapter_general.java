@@ -24,19 +24,15 @@ import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.StatesticActivity;
-import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
-
-import static com.apps.morfiwifi.morfi_project_samane.utility.Init.Mod.cancelation;
 
 //// STOPSHIP: 8/7/2018 has a general bottom sheet -show or not !
-public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_general>{
+public class RecyclerAdapter_general extends  RecyclerView.Adapter<ViewHolder_general>{
     private Init.Mod mod;
     private String current_mod  = Init.Empty;
     private boolean stdmod = true; // FOR EXTRA DATA FOR NON STUDENTS
@@ -51,7 +47,7 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
 
 
 
-    public general_RecyclerAdapter (List<Object> objects , boolean stdmod , boolean show_bottom_sheet , Init.Mod mod) {
+    public RecyclerAdapter_general(List<Object> objects , boolean stdmod , boolean show_bottom_sheet , Init.Mod mod) {
         this.objects = objects;
         this.stdmod = stdmod;
         this.show_bottom_sheet = show_bottom_sheet;
@@ -60,7 +56,7 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
 
     @Override
     public ViewHolder_general onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.general_item , parent , false); // Report Item
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_general, parent , false); // Report Item
         return new ViewHolder_general(view);
     }
 
@@ -356,13 +352,13 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
     public static void Init(Object object, AppCompatActivity activity , final Init.Mod mod, boolean stdmod , boolean show_bottom_sheet ){
         List<Object> objects = ((List<Object>) object);
         view_fixer(objects, activity);
-        general_RecyclerAdapter.isFragment = false;
+        RecyclerAdapter_general.isFragment = false;
         recyclerView = activity.findViewById(R.id.rec_general);
-        general_RecyclerAdapter.activity = activity;
+        RecyclerAdapter_general.activity = activity;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
-        recyclerView.setAdapter(new general_RecyclerAdapter(objects ,stdmod, show_bottom_sheet ,mod ));
+        recyclerView.setAdapter(new RecyclerAdapter_general(objects ,stdmod, show_bottom_sheet ,mod ));
 
 
     }
@@ -393,12 +389,12 @@ public class general_RecyclerAdapter extends  RecyclerView.Adapter<ViewHolder_ge
                     recyclerView = view.findViewById(R.id.rec_general);
         }
         view_fixer_fr(recyclerView,objects, view);
-        general_RecyclerAdapter.isFragment = true;
-        general_RecyclerAdapter.activity = activity;
+        RecyclerAdapter_general.isFragment = true;
+        RecyclerAdapter_general.activity = activity;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
-        recyclerView.setAdapter(new general_RecyclerAdapter(objects ,stdmod, show_bottom_sheet ,mod ));
+        recyclerView.setAdapter(new RecyclerAdapter_general(objects ,stdmod, show_bottom_sheet ,mod ));
     }
 
 
