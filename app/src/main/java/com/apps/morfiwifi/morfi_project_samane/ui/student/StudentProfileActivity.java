@@ -95,7 +95,7 @@ public class StudentProfileActivity extends DarkhastActivity {
         TextView tv_room_name = findViewById(R.id.tv_room_name);
 
 
-        TextView tv_username = findViewById(R.id.tv_username);
+        TextView tv_username = findViewById(R.id.tv_role_name);
         TextView tv_ranc = findViewById(R.id.tv_ranc);
 
         tv_username.setText(User.current_user.UserName);

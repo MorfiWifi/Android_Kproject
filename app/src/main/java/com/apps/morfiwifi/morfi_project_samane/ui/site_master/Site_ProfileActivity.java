@@ -4,7 +4,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -79,7 +78,7 @@ public class Site_ProfileActivity extends SiteMasterActivity {
             TextView tv_room_name = findViewById(R.id.tv_room_name);
 
 
-            TextView tv_username = findViewById(R.id.tv_username);
+            TextView tv_username = findViewById(R.id.tv_role_name);
             TextView tv_ranc = findViewById(R.id.tv_ranc);
 
             tv_username.setText(User.current_user.UserName);

@@ -1,5 +1,6 @@
 package com.apps.morfiwifi.morfi_project_samane.ui.site_master;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -10,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
@@ -37,6 +39,8 @@ public class StatesticActivity extends SiteMasterActivity{
     frag_extra extra;
     ViewPager viewPager;
     boolean isDetroying = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

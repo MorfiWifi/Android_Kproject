@@ -17,6 +17,11 @@ import java.util.List;
 
 public class RecyclerAdapter_samane extends RecyclerView.Adapter<ViewHolder_samane> {
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     private List<Samane> samanes;
     private static  RecyclerView recyclerView;
     private static AppCompatActivity activity;

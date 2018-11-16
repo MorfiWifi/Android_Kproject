@@ -103,6 +103,11 @@ public class RecyclerAdapter_ticket extends RecyclerView.Adapter<ViewHolder_tick
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
     public int getItemCount() {
         return ticketList.size();
     }
@@ -135,9 +140,6 @@ public class RecyclerAdapter_ticket extends RecyclerView.Adapter<ViewHolder_tick
         recyclerView.setHasFixedSize(false);
         RecyclerAdapter_ticket x = new RecyclerAdapter_ticket(reportList);
         recyclerView.setAdapter(x);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-              DividerItemDecoration.HORIZONTAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
         return x;
 
     }
@@ -159,4 +161,8 @@ public class RecyclerAdapter_ticket extends RecyclerView.Adapter<ViewHolder_tick
             notifyDataSetChanged();
         }
     }
+
+    /*public void Notify_Chainge() {
+        notifyDataSetChanged();
+    }*/
 }

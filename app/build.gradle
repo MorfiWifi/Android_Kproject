@@ -73,9 +73,9 @@ dependencies {
     implementation "com.parse:parse-android:$parseVersion"
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     // Add for push notification support -- add FCM or GCM but not both.
-    implementation "com.parse:parse-fcm-android:$parseVersion"
+//    implementation "com.parse:parse-fcm-android:$parseVersion"
     // migrate to FCM
-//    implementation 'com.google.firebase:firebase-core:16.0.3'
+    implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'commons-net:commons-net:3.3'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.71'
@@ -88,17 +88,17 @@ dependencies {
     implementation "com.android.support:support-compat:27.1.1"
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.0.2'
-    implementation 'com.google.code.gson:gson:2.8.2'
+//    implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.flipboard:bottomsheet-core:1.5.3'
     implementation 'com.flipboard:bottomsheet-commons:1.5.3'
     // optional
     implementation 'org.greenrobot:greendao:3.2.2'
 //    implementation "org.assertj:assertj-core:2.6.0"
     testImplementation "org.robolectric:robolectric:4.0.1"
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
 //    androidTestImplementation 'androidx.test:1.0'
-//    androidTestImplementation 'org.robolectric:robolectric:4.0.1'
+    androidTestImplementation 'org.robolectric:robolectric:4.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 //    implementation 'junit:junit:4.12'
     // Required -- JUnit 4 framework
@@ -106,7 +106,7 @@ dependencies {
     // Optional -- Robolectric environment
     testImplementation 'androidx.test:core:1.0.0'
     // Optional -- Mockito framework
-    testImplementation 'org.mockito:mockito-core:2.19.0'
+//    testImplementation 'org.mockito:mockito-core:2.19.0'
 }
 //apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 // In your app projects build.gradle file:

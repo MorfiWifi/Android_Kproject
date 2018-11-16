@@ -40,6 +40,11 @@ public class RecyclerAdapter_active_stu extends RecyclerView.Adapter<ViewHolder_
         return new ViewHolder_active_stu(view);
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     public static void expand_buttom_sheet (Properties properties){
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 

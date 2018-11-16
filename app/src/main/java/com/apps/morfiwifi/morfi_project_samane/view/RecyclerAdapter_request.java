@@ -43,6 +43,10 @@ public class RecyclerAdapter_request extends RecyclerView.Adapter<ViewHolder_req
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gozaresh_recive_item , parent , false); // Report Item
         return new ViewHolder_request(view);
     }
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     @Override
     public void onBindViewHolder(ViewHolder_request holder, int position) {

@@ -44,6 +44,11 @@ public class RecyclerAdapter_gozaresh extends RecyclerView.Adapter<ViewHolder_go
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
     public void onBindViewHolder(ViewHolder_gozaresh holder, int position) {
         final Report sample_report = reportList.get(position);
 

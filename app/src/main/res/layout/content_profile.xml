@@ -68,7 +68,7 @@
             <TextView
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
-                android:id="@+id/tv_username"
+                android:id="@+id/tv_role_name"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/im_prof"
                 android:gravity="center"
@@ -84,7 +84,7 @@
                 android:textColor="@color/black"
                 android:text="user_ranc_here"
                 android:id="@+id/tv_ranc"
-                android:layout_below="@id/tv_username"
+                android:layout_below="@id/tv_role_name"
                 android:textSize="14sp"
                 android:gravity="center"
                 android:layout_width="match_parent"

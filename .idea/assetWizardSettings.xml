@@ -109,10 +109,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="color" value="8a8a8a" />
-                            <entry key="outputName" value="ic_ticket" />
-                            <entry key="sourceFile" value="C:\Users\Wifimorfi\Desktop\ticket.svg" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_close_white" />
+                            <entry key="sourceFile" value="C:\Users\Wifimorfi\Desktop\student.svg" />
                           </map>
                         </option>
                       </PersistentState>

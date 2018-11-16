@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_simple_gray"
     tools:context=".ui.ticket.TicketMessageActivity">
 
 
@@ -14,11 +15,9 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_pa"
+        android:layout_below="@id/rel_toolbar"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -43,29 +42,93 @@
 
 
 
-        <android.support.v7.widget.RecyclerView
+        <android.support.v4.widget.SwipeRefreshLayout
             android:layout_marginBottom="70dp"
-            android:id="@+id/rec_tick_message"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipeContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible">
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rec_tick_message"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
 
 
-        </android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.RecyclerView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_ticket_status"
-        android:paddingRight="2dp"
-        android:paddingLeft="2dp"
-        android:textColor="@color/black"
-        android:background="@drawable/background_tick_status"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="STATuS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:elevation="5dp"
+        android:background="@drawable/background_simple_white"
+        android:id="@+id/rel_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:maxLength="15"
+            android:id="@+id/tv_ticket_status"
+            android:paddingRight="2dp"
+            android:paddingLeft="2dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:text="STATuS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_erja_text"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/im_forward_ticker"
+            android:text="ارجاء"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_close_text"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/im_close_ticket"
+            android:layout_centerVertical="true"
+            android:text="ببند"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:onClick="CloseTicket"
+            android:visibility="gone"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/im_close_ticket"
+            android:src="@drawable/ic_close"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+
+        <ImageButton
+            android:onClick="ForwardTicket"
+            android:visibility="gone"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_alignParentRight="true"
+            android:id="@+id/im_forward_ticker"
+            android:src="@drawable/ic_erja"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+
+
+    </RelativeLayout>
+
+
 
 
     <RelativeLayout
@@ -112,9 +175,9 @@
                 android:layout_weight="4"
                 android:visibility="gone"
                 android:id="@+id/im_sed_tickmess"
-                android:src="@drawable/ic_menu_send"
+                android:src="@drawable/background_send_btn"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="70dp"
                 />
 
 

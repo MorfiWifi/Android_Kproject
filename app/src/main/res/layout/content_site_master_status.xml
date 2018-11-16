@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.site_master.SiteTicketActivity"
-    >
+    tools:context=".ui.student.StudentTicketActivity"
+   >
+    <!--tools:showIn="@layout/activity_site_ticket_stats"-->
 
 
     <android.support.design.widget.AppBarLayout
@@ -29,52 +30,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar_pa"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <com.wang.avi.AVLoadingIndicatorView
-            android:layout_marginTop="100dp"
             android:id="@+id/avi_loading"
-            android:visibility="gone"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            app:indicatorName="BallGridPulseIndicator"
-            app:indicatorColor="#bf545454"
-            />
-
-        <TextView
-            android:textColor="@color/black"
-            android:id="@+id/tv_please_bepashent"
+            android:layout_marginTop="100dp"
             android:visibility="gone"
-            android:textSize="20sp"
-            android:text="شکیبا باشید.."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            app:indicatorColor="#bf545454"
+            app:indicatorName="BallGridPulseIndicator" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rec_ticket"
+            android:id="@+id/rec_statestic"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible">
+            android:layout_height="match_parent"/>
 
-
-        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
 
     <android.support.design.widget.FloatingActionButton
+        android:visibility="gone"
         android:id="@+id/fab_new_ticket"
-        android:onClick="new_ticket"
         android:src="@drawable/ic_add"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
         app:elevation="10dp"
         app:layout_anchor="@+id/linearLayout"
-        app:layout_anchorGravity="right|bottom" />
+        app:layout_anchorGravity="bottom|right" />
 
 </android.support.design.widget.CoordinatorLayout>

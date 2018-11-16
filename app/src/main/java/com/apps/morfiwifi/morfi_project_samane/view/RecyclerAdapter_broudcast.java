@@ -35,6 +35,10 @@ public class RecyclerAdapter_broudcast extends RecyclerView.Adapter<ViewHolder_b
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message, parent , false);
         return new ViewHolder_broudcast_std(view);
     }
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder_broudcast_std holder, int position) {

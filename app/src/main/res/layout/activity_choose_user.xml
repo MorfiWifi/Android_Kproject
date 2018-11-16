@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:elevation="0dp"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_simple_gray"
+    tools:context=".ui.ticket.ChooseUserActivity">
+
+
+    <RelativeLayout
+        android:background="@drawable/background_simple_white"
+        android:elevation="5dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_users"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/avi_users"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicatorName="BallGridPulseIndicator"
+            app:indicatorColor="#bf143ebc"
+            />
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rec_users"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
+
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:background="@drawable/background_simple_white"
+        android:elevation="5dp"
+        android:id="@+id/rel_user_role_place"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/tv_roles"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/avi_roles"
+            android:visibility="gone"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:indicatorName="BallPulseIndicator"
+            app:indicatorColor="#bfff0000"
+            />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tv_please_bepashent2"
+            android:visibility="gone"
+            android:textSize="20sp"
+            android:text="شکیبا باشید.."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rec_roles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:elevation="5dp"
+        android:background="@drawable/background_simple_white"
+
+        android:id="@+id/rel_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:onClick="back_arrow"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/im_close_ticket"
+            android:src="@drawable/ic_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <EditText
+            android:id="@+id/et_serch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/im_close_ticket"
+            android:background="@null"
+            android:hint="جستجو"
+            android:maxLength="20" />
+
+        <ImageButton
+            android:visibility="gone"
+            android:onClick="serch_user"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_alignParentRight="true"
+            android:id="@+id/im_forward_ticker"
+            android:src="@drawable/ic_search"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:id="@+id/tv_roles"
+        android:layout_below="@id/rel_toolbar"
+        android:textSize="18sp"
+        android:text="نقش ها"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:maxLength="20"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:id="@+id/tv_roles_message"
+        android:layout_below="@id/rel_toolbar"
+        android:textSize="18sp"
+        android:text="یک نقش انتخواب کنید"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:id="@+id/tv_role_selected"
+        android:layout_below="@id/rel_toolbar"
+        android:textSize="18sp"
+        android:text="نقش ها"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:id="@+id/tv_users"
+        android:layout_below="@id/rel_user_role_place"
+        android:textSize="18sp"
+        android:text="کاربر ها"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

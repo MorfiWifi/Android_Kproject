@@ -39,6 +39,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Thing;
 import com.apps.morfiwifi.morfi_project_samane.models.Transfer;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.role;
+import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SiteTicketActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.DarkhastActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.ReportActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentTicketActivity;
@@ -77,8 +78,8 @@ public class Dialogue {
                         //activity.finish();
 
                         Intent intent = new Intent(activity , LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("EXIT" , true);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         activity.startActivity(intent);
                         dialog.cancel();
 
@@ -109,7 +110,7 @@ public class Dialogue {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         //activity.finish();
-
+                        Init.Deactivate_Token(activity); // After Exit wont turn in auto...
                         Intent intent = new Intent(activity , LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         activity.startActivity(intent);
@@ -869,6 +870,10 @@ public class Dialogue {
 //
                 if (activity instanceof StudentTicketActivity){
                     ((StudentTicketActivity) activity).insert_ticket_header(ticket_header.getText().toString());
+                }
+
+                if (activity instanceof SiteTicketActivity){
+                    ((SiteTicketActivity) activity).insert_ticket_header(ticket_header.getText().toString());
                 }
             }
         });

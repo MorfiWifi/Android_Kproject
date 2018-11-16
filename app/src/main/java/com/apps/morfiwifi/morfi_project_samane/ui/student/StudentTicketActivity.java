@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
 import com.apps.morfiwifi.morfi_project_samane.R;
@@ -120,7 +121,7 @@ public class StudentTicketActivity extends DarkhastActivity {
         }
     };
     Thread thread = new Thread(runnable_getTickets);
-    final Thread thread_send = new Thread(runnable_sendTickets);
+    Thread thread_send = new Thread(runnable_sendTickets);
 
     @Override
     protected void onPause() {
@@ -202,9 +203,22 @@ public class StudentTicketActivity extends DarkhastActivity {
     public void insert_ticket_header ( String s){
         ticket_heade = s;
         try {
+            if (thread_send == null){
+                thread_send = new Thread(runnable_sendTickets);
+                thread_send.start();
+                return;
+            }
+
+            if (thread_send.isAlive()){
+                Toast.makeText(this, "داره میفرسته !", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            thread_send = new Thread(runnable_sendTickets);
             thread_send.start();
+
         }catch (Exception e){
-            Log.e(getClass().getName() , e.getMessage());
+            Log.e("SEND" , "EXCEPTION >>>");
         }
     }
 

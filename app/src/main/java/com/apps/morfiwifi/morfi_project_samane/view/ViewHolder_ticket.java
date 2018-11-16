@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Ticket;
+import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentTicketActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.ticket.TicketMessageActivity;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -43,7 +44,12 @@ public class ViewHolder_ticket extends RecyclerView.ViewHolder implements View.O
 //        Toast.makeText(activity, "TIC:"+ticket.isLoading, Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(activity , TicketMessageActivity.class);
-        intent.putExtra("SENDER" , StudentTicketActivity.STUDENT);
+        if (User.current_user.cod == 0){
+            intent.putExtra("SENDER" , StudentTicketActivity.STUDENT);
+        }else {
+            intent.putExtra("SENDER" , "NOT STUDENT ANY !");
+        }
+
         intent.putExtra("TIVKET_ARRIVED" , true);
         TicketMessageActivity.setTicket(ticket);
 

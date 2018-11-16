@@ -1,30 +1,19 @@
 package com.apps.morfiwifi.morfi_project_samane
 
-import android.app.Activity
-import android.content.Intent
+import android.content.*
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import com.apps.morfiwifi.morfi_project_samane.models.DataPref
-import com.apps.morfiwifi.morfi_project_samane.models.Properties
 import com.apps.morfiwifi.morfi_project_samane.models.User
 import com.apps.morfiwifi.morfi_project_samane.models.role
 import com.apps.morfiwifi.morfi_project_samane.ui.admin.AdminMainActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SiteMasterActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.student.SamanehaActivity
-import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentMainActivity
 import com.apps.morfiwifi.morfi_project_samane.ui.technical.TechnicalActivity
-import com.apps.morfiwifi.morfi_project_samane.util.MYService
 import com.apps.morfiwifi.morfi_project_samane.utility.Init
 //import kotlinx.android.synthetic.main.activity_login.*
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.IntentFilter
 import android.util.Log
-import com.apps.morfiwifi.morfi_project_samane.R.id.txin_pass
-import com.apps.morfiwifi.morfi_project_samane.R.id.txin_user_name
 import com.apps.morfiwifi.morfi_project_samane.ui.Startup
 import com.apps.morfiwifi.morfi_project_samane.ui.notification.MessageNotification
 import kotlinx.android.synthetic.main.activity_login.*
@@ -42,13 +31,15 @@ class LoginActivity : AppCompatActivity() {
 
 //        Init.test_loading(this)
 
-        intent = Intent(this , Startup::class.java)
-        startActivity(intent)
+        var intenti = Intent(this, Startup::class.java)
+        startActivity(intenti)
 
 
-        val exit_code = intent.getBooleanExtra("EXIT" , false)
-        if (exit_code){
+
+        val exitCode = intent.getBooleanExtra("EXIT" , false)
+        if (exitCode){
             finish()
+            return
         }
 
         MessageNotification.createNotificationChannel(applicationContext)
@@ -61,6 +52,9 @@ class LoginActivity : AppCompatActivity() {
 
         Log.d("LOG IN " , "TEST FUNCTION HAS RUNED !")
 
+        if (Init.IsTokenActive(this)){
+            User.LogInWithToken(this)
+        }
 
     }
 
@@ -77,18 +71,44 @@ class LoginActivity : AppCompatActivity() {
 
             Init.start_fresh() // for fixing other user catching problem
             when {
+                user.cod == 0 -> {
+                    role.load_roles(this , false)
+                    val intent = Intent(this, SamanehaActivity::class.java)
+                    cleanup()
+                    startActivity(intent)
+                }
+
+                user.cod > 3 -> { // as admin ...
+                    role.load_roles(this , false)
+                    val intent = Intent(this, SiteMasterActivity::class.java)
+                    cleanup()
+                    startActivity(intent)
+                }
+
+                user.cod > 0 -> {
+                    role.load_roles(this , false)
+                    val intent = Intent(this, SiteMasterActivity::class.java)
+                    cleanup()
+                    startActivity(intent)
+                }
+
+
+
                 user.Role.equals(User.Kind.Student.toString()) -> {
                     role.load_roles(this , false)
                     val intent = Intent(this, SamanehaActivity::class.java)
                     cleanup()
                     startActivity(intent)
                 }
+
+
                 user.Role.equals(User.Kind.Admin.toString()) -> {
                     role.load_roles(this , false)
                     val intent = Intent(this, AdminMainActivity::class.java)
                     cleanup()
                     startActivity(intent)
                 }
+
                 user.Role.equals(User.Kind.Site_Master.toString()) -> {
                     role.load_roles(this , false)
                     val intent = Intent(this, SiteMasterActivity::class.java)
@@ -115,6 +135,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun login (view : View){
+
+        if (sw_remember_me.isChecked){
+            Init.Activate_Token(this)
+        }
+
 
 
         val username = txin_user_name.text.toString()

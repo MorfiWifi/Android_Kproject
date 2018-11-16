@@ -21,12 +21,15 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
+import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentMainActivity;
 import com.apps.morfiwifi.morfi_project_samane.util.MYService;
 
 public class SiteMasterActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ProgressDialog loading;
+
 
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -98,7 +101,8 @@ public class SiteMasterActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setTitle("پنل مسئول سایت");
+//        setTitle("پنل مسئول سایت");
+        setTitle(User.current_user.Role);
 
 
         final AppCompatActivity activity = this;
@@ -167,6 +171,8 @@ public class SiteMasterActivity extends AppCompatActivity
             }
         });
 
+
+
         findViewById(R.id.rel_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,11 +197,10 @@ public class SiteMasterActivity extends AppCompatActivity
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }else {
-                super.onBackPressed();
+                    Dialogue dialog = new Dialogue();
+                    dialog.Exit_app(this).show();
+//                super.onBackPressed();
             }
-
-
-
         }
     }
 
@@ -263,6 +268,12 @@ public class SiteMasterActivity extends AppCompatActivity
                 intent = new Intent(this , StatesticActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+            }
+
+        } else if (id == R.id.nav_ticket) {
+            if (!(this.getClass().getName().equals(SiteTicketActivity.class.getName()))){
+                SiteTicketActivity.StartActivity_UserBase (this);
+
             }
 
         } else if (id == R.id.nav_search) {

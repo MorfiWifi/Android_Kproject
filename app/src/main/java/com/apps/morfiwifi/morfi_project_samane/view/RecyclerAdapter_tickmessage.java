@@ -42,6 +42,12 @@ public class RecyclerAdapter_tickmessage extends RecyclerView.Adapter<ViewHolder
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+
+    @Override
     public ViewHolder_tickmessage onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tickmessage_recived , parent , false); // Report Item
         return new ViewHolder_tickmessage(view);
@@ -68,9 +74,9 @@ public class RecyclerAdapter_tickmessage extends RecyclerView.Adapter<ViewHolder
             holder.item_back.setBackgroundResource(R.drawable.background_message_sent);
             holder.item_parent.setGravity(Gravity.RIGHT);
         }else {
-            // TODO: 11/12/2018 USERS ROLE + USER NAME!
-            holder.detail.setText("!؟");
-//            holder.lspace.setVisibility(View.GONE);
+            holder.detail.setText(Init.notNull(ticket_messages.get(position).parseObject.get("role_name")) +" , "
+                    + Init.notNull(ticket_messages.get(position).parseObject.get("SENDER_USERNAME")) );
+//            holder.lspace.setVisibility(View.GONE);  SENDER_USERNAME
             holder.item_back.setBackgroundResource(R.drawable.background_message_recive);
             holder.item_parent.setGravity(Gravity.LEFT);
         }
@@ -78,6 +84,9 @@ public class RecyclerAdapter_tickmessage extends RecyclerView.Adapter<ViewHolder
         if (ticket_messages.get(position).parseObject.getBoolean("ERJA")){
 //            holder.rspace.setVisibility(View.VISIBLE);
 //            holder.rspace.setVisibility(View.VISIBLE);
+            String base = "ارجاء شده به : ";
+            base = base + (Init.notNull(ticket_messages.get(position).parseObject.get("ERJA_ROLE_NAME")));
+            holder.message.setText(base);
             holder.item_back.setBackgroundResource(R.drawable.background_erja);
             holder.item_parent.setGravity(Gravity.CENTER);
         }
@@ -95,24 +104,7 @@ public class RecyclerAdapter_tickmessage extends RecyclerView.Adapter<ViewHolder
         return ticket_messages.size();
     }
 
-    public static void view_fixer(List<Ticket_Message> reportList, AppCompatActivity activity){
-        /*if (reportList == null){
-            activity.findViewById(R.id.tv_signup_empty).setVisibility(View.VISIBLE);
-            activity.findViewById(R.id.rec_request).setVisibility(View.GONE);
-        }else{
-            if (reportList.size() == 0){
-                activity.findViewById(R.id.tv_signup_empty).setVisibility(View.VISIBLE);
-                activity.findViewById(R.id.rec_request).setVisibility(View.GONE);
-            }
-            else {
-                activity.findViewById(R.id.tv_signup_empty).setVisibility(View.GONE);
-                activity.findViewById(R.id.rec_request).setVisibility(View.VISIBLE);
-            }
-        }*/
-    }
-
     public static RecyclerAdapter_tickmessage Init(List<Ticket_Message> ticket_messages, AppCompatActivity activity){
-//        view_fixer(ticket_messages, activity);
         // TODO: 11/9/2018 FIX CHOOSEN RECYCLER
         recyclerView = activity.findViewById(R.id.rec_tick_message);
         RecyclerAdapter_tickmessage.activity = activity;
@@ -121,21 +113,7 @@ public class RecyclerAdapter_tickmessage extends RecyclerView.Adapter<ViewHolder
         recyclerView.setHasFixedSize(false);
         RecyclerAdapter_tickmessage x = new RecyclerAdapter_tickmessage(ticket_messages);
         recyclerView.setAdapter(x);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                DividerItemDecoration.HORIZONTAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
         return x;
-    }
-
-    public static void Init(List<Request> reportList , List<Thing> things, AppCompatActivity activity){
-//        view_fixer(reportList, activity);
-//        recyclerView = activity.findViewById(R.id.rec_ticket);
-        RecyclerAdapter_tickmessage.activity = activity;
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setAdapter(new RecyclerAdapter_request(reportList));
-
     }
 
     public void Set_List(List<Ticket_Message> ticket_messages) {

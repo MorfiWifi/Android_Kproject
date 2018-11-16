@@ -86,16 +86,17 @@ public class App extends Application {
     static void init_parse( Context context){
         Parse.initialize(new Parse.Configuration.Builder(context)
 //                .applicationId(Security.Decript_STR(getNativeKey1()))
-//                        .applicationId("z8ABZI7P44AzqQHSShS09qtKpcVjx8Dk8F9WipRB")
-                         .applicationId("first")
+                        .applicationId("z8ABZI7P44AzqQHSShS09qtKpcVjx8Dk8F9WipRB")
+//                         .applicationId("first")
 //                .clientKey(Security.Decript_STR(getNativeKey2()))
-//                        .clientKey("fmbYAhCnAHlXvk9p8B2UBPK8vaeyTm1ZOZ1zPxq9")
+                        .clientKey("fmbYAhCnAHlXvk9p8B2UBPK8vaeyTm1ZOZ1zPxq9")
 
 //                .clientKey("QE5Pwhr60WAfd24VtGcFIV3KHDStpK1Q2WgtP4yr") // MASTER
-//                        .server("https://parseapi.back4app.com/")
+                        .server("https://parseapi.back4app.com/")
 //                .server(Security.Decript_STR(getserver()))
 
-                        .server("http://192.168.1.105:1337/parse/")
+//                        .server("http://192.168.1.105:1337/parse/")
+//                        .server("http://192.168.19.2:1337/parse/")
 //                        .server("http://192.168.1.45:1337/parse/")
                         .build()
         );

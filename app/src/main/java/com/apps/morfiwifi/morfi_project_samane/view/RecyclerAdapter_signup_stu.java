@@ -34,6 +34,11 @@ public class RecyclerAdapter_signup_stu extends RecyclerView.Adapter<ViewHolder_
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
     public void onBindViewHolder(ViewHolder_signup_stu holder, int position) {
         final User sample_user = users.get(position);
         holder.id.setText(sample_user.Kaet_meli); // YET DIDNT INPUT ANY STUDENT ID !

@@ -3,12 +3,14 @@ package com.apps.morfiwifi.morfi_project_samane.utility;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,6 +88,19 @@ public class Init {
         }
     }
 
+    public static int  notNullInteger (Object s){
+        if (s != null) {
+            try {
+                int x =
+                        Integer.parseInt(s.toString());
+                return x;
+            } catch (Exception e) {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
     public static String notNull (Object s , String def){
         if (s != null){
             return s.toString();
@@ -146,6 +161,8 @@ public class Init {
             }
         });
     }
+
+
 /*
 
     public static void FIX_PROP_ID(User user_glob, Properties properties_glob) {
@@ -201,6 +218,38 @@ public class Init {
         System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
         // THis is a Memory From the PAST..................................................
     }
+
+    public static void Activate_Token(AppCompatActivity activity){
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("SAMANE" , Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("USE_TOKEN" , true);
+        editor.apply();
+    }
+
+    public static void Deactivate_Token(AppCompatActivity activity){
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("SAMANE" , Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("USE_TOKEN" , false);
+        editor.apply();
+    }
+
+    public static boolean IsTokenActive (AppCompatActivity activity){
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("SAMANE" , Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("USE_TOKEN" , false);
+    }
+
+    public static void SaveToken(AppCompatActivity activity , String token) {
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("SAMANE" , Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("TOKEN" , token);
+        editor.apply();
+    }
+
+    public static String GetToken(AppCompatActivity activity ) {
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("SAMANE" , Context.MODE_PRIVATE);
+        return sharedPreferences.getString("TOKEN" , Init.Empty);
+    }
+
     public  static  String Token = "";
     public static boolean CheckInternet (){
         try {

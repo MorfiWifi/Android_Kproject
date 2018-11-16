@@ -1,6 +1,7 @@
 package com.apps.morfiwifi.morfi_project_samane.models;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import com.apps.morfiwifi.morfi_project_samane.LoginActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.ui.others.TestActivity;
+import com.apps.morfiwifi.morfi_project_samane.ui.ticket.ChooseUserActivity;
 import com.apps.morfiwifi.morfi_project_samane.ui.ticket.TicketMessageActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.parse.FindCallback;
@@ -20,6 +22,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -166,10 +170,14 @@ public class User   {
                                     ParseObject first = (ParseObject) objects.get(0);
                                     properties.use_khabgah = first.getBoolean(Properties.obj_is_using_kh);
                                     properties.id = first.getObjectId();
-                                    properties.real_name = first.get(Properties.obj_real_name).toString();
-                                    properties.real_lastname = first.get(Properties.obj_real_lastname).toString();
-                                    properties.father_name = first.get(Properties.obj_father_name).toString();
-                                    properties.national_cod = first.get(Properties.obj_national_cod).toString();
+                                    properties.real_name =   Init.notNull(first.get(Properties.obj_real_name));
+//                                            first.get(Properties.obj_real_name).toString();
+                                    properties.real_lastname = Init.notNull(first.get(Properties.obj_real_lastname));
+//                                            first.get(Properties.obj_real_lastname).toString();
+                                    properties.father_name = Init.notNull(first.get(Properties.obj_father_name));
+//                                            first.get(Properties.obj_father_name).toString();
+                                    properties.national_cod =Init.notNull(first.get(Properties.obj_national_cod));
+//                                            first.get(Properties.obj_national_cod).toString();
                                 }
 
                                 Init.stop_loading(activity);
@@ -201,6 +209,101 @@ public class User   {
 
 
 
+    }
+
+    public static void LogInWithToken(@NotNull final AppCompatActivity activity) {
+        Init.start_fresh();
+        Init.start_loading(activity);
+        ParseUser.becomeInBackground(Init.GetToken(activity) , new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                if (parseUser != null) {
+                    current_user  = new User();
+                    current_user.Role = null;
+                    current_user.UserName =(parseUser.getUsername()); // TODO: 7/10/2018  Fild,s You need in User
+                    current_user.id = parseUser.getObjectId();
+                    current_user.PreActive = parseUser.getBoolean("preactive");
+                    current_user.Active = parseUser.getBoolean("activate");
+
+
+                    // TODO: 7/9/2018 Do what ever tekes its log in !
+                    parseUser.getUsername();
+//                    Object object =  parseUser.get("role_id");
+                    String role_id = parseUser.get("role_id").toString();
+                    Properties.load_self_properties(activity , true , false);
+
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("role");
+                    ParseObject Role_obj ;
+                    String Role_name;
+//                    Init.stop_loading(activity);
+
+                    query.getInBackground(role_id, new GetCallback<ParseObject>() {
+                        @Override
+                        public void done(ParseObject object, ParseException e) {
+                            if (e == null){
+
+                                if (object != null) {
+                                    current_user.Role = object.get("name").toString();
+                                    current_user.Role_id = object.getObjectId();
+                                    current_user.cod = object.getInt("cod");
+
+                                    final ParseQuery mus = new ParseQuery(obj_muser);
+                                    mus.whereEqualTo(obj_user_id , current_user.id);
+                                    mus.getFirstInBackground(new GetCallback<ParseObject>() {
+                                        @Override
+                                        public void done(ParseObject object, ParseException e) {
+                                            if (e == null){
+                                                User.curent_muser = new MUSER(object.getBoolean(obj_activate) ,
+                                                        object.getBoolean(obj_preactive) , object.getBoolean(obj_isdelete));
+                                                current_user.muser =curent_muser;
+                                                Init.stop_loading(activity);
+
+                                                Init.SaveToken (activity , ParseUser.getCurrentUser().getSessionToken());
+
+
+                                                if(activity instanceof LoginActivity){
+                                                    ((LoginActivity) activity).login_server(current_user);
+                                                }
+                                            }else {
+                                                Toast.makeText(activity, "خطا در ورود", Toast.LENGTH_SHORT).show();
+                                                Log.d("MUSER get EX" , e.getMessage());
+                                                Init.stop_loading(activity);
+                                            }
+                                        }
+                                    });
+                                }
+                            }else {
+                                Toast.makeText(activity, "خطا در ورود", Toast.LENGTH_SHORT).show();
+                                Log.d("ROLE get EX" , e.getMessage());
+                                Init.stop_loading(activity);
+                            }
+                        }
+                    });
+
+                    // GET ROLE
+
+
+                    if (current_user.Role != null){
+//                        Toast.makeText(activity, "OK YOU ARE IN !", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Init.stop_loading(activity);
+//                        Init.Terminal(current_user.Role + " Role KEY !");
+                    }
+
+
+
+                } else {
+                    // Toast.makeText(LoginActivity.this, "Error in Log in" + e.getMessage() , Toast.LENGTH_SHORT).show();
+                    //Login Fail
+                    //get error by calling e.getMessage()
+                    // TODO: 7/9/2018  Log in Faild due to message (EX)
+                    Log.d("EX IN LOG IN" , e.getMessage());
+                    Toast.makeText(activity, "خطا در ورود", Toast.LENGTH_SHORT).show();
+                    Init.stop_loading(activity);
+                }
+
+            }
+        });
     }
 
 
@@ -324,7 +427,7 @@ public class User   {
         Init.start_fresh();
         /// Debugign thing !
         if (userName.equals("max") && pass.equals("max")){
-            Intent intent = new Intent(activity , TicketMessageActivity.class);
+            Intent intent = new Intent(activity , ChooseUserActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             activity.startActivity(intent);
             return;
@@ -378,6 +481,10 @@ public class User   {
                                                         object.getBoolean(obj_preactive) , object.getBoolean(obj_isdelete));
                                                 current_user.muser =curent_muser;
                                                 Init.stop_loading(activity);
+
+                                                Init.SaveToken (activity , ParseUser.getCurrentUser().getSessionToken());
+
+
                                                 if(activity instanceof LoginActivity){
                                                     ((LoginActivity) activity).login_server(current_user);
                                                 }

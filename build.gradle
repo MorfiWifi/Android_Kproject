@@ -2,10 +2,17 @@
 
 buildscript {
     repositories {
-        maven { url "https://maven.google.com/"}
+
         google()
+        maven { url 'http://jcenter.bintray.com' }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
         jcenter()
-        maven { url 'https://plugins.gradle.org/m2/'}
+//        google()
+//        maven { url "https://maven.google.com/"}
+//        maven { url 'https://plugins.gradle.org/m2/'}
     }
     dependencies {
         classpath 'com.google.gms:google-services:4.0.1'
@@ -30,10 +37,12 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "https://maven.google.com/"}
+
         google()
         jcenter()
-        maven { url 'https://plugins.gradle.org/m2/'}
+//        google()
+//        maven { url "https://maven.google.com/"}
+//        maven { url 'https://plugins.gradle.org/m2/'}
     }
 }
 

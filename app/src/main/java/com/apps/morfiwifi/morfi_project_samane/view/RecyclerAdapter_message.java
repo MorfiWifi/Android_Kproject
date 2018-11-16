@@ -39,6 +39,10 @@ public class RecyclerAdapter_message extends RecyclerView.Adapter<ViewHolder_mes
         return new ViewHolder_message(view);
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     @Override
     public void onBindViewHolder(ViewHolder_message holder, final int position ) {

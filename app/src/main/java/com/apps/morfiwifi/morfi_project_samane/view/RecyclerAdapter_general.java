@@ -46,6 +46,10 @@ public class RecyclerAdapter_general extends  RecyclerView.Adapter<ViewHolder_ge
     List<Thing> things;
 
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     public RecyclerAdapter_general(List<Object> objects , boolean stdmod , boolean show_bottom_sheet , Init.Mod mod) {
         this.objects = objects;
