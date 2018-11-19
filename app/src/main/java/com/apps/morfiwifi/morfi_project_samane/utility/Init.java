@@ -72,6 +72,7 @@ import java.util.List;
  * Created by WifiMorfi on 12/20/2017.
  */
 public class Init {
+    public static boolean ADVANCE_MOD = true;
     public static String Parse_serevr = "pars";
     public static final String FRAGMENT = "FRAGMENT";
     public static String ASP_server = "ASP";

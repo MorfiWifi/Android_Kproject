@@ -20,8 +20,8 @@ android {
         applicationId "com.apps.morfiwifi.morfi_project_samane"
         minSdkVersion 22
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0 beta"
+        versionCode 2
+        versionName "1.1"
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         /*manifestPlaceholders = [
                 onesignal_app_id: 'b0e9096c-c879-4055-ab37-da1501504b88',

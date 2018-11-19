@@ -50,9 +50,6 @@ public class ViewHolder_user extends RecyclerView.ViewHolder implements View.OnC
         }else if (v.equals(btn_info)){
             User.user_info_dialogue(activity , user_model.parseUser.getObjectId());
 //            Toast.makeText(activity, "INFO", Toast.LENGTH_SHORT).show();
-        }else {
-//            Toast.makeText(activity, "ELSE", Toast.LENGTH_SHORT).show();
-        }
-
+        } //            Toast.makeText(activity, "ELSE", Toast.LENGTH_SHORT).show();
     }
 }

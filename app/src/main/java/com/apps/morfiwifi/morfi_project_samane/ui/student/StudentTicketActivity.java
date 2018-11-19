@@ -35,7 +35,7 @@ public class StudentTicketActivity extends DarkhastActivity {
     int chainge = 0;
     String ticket_heade = "";
     ParseUser parseUser;
-    boolean isLoadig = true, isSaving = false;
+    boolean isLoadig = true, isSaving = false , isFirstTime = true;
     final Handler handler = new Handler(); // update View Handler in MAIN TH;
     Runnable runnable_view = new Runnable() {
         @Override
@@ -44,6 +44,9 @@ public class StudentTicketActivity extends DarkhastActivity {
                 star_loading();
             }else {
                 stop_loading();
+            }
+            if (Init.ADVANCE_MOD){
+                load_tickets();
             }
             if (isSaving){
                 findViewById(R.id.fab_new_ticket).setVisibility(View.GONE);
@@ -69,9 +72,16 @@ public class StudentTicketActivity extends DarkhastActivity {
             query.whereEqualTo("CreateBy" ,parseUser );
             query.orderByDescending("createdAt");
             try {
-                isLoadig = true;
+                if (tickets.size() <= 0 && isFirstTime){
+                    isLoadig = true;
+                }
                 List<ParseObject> list =
                         query.find();
+
+                if (Init.ADVANCE_MOD && !isFirstTime){
+                    if (list.size() == tickets.size())return; // NO refresh
+                }
+                isFirstTime = false;
                 tickets = new ArrayList<>();// first load then send !
                 for (ParseObject pa :list) {
                     Ticket t = new Ticket(false , pa);
@@ -79,7 +89,8 @@ public class StudentTicketActivity extends DarkhastActivity {
                 }
                 chainge++;
                 isLoadig = false;
-            } catch (ParseException e) {
+                Thread.sleep(1000); // FOR no Ultimate Fast
+            } catch (Exception e) {
 //                e.printStackTrace();
 //                Log.
                 Log.e(getClass().getName() , e.getMessage());

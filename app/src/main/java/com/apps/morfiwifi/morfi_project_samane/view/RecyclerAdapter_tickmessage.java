@@ -65,7 +65,10 @@ public class RecyclerAdapter_tickmessage extends RecyclerView.Adapter<ViewHolder
             holder.loading.smoothToHide();
             holder.loading.setVisibility(View.GONE);
             holder.message.setText(Init.notNull(ticket_messages.get(position).parseObject.get("mess")));
-            holder.date.setText(shamsiDate.persian_date(ticket_messages.get(position).parseObject.getCreatedAt()));
+            if (ticket_messages.get(position).parseObject.getCreatedAt() == null)
+                holder.date.setText("خطا");
+            if (ticket_messages.get(position).parseObject.getCreatedAt() != null)
+                holder.date.setText(shamsiDate.persian_date(ticket_messages.get(position).parseObject.getCreatedAt()));
         }
 
         if (ParseUser.getCurrentUser().getObjectId().equals(ticket_messages.get(position).parseObject.getParseUser("CreatedBy").getObjectId())){
@@ -74,7 +77,7 @@ public class RecyclerAdapter_tickmessage extends RecyclerView.Adapter<ViewHolder
             holder.item_back.setBackgroundResource(R.drawable.background_message_sent);
             holder.item_parent.setGravity(Gravity.RIGHT);
         }else {
-            holder.detail.setText(Init.notNull(ticket_messages.get(position).parseObject.get("role_name")) +" , "
+            holder.detail.setText(Init.notNull(ticket_messages.get(position).parseObject.get("ROLE_NAME")) +" , "
                     + Init.notNull(ticket_messages.get(position).parseObject.get("SENDER_USERNAME")) );
 //            holder.lspace.setVisibility(View.GONE);  SENDER_USERNAME
             holder.item_back.setBackgroundResource(R.drawable.background_message_recive);

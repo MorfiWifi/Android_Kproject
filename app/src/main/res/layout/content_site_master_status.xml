@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.student.StudentTicketActivity"
+    android:background="@drawable/background_simple_gray"
    >
     <!--tools:showIn="@layout/activity_site_ticket_stats"-->
 
@@ -17,6 +18,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
+            android:elevation="5dp"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"

@@ -19,6 +19,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Ticket;
 import com.apps.morfiwifi.morfi_project_samane.models.Ticket_Message;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.User_model;
+import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentTicketActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_ticket;
@@ -26,6 +27,7 @@ import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_tickmessage;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -52,6 +54,10 @@ public class TicketMessageActivity extends AppCompatActivity {
             }else {
                 stop_loading();
                 swipeContainer.setRefreshing(false);
+            }
+
+            if (Init.ADVANCE_MOD){
+                load_ticket_messages();
             }
             if (isErjaed){
                 onBackPressed();
@@ -83,14 +89,24 @@ public class TicketMessageActivity extends AppCompatActivity {
                 return;
 
             try {
-                isLoadig = true;
-                HashMap<String , Object> hashMap = new HashMap<>();
-                hashMap.put("ticket" , ticket.parseObject.getObjectId());
-                List<ParseObject> list_pre =
-                        (List<ParseObject>) ParseCloud.callFunction("ticket_message" , hashMap );
+                if (ticket_messages.size() <= 0 && isFirstTime){
+                    isLoadig = true;
+                }
 
 
+                ParseQuery query = new ParseQuery("ticket_message");
+                query.whereEqualTo("TICKET" ,ticket.parseObject );
 
+//                hashMap.put("ticket" , ticket.parseObject.getObjectId());
+//                List<ParseObject> list_pre =
+//                        (List<ParseObject>) ParseCloud.callFunction("ticket_message" , hashMap );
+
+                List<ParseObject> list_pre = query.find();
+
+                if (Init.ADVANCE_MOD && !isFirstTime){
+                    if (list_pre.size() == ticket_messages.size())  return;
+                }
+                isFirstTime = false;
                 List<ParseObject> list =new  ArrayList();
 
                 for (int i = list_pre.size()-1; i > -1 ; i--) {
@@ -104,7 +120,8 @@ public class TicketMessageActivity extends AppCompatActivity {
                 }
                 chainge++;
                 isLoadig = false;
-            } catch (ParseException e) {
+                Thread.sleep(1000); // FOR NO ULTIMATE FAST(PARSE EXCEPT)
+            } catch (Exception e) {
                 Log.e(getClass().getName() , e.getMessage());
                 chainge++;
                 isLoadig = false;
@@ -122,9 +139,11 @@ public class TicketMessageActivity extends AppCompatActivity {
             tic_message.put("ATTACHED" , "NON"); // file attach (server adress)
             tic_message.put("ERJA" , false);
             tic_message.put("HAS_ATTACHED" , false);
-            tic_message.put("role_name" , User.current_user.Role);
+            tic_message.put("ROLE_NAME" , User.current_user.Role);
 
-            ticket.parseObject.add("ticket_message" , tic_message); // Add message to ticket..
+            tic_message.put("TICKET" , ticket.parseObject);//add ticket to message
+
+//            ticket.parseObject.add("ticket_message" , tic_message); // Add message to ticket..
 
             try {
                 Ticket_Message messagei = new Ticket_Message(true , tic_message);
@@ -132,7 +151,8 @@ public class TicketMessageActivity extends AppCompatActivity {
                 map.put(  messagei , ticket_messages.indexOf(messagei));
                 chainge++;
                 isSaving = true;
-                ticket.parseObject.save();
+                tic_message.save();
+//                ticket.parseObject.save();
                 isSaving = false;
                 chainge++;
                 message = "";
@@ -173,7 +193,16 @@ public class TicketMessageActivity extends AppCompatActivity {
                 if (erja_model == null) return;
                 HashMap<String , Object> hashMap2 = new HashMap<>();
                 hashMap2.put("userId" , erja_model.parseUser.getObjectId());
-                String reciver_role_name = ((ParseObject) ParseCloud.callFunction("get_role" ,hashMap2 )).get("name").toString();
+                ParseQuery role = new ParseQuery("role");
+
+                String role_name = Init.Empty;
+                try {
+                    String role_id = erja_model.parseUser.get("role_id").toString();
+                    ParseObject x = (ParseObject) role.get(role_id);
+                    role_name = (x ).get("name").toString();
+                }catch (Exception e){
+                    Log.e("EX IN ROLE GET " , e.getMessage());
+                }
 
 
                 ParseObject tic_message = new ParseObject("ticket_message");
@@ -185,15 +214,19 @@ public class TicketMessageActivity extends AppCompatActivity {
                 tic_message.put("ERJATO" ,erja_model.parseUser );
                 tic_message.put("HAS_ATTACHED" , false);
                 tic_message.put("ROLE_NAME" , User.current_user.Role);
-                tic_message.put("ERJA_ROLE_NAME" , reciver_role_name);
+                tic_message.put("ERJA_ROLE_NAME" , role_name);
                 tic_message.put("ERJATO_USERNAME" , erja_model.parseUser.getUsername());
 
 
                 ticket.parseObject.put("LASTERJA" , erja_model.parseUser);
-                ticket.parseObject.put("ERJA_ROLE_NAME" , reciver_role_name);
+                ticket.parseObject.put("ERJA_ROLE_NAME" , role_name);
                 ticket.parseObject.put("LASTERJA_USERNAEM" , erja_model.parseUser.getUsername());
-                ticket.parseObject.add("ticket_message" , tic_message); // Add message to ticket..
+                tic_message.put("TICKET" , ticket.parseObject);//add ticket to message
+
+
+//                ticket.parseObject.add("ticket_message" , tic_message); // Add message to ticket..
                 isLoadig = true;
+                tic_message.save();
                 ticket.parseObject.save();
                 isErjaed = true;
                 isLoadig = false;
@@ -210,6 +243,7 @@ public class TicketMessageActivity extends AppCompatActivity {
     Thread thread_closeIt ;
     Thread thread_erjaIt ;
     private SwipeRefreshLayout swipeContainer;
+    private boolean isFirstTime = true;
 
     @Override
     protected void onDestroy() {
@@ -382,11 +416,13 @@ public class TicketMessageActivity extends AppCompatActivity {
             findViewById(R.id.im_close_ticket).setVisibility(View.VISIBLE);
             findViewById(R.id.tv_close_text).setVisibility(View.VISIBLE);
             findViewById(R.id.tv_erja_text).setVisibility(View.VISIBLE);
+            findViewById(R.id.tv_about_sender).setVisibility(View.VISIBLE);
         }else {
             findViewById(R.id.im_forward_ticker).setVisibility(View.GONE);
             findViewById(R.id.im_close_ticket).setVisibility(View.GONE);
             findViewById(R.id.tv_close_text).setVisibility(View.GONE);
             findViewById(R.id.tv_erja_text).setVisibility(View.GONE);
+            findViewById(R.id.tv_about_sender).setVisibility(View.GONE);
         }
 
     }
@@ -412,7 +448,6 @@ public class TicketMessageActivity extends AppCompatActivity {
     }
 
     public void ForwardTicket(View view) {
-        // TODO: 11/16/2018 FORWARD THE TICKET & BLOCK VIEW...
         Intent intent = new Intent(this , ChooseUserActivity.class);
         intent.putExtra(ChooseUserActivity.min_role_level , 1 ); // NO ERJA TO STD!!
         startActivityForResult(intent , requestCod);
@@ -455,5 +490,13 @@ public class TicketMessageActivity extends AppCompatActivity {
         }else {
             Toast.makeText(this, "درحال ارجاء دادن", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void show_user_info(View view) {
+        Object o   = ticket.parseObject.get("CreateBy");
+        if (o==null)return;
+        String user_id =
+        ((ParseUser)o).getObjectId();
+        User.user_info_dialogue(this , user_id);
     }
 }

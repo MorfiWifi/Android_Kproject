@@ -109,9 +109,10 @@ public class SiteMasterActivity extends AppCompatActivity
         findViewById(R.id.rel_prof).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , Site_ProfileActivity.class);
+                SiteTicketActivity.StartActivity_UserBase(activity);
+                /*Intent intent = new Intent(getApplicationContext() , Site_ProfileActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
 

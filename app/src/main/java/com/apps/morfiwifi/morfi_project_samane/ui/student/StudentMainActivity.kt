@@ -40,7 +40,7 @@ class StudentMainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         //fixme THis Could be std Profile instead of Main
 
         rel_prof.setOnClickListener {
-            val intent = Intent(this , StudentProfileActivity::class.java)
+            val intent = Intent(this , StudentTicketActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent )
         }

@@ -15,6 +15,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Ticket;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,6 +62,13 @@ public class RecyclerAdapter_ticket extends RecyclerView.Adapter<ViewHolder_tick
     @Override
     public void onBindViewHolder(ViewHolder_ticket holder, int position) {
 
+        holder.image.setImageResource(
+        ticketList.get(position).parseObject.getBoolean("isinternal")?
+                R.drawable.id_ticket_green
+                :R.drawable.ic_ticket
+                );
+
+
         if (ticketList.get(position).isLoading){
             holder.image.setVisibility(View.GONE);
             holder.loading.setVisibility(View.VISIBLE);
@@ -68,7 +76,7 @@ public class RecyclerAdapter_ticket extends RecyclerView.Adapter<ViewHolder_tick
 
             holder.tick_header.setText(Init.notNull(ticketList.get(position).parseObject.get("header")));
             holder.tick_date.setText("...");
-            holder.tick_review.setText("");
+            holder.tick_review.setText("ارجاء نشده!");
         }else {
             if (!(Boolean) ticketList.get(position).parseObject.get("isopen")){
                 holder.image.setImageResource(R.drawable.id_ticket_gray);
@@ -82,22 +90,34 @@ public class RecyclerAdapter_ticket extends RecyclerView.Adapter<ViewHolder_tick
 
             holder.tick_header.setText(Init.notNull(ticketList.get(position).parseObject.get("header")));
             holder.tick_date.setText(shamsiDate.persian_date(ticketList.get(position).parseObject.getCreatedAt()));
-            holder.tick_review.setText("");
+
+            Object b = ticketList.get(position).parseObject.get("ERJA_ROLE_NAME");
+            Object c = ticketList.get(position).parseObject.get("CreateBy_username");
+
+            if (c!= null ){
+                if (c.toString().equals(ParseUser.getCurrentUser().getUsername())){
+                    c = "خودم";
+                }
+            }
+
+            if (b != null && c != null){
+                String text = c.toString() + " => "
+                        + "ارجاء شده به : " +
+                        b.toString();
+                holder.tick_review.setText(text);
+            }else if (b != null){
+                String text =  "ارجاء شده به : " +
+                        b.toString();
+                holder.tick_review.setText(text);
+            }else { // c != null
+                String text = "سازنده : "+ c.toString() ;
+                holder.tick_review.setText(text);
+            }
         }
 
         holder.activity = activity;
         holder.ticket = ticketList.get(position);
         holder.item_back.setOnClickListener(holder);
-
-
-
-//        notifyDataSetChanged();
-
-        shamsiDate shamsiDate = new shamsiDate();
-        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(sample_report.createAt);
-//        String dati = shamsiDate.shamsiDate(calendar.get(Calendar.YEAR) , calendar.get(Calendar.MONTH)+1 , calendar.get(Calendar.DATE));
-
 
 
     }

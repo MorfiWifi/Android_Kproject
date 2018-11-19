@@ -3,20 +3,21 @@ package com.apps.morfiwifi.morfi_project_samane.ui.site_master;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Ticket;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
+import com.apps.morfiwifi.morfi_project_samane.models.User_model;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
+import com.apps.morfiwifi.morfi_project_samane.ui.ticket.ChooseUserActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_ticket;
 import com.parse.ParseException;
@@ -30,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SiteTicketActivity extends SiteMasterActivity {
+    private final  int requestCod = 2156;
     public final static String ADMINIMISTRATOR = "ADMIN";
     public final static String NONADMIN = "NOADMIN";
     public final static String USER_MOD = "MOD";
@@ -44,17 +46,17 @@ public class SiteTicketActivity extends SiteMasterActivity {
     public final static String ERJA_BASE = "ERJA_BASE";
     public final static String USER_BASE = "USER_BASE";
     public final static String TARGET_USER = "TARGER";
+    public static final String NOTINTERNAL = "NOTINTERNAL" ;
+    public static final String STUDENT = "STUDENT";
+    public static final String ALL = "ALL";
+    private boolean isFirstTime = true;
+    String type = "";
+    static User_model ticketReciver = null;
+    Thread thread_new_internal_ticket;
 
-
-
-   /* var json = {
-            "open": open,
-            "close": close,
-            "internal" : internal,
-            "outernal" : out,
-            "notassigned" : notassigne
-}*/
-
+    public static void setTicketReciver(User_model user_model) {
+        ticketReciver = user_model;
+    }
 
     enum runtime { Admin  , Normal}
     runtime Run = runtime.Normal;
@@ -75,6 +77,11 @@ public class SiteTicketActivity extends SiteMasterActivity {
             }else {
                 stop_loading();
             }
+            if (Init.ADVANCE_MOD){
+                load_tickets();
+            }
+
+
             if (isSaving){
                 findViewById(R.id.fab_new_ticket).setVisibility(View.GONE);
             }else {
@@ -91,8 +98,6 @@ public class SiteTicketActivity extends SiteMasterActivity {
     Runnable runnable_getTickets = new Runnable() {
         @Override
         public void run() {
-//            boolean isloaded = false;
-
             ParseQuery<ParseObject> mainQuery;
             List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
             ParseQuery query = new ParseQuery("ticket");
@@ -103,25 +108,67 @@ public class SiteTicketActivity extends SiteMasterActivity {
                 query2.whereEqualTo("LASTERJA" , ParseUser.getCurrentUser());
                 query3.whereDoesNotExist("LASTERJA");
 
-                queries.add(query);
-                queries.add(query2);
-                queries.add(query3);
+                if (User.current_user.cod == 2){
+                    queries.add(query);
+                    queries.add(query2);
+                    queries.add(query3);
+                }else {
+                    // IS NOT SITI !!
+                    queries.add(query);
+                    queries.add(query2);
+                }
+
+
                 mainQuery = ParseQuery.or(queries);
             }else {
                 // based on what wanted !!!
-                mainQuery = new ParseQuery<ParseObject>("asda");// ??
 
+                if (type.equals(NOTINTERNAL)){
+                    query.whereEqualTo("isinternal" , false);
+                    queries.add(query);
+                }
 
+                if (type.equals(INTERNAL)){
+                    query.whereEqualTo("isinternal" , true);
+                    queries.add(query);
+                }
 
+                if (type.equals(STUDENT)){
+                    query.whereEqualTo("creatot_role_name" ,"دانشجو");
+                    queries.add(query);
+                }
+
+                if (type.equals(OPEN)){
+                    query.whereEqualTo("isopen" ,true);
+                    queries.add(query);
+                }
+
+                if (type.equals(CLOSED)){
+                    query.whereEqualTo("isopen" ,false);
+                    queries.add(query);
+                }
+
+                if (type.equals(ALL)){
+                    queries.add(query);
+                }
+                mainQuery = ParseQuery.or(queries);
             }
 
 
 
             try {
-                isLoadig = true;
+                if (tickets.size() <= 0 && isFirstTime){
+                    isLoadig = true;
+                }
+
                 mainQuery.orderByDescending("createdAt");
                 List<ParseObject> list =
                         mainQuery.find();
+
+                if (Init.ADVANCE_MOD && !isFirstTime){
+                    if (tickets.size() == list.size())return; // no Chainge!
+                }
+                isFirstTime = false;
                 tickets = new ArrayList<>();// first load then send !
                 for (ParseObject pa :list) {
                     Ticket t = new Ticket(false , pa);
@@ -129,7 +176,8 @@ public class SiteTicketActivity extends SiteMasterActivity {
                 }
                 chainge++;
                 isLoadig = false;
-            } catch (ParseException e) {
+                Thread.sleep(1000);
+            } catch (Exception e) {
 //                e.printStackTrace();
 //                Log.
                 Log.e(getClass().getName() , e.getMessage());
@@ -138,24 +186,57 @@ public class SiteTicketActivity extends SiteMasterActivity {
             }
         }
     };
-    Runnable runnable_sendTickets = new Runnable() {
+
+    Runnable runnable_new_internal_ticket = new Runnable() {
         @Override
         public void run() {
-            ParseObject tic = new ParseObject("ticket");
-            tic.put("CreateBy" , ParseUser.getCurrentUser());
-            tic.put("creatot_role_name" , User.current_user.Role);
-            tic.put("header" , ticket_heade);
-            tic.put("isinternal" , false);
-            tic.put("isopen" , true);
-            tic.put("CreateBy_username" , ParseUser.getCurrentUser().getUsername());
             try {
+                if (ticketReciver == null) return;
+//                HashMap<String , Object> hashMap2 = new HashMap<>();
+//                hashMap2.put("userId" , ticketReciver.parseUser.getObjectId());
+                ParseQuery role = new ParseQuery("role");
+
+                String role_name = Init.Empty;
+                try {
+                    String role_id = ticketReciver.parseUser.get("role_id").toString();
+                    ParseObject x = (ParseObject) role.get(role_id);
+                    role_name = (x ).get("name").toString();
+                }catch (Exception e){
+                    Log.e("EX IN ROLE GET " , e.getMessage());
+                }
+
+                ParseObject tic = new ParseObject("ticket");
+                tic.put("CreateBy" , ParseUser.getCurrentUser());
+                tic.put("creatot_role_name" , User.current_user.Role);
+                tic.put("header" , ticket_heade);
+                tic.put("isinternal" , true);
+                tic.put("isopen" , true);
+                tic.put("CreateBy_username" , ParseUser.getCurrentUser().getUsername());
+
+
+                ParseObject tic_message = new ParseObject("ticket_message");
+//                tic_message.put("mess" , message);
+                tic_message.put("CreatedBy" , ParseUser.getCurrentUser());
+                tic_message.put("SENDER_USERNAME" , ParseUser.getCurrentUser().getUsername()); // this won't chainge
+                tic_message.put("ATTACHED" , "NON"); // file attach (server adress)
+                tic_message.put("ERJA" , true);
+                tic_message.put("ERJATO" , ticketReciver.parseUser );
+                tic_message.put("HAS_ATTACHED" , false);
+                tic_message.put("ROLE_NAME" , User.current_user.Role);
+                tic_message.put("ERJA_ROLE_NAME" , role_name);
+                tic_message.put("ERJATO_USERNAME" , ticketReciver.parseUser.getUsername());
+
+
+                tic.put("LASTERJA" , ticketReciver.parseUser);
+                tic.put("ERJA_ROLE_NAME" , role_name);
+                tic.put("LASTERJA_USERNAEM" , ticketReciver.parseUser.getUsername());
+                tic_message.put("TICKET" , tic);//add ticket to message
                 Ticket ticket = new Ticket(true , tic);
                 tickets.add(0 ,ticket);
                 map.put(  ticket , tickets.indexOf(ticket));
-                chainge++;
-                isSaving = true;
-                tic.save();
-                isSaving = false;
+                isLoadig = true;
+                tic_message.save();
+                isLoadig = false;
                 chainge++;
                 ticket_heade = "";
                 if (map.containsKey(ticket)){
@@ -164,15 +245,12 @@ public class SiteTicketActivity extends SiteMasterActivity {
                 }
             } catch (ParseException e) {
                 Log.e(getClass().getName() , e.getMessage());
-                isSaving = false;
-                ticket_heade = "";
-                chainge++;
+                isLoadig = false;
             }
         }
     };
-    Thread thread = new Thread(runnable_getTickets);
-    final Thread thread_send = new Thread(runnable_sendTickets);
 
+    Thread thread = new Thread(runnable_getTickets);
     @Override
     protected void onPause() {
         handler.removeCallbacks(runnable_view);
@@ -190,6 +268,12 @@ public class SiteTicketActivity extends SiteMasterActivity {
     protected void onDestroy() {
         handler.removeCallbacks(runnable_view);
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        finish();
     }
 
     public static void StartActivity_UserBase(AppCompatActivity activity) {
@@ -227,8 +311,12 @@ public class SiteTicketActivity extends SiteMasterActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
         setTitle("تیکت ها");
+        if (getIntent().getExtras() != null){
+            Run = Init.notNull(getIntent().getExtras().getString(USER_MOD , NONADMIN)).equals(ADMINIMISTRATOR)?runtime.Admin:runtime.Normal;
+            type =
+                    getIntent().getExtras().getString(Query_Part , Init.Empty);
+        }
 
-        Run = Init.notNull(getIntent().getExtras().getString(USER_MOD , NONADMIN)).equals(ADMINIMISTRATOR)?runtime.Admin:runtime.Normal;
         recycler = RecyclerAdapter_ticket.Init(null , this);
         load_tickets();
         start_view_thread();
@@ -268,11 +356,9 @@ public class SiteTicketActivity extends SiteMasterActivity {
 
     public void insert_ticket_header ( String s){
         ticket_heade = s;
-        try {
-            thread_send.start();
-        }catch (Exception e){
-            Log.e(getClass().getName() , e.getMessage());
-        }
+        Intent intent = new Intent(this , ChooseUserActivity.class);
+        intent.putExtra(ChooseUserActivity.min_role_level , 0 ); // NO ERJA TO STD!!
+        startActivityForResult(intent , requestCod);
     }
 
 
@@ -280,6 +366,37 @@ public class SiteTicketActivity extends SiteMasterActivity {
         if (isSaving)
             return;
         Dialogue.new_ticket_student(this);
+    }
+
+    private void OPEN_NEW_INTERNAL_TICKET() {
+        if (thread_new_internal_ticket == null){
+            thread_new_internal_ticket = new Thread(runnable_new_internal_ticket);
+            thread_new_internal_ticket.start();
+            return;
+        }
+        if (!thread_new_internal_ticket.isAlive()){
+            thread_new_internal_ticket = new Thread(runnable_new_internal_ticket);
+            thread_new_internal_ticket.start();
+            return;
+        }else {
+            Toast.makeText(this, "درحال ساختن ...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == requestCod){
+            if (resultCode == RESULT_CANCELED ){
+                ticketReciver = null;
+            }else if (resultCode == RESULT_OK){
+                if (data.getExtras() == null)return; // go hell out .....
+                boolean has_data =
+                        data.getExtras().getBoolean("hasResult" , false);
+                if (has_data){
+                    OPEN_NEW_INTERNAL_TICKET();
+                }
+            }
+        }
     }
 
 }

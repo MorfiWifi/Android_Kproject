@@ -13,9 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
-import com.apps.morfiwifi.morfi_project_samane.models.Result;
 import com.apps.morfiwifi.morfi_project_samane.models.Role_model;
 import com.apps.morfiwifi.morfi_project_samane.models.User_model;
+import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SiteTicketActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_role;
 import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_user;
@@ -109,6 +109,22 @@ public class ChooseUserActivity extends AppCompatActivity {
                     User_model t = new User_model( pa);
                     user_models.add(t);
                 }
+                // FOR HIDING CURRENT USER FOR ERJA SYSTEM_____________________________________________________________________
+                if (Init.notNull(ChoosenRole.parseObject.getObjectId()).equals(ParseUser.getCurrentUser().get("role_id"))){
+                    int inxed = 0;
+                    boolean isFound = false;
+                    for (User_model us: user_models) {
+                        if (us.parseUser.getObjectId().equals(ParseUser.getCurrentUser().getObjectId())){
+                            isFound = true;
+                            break;
+                        }
+                        inxed++;
+                    }
+                    if (isFound){
+                        user_models.remove(inxed);
+                    }
+                }
+                // FOR HIDING CURRENT USER FOR ERJA SYSTEM_____________________________________________________________________
                 chainge_user++;
                 isLoadig_users = false;
             } catch (ParseException e) {
@@ -173,6 +189,7 @@ public class ChooseUserActivity extends AppCompatActivity {
             }
         });
 
+        if (getIntent().getExtras() == null) return;
 
         min_role_leve = Init.notNullInteger(getIntent().getExtras().getInt(min_role_level , 0));
         rec_roles = RecyclerAdapter_role.Init(null , this);
@@ -287,6 +304,7 @@ public class ChooseUserActivity extends AppCompatActivity {
         returnIntent.putExtra("hasResult" ,true);
         setResult(RESULT_OK, returnIntent);
         TicketMessageActivity.setErja_model(user_model);
+        SiteTicketActivity.setTicketReciver(user_model);
         onBackPressed();
     }
 }
