@@ -1,5 +1,5 @@
 ﻿# Android_Kproject
-[![Build Status](https://api.travis-ci.org/pages-themes/cayman.svg)](https://github.com/MorfiWifi/Android_Kproject)  Version : 0.0.1
+[![Build Status](https://api.travis-ci.org/pages-themes/cayman.svg)](https://github.com/MorfiWifi/Android_Kproject)  Version : 1.2
 
 
 - [x] online Log in 
