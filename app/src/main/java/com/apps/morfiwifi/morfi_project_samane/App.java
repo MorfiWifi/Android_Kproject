@@ -15,13 +15,13 @@ import java.io.FileInputStream;
 
 public class App extends Application {
 
-//    static {
-//        System.loadLibrary("keys");
-//    }
+    static {
+        System.loadLibrary("keys");
+    }
 //
-//    public static native String getNativeKey1();
-//    public static native String getNativeKey2();
-//    public static native String getserver();
+    public static native String getNativeKey1();
+    public static native String getNativeKey2();
+    public static native String getserver();
 
 
     @Override
@@ -85,18 +85,20 @@ public class App extends Application {
 
     static void init_parse( Context context){
         Parse.initialize(new Parse.Configuration.Builder(context)
-//                .applicationId(Security.Decript_STR(getNativeKey1()))
-                        .applicationId("z8ABZI7P44AzqQHSShS09qtKpcVjx8Dk8F9WipRB")
+                .applicationId(getNativeKey1())
+//                        .applicationId("z8ABZI7P44AzqQHSShS09qtKpcVjx8Dk8F9WipRB")
+//                        .applicationId("JpW6D4s2bqLrKErHLXcoSp36Nd0SpR9zOqtVjkDP")
 //                         .applicationId("first")
 //                .clientKey(Security.Decript_STR(getNativeKey2()))
-                        .clientKey("fmbYAhCnAHlXvk9p8B2UBPK8vaeyTm1ZOZ1zPxq9")
+//                        .clientKey("fmbYAhCnAHlXvk9p8B2UBPK8vaeyTm1ZOZ1zPxq9")
+//                        .clientKey("NgdIubexsJySLzHkPbV6sPyzaWf4UeM2vGpKUhe2")
 
 //                .clientKey("QE5Pwhr60WAfd24VtGcFIV3KHDStpK1Q2WgtP4yr") // MASTER
-                        .server("https://parseapi.back4app.com/")
-//                .server(Security.Decript_STR(getserver()))
+//                        .server("https://parseapi.back4app.com/")
+                .server(getserver())
 
 //                        .server("http://192.168.1.105:1337/parse/")
-//                        .server("http://192.168.19.2:1337/parse/")
+//                        .server("http://5.57.36.104:1337/parse/")
 //                        .server("http://192.168.1.45:1337/parse/")
                         .build()
         );

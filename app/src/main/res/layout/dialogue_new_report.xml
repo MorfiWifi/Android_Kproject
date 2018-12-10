@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
-                android:gravity="right"
+                android:gravity="start"
                 android:padding="10dp"
                 android:hint="متن گزارش"
                 />

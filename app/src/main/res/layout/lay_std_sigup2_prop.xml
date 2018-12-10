@@ -32,6 +32,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Switch
+                        android:checked="true"
+                        android:id="@+id/sw_is_maile"
+                        android:gravity="center"
+                        android:text="جنسیت مرد ؟"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
                 <TextView
                     android:textColor="@color/black"
                     android:textSize="20sp"

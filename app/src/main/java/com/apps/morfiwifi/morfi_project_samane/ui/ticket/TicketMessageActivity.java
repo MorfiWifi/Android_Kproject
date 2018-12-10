@@ -140,6 +140,7 @@ public class TicketMessageActivity extends AppCompatActivity {
             tic_message.put("ERJA" , false);
             tic_message.put("HAS_ATTACHED" , false);
             tic_message.put("ROLE_NAME" , User.current_user.Role);
+            tic_message.put("ROLE_COD" , User.current_user.cod);
 
             tic_message.put("TICKET" , ticket.parseObject);//add ticket to message
 
@@ -147,6 +148,7 @@ public class TicketMessageActivity extends AppCompatActivity {
 
             try {
                 Ticket_Message messagei = new Ticket_Message(true , tic_message);
+//                ticket_messages.add()
                 ticket_messages.add(0 ,messagei);
                 map.put(  messagei , ticket_messages.indexOf(messagei));
                 chainge++;
@@ -158,7 +160,8 @@ public class TicketMessageActivity extends AppCompatActivity {
                 message = "";
                 if (map.containsKey(messagei)){
                     int p = map.get(messagei);
-                    ticket_messages.get(p).isLoading = false;
+                    if (ticket_messages.contains(messagei))
+                    ticket_messages.get(ticket_messages.indexOf(messagei)).isLoading = false;
                 }
             } catch (ParseException e) {
                 Log.e(getClass().getName() , e.getMessage());

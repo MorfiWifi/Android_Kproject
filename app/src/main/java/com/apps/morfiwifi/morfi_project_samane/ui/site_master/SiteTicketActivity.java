@@ -107,8 +107,11 @@ public class SiteTicketActivity extends SiteMasterActivity {
                 query.whereEqualTo("CreateBy" ,ParseUser.getCurrentUser() );
                 query2.whereEqualTo("LASTERJA" , ParseUser.getCurrentUser());
                 query3.whereDoesNotExist("LASTERJA");
+                // TODO: 12/9/2018 chek std block with site ...
+                query3.whereEqualTo("ROLE_COD" , 0); // Created By std
+                query3.whereEqualTo("BLOCK_ID" , User.current_user.property.blook_id); // In block STD
 
-                if (User.current_user.cod == 2){
+                if (User.current_user.cod == 1){
                     queries.add(query);
                     queries.add(query2);
                     queries.add(query3);
@@ -134,7 +137,8 @@ public class SiteTicketActivity extends SiteMasterActivity {
                 }
 
                 if (type.equals(STUDENT)){
-                    query.whereEqualTo("creatot_role_name" ,"دانشجو");
+//                    query.whereEqualTo("creatot_role_name" ,"دانشجو");
+                    query.whereEqualTo("creatot_role_cod" , User.current_user.cod); // 0
                     queries.add(query);
                 }
 
@@ -208,6 +212,9 @@ public class SiteTicketActivity extends SiteMasterActivity {
                 ParseObject tic = new ParseObject("ticket");
                 tic.put("CreateBy" , ParseUser.getCurrentUser());
                 tic.put("creatot_role_name" , User.current_user.Role);
+                tic.put("creatot_role_cod" , User.current_user.cod);
+//                tic_message.put("ROLE_COD" , User.current_user.cod);
+
                 tic.put("header" , ticket_heade);
                 tic.put("isinternal" , true);
                 tic.put("isopen" , true);
@@ -223,6 +230,7 @@ public class SiteTicketActivity extends SiteMasterActivity {
                 tic_message.put("ERJATO" , ticketReciver.parseUser );
                 tic_message.put("HAS_ATTACHED" , false);
                 tic_message.put("ROLE_NAME" , User.current_user.Role);
+                tic_message.put("ROLE_COD" , User.current_user.cod);
                 tic_message.put("ERJA_ROLE_NAME" , role_name);
                 tic_message.put("ERJATO_USERNAME" , ticketReciver.parseUser.getUsername());
 
@@ -241,7 +249,9 @@ public class SiteTicketActivity extends SiteMasterActivity {
                 ticket_heade = "";
                 if (map.containsKey(ticket)){
                     int p = map.get(ticket);
-                    tickets.get(p).isLoading = false;
+                    if (tickets.contains(ticket))
+                        tickets.get(tickets.indexOf(ticket)).isLoading = false;
+//                    tickets.get(p).isLoading = false;
                 }
             } catch (ParseException e) {
                 Log.e(getClass().getName() , e.getMessage());
@@ -357,7 +367,34 @@ public class SiteTicketActivity extends SiteMasterActivity {
     public void insert_ticket_header ( String s){
         ticket_heade = s;
         Intent intent = new Intent(this , ChooseUserActivity.class);
-        intent.putExtra(ChooseUserActivity.min_role_level , 0 ); // NO ERJA TO STD!!
+        int current_cod =
+                User.current_user.cod;
+
+        switch (current_cod){
+            case 0:
+                intent.putExtra(ChooseUserActivity.min_role_level , 1 ); // NO ERJA TO STD!!
+                intent.putExtra(ChooseUserActivity.max_role_level , 0 ); // Base on Current Role COD ..
+                break;
+            case 1:
+                intent.putExtra(ChooseUserActivity.min_role_level , 0 ); // NO ERJA TO STD!!
+                intent.putExtra(ChooseUserActivity.max_role_level , 2 ); // Base on Current Role COD ..
+                break;
+            case 2:
+                intent.putExtra(ChooseUserActivity.min_role_level , 1 ); // NO ERJA TO STD!!
+                intent.putExtra(ChooseUserActivity.max_role_level , 4 ); // Base on Current Role COD ..
+                break;
+            case 3:
+                intent.putExtra(ChooseUserActivity.min_role_level , 1 ); // NO ERJA TO STD!!
+                intent.putExtra(ChooseUserActivity.max_role_level , 4 ); // Base on Current Role COD ..
+                break;
+            case 4 :
+                intent.putExtra(ChooseUserActivity.min_role_level , 0 ); // NO ERJA TO STD!!
+                intent.putExtra(ChooseUserActivity.max_role_level , 4 ); // Base on Current Role COD ..
+                default:
+
+        }
+
+
         startActivityForResult(intent , requestCod);
     }
 

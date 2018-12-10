@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:layoutDirection="ltr"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -87,7 +88,7 @@
             android:visibility="gone"
             android:textColor="@color/black"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/im_forward_ticker"
+            android:layout_toStartOf="@id/im_forward_ticker"
             android:text="ارجاء"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -96,7 +97,7 @@
             android:id="@+id/tv_close_text"
             android:visibility="gone"
             android:textColor="@color/black"
-            android:layout_toRightOf="@id/im_close_ticket"
+            android:layout_toEndOf="@id/im_close_ticket"
             android:layout_centerVertical="true"
             android:text="ببند"
             android:layout_width="wrap_content"
@@ -118,7 +119,7 @@
             android:visibility="gone"
             android:clickable="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:id="@+id/im_forward_ticker"
             android:src="@drawable/ic_erja"
             android:layout_width="50dp"

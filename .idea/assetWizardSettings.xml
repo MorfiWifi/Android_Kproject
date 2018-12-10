@@ -109,9 +109,13 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_close_white" />
-                            <entry key="sourceFile" value="C:\Users\Wifimorfi\Desktop\student.svg" />
+                            <entry key="height" value="128" />
+                            <entry key="outputName" value="ic_travel" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="C:\Users\Wifimorfi\Desktop\screen_shots\svg\new_role_icons\travel.svg" />
+                            <entry key="width" value="128" />
                           </map>
                         </option>
                       </PersistentState>

@@ -75,13 +75,13 @@ public class RecyclerAdapter_tickmessage extends RecyclerView.Adapter<ViewHolder
             holder.detail.setText("خودم");
 //            holder.rspace.setVisibility(View.GONE);
             holder.item_back.setBackgroundResource(R.drawable.background_message_sent);
-            holder.item_parent.setGravity(Gravity.RIGHT);
+            holder.item_parent.setGravity(Gravity.END);
         }else {
             holder.detail.setText(Init.notNull(ticket_messages.get(position).parseObject.get("ROLE_NAME")) +" , "
                     + Init.notNull(ticket_messages.get(position).parseObject.get("SENDER_USERNAME")) );
 //            holder.lspace.setVisibility(View.GONE);  SENDER_USERNAME
             holder.item_back.setBackgroundResource(R.drawable.background_message_recive);
-            holder.item_parent.setGravity(Gravity.LEFT);
+            holder.item_parent.setGravity(Gravity.START);
         }
 
         if (ticket_messages.get(position).parseObject.getBoolean("ERJA")){

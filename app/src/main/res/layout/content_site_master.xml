@@ -70,6 +70,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/lin_2nd_icon"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="125dp">
@@ -122,6 +124,8 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/lin_3rd_icon"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="125dp">
@@ -167,6 +171,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/lin_4th_icon"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="125dp">
@@ -213,6 +219,8 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/lin_5th_icon"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -314,6 +322,8 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/lin_6th_icon"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="125dp">

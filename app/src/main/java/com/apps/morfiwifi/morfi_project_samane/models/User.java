@@ -87,6 +87,7 @@ public class User   {
     public  String email;
     public boolean deleted = false;
     public Date createAt = Calendar.getInstance().getTime();
+    public Properties property;
     private int type;
     private static List<ParseUser> temp_nonactive;
     public MUSER muser = new MUSER();
@@ -955,6 +956,28 @@ public class User   {
             }
         }
 
+    }
+
+    public  static String getRoleNmae(int cod){
+        switch (cod){
+            case 0:
+                return "دانشجو";
+            case 1:
+                return  "سرپرست خوابگاه";
+            case 2:
+                return  "مدیر مجتمع";
+            case 3:
+                return  "خدمات";
+            case 4:
+                return  "ادمین";
+                default:
+                    if (cod < 0){
+                        return "بی معنی" ;
+                    }else {
+                        return "*فوق کاربر*";
+                    }
+
+        }
     }
 
 

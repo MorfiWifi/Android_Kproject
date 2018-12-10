@@ -62,11 +62,48 @@ public class RecyclerAdapter_ticket extends RecyclerView.Adapter<ViewHolder_tick
     @Override
     public void onBindViewHolder(ViewHolder_ticket holder, int position) {
 
-        holder.image.setImageResource(
-        ticketList.get(position).parseObject.getBoolean("isinternal")?
-                R.drawable.id_ticket_green
-                :R.drawable.ic_ticket
-                );
+       /* holder.image.setImageResource(
+                ticketList.get(position).parseObject.getBoolean("isinternal")?
+                        R.drawable.id_ticket_green
+                        :R.drawable.ic_ticket
+        );*/
+
+
+//        String name = Init.notNull(role_models.get(position).parseObject.get("name"));
+        int cod = ticketList.get(position).parseObject.getInt("creatot_role_cod");
+//        holder.role_naem.setText(name);
+
+        if (cod >= 4){
+            holder.image.setImageResource(R.drawable.ic_admin_2);
+
+        }else if (cod == 1){
+            holder.image.setImageResource(R.drawable.ic_worker_2);
+        }else if (cod == 2){
+            holder.image.setImageResource(R.drawable.ic_cook);
+        } else if (cod == 3){
+            holder.image.setImageResource(R.drawable.ic_travel);
+        }
+        else if (cod == 0){
+            holder.image.setImageResource(R.drawable.ic_student_2);
+        }else {
+            holder.image.setImageResource(R.drawable.ic_casher);
+        }
+
+
+        /*if (ticketList.get(position).parseObject.get("creatot_role_name") == null){
+            holder.image.setImageResource(R.drawable.ic_casher);
+        } else if (ticketList.get(position).parseObject.get("creatot_role_name").equals("ادمین سیستم")){
+            holder.image.setImageResource(R.drawable.ic_admin_2);
+
+        }else if (ticketList.get(position).parseObject.get("creatot_role_name").equals("مسئول سایت")){
+            holder.image.setImageResource(R.drawable.ic_worker_2);
+
+        }else if (ticketList.get(position).parseObject.get("creatot_role_name").equals("دانشجو")){
+            holder.image.setImageResource(R.drawable.ic_student_2);
+        }else {
+            holder.image.setImageResource(R.drawable.ic_casher);
+        }*/
+
 
 
         if (ticketList.get(position).isLoading){
@@ -75,6 +112,7 @@ public class RecyclerAdapter_ticket extends RecyclerView.Adapter<ViewHolder_tick
             holder.loading.smoothToShow();
 
             holder.tick_header.setText(Init.notNull(ticketList.get(position).parseObject.get("header")));
+
             holder.tick_date.setText("...");
             holder.tick_review.setText("ارجاء نشده!");
         }else {

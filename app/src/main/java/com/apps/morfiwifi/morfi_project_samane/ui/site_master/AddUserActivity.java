@@ -317,6 +317,7 @@ public class AddUserActivity extends SiteMasterActivity {
         properties.blook_id = ((Block)bl).Id;
         properties.room_id = ((Room)ro).Id;
         properties.use_khabgah = true;
+        properties.isMail = ((Switch) findViewById(R.id.sw_is_maile)).isChecked();
 
 
         log_it("validate khabgah ended");

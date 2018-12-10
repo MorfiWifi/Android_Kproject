@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
 import com.apps.morfiwifi.morfi_project_samane.models.Role_model;
+import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.User_model;
 import com.apps.morfiwifi.morfi_project_samane.ui.site_master.SiteTicketActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
@@ -38,7 +39,9 @@ public class ChooseUserActivity extends AppCompatActivity {
     int chainge = 0 , chainge_user = 0;
     Role_model ChoosenRole = null;
     int min_role_leve = 0;
+    int max_role_leve = 0;
     public static final String min_role_level = "MIN_ROLE_LEVEL";
+    public static final String max_role_level = "MAX_ROLE_LEVEL";
 
 
 
@@ -60,7 +63,7 @@ public class ChooseUserActivity extends AppCompatActivity {
             }
 
             if (chainge_user > 0){
-                rec_users.Set_List(user_models , Init.notNull(ChoosenRole.parseObject.get("name")));
+                rec_users.Set_List(user_models , Init.notNull(ChoosenRole.parseObject.get("name")) ,ChoosenRole.parseObject.getInt("cod") );
                 chainge_user = 0;
             }
             if (chainge > 0){
@@ -78,6 +81,9 @@ public class ChooseUserActivity extends AppCompatActivity {
                 isLoadig_roles = true;
                 ParseQuery query = new ParseQuery("role");
                 query.whereGreaterThan("cod" , min_role_leve - 1);
+                if (max_role_leve != 0){
+                    query.whereLessThanOrEqualTo("cod" , max_role_leve);
+                }
                 List<ParseObject> list;
                 list = query.find();
                 role_models = new ArrayList<>();// first load then send !8
@@ -102,6 +108,12 @@ public class ChooseUserActivity extends AppCompatActivity {
                 isLoadig_users = true;
                 ParseQuery query = new ParseQuery("_User");
                 query.whereEqualTo("role_id" , Init.notNull(ChoosenRole.parseObject.getObjectId()));
+
+                // TODO: 12/10/2018 USER CANT SEND FOR OWN => STDS !!!!!!!!!!!!!!!!!!!
+//                if (User.current_user.cod == 1 && (int) ChoosenRole.parseObject.getNumber("cod") == 0 ){
+//                    query.whereEqualTo("BLOCK_ID" , User.current_user.property.blook_id);
+//                }
+
                 List<ParseUser> list;
                 list = query.find();
                 user_models = new ArrayList<>();// first load then send !8
@@ -173,7 +185,7 @@ public class ChooseUserActivity extends AppCompatActivity {
                 if (s.length() == 0){
                     if (ChoosenRole == null) return;
                     if (ChoosenRole.parseObject == null) return;
-                    rec_users.Set_List(user_models , Init.notNull(ChoosenRole.parseObject.get("name")));
+                    rec_users.Set_List(user_models , Init.notNull(ChoosenRole.parseObject.get("name")) , ChoosenRole.parseObject.getInt("cod"));
                     return;
                 }
                 if (s.length() > 2){
@@ -192,6 +204,7 @@ public class ChooseUserActivity extends AppCompatActivity {
         if (getIntent().getExtras() == null) return;
 
         min_role_leve = Init.notNullInteger(getIntent().getExtras().getInt(min_role_level , 0));
+        max_role_leve = Init.notNullInteger(getIntent().getExtras().getInt(max_role_level , 0));
         rec_roles = RecyclerAdapter_role.Init(null , this);
         rec_users = RecyclerAdapter_user.Init(null , this , Init.Empty);
         start_view_thread();
@@ -280,7 +293,7 @@ public class ChooseUserActivity extends AppCompatActivity {
                 list2.add(usert);
             }
         }
-        rec_users.Set_List(list2 , Init.notNull(ChoosenRole.parseObject.get("name")));
+        rec_users.Set_List(list2 , Init.notNull(ChoosenRole.parseObject.get("name")) , ChoosenRole.parseObject.getInt("cod"));
     }
 
     public void setRole (Role_model role){

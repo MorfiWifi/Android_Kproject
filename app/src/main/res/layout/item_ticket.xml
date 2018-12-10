@@ -12,8 +12,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/avi"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/avi"
         android:id="@+id/im_ticket"
         android:layout_centerVertical="true"
         android:padding="5dp"
@@ -22,7 +22,7 @@
         android:layout_height="60dp"/>
 
     <com.wang.avi.AVLoadingIndicatorView
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_centerVertical="true"
         android:id="@+id/avi"
         android:layout_width="60dp"
@@ -36,9 +36,9 @@
     <TextView
         android:textColor="@color/black"
         android:id="@+id/tv_tick_header"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:layout_toRightOf="@id/im_ticket"
+        android:layout_toEndOf="@id/im_ticket"
         android:text="HEADER"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -46,19 +46,19 @@
     <TextView
         android:layout_below="@id/tv_tick_header"
         android:id="@+id/tv_tick_review"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:layout_toRightOf="@id/im_ticket"
+        android:layout_toEndOf="@id/im_ticket"
         android:text="HEADER"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:id="@+id/tv_tick_date"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="15dp"
-        android:layout_alignRight="@id/tv_tick_header"
+        android:layout_alignEnd="@id/tv_tick_header"
         android:text="HEADER"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

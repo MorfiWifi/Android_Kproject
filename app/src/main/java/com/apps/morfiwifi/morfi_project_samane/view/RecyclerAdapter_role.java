@@ -55,18 +55,23 @@ public class RecyclerAdapter_role extends RecyclerView.Adapter<ViewHolder_role> 
         holder.image.setOnClickListener(holder);
 
         String name = Init.notNull(role_models.get(position).parseObject.get("name"));
+        int cod = (int) role_models.get(position).parseObject.getNumber("cod");
         holder.role_naem.setText(name);
 
-        if (name.equals("ادمین سیستم")){
-            holder.image.setImageResource(R.drawable.ic_admin);
+        if (cod >= 4){
+            holder.image.setImageResource(R.drawable.ic_admin_2);
 
-        }else if (name.equals("مسئول سایت")){
-            holder.image.setImageResource(R.drawable.ic_worker);
-
-        }else if (name.equals("دانشجو")){
-            holder.image.setImageResource(R.drawable.ic_student);
+        }else if (cod == 1){
+            holder.image.setImageResource(R.drawable.ic_worker_2);
+        }else if (cod == 2){
+        holder.image.setImageResource(R.drawable.ic_cook);
+        } else if (cod == 3){
+        holder.image.setImageResource(R.drawable.ic_travel);
+        }
+        else if (cod == 0){
+            holder.image.setImageResource(R.drawable.ic_student_2);
         }else {
-            holder.image.setImageResource(R.drawable.ic_ticket);
+            holder.image.setImageResource(R.drawable.ic_casher);
         }
 
 
@@ -81,7 +86,7 @@ public class RecyclerAdapter_role extends RecyclerView.Adapter<ViewHolder_role> 
         // TODO: 11/9/2018 FIX CHOOSEN RECYCLER
         recyclerView = activity.findViewById(R.id.rec_roles);
         RecyclerAdapter_role.activity = activity;
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
         RecyclerAdapter_role x = new RecyclerAdapter_role(ticket_messages);

@@ -91,7 +91,7 @@ public class SignupStudentsActivity extends AppCompatActivity {
 //                TextInputEditText kod_melli = (TextInputEditText) findViewById(R.id.ti_kod_melli);
                 EditText name =  findViewById(R.id.ti_name);
                 EditText last_name = findViewById(R.id.ti_lastname);
-                EditText user_name = findViewById(R.id.ti_username);
+//                EditText user_name = findViewById(R.id.ti_username);
                 EditText password =findViewById(R.id.ti_password);
                 EditText password_re =  findViewById(R.id.ti_password_rep);
                 EditText std_code =  findViewById(R.id.ti_student_cod);
@@ -177,10 +177,10 @@ public class SignupStudentsActivity extends AppCompatActivity {
             last_name.setError("نام خانوادگی خالی !");
             err++;
         }
-        if (user_name.getText().toString().trim().length() < 3){
-            user_name.setError("نام کاربری !");
-            err++;
-        }
+//        if (user_name.getText().toString().trim().length() < 3){
+//            user_name.setError("نام کاربری !");
+//            err++;
+//        }
         if (! password_re.getText().toString().equals(password.getText().toString()) ){
             password_re.setError("تکرار رمز صحیح نیست");
             err++;
@@ -231,6 +231,7 @@ public class SignupStudentsActivity extends AppCompatActivity {
             properties.real_lastname = last_name.getText().toString();
             properties.real_name = name.getText().toString();
             properties.father_name = std_father_name.getText().toString();
+            properties.isMail = ((Switch)findViewById(R.id.sw_is_maile)).isChecked();
             //bug user ID SHOULD BE IN PROPERTY !!!!! (SEQUENCE )
             properties.user_id ="";
             if (sw.isChecked()){
@@ -250,57 +251,24 @@ public class SignupStudentsActivity extends AppCompatActivity {
             }
 
 
+//            --------------------------- STD COD AS USER NAME ------------------------------
             Properties.check_properties(activity , true , properties);
 
             User user = new User();
-            user.UserName = user_name.getText().toString();
+            user.UserName = std_code.getText().toString();
+//                    user_name.getText().toString();
             user.Pass = password.getText().toString();
             user.Role_id = role.HARD_CODED_STUDENT_ROLE;
             user.Active = false;
             user.PreActive = false; // YET NO LEVEL OF ACTIVATION
-
+//            --------------------------- STD COD AS USER NAME ------------------------------
 
                     user_glob = user;
                     properties_glob = properties;
 
             User.chech_student(activity , true , user);
 
-                    // THING,s IN PROGRESS ....
-
-
-
-           /* // if there is no eror do the thing ...
-            User m = new User();
-            m.setKaet_meli(kod_melli.getText().toString());
-            m.set_Type(User.Kind.Student);
-            m.setPass(password.getText().toString());
-            m.setFName(name.getText().toString());
-            m.setLName(last_name.getText().toString());
-            m.setUserName(user_name.getText().toString());
-            m.setActive(false);
-            m.setShould_fill_init_forms(true);
-            m.setInset_date(Calendar.getInstance().getTime());
-            m.setPreActive(false);
-
-
-            // chek username pass exist -> kod melli & uid !
-
-
-            if (op_finished){
-                Init.Toas(this ,"لطفا خارج شوید !");
-            }else {
-                if (switc.isChecked()){ //todo : check what you would do ....for remeber
-                    Repository.GetInstant(this).getUserDao().insert(m);
-                    Init.Toas(this ,"پس از فعال شدن مطلع خواهید شد");
-                }else {
-                    Repository.GetInstant(this).getUserDao().insert(m);
-                    Init.Toas(this ,"پس از فعال شدن می توانید وارد شوید");
-                }
-            }*/
-
-
-
-
+                    // THING,s IN PROGRESS ...
                     op_finished =true;
                 }
 
@@ -389,6 +357,7 @@ public class SignupStudentsActivity extends AppCompatActivity {
             Properties properties = new Properties();
             properties.std_cod = std_code.getText().toString();
             properties.national_cod = kod_melli.getText().toString();
+            properties.isMail = ((Switch)findViewById(R.id.sw_is_maile)).isChecked();
 
             Properties.check_properties(this , true , properties);
 

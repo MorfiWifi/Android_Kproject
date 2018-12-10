@@ -104,6 +104,17 @@ public class SiteMasterActivity extends AppCompatActivity
 //        setTitle("پنل مسئول سایت");
         setTitle(User.current_user.Role);
 
+        int m = User.current_user.cod;
+        if (m > 3){
+            findViewById(R.id.lin_6th_icon).setVisibility(View.VISIBLE);
+            findViewById(R.id.lin_5th_icon).setVisibility(View.VISIBLE);
+            findViewById(R.id.lin_4th_icon).setVisibility(View.VISIBLE);
+            findViewById(R.id.lin_3rd_icon).setVisibility(View.VISIBLE);
+            findViewById(R.id.lin_2nd_icon).setVisibility(View.VISIBLE);
+        }
+
+//        android:id="@+id/"
+
 
         final AppCompatActivity activity = this;
         findViewById(R.id.rel_prof).setOnClickListener(new View.OnClickListener() {

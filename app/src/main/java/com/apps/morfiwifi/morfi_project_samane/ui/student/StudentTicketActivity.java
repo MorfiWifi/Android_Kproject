@@ -105,10 +105,14 @@ public class StudentTicketActivity extends DarkhastActivity {
             ParseObject tic = new ParseObject("ticket");
             tic.put("CreateBy" , ParseUser.getCurrentUser());
             tic.put("creatot_role_name" , User.current_user.Role);
+//            tic.put("creatot_role_name" , User.current_user.Role);
+            tic.put("creatot_role_cod" , User.current_user.cod);
+//                tic_message.put("ROLE_COD" , User.current_user.cod);
             tic.put("header" , ticket_heade);
             tic.put("isinternal" , false);
             tic.put("isopen" , true);
             tic.put("CreateBy_username" , ParseUser.getCurrentUser().getUsername());
+            tic.put("BLOCK_ID" , User.current_user.property.blook_id);
             try {
                 Ticket ticket = new Ticket(true , tic);
                 tickets.add(0 ,ticket);
@@ -121,7 +125,9 @@ public class StudentTicketActivity extends DarkhastActivity {
                 ticket_heade = "";
                 if (map.containsKey(ticket)){
                     int p = map.get(ticket);
-                    tickets.get(p).isLoading = false;
+                    if (tickets.contains(ticket))
+                        tickets.get(tickets.indexOf(ticket)).isLoading = false;
+//                    tickets.get(p).isLoading = false;
                 }
             } catch (ParseException e) {
                 Log.e(getClass().getName() , e.getMessage());

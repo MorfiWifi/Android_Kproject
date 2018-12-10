@@ -25,6 +25,7 @@ public class RecyclerAdapter_user extends RecyclerView.Adapter<ViewHolder_user> 
     private String role_name = Init.Empty;
     User sener_user ;
     List<Thing> things;
+    private int cod = 0;
 
     public RecyclerAdapter_user(List<User_model> user_models) {
         if (user_models == null){
@@ -48,16 +49,23 @@ public class RecyclerAdapter_user extends RecyclerView.Adapter<ViewHolder_user> 
     @Override
     public void onBindViewHolder(ViewHolder_user holder, int position) {
 
-        if (role_name.equals("ادمین سیستم")){
-            holder.image.setImageResource(R.drawable.ic_admin);
+//        int cod = (int) role_models.get(position).parseObject.getNumber("cod");
+//        holder.role_naem.setText(name);
 
-        }else if (role_name.equals("مسئول سایت")){
-            holder.image.setImageResource(R.drawable.ic_worker);
+        if (cod >= 4){
+            holder.image.setImageResource(R.drawable.ic_admin_2);
 
-        }else if (role_name.equals("دانشجو")){
-            holder.image.setImageResource(R.drawable.ic_student);
+        }else if (cod == 1){
+            holder.image.setImageResource(R.drawable.ic_worker_2);
+        }else if (cod == 2){
+            holder.image.setImageResource(R.drawable.ic_cook);
+        } else if (cod == 3){
+            holder.image.setImageResource(R.drawable.ic_travel);
+        }
+        else if (cod == 0){
+            holder.image.setImageResource(R.drawable.ic_student_2);
         }else {
-            holder.image.setImageResource(R.drawable.ic_ticket);
+            holder.image.setImageResource(R.drawable.ic_casher);
         }
         holder.role_name.setText(role_name);
         holder.user_name.setText(Init.notNull(user_models.get(position).parseUser.getUsername()));
@@ -83,10 +91,11 @@ public class RecyclerAdapter_user extends RecyclerView.Adapter<ViewHolder_user> 
         return x;
     }
 
-    public void Set_List(List<User_model> user_models , String role_name) {
+    public void Set_List(List<User_model> user_models , String role_name , int cod) {
         if (user_models != null){
             this.role_name = role_name;
             this.user_models = user_models;
+            this.cod = cod;
             notifyDataSetChanged();
         }
     }

@@ -75,8 +75,9 @@ public class Properties {
     public final static String obj_std_code = "std_code";
     public final static String obj_adrsss = "adress";
     public final static String obj_phone = "phone";
+    public final static String obj_isMail = "ismail";
 
-    private static String[] all_params = {obj_createAt ,obj_id ,obj_user_id ,obj_kh_id ,obj_blook_id ,obj_room_id,obj_national_cod,obj_father_name,obj_is_studyng,obj_is_using_kh,obj_real_name,obj_real_lastname , obj_adrsss , obj_phone };
+    private static String[] all_params = {obj_createAt ,obj_id ,obj_user_id ,obj_kh_id ,obj_blook_id ,obj_room_id,obj_national_cod,obj_father_name,obj_is_studyng,obj_is_using_kh,obj_real_name,obj_real_lastname , obj_adrsss , obj_phone,obj_isMail };
 
 
     //bug we NEED ONE FOR STUDENTS AND LIST FOR HIGH RANKS !!!
@@ -89,6 +90,7 @@ public class Properties {
     private static  Properties properties_other ; // additional information about user !
     private static  ParseObject tempi ; // additional information about user !
     private static  ParseObject temp_other ; // additional information about user !
+    public boolean isMail = true;
 
     //NOTE USE LOADING FROM Init.start_loading(activity); => THIS DOSE'NT CONSIDER TYPE OF ACTIVITY !
 
@@ -155,6 +157,7 @@ public class Properties {
                         else
                             tempi = new ParseObject(class_name);
                         convert_self_parse();
+                        User.current_user.property = properties;
                         result = new Result(properties , CODE , true);
                         Init.result_of_query(activity , result);
                         isloaded = true;
@@ -266,6 +269,10 @@ public class Properties {
         Object object ;
         for (String param: all_params) {
             switch (param){
+                case obj_isMail:
+//                    object = parseObject.getBoolean(obj_isMail);
+                    isMail =parseObject.getBoolean(obj_isMail);
+                    break;
                 case obj_std_code:
                     object = parseObject.get(obj_std_code);
                     if (object != null){
@@ -449,6 +456,7 @@ public class Properties {
         object.put(obj_real_lastname , properties.real_lastname);
         object.put(obj_adrsss , properties.adress);
         object.put(obj_phone , properties.phone);
+        object.put(obj_isMail , properties.isMail);
 
         // TODO: 8/30/2018 check properites and upload them too
 

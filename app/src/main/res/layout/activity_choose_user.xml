@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layoutDirection="ltr"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -108,10 +109,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="60dp"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@id/im_close_ticket"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/im_close_ticket"
             android:background="@null"
             android:hint="جستجو"
             android:maxLength="20" />
@@ -121,7 +122,7 @@
             android:onClick="serch_user"
             android:clickable="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:id="@+id/im_forward_ticker"
             android:src="@drawable/ic_search"
             android:layout_width="50dp"
@@ -132,7 +133,7 @@
     </RelativeLayout>
 
     <TextView
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:id="@+id/tv_roles"
         android:layout_below="@id/rel_toolbar"
         android:textSize="18sp"
@@ -142,8 +143,8 @@
 
     <TextView
         android:maxLength="20"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="5dp"
         android:id="@+id/tv_roles_message"
         android:layout_below="@id/rel_toolbar"
         android:textSize="18sp"
@@ -153,8 +154,8 @@
 
     <TextView
         android:visibility="gone"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="5dp"
         android:id="@+id/tv_role_selected"
         android:layout_below="@id/rel_toolbar"
         android:textSize="18sp"
@@ -163,7 +164,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:id="@+id/tv_users"
         android:layout_below="@id/rel_user_role_place"
         android:textSize="18sp"
