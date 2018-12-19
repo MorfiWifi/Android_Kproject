@@ -30,8 +30,9 @@ public class Block {
     private final static String obj_id = "id";
     private final static String obj_createAt = "crateAt";
     private final static String obj_kh_id = "khabgah_id";
+    private final static String obj_ismail = "ismail";
 
-    private static String[] all_params = {obj_name ,obj_code ,obj_id ,obj_createAt ,obj_kh_id };
+    private static String[] all_params = {obj_name ,obj_code ,obj_id ,obj_createAt ,obj_kh_id , obj_ismail};
     private static int limit = 100;
 
     public String Id = Init.Empty;
@@ -41,6 +42,7 @@ public class Block {
     public Long id;
     public String name = Init.Empty;
     public String code = Init.Empty;
+    public boolean ismail = true;
     public String khabgah_id = Init.Empty;
     public List<Room> rooms;
 
@@ -120,6 +122,7 @@ public class Block {
     private void null_self_fixer (ParseObject parseObject){
         // TODO: 7/25/2018 COMPLET OBJECT BUILDIGN SYS
         String t;
+        Object temp;
         for (String param: all_params) {
             switch (param){
                 case obj_id :
@@ -136,21 +139,24 @@ public class Block {
                     break;
 
                 case obj_name:
-                    t = parseObject.get(obj_name).toString();
-                    if (t != null){
-                        name = t;
+                    temp = parseObject.get(obj_name);
+                    if (temp != null){
+                        name = temp.toString();
                     }
                     break;
+                case obj_ismail:
+                    ismail = parseObject.getBoolean(obj_ismail);
+                    break;
                 case obj_code:
-                    t = parseObject.get(obj_code).toString();
-                    if (t != null){
-                        code = t;
+                    temp = parseObject.get(obj_code);
+                    if (temp != null){
+                        code = temp.toString();
                     }
                     break;
                     case obj_kh_id:
-                    t = parseObject.get(obj_kh_id).toString();
-                    if (t != null){
-                        khabgah_id = t;
+                        temp = parseObject.get(obj_kh_id);
+                    if (temp != null){
+                        khabgah_id = temp.toString();
                     }
                     break;
                 default:

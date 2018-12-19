@@ -16,6 +16,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
 import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
+import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
 
 import java.util.Calendar;
@@ -45,7 +46,7 @@ public class Site_ProfileActivity extends SiteMasterActivity {
         collapsingToolbarLayout.setTitle("پروفایل");
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
 
-        Properties.load_self_properties(this , true , false); // JUST FAST REQUEST ! ASYNC RES
+        Properties.load_self_properties(this , true , true); // JUST FAST REQUEST ! ASYNC RES
     }
 
     public  void set_properties (Properties properties){
@@ -120,10 +121,10 @@ public class Site_ProfileActivity extends SiteMasterActivity {
 
 
                 tv_user_khabgah.setText("استفاده از خوابگاه  : بله");
-                tv_khabgah_nmae.setText("نام خوابگاه : " + khabgah.name);
+                tv_khabgah_nmae.setText("نام خوابگاه : " + (khabgah.name.equals(Init.Empty)?properties.kh_id:khabgah.name));
 
-                tv_blook_name.setText("نام بلوک : " + block.name);
-                tv_room_name.setText("نام اتاق : " + room.name);
+                tv_blook_name.setText("نام بلوک : " + (block.name.equals(Init.Empty)?properties.blook_id:block.name));
+                tv_room_name.setText("نام اتاق : " + (room.name.equals(Init.Empty)?properties.room_id:room.name));
 
 
 

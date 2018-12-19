@@ -67,6 +67,24 @@ public class SignupStudentsActivity extends AppCompatActivity {
             }
         });
 
+        Switch ismail = findViewById(R.id.sw_is_maile);
+        ismail.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean ISMAIL) {
+                ArrayList<Block> blocks2 = new ArrayList<Block>();
+                for (Block blook :
+                        blocks) {
+                    if (blook.ismail == ISMAIL){
+                        blocks2.add(blook);
+                    }
+                }
+
+                Spinner block = findViewById(R.id.sp_block);
+                ArrayAdapter<Block> bl_adapter = new ArrayAdapter<Block>(getBaseContext(),   android.R.layout.simple_spinner_item, blocks2);
+                block.setAdapter(bl_adapter);
+            }
+        });
+
         final AppCompatActivity activity = this;
         final EditText kod_melli= findViewById(R.id.ti_kod_melli) ;
 
@@ -98,7 +116,7 @@ public class SignupStudentsActivity extends AppCompatActivity {
 
                 EditText std_phone =  findViewById(R.id.ti_phone_number);
                 EditText std_father_name =  findViewById(R.id.ti_father_name);
-                EditText std_adress =  findViewById(R.id.ti_address);
+//                EditText std_adress =  findViewById(R.id.ti_address);
                 SwitchCompat switc = findViewById(R.id.sw_remember);
 
                 // ******************************************************** checking all property...
@@ -209,10 +227,6 @@ public class SignupStudentsActivity extends AppCompatActivity {
                     std_father_name.setError("نام پدر ؟");
                     err++;
                 }
-                if (std_adress.getText().toString().trim().length() < 4){
-                    std_adress.setError("نشانی ؟");
-                    err++;
-                }
 
                 if (sw.isChecked()){
                     err =  chech_user_kh(err); // get and sets errors count ! USE TOAST FOR ADVISE
@@ -253,10 +267,8 @@ public class SignupStudentsActivity extends AppCompatActivity {
 
 //            --------------------------- STD COD AS USER NAME ------------------------------
             Properties.check_properties(activity , true , properties);
-
             User user = new User();
             user.UserName = std_code.getText().toString();
-//                    user_name.getText().toString();
             user.Pass = password.getText().toString();
             user.Role_id = role.HARD_CODED_STUDENT_ROLE;
             user.Active = false;
@@ -549,7 +561,15 @@ public class SignupStudentsActivity extends AppCompatActivity {
             ArrayAdapter<Khabgah> kh_adapter = new ArrayAdapter<>(this,   android.R.layout.simple_spinner_item, khabgahs);
             kh.setAdapter(kh_adapter);
 
-            ArrayAdapter<Block> bl_adapter = new ArrayAdapter<>(this,   android.R.layout.simple_spinner_item, blocks);
+
+            ArrayList<Block> blocks2 = new ArrayList<Block>();
+            for (Block blook :
+                    blocks) {
+                if (blook.ismail == ((Switch)findViewById(R.id.sw_is_maile)).isChecked()){
+                    blocks2.add(blook);
+                }
+            }
+            ArrayAdapter<Block> bl_adapter = new ArrayAdapter<>(this,   android.R.layout.simple_spinner_item, blocks2);
             block.setAdapter(bl_adapter);
 
             ArrayAdapter<Room> r_adapter = new ArrayAdapter<>(this,   android.R.layout.simple_spinner_item, rooms);
@@ -563,7 +583,15 @@ public class SignupStudentsActivity extends AppCompatActivity {
                     if (i >= 0){
                         // TODO: 6/1/2018 Check some out of bound Things
                         block.setEnabled(true);
-                        ArrayAdapter<Block> spinnerArrayAdapter = new ArrayAdapter<Block>(activity ,   android.R.layout.simple_spinner_item, khabgahs.get(i).blocks);
+
+                        ArrayList<Block> blocks2 = new ArrayList<Block>();
+                        for (Block blook :
+                                khabgahs.get(i).blocks) {
+                            if (blook.ismail == ((Switch)findViewById(R.id.sw_is_maile)).isChecked()){
+                                blocks2.add(blook);
+                            }
+                        }
+                        ArrayAdapter<Block> spinnerArrayAdapter = new ArrayAdapter<Block>(activity ,   android.R.layout.simple_spinner_item,blocks2 );
                         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                         block.setAdapter(spinnerArrayAdapter);
 

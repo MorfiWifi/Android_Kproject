@@ -19,7 +19,7 @@ public class role {
     private static boolean isloaded = false;
     static  String class_name = "role";
     final static  String obj_cod = "cod";
-    public static  String HARD_CODED_STUDENT_ROLE = "Gd28OPmRhm";
+    public static  String HARD_CODED_STUDENT_ROLE = "47eFLUJ7RF"; // 57.00.00.000
     static  String obj_name = "name";
     static List<ParseObject> temp;
     static List<role> roles;

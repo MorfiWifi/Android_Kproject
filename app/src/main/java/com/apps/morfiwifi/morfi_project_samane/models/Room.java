@@ -105,6 +105,7 @@ public class Room {
     private void null_self_fixer (ParseObject parseObject){
         // TODO: 7/25/2018 COMPLET OBJECT BUILDIGN SYS
         String t;
+        Object temp;
         for (String param: all_params) {
             switch (param){
                 case obj_id :

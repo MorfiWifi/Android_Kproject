@@ -321,6 +321,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_4th"
                     android:textColor="@color/black"
                     android:textSize="20sp"
@@ -331,7 +332,7 @@
                     android:text="نشانی محل سکونت"/>
 
                 <LinearLayout
-
+                    android:visibility="gone"
                     android:id="@+id/lin_4th"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="0dp"

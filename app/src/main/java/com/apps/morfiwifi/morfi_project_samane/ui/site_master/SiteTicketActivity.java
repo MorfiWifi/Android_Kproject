@@ -108,7 +108,7 @@ public class SiteTicketActivity extends SiteMasterActivity {
                 query2.whereEqualTo("LASTERJA" , ParseUser.getCurrentUser());
                 query3.whereDoesNotExist("LASTERJA");
                 // TODO: 12/9/2018 chek std block with site ...
-                query3.whereEqualTo("ROLE_COD" , 0); // Created By std
+                query3.whereEqualTo("creatot_role_cod" , 0); // Created By std
                 query3.whereEqualTo("BLOCK_ID" , User.current_user.property.blook_id); // In block STD
 
                 if (User.current_user.cod == 1){

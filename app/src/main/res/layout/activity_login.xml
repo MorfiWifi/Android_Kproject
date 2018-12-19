@@ -9,6 +9,7 @@
     tools:context="com.apps.morfiwifi.morfi_project_samane.LoginActivity">
 
     <LinearLayout
+        android:elevation="10dp"
         android:gravity="center"
         android:background="@drawable/gray_back"
         android:layout_width="match_parent"
@@ -162,6 +163,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:elevation="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="90dp">
@@ -218,6 +220,7 @@
         android:layout_height="match_parent" />
 
     <LinearLayout
+        android:elevation="10dp"
         android:layout_margin="20dp"
         android:background="@drawable/gray_back"
 

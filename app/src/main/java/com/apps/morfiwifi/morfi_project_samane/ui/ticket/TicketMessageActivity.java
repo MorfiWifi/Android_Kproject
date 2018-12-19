@@ -189,6 +189,24 @@ public class TicketMessageActivity extends AppCompatActivity {
         }
     };
 
+    Runnable runnable_openTicket = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                isLoadig = true;
+                ticket.parseObject.put("isopen" , true);
+                ticket.parseObject.save();
+                isOpen = true;
+                isLoadig = false;
+                chainge++;
+                closing_cjainge++;
+            } catch (ParseException e) {
+                Log.e(getClass().getName() , e.getMessage());
+                isLoadig = false;
+            }
+        }
+    };
+
     Runnable runnable_erjaTicket = new Runnable() {
         @Override
         public void run() {
@@ -244,6 +262,7 @@ public class TicketMessageActivity extends AppCompatActivity {
     Thread thread = new Thread(runnable_getTickets);
     Thread thread_send ;
     Thread thread_closeIt ;
+    Thread thread_openIt ;
     Thread thread_erjaIt ;
     private SwipeRefreshLayout swipeContainer;
     private boolean isFirstTime = true;
@@ -285,8 +304,10 @@ public class TicketMessageActivity extends AppCompatActivity {
         }else {
             if (!ticket.parseObject.getBoolean("isopen")){
                 setToolbarVisibility(false);
+                setReopenbarVisibiliy(true);
             }else {
                 setToolbarVisibility(true);
+                setReopenbarVisibiliy(false);
             }
         }
 
@@ -340,6 +361,15 @@ public class TicketMessageActivity extends AppCompatActivity {
         });
     }
 
+    private void setReopenbarVisibiliy(boolean b) {
+        if (b){
+            findViewById(R.id.rel_open_again_parent).setVisibility(View.VISIBLE);
+        }else {
+            findViewById(R.id.rel_open_again_parent).setVisibility(View.GONE);
+        }
+
+    }
+
     private void validateTicketStatus() {
         TextView status =
                 findViewById(R.id.tv_ticket_status);
@@ -349,8 +379,10 @@ public class TicketMessageActivity extends AppCompatActivity {
         status.setText(head);
         if (!ticket.parseObject.getBoolean("isopen")){
             findViewById(R.id.lin_sending_aria).setVisibility(View.GONE);
+            findViewById(R.id.tv_open_again).setVisibility(View.VISIBLE);
         }else {
             findViewById(R.id.lin_sending_aria).setVisibility(View.VISIBLE);
+            findViewById(R.id.tv_open_again).setVisibility(View.GONE);
         }
     }
 
@@ -420,12 +452,14 @@ public class TicketMessageActivity extends AppCompatActivity {
             findViewById(R.id.tv_close_text).setVisibility(View.VISIBLE);
             findViewById(R.id.tv_erja_text).setVisibility(View.VISIBLE);
             findViewById(R.id.tv_about_sender).setVisibility(View.VISIBLE);
+//            findViewById(R.id.rel_open_again_parent).setVisibility(View.GONE);
         }else {
             findViewById(R.id.im_forward_ticker).setVisibility(View.GONE);
             findViewById(R.id.im_close_ticket).setVisibility(View.GONE);
             findViewById(R.id.tv_close_text).setVisibility(View.GONE);
             findViewById(R.id.tv_erja_text).setVisibility(View.GONE);
             findViewById(R.id.tv_about_sender).setVisibility(View.GONE);
+//            findViewById(R.id.rel_open_again_parent).setVisibility(View.VISIBLE);
         }
 
     }
@@ -501,5 +535,25 @@ public class TicketMessageActivity extends AppCompatActivity {
         String user_id =
         ((ParseUser)o).getObjectId();
         User.user_info_dialogue(this , user_id);
+    }
+
+    public void open_again(View view) {
+        if (ticket == null) return;
+        if (ticket.parseObject == null) return;
+        if (thread_openIt == null){
+            thread_openIt = new Thread(runnable_openTicket);
+            thread_openIt.start();
+            return;
+        }
+        if (thread_closeIt.isAlive()){
+            Toast.makeText(this, "درحال باز کردن!", Toast.LENGTH_SHORT).show();
+        }else {
+            if (isOpen){
+                Toast.makeText(this, "باز است!", Toast.LENGTH_SHORT).show();
+            }else {
+                thread_openIt = new Thread(runnable_openTicket);
+                thread_openIt.start();
+            }
+        }
     }
 }

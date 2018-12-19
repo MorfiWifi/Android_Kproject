@@ -135,6 +135,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <RelativeLayout
+            android:id="@+id/rel_open_again_parent"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:layout_below="@id/tv_about_sender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:onClick="open_again"
+                android:id="@+id/tv_open_again"
+                android:visibility="gone"
+                android:layout_centerHorizontal="true"
+                android:text="دوباره باز شود"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
+
 
 
     </RelativeLayout>
