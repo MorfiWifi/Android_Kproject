@@ -3,7 +3,7 @@
 //
 
 #include <jni.h>
-
+//asdsad
 JNIEXPORT jstring JNICALL
 Java_com_apps_morfiwifi_morfi_1project_1samane_App_getNativeKey1(JNIEnv *env, jobject instance) {
  //_71_-40_-6_-6_70_-90_44_-77_55_19_43_59_-62_77_42_21_-31_-54_77_-27_16_-32_122_42_120_42_-32_108_-9_114_12_-9_36_77_-22_-14_-34_113_27_62_79_-110_123_11_-26_-60_-29_-4
