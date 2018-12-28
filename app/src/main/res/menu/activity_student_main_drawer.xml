@@ -9,26 +9,32 @@
             android:icon="@drawable/ic_account"
             android:title="پروفایل" />
         <item
+            android:visible="false"
             android:id="@+id/nav_darkhast"
             android:icon="@drawable/ic_request"
             android:title="درخواست" />
         <item
+            android:visible="false"
             android:id="@+id/nav_gozaresh"
             android:icon="@drawable/ic_report"
             android:title="گزارش" />
         <item
+            android:visible="false"
             android:id="@+id/nav_jabeja"
             android:icon="@drawable/ic_transfer"
             android:title="جابجایی" />
         <item
+            android:visible="false"
             android:id="@+id/nav_enseraf"
             android:icon="@drawable/ic_getout"
             android:title="انصراف" />
         <item
+            android:visible="false"
             android:id="@+id/nav_manage_box"
             android:icon="@drawable/ic_inbox"
             android:title="صندوق پیام" />
         <item
+            android:visible="false"
             android:id="@+id/nav_enteghad"
             android:icon="@drawable/ic_feedback"
             android:title="پیشنهاد" />

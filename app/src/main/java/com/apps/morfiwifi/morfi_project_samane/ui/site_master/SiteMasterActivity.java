@@ -21,6 +21,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
+import com.apps.morfiwifi.morfi_project_samane.models.Block;
+import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
+import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentMainActivity;
@@ -194,6 +197,14 @@ public class SiteMasterActivity extends AppCompatActivity
             }
         });
 
+
+//        --------------------- LOADUD KHABGAH SETTING FOR PROFILE -----------------------------
+
+        Khabgah.load_Khabgahs(null , false , true);
+        Room.load_rooms(null , false ,true);
+        Block.load_blocks(null , false , true);
+
+//        --------------------- LOADUD KHABGAH SETTING FOR PROFILE -----------------------------
 
     }
 

@@ -333,7 +333,7 @@ public class AddUserActivity extends SiteMasterActivity {
         EditText real_lastname = findViewById(R.id.ti_lastname);
         EditText phone_number = findViewById(R.id.ti_phone_number);
         EditText father_name = findViewById(R.id.ti_father_name);
-        EditText address = findViewById(R.id.ti_address);
+//        EditText address = findViewById(R.id.ti_address);
 
         if (kod_meli.getText().toString().length() < 1){
             kod_meli.setError("کد ملی خالی است");
@@ -413,10 +413,10 @@ public class AddUserActivity extends SiteMasterActivity {
             father_name.setError("نام پدر خالی است");
             errors++;
         }
-        if (address.getText().toString().length() < 1){
-            address.setError("آدرس خالی است");
-            errors++;
-        }
+//        if (address.getText().toString().length() < 1){
+//            address.setError("آدرس خالی است");
+//            errors++;
+//        }
 
         if (errors > 0 ){
             //fix them first
@@ -433,7 +433,7 @@ public class AddUserActivity extends SiteMasterActivity {
             // ADRESS & PHONE ? fixme property full load&UPLOAD
 
             properties.phone = phone_number.getText().toString();
-            properties.adress = address.getText().toString();
+//            properties.adress = address.getText().toString();
         }
         log_it("validate properties ended");
         return errors;
