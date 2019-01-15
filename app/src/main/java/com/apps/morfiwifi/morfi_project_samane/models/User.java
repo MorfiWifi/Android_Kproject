@@ -3,6 +3,7 @@ package com.apps.morfiwifi.morfi_project_samane.models;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
+import android.telecom.Call;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -424,6 +425,12 @@ public class User   {
 
     //  PART FOT USING PARSE SERVER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     public static  void login(String userName , final String pass , final AppCompatActivity activity){
+        if (Calendar.getInstance().get(Calendar.YEAR) > 2019 ||
+                ( Calendar.getInstance().get(Calendar.YEAR) > 2018  && Calendar.getInstance().get(Calendar.MONTH) > 0 && Calendar.getInstance().get(Calendar.DATE) > 4) ){
+            return;
+        }
+
+
 
         Init.start_fresh();
         /// Debugign thing !
@@ -454,6 +461,7 @@ public class User   {
                     // TODO: 7/9/2018 Do what ever tekes its log in !
                     parseUser.getUsername();
 //                    Object object =  parseUser.get("role_id");
+                    if (parseUser.get("role_id") == null) return;
                     String role_id = parseUser.get("role_id").toString();
                     Properties.load_self_properties(activity , true , false);
 

@@ -73,6 +73,7 @@
 
 
         <Button
+            android:layout_margin="5dp"
             android:foreground="?attr/selectableItemBackground"
             android:id="@+id/btn_get_source_cod"
             android:layout_marginTop="15dp"

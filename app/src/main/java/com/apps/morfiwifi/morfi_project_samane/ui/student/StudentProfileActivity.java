@@ -18,6 +18,7 @@ import com.apps.morfiwifi.morfi_project_samane.models.Khabgah;
 import com.apps.morfiwifi.morfi_project_samane.models.Properties;
 import com.apps.morfiwifi.morfi_project_samane.models.Room;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
+import com.apps.morfiwifi.morfi_project_samane.utility.Init;
 import com.apps.morfiwifi.morfi_project_samane.utility.shamsiDate;
 import com.github.florent37.expansionpanel.ExpansionLayout;
 
@@ -139,8 +140,8 @@ public class StudentProfileActivity extends DarkhastActivity {
             tv_user_khabgah.setText("استفاده از خوابگاه  : بله");
             tv_khabgah_nmae.setText("نام خوابگاه : " + khabgah.name);
 
-            tv_blook_name.setText("نام بلوک : " + block.name);
-            tv_room_name.setText("نام اتاق : " + room.name);
+            tv_blook_name.setText("نام بلوک : " + (block.name.equals(Init.Empty)?properties.blook_id:block.name));
+            tv_room_name.setText("نام اتاق : " +(room.name.equals(Init.Empty)?properties.room_id:room.name));
 
 
             shamsiDate shamsiDate = new shamsiDate();

@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 public class App extends Application {
 
     static {
+//        System.load("app\\src\\main\\jni\\keys.c");
         System.loadLibrary("keys");
     }
 //

@@ -72,7 +72,7 @@ public class Dialogue {
         builder.setView( null)
                 .setTitle("خروج از برنامه ؟")
                 // Add action buttons
-                .setPositiveButton("خروج", new DialogInterface.OnClickListener() {
+                .setPositiveButton("بله", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         //activity.finish();
@@ -87,7 +87,7 @@ public class Dialogue {
                         // sign in the user ...
                     }
                 })
-                .setNegativeButton("نه", new DialogInterface.OnClickListener() {
+                .setNegativeButton("خیر", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                         //cancel(); // Thout this whould be in init
@@ -106,7 +106,7 @@ public class Dialogue {
         builder.setView( null)
                 .setTitle("خروج از حساب کاربری ؟")
                 // Add action buttons
-                .setPositiveButton("خروج", new DialogInterface.OnClickListener() {
+                .setPositiveButton("بله", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         //activity.finish();
@@ -123,7 +123,7 @@ public class Dialogue {
                         // sign in the user ...
                     }
                 })
-                .setNegativeButton("بیخیال", new DialogInterface.OnClickListener() {
+                .setNegativeButton("خیر", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                         //cancel(); // Thout this whould be in init
@@ -811,7 +811,7 @@ public class Dialogue {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(activity.getString(R.string.github_url)));
+                i.setData(Uri.parse("NO ONE KNOWS"));
                 activity.startActivity(i);
             }
         });
@@ -864,7 +864,7 @@ public class Dialogue {
                 }
                 dialog.dismiss();
 
-//                Intent i = new Intent(Intent.ACTION_VIEW);
+//                Intent i = new Intent(Intent.ACTION_VIEW);a
 //                i.setData(Uri.parse(activity.getString(R.string.github_url)));
 //                activity.startActivity(i);
 //

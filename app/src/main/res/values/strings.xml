@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">سیستم سامانه ها</string>
+    <string name="app_name">معاونت دانشجویی</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -44,8 +44,8 @@
         tortor.
     </string>
 
-    <string name="app_intro">سامانه ی خوابگاه ها پیاده سازی شده در اندروید استدیو و با استفاده از سرویس parse server برای توسعه برنامه های تحت سرور باتشکر @wifimorfi</string>
-    <string name="github_url">https://github.com/MorfiWifi/Android_Kproject</string>
+    <string name="app_intro">پشتیبانی نرم افزار آقای یزدیان شماره تماس 09355149396</string>
+    <!--<string name="github_url">https://github.com/MorfiWifi/Android_Kproject</string>-->
     <string name="title_activity_srudent_ticket">SrudentTicketActivity</string>
     <string name="title_activity_site_ticket">SiteTicketActivity</string>
 </resources>

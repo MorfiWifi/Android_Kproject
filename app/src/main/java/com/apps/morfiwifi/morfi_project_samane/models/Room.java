@@ -35,7 +35,7 @@ public class Room {
 
 
     private static String[] all_params = {obj_name ,obj_code ,obj_id ,obj_createAt ,obj_blook_id };
-    private static int limit = 100;
+    private static int limit = 500;
 
 
     //    @Transient
@@ -56,6 +56,7 @@ public class Room {
                 Init.start_loading(activity);
             isloaded = false; // GETTING NEWER VERSION! NOT READY YET
             ParseQuery query = new ParseQuery(class_name);
+            query.setLimit(limit);
             query.findInBackground(new FindCallback<ParseObject>(){
                 @Override
                 public void done(List<ParseObject> objects, ParseException e) {

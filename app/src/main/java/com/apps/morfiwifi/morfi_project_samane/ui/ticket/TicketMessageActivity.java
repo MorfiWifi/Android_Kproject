@@ -14,17 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apps.morfiwifi.morfi_project_samane.R;
-import com.apps.morfiwifi.morfi_project_samane.models.Result;
 import com.apps.morfiwifi.morfi_project_samane.models.Ticket;
 import com.apps.morfiwifi.morfi_project_samane.models.Ticket_Message;
 import com.apps.morfiwifi.morfi_project_samane.models.User;
 import com.apps.morfiwifi.morfi_project_samane.models.User_model;
-import com.apps.morfiwifi.morfi_project_samane.ui.Dialogue;
 import com.apps.morfiwifi.morfi_project_samane.ui.student.StudentTicketActivity;
 import com.apps.morfiwifi.morfi_project_samane.utility.Init;
-import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_ticket;
 import com.apps.morfiwifi.morfi_project_samane.view.RecyclerAdapter_tickmessage;
-import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -78,7 +74,7 @@ public class TicketMessageActivity extends AppCompatActivity {
         }
     };
 
-    Runnable runnable_getTickets = new Runnable() {
+    Runnable runnable_getMessages = new Runnable() {
         @Override
         public void run() {
 //            boolean isloaded = false;
@@ -128,9 +124,33 @@ public class TicketMessageActivity extends AppCompatActivity {
             }
         }
     };
-    Runnable runnable_sendTickets = new Runnable() {
+    Runnable runnable_sendMessage= new Runnable() {
         @Override
         public void run() {
+
+            if (ticket.parseObject.getInt("creatot_role_cod") == 0 && User.current_user.cod > 0 && User.current_user.cod < 4
+                    && !ticket.parseObject.getBoolean("isinternal")
+                    && ticket.parseObject.get("LASTERJA_USERNAEM") == null && !ticket.parseObject.getBoolean("isopen") ){
+
+                // IF ALL ABOVE CONTIDONS ARE TRUE THEN TICKET IS ERJAED TO CURRENT USER MESSAGE SENDER
+                ParseObject tic_message = new ParseObject("ticket_message");
+//                tic_message.put("mess" , message);
+                tic_message.put("CreatedBy" , ParseUser.getCurrentUser());
+                tic_message.put("SENDER_USERNAME" , ParseUser.getCurrentUser().getUsername()); // this won't chainge
+                tic_message.put("ATTACHED" , "NON"); // file attach (server adress)
+                tic_message.put("ERJA" , true);
+                tic_message.put("ERJATO" ,erja_model.parseUser );
+                tic_message.put("HAS_ATTACHED" , false);
+                tic_message.put("ROLE_NAME" , User.current_user.Role);
+                tic_message.put("ERJA_ROLE_NAME" , User.current_user.Role);
+                tic_message.put("ERJATO_USERNAME" , erja_model.parseUser.getUsername());
+
+
+                ticket.parseObject.put("LASTERJA" , erja_model.parseUser);
+                ticket.parseObject.put("ERJA_ROLE_NAME" , User.current_user.Role);
+                ticket.parseObject.put("LASTERJA_USERNAEM" , erja_model.parseUser.getUsername());
+                tic_message.put("TICKET" , ticket.parseObject);//add ticket to message
+            }
 
             ParseObject tic_message = new ParseObject("ticket_message");
             tic_message.put("mess" , message);
@@ -259,7 +279,7 @@ public class TicketMessageActivity extends AppCompatActivity {
             }
         }
     };
-    Thread thread = new Thread(runnable_getTickets);
+    Thread thread = new Thread(runnable_getMessages);
     Thread thread_send ;
     Thread thread_closeIt ;
     Thread thread_openIt ;
@@ -392,7 +412,7 @@ public class TicketMessageActivity extends AppCompatActivity {
     }
     public void load_ticket_messages(){
         if (!thread.isAlive()){
-            thread = new Thread(runnable_getTickets);
+            thread = new Thread(runnable_getMessages);
             thread.start();
         }
 
@@ -432,13 +452,13 @@ public class TicketMessageActivity extends AppCompatActivity {
             return;
         }
         if (thread_send == null){
-            thread_send = new Thread(runnable_sendTickets);
+            thread_send = new Thread(runnable_sendMessage);
             thread_send.start();
             return;
         }
 
         if (!thread_send.isAlive()){
-            thread_send = new Thread(runnable_sendTickets);
+            thread_send = new Thread(runnable_sendMessage);
             thread_send.start();
         }else {
             Toast.makeText(this, "مشکلی برای ارسال وجود دارد", Toast.LENGTH_SHORT).show();

@@ -188,7 +188,7 @@
                 android:textColor="@color/black"
                 android:layout_weight="1"
                 android:id="@+id/ti_tick_mess"
-                android:maxHeight="150dp"
+                android:maxHeight="60dp"
                 android:minHeight="40dp"
                 android:layout_width="match_parent"
                 android:paddingTop="14sp"
@@ -200,16 +200,17 @@
             <!--android:foreground="?attr/selectableItemBackground"-->
 
             <ImageButton
+                android:scaleType="centerInside"
                 android:clickable="true"
                 android:onClick="click_send"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_gravity="bottom"
-                android:layout_weight="4"
+                android:layout_weight="5"
                 android:visibility="gone"
                 android:id="@+id/im_sed_tickmess"
                 android:src="@drawable/background_send_btn"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 />
 
 
